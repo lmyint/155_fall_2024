@@ -1,0 +1,235 @@
+[
+  {
+    "objectID": "tech_setup.html",
+    "href": "tech_setup.html",
+    "title": "Tech Setup",
+    "section": "",
+    "text": "Follow these instructions to set up the software that we’ll be using throughout the semester. Even if you’ve already downloaded both R and RStudio, you’ll want to re-download to make sure that you have the most current versions.\n\nRequired: Change the default file download location for your internet browser.\n\nGenerally by default, internet browsers automatically save all files to the Downloads folder on your computer. This does not encourage good file organization practices. You need to change this option so that your browser asks you where to save each file before downloading it.\nThis page has information on how to do this for the most common browsers.\n\n\nRequired: Download R and RStudio.\n\nFIRST: Download R here.\n\nIn the top section, you will see three links “Download R for …”\nChoose the link that corresponds to your computer.\nAs of August 27, 2024, the latest version of R is 4.4.1 (“Race for Your Life”).\n\nSECOND: Download RStudio here.\n\nClick the button under step 2 to install the version of RStudio recommended for your computer.\nAs of August 27, 2024, the latest version of RStudio is 2024.04.2+764.\n\n\n\nSuggested: Watch this video describing key configuration options for RStudio.\n\nRequired: Install required packages.\n\nAn R package is an extra bit of functionality that will help us in our data analysis efforts in a variety of ways.\nOpen RStudio and click inside the Console pane (by default, the bottom left pane). Copy and paste the following command into the Console. You should see the text below appear to the right of the &gt;, which is called the R prompt. After you paste, hit Enter.\n\n\ninstall.packages(c(\"tidyverse\"))\n\n\nYou will see a lot of text from status messages appearing in the Console as the packages are being installed. Wait until you see the &gt; again.\nEnter the command library(tidyverse) and hit Enter.\nIf you see an error message, then there was a problem installing the package. Talk to the instructor or a preceptor for help.\nQuit RStudio. You’re done setting up!\n\n\nOptional: For a tour of RStudio features, watch this video. It also shows you how to customize the layout and color scheme of RStudio.\n\nRequired: Set essential RStudio options.\nGo to Edit &gt; Preferences (or Settings…) &gt; General\nNavigate to the “Workspace” section. You’ll see 2 options:\n\nRestore .RData into workspace at startup: Leave this unchecked\nSave workspace to .RData on exit: Select “Never”\n\nWithout doing this RStudio will save and reload everything that you’ve been working on from the start of the semester. Since we’ll be working with new data each class, we want to keep our digital environment clean. Essentially, this is like an artist getting a clean canvas for each new painting rather than trying to paint all paintings on a single canvas."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Week\nM\nW\nF\nHomework (due Fridays at 5pm)\n\n\n\n\n1 (9/2 - 9/6)\n\nFirst day!\nWelcome and data fundamentals\nUnivariate visualization and summaries\n\n\n\n2 (9/9 - 9/13)\nDiscovery day\nFormalizing simple linear regression\nFormalizing simple linear regression\nHomework 1 due\n\n\n3 (9/16 - 9/20)\nModel evaluation\nTransformations\nLibrary activity.\nHomework 2 due\nGroup project survey due\n\n\n4 (9/23 - 9/27)\nSimple linear regression: categorical predictor\nDiscovery day\nQuiz 1\n\n\n\n5 (9/30 - 10/4)\nMultiple linear regression principles\nConfounding\nProject work day\nHomework 3 due\n\n\n6 (10/7 - 10/11)\nDiscovery day\nInteraction models: practice\nFlex day\nHomework 4 due\nProject Checkpoint 1 due\n\n\n7 (10/14 - 10/18)\nModel building (part 1)\nModel building (part 2)\nFALL BREAK\n\n\n\n8 (10/21 - 10/25)\nProbability and odds\nSimple logistic regression\n\nMultiple logistic regression and evaluation\nHomework 5 due\n\n\n9 (10/28 - 11/1)\nTools for inference (sampling variation, sampling distributions)\nTools for inference (bootstrapping, normal distribution)\nQuiz 2\n\n\n\n10 (11/4 - 11/8)\nConfidence intervals\nFlex day (day after election) \nDiscovery day\nHomework 6 due\n\n\n11 (11/11 - 11/15)\nHypothesis testing details (single coefficient)\nHypothesis testing practice (single coefficient)\nProject work day\nHomework 7 due\n\n\n12 (11/18 - 11/22)\nHypothesis testing for multiple coefficients\np-values discussion\nFlex day\nHomework 8 due\n\n\n13 (11/25 - 11/29)\nProject Time\nTHANKSGIVING\nTHANKSGIVING\nProject Checkpoint 2 due\n(Tuesday at 5pm)\n\n\n14 (12/2 - 12/6)\nProject Time\nProject Time\nProject Time\n\n\n\n15 (12/9 - 12/13)\nProject Time\nProject Paper due, Presentations\n\nQuiz 3 Monday, 12/16 8:00-10:00am.\n~1.25 hours during our final exam slot."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "STAT 155: Introduction to Statistical Modeling",
+    "section": "",
+    "text": "Learn the fundamentals of summarizing, visualizing, and modeling data to answer research questions\n\n\nInstructor: Leslie Myint  Class meeting times: MWF 12:00-1:00pm  Class location: THEATR 204  Instructor drop-in hours: TBD"
+  },
+  {
+    "objectID": "activities/01_foundations_welcome.html",
+    "href": "activities/01_foundations_welcome.html",
+    "title": "Data Foundations",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you should be able to:\n\nGet a sense for the kinds of statistical investigations that\nDefine cases and variables\nApply the 5 W’s + H (who, what, when, where, why, and how) to data collection\n\nLinks to related reading(s):\n\nWhat is Data?\nData Context\n\n\nActivity under construction",
+    "crumbs": [
+      "Data Foundations"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html",
+    "href": "assignments/pp1.html",
+    "title": "Practice Problems 1",
+    "section": "",
+    "text": "Due Friday, 9/13 at 5pm on Moodle.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#context",
+    "href": "assignments/pp1.html#context",
+    "title": "Practice Problems 1",
+    "section": "Context",
+    "text": "Context\nThis cartoon by Alison Bechdel inspired the “Bechdel test” (image source):\n\nA movie passes the test if it meets the following criteria:\n\nthere are at least 2 women-identifying characters;\n\nthese characters talk to each other at least 1 time; and\n\nthey talk about something other than a male-identifying character\n\nWe’ll work with the bechdel data within the fivethirtyeight package. You can enter ?bechdel in the Console to view the codebook.\n\n# Load the data\ndata(bechdel)",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-1-define-two-new-variables",
+    "href": "assignments/pp1.html#exercise-1-define-two-new-variables",
+    "title": "Practice Problems 1",
+    "section": "Exercise 1: Define two new variables",
+    "text": "Exercise 1: Define two new variables\nWe can use the mutate() function from dplyr to define new variables. For example:\n\n# Define a new variable which measures years_since_1900\nbechdel &lt;- bechdel %&gt;% \n    mutate(years_since_1900 = year - 1900)\n\n# Check it out / confirm it's right\nbechdel %&gt;% \n    select(year, years_since_1900) %&gt;% \n    head(3)\n\nYour turn. Define a new variable budget_mil which measures budget in MILLIONS of dollars (on the 2013 scale). Similarly, define a new variable intgross_mil which measures international gross in MILLIONS of dollars (on the 2013 scale). Store these in bechdel and confirm your results match those here:\n## # A tibble: 3 x 2\n##   budget_mil intgross_mil\n##        &lt;dbl&gt;        &lt;dbl&gt;\n## 1       13           42.2\n## 2       45.7         41.5\n## 3       20          159.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-2-get-to-know-the-data",
+    "href": "assignments/pp1.html#exercise-2-get-to-know-the-data",
+    "title": "Practice Problems 1",
+    "section": "Exercise 2: Get to know the data",
+    "text": "Exercise 2: Get to know the data\nComplete each task below using dim(), nrow(), head(), or one of the dplyr functions: filter(), summarize(), select(). For any questions about movie budget and gross earnings, use budget_mil and gross_mil. NOTE: You don’t need to write out any discussion for this exercise, just include your code and output.\n\n# How many films are in the dataset?\n\n# When was the oldest film in the dataset made?\n\n# When was the most recent film in the dataset made?\n\n# What is the median film budget in 2013 dollars?\n\n# What films had budgets that exceeded 300 million in 2013 dollars?\n# (Just show the films and budgets, not all variables)\n\n# What films were made in 1971?\n# (Just show the films and year, not all variables)\n\n# What were the budget_mil and intgross_mil values for \"Titanic\"?\n# (Just show the budget_mil and intgross_mil values)",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
+    "href": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
+    "title": "Practice Problems 1",
+    "section": "Exercise 3: Does it pass the Bechdel?",
+    "text": "Exercise 3: Does it pass the Bechdel?\nThe clean_test variable records the Bechdel category into which each movie falls. From worst to best (if you care about the representation of women in film):\n\nnowomen = there are no significant women characters in the film\nnotalk = there are women characters but they don’t talk to one another\nmen = there are women characters that talk to one another but they only talk about men\ndubious = barely passes the Bechdel test\nok = passes the Bechdel test\n\nConstruct a visualization of the clean_test variable, and construct a corresponding table of counts. In one sentence, summarize your findings about clean_test as if you were writing a newspaper article about movies.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
+    "href": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
+    "title": "Practice Problems 1",
+    "section": "Exercise 4: How much money did it make?",
+    "text": "Exercise 4: How much money did it make?\nThe intgross_mil variable records each movie’s total international gross, in millions of dollars (and adjusted to 2013).\n\nConstruct a visualization of the intgross_mil variable. Summarize your findings as if you were writing a newspaper article about movies.\nCalculate the mean and median values of intgross_mil. Explain why the mean exceeds the median by quite a bit and which is the more appropriate measure of trend here.\n\nNOTE: Since some films are missing information on intgross_mil, you’ll need to use mean(___, na.rm = TRUE) where na.rm = TRUE says to remove the NA (missing) values from the calculation. Similarly for the median.\n\nCalculate the standard deviations for the intgross_mil and budget_mil variables. Comment on whether there’s more variability among how much money is spent making movies (budgets) or how much money a movie makes (grosses)?",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
+    "href": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
+    "title": "Practice Problems 1",
+    "section": "Exercise 5: Explaining intgross_mil",
+    "text": "Exercise 5: Explaining intgross_mil\nNext, let’s try to explain some of the variability in how much money films gross. To this end, we’ll focus on modeling intgross_mil by budget_mil. That is, to what extent is the money a film makes related to its budget?\n\nIn the relationship between intgross_mil and budget_mil, which is the response variable?\nConstruct a visualization of the relationship between intgross_mil and budget_mil. Include a regression line that represents the trend in this relationship.\nIn 1-3 sentences, summarize your findings about this relationship as if you were writing a newspaper article about movies. Be sure to comment on both the trend and variability in this relationship.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
+    "href": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
+    "title": "Practice Problems 1",
+    "section": "Exercise 6: Modeling intgross_mil",
+    "text": "Exercise 6: Modeling intgross_mil\nLet’s examine the relationship between intgross_mil and budget_mil in more detail.\n\nUse lm() to construct a linear regression model of the trend in the relationship between intgross_mil and budget_mil. Store this as movie_model and report a model summary table.\nWrite out a formula for the trend.\nProvide a newspaper appropriate interpretation of the budget_mil coefficient. Make sure to use non-causal language, include units, and talk about averages rather than individual cases.\nDoes it make sense to interpret the intercept in this model? Explain.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-7-predictions-and-residuals",
+    "href": "assignments/pp1.html#exercise-7-predictions-and-residuals",
+    "title": "Practice Problems 1",
+    "section": "Exercise 7: Predictions and residuals",
+    "text": "Exercise 7: Predictions and residuals\n\nIn exercise 2 you identified the budget (budget_mil) for the movie Titanic. Use the model formula above to predict its international gross. You can check your work using the predict() function. This provides a more accurate prediction (it doesn’t round the model coefficients) so don’t worry if your calculation doesn’t exactly match.\n\n\npredict(___, newdata = data.frame(budget_mil = ___))\n\n\nCalculate the Titanic residual. HINT: You’ll need to use the observed intgross_mil value from exercise 2.\nBased on your calculation in part b, did the model over- or under-estimate Titanic’s gross?",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "Project",
+    "section": "",
+    "text": "Details coming soon!"
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Hello, and welcome to a new year at Macalester! I’m excited to spend the next 15 weeks with you journeying through a beloved field of mine.\nI will confess that early during college, I really didn’t love statistics. In my first statistics class, we focused almost entirely on formulas and procedures, and I was continually left wondering: “Why should I care??” Still, I decided to give statistics another try, and the next year I had the fortune of taking a statistics class that really emphasized the connection between math and data. I began to see and imagine possibilities for collecting data in fields that could improve people’s lives, and I found this incredibly inspiring.\nIn graduate school, I quickly saw how much other disciplines use and benefit from statistics, and my admiration for the field deepened immensely. I’ve had the chance to use statistics to learn about many interesting areas including biology, epidemiology, public health, and even my own hobbies! Over the years, my students have used data to learn about redlining, renewable energy, cinema, sports, ecology, and so much more.\nI love teaching introductory statistics, and I can’t wait to show you all the tools and ideas statistics has to offer. I’m also excited to find ways for you to connect to data and statistics in your own lives.\nLet’s have a great semester!"
+  },
+  {
+    "objectID": "syllabus.html#meet-the-instructional-team",
+    "href": "syllabus.html#meet-the-instructional-team",
+    "title": "Syllabus",
+    "section": "Meet the instructional team",
+    "text": "Meet the instructional team\nInstructor: Leslie Myint (lez-lee mee-int) (she/her)\n\nAbout me: Aside from data-related topics, I love talking about all things games! I love playing board games, Dungeons and Dragons (D&D), and Nintendo console games. I also love staying active with weightlifting, rock climbing, Mac intramural soccer, and dance. If it snows enough this winter (fingers crossed!), I’m hoping to learn how to cross-country ski.\n\nPreceptors: We have 9 preceptors across the 6 sections of STAT 155 this semester. We will also have the support of a dedicated R preceptor (Kyle Suelflow) who helps with R across all MSCS courses.\nRyan will be the preceptor dedicated to our section and will sometimes come to class to help with activities. Preceptor drop-in hours (office hours) will be shared across all sections of the course and posted on our course homepage.\n\nRyan Mickelborough\nSamina Stack\nOwen Carr\nRana Rishmawi\nIlhaan Dhegadub\nJulia Van Orman\nTanisha Dodla\nSydney Ohr\nLucas Nelson\nKyle Suelflow (R preceptor)"
+  },
+  {
+    "objectID": "syllabus.html#contacting-the-instructor",
+    "href": "syllabus.html#contacting-the-instructor",
+    "title": "Syllabus",
+    "section": "Contacting the instructor",
+    "text": "Contacting the instructor\nI love getting to talk to students outside of class time—whether about class-related topics or anything else. Come chat with me!\nI’ll be setting times for drop-in hours based on feedback from the pre-course survey. I’ll update my drop-in hours on our course homepage and Moodle when they’re finalized.\nI’m also happy to meet one-on-one if my normal drop-in hours don’t work. You can schedule a time to meet with me via Calendly.\n\n\n\n\n\n\nCall me “Leslie”\n\n\n\nStudents sometimes wonder what to call their professors. I prefer to be called Leslie, but if you prefer to be more formal, I am also ok with Professor Myint. My preferred gender pronouns are she/her/hers.\nPlease help me make sure that I call you by your preferred name and pronouns too!"
+  },
+  {
+    "objectID": "syllabus.html#community-is-key",
+    "href": "syllabus.html#community-is-key",
+    "title": "Syllabus",
+    "section": "Community is key",
+    "text": "Community is key\nA sense of community and connectedness can provide a powerful environment for learning: Research shows that learning is maximized when students feel a sense of belonging in the educational environment (e.g., Booker, 2016). A negative climate may create barriers to learning, while a positive climate can energize students’ learning (e.g., Pascarella & Terenzini, cited in How Learning Works, 2012).\nFor these reasons, I will be designing our in-class group activities to intentionally foster community and connectedness. You can help cultivate our classroom community by being thoughtful about the way you engage with others in class."
+  },
+  {
+    "objectID": "syllabus.html#reflection-is-paramount",
+    "href": "syllabus.html#reflection-is-paramount",
+    "title": "Syllabus",
+    "section": "Reflection is paramount",
+    "text": "Reflection is paramount\nWhether or not you continue learning statistics beyond this course, the skill of reflection is one that will be immensely useful whatever you do, and it is a skill that we will practice in this course.\nReflection is not just fundamental to learning content–it’s fundamental to learning any sort of intellectual, emotional, or physical skill. For this reason, we will practice reflection in our activities and assignments."
+  },
+  {
+    "objectID": "syllabus.html#mistakes-are-essential",
+    "href": "syllabus.html#mistakes-are-essential",
+    "title": "Syllabus",
+    "section": "Mistakes are essential",
+    "text": "Mistakes are essential\n\nAn expert is a person who has made all the mistakes which can be made in a narrow field.\n\nNiels Bohr, Nobel Prize-winning physicist\n\n\nPerhaps paradoxically, an important way to gain confidence in an area is to make a lot of mistakes. Making mistakes can seem scary—I get it. The culture of math and science education in America perpetuates a “genius” culture in STEM, where making mistakes immediately marks someone as “less than” or unworthy. I wholeheartedly DO NOT believe in this. Everyone can thrive in this course and learn statistics. Mistakes are not only ok but necessary."
+  },
+  {
+    "objectID": "syllabus.html#communication-is-a-superpower",
+    "href": "syllabus.html#communication-is-a-superpower",
+    "title": "Syllabus",
+    "section": "Communication is a superpower",
+    "text": "Communication is a superpower\n\nThe single biggest problem in communication is the illusion that it has taken place.\n\nGeorge Bernard Shaw\n\n\nBeing able to share an idea with others and have true understanding occur is a gift for all involved. And it’s really hard. We’ll have a lot of opportunity for practice in this course. What’s more, the process of crafting effective communication is invaluable for deepening your own understanding:\n\n\n\nRead to collect the dots, write to connect them pic.twitter.com/YbgnKKFUNn\n\n— David Perell (@david_perell) July 5, 2021"
+  },
+  {
+    "objectID": "syllabus.html#outside-of-class",
+    "href": "syllabus.html#outside-of-class",
+    "title": "Syllabus",
+    "section": "Outside of class",
+    "text": "Outside of class\nPre-class videos/readings: Some class periods will have required videos or reading to get acquainted with new concepts before seeing them again in class. My goal for these videos and readings is for you to get the most out of class time by being able to more easily follow explanations in class and to engage most fully in class activities. When there are required readings or videos, there will be an associated checkpoint to complete on Moodle (due just before the start of class).\n\n\n\n\n\n\nSuggestions\n\n\n\n\nAs you take notes on videos/readings, highlight or otherwise mark all the areas where you have questions. Gather up all of these questions in one place, and bring them to class with you.\nRecord any reflections from in-class time about your learning process or interactions with peers while they are still fresh.\nAfter learning a new topic in class, it is helpful to attempt the upcoming assignment as soon as possible. Just by getting some rough ideas down quickly, you avoid the difficulty of starting from a blank slate.\nCome to instructor and preceptor drop-in hours (office hours) to chat about the course or anything else! 😃"
+  },
+  {
+    "objectID": "syllabus.html#during-class",
+    "href": "syllabus.html#during-class",
+    "title": "Syllabus",
+    "section": "During class",
+    "text": "During class\nClass time will be a mix of interactive lecture and longer stretches of group work. During the lecture portion, I will pause explanation frequently to prompt a short exercise or ask questions that you’ll reflect on individually or together.\n\n\n\n\n\n\nSuggestions\n\n\n\n\nAs we review the material at the start of class and as you work on the class activity, reference your set of questions from the pre-class material. Have you made progress on addressing those questions? Who or what helped with improving your understanding, and how?"
+  },
+  {
+    "objectID": "syllabus.html#my-philosophy",
+    "href": "syllabus.html#my-philosophy",
+    "title": "Syllabus",
+    "section": "My philosophy",
+    "text": "My philosophy\nGrading is thorny issue for many educators because of its known negative effects on learning and motivation. Nonetheless, it is ever-present in the US education system and at Macalester. Because I am required to submit grades for this course, it’s worth me taking a minute to share my philosophy about grading with you.\nWhat excites me about being a teacher is your learning. Learning flourishes in an environment where you find meaning and value in what we’re exploring, feel supported when engaging with challenges, receive useful feedback, and regularly reflect on your learning.\nIf I didn’t have to give grades, I wouldn’t. But because I am required to, it is important to me to create a course structure and grading system that allow learning to flourish:\n\nFinding meaning and value: I am striving to achieve this by creating space for authentic connection between you, your peers, and myself and by encouraging you to explore a topic that intrigues you for our course project.\nSupport in engaging with challenges: The assignments and activities that we will use to learn are meant to be challenging, and perfect understanding on your first try is not my expectation. For this reason, there will be opportunities to show improvement in your understanding over time to improve your grade on past assignments and assessments. Strong learning does not occur under excessive stress, so my hope is that having multiple chances to show your understanding alleviates much of the stress that would normally arise from needing to do as well as possible with only one try.\nReceiving useful feedback and reflecting regularly: My aim with feedback is to always provide guidance towards improvement, no matter where you are in your progress. But good feedback alone is useless. Learners need to engage deeply with feedback in order to benefit the most from it."
+  },
+  {
+    "objectID": "syllabus.html#assignments-and-assessments",
+    "href": "syllabus.html#assignments-and-assessments",
+    "title": "Syllabus",
+    "section": "Assignments and assessments",
+    "text": "Assignments and assessments\n\nCheckpoints\nFor class days where some reading and/or videos are required beforehand, there will be a short multiple-choice Moodle checkpoint due at 11:30am (30 minutes before class starts).\nYou can attempt a checkpoint quiz as many times as you want, but there is a 33% point deduction for each successive attempt on a question. For example, if your first attempt on a 1-point question is incorrect, the maximum possible score on that question is 0.67 points for the second attempt. On the third attempt, the maximum score is 0.33 points. No points are awarded for the 4th attempt and beyond.\n\n\nPractice problems\nTo practice concepts that we cover in class, there will be 8 weekly practice problems (PPs) due on Fridays at 5pm. (Note that if needed, extensions are possible—see the late work policy.)\nYou will receive qualitative feedback on all questions on these practice problem sets. These assignments will receive on overall score on the following scale:\n\nHigh pass: 2 points\nPass: 1 point\nNeeds improvement: 0 points\n\nShowing growth: If, on a quiz, you demonstrate stronger understanding of the concepts that you missed on a PP, you have the chance to earn a higher score on the PP. Either via email or through an in-person conversation with the instructor, you must discuss how your understanding of the concept(s) changed from the PP to the quiz by addressing feedback from both the PP and the quiz. You can do this 3 times over the semester (once for each quiz), and you can show improvement on multiple PPs using a single quiz.\n\n\nQuizzes\nThere will be 3 quizzes over the course of the semester.\n\nQuiz 1: Friday, 9/27. 1 hour in class.\nQuiz 2: Friday, 11/1. 1 hour in class. Will cover material from the first quiz to some extent because of the way that material in this course builds on earlier ideas.\nQuiz 3: Monday, 12/16 8:00-10:00am. ~1.25 hours during our final exam slot. Will cover content from the whole course.\n\nEach quiz question will be graded on the following scale:\n\n3 points: fully correct\n2 points: mostly correct with minor errors\n1 point: missing key understanding\n0 points: fully off target or blank\n\nQuiz format:\n\nFully pen/pencil and paper. You will not need to write code or use a calculator, but you will need to be able to read and interpret output from R code.\nYou are allowed to bring a 3x5 index card with notes written on both sides. Typing your notes and pasting them on the card is fine.\n\nShowing growth: You can earn up to 50% of missed points back on quizzes if you complete a quiz correction and reflection. You must:\n\nWrite a reflection of how you prepared for the quiz and where you felt strongest and more uncertain in your understanding before taking the quiz\nSchedule a meeting with the instructor. During our conversation, you will correct your quiz responses and discuss the above reflection. You will get immediate feedback at this meeting. Use my Calendly page to schedule this meeting.\n\n\n\nProject\nThe goal of the course project is to apply the data analysis skills from our course to investigate a research question in a dataset of your choosing. Through milestones over the course of the semester, you will make steady progress on your projects and iterate on feedback. Full details about the project will be available on the Project page."
+  },
+  {
+    "objectID": "syllabus.html#course-grading-system",
+    "href": "syllabus.html#course-grading-system",
+    "title": "Syllabus",
+    "section": "Course grading system",
+    "text": "Course grading system\nIn order to earn a given letter grade, all requirements listed under that column need to be met.\n\n\n\n\n\n\n\n\n\n\n\n\nGrade: A\nGrade: B\nGrade: C\n\n\n\n\nCheckpoint average\n≥ 80%\n≥ 70%\n≥ 60%\n\n\nPractice problems (PPs)\n14 out of 16 points across all 8 PPs.\nMust submit all 8 PPs.\n12 out of 16 points across all 8 PPs.\n10 out of 16 points across all 8 PPs.\n\n\nQuiz average\n≥ 90%\n≥ 80%\n≥ 70%\n\n\nProject\nEarn highest level (Excellent) on all 6 rubric categories\nEarn highest level (Excellent) on all but 1 rubric category\nEarn highest level (Excellent) on all but 2 rubric categories\n\n\n\nIf your work for different course components falls under different letter grades, your final letter grade will be an “average” of the letter grades for the different components.\nC  C  C  C --&gt; C\nC  C  C  B --&gt; C+\nC  C  C  A --&gt; C+\nC  C  B  B --&gt; B-\nC  C  B  A --&gt; B-\nC  C  A  A --&gt; B\nC  B  B  B --&gt; B-\nC  B  B  A --&gt; B\nC  B  A  A --&gt; B+\nC  A  A  A --&gt; B+\nB  B  B  B --&gt; B\nB  B  B  A --&gt; B+\nB  B  A  A --&gt; A-\nB  A  A  A --&gt; A-\nA  A  A  A --&gt; A"
+  },
+  {
+    "objectID": "syllabus.html#late-work",
+    "href": "syllabus.html#late-work",
+    "title": "Syllabus",
+    "section": "Late work",
+    "text": "Late work\nHomework assignments will generally be due weekly on Fridays at 5pm.\nThroughout the quarter, you may use up to three extensions on practice problems. You will These three extensions can be used on practice problems only, not checkpoints or quizzes. The purpose of deadlines (and extensions) is to keep you accountable for your own learning, to keep you on track with the pace of the course (which builds upon itself throughout the semester), and to provide preceptors and myself the ability to give you timely feedback on assignments.\nIn order to use an extension, you must email me (lmyint@macalester.edu) before the practice problem deadline to inform me you plan to use an extension. In your email, please specify (1) that you are using an extension, and (2) your self-set deadline is for the assignment. For example, you could say “I am using my second extension. I will have Practice Problems #7 in by 5:00pm two days from now.” Once you set your deadline, I expect you to stick to it. If you do not e-mail me prior to the practice problem deadline, the extension will not be counted, and your assignment will be counted as late. Late homework without prior communication receives no credit.\nIf you have run out of extensions and/or an extenuating circumstance occurs that impacts your ability to submit assignments on time, please email me to discuss the situation. I am happy to be flexible as long as you communicate!"
+  },
+  {
+    "objectID": "syllabus.html#academic-integrity",
+    "href": "syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "Academic integrity",
+    "text": "Academic integrity\nAcademic integrity is the cornerstone of our learning community. Students are expected to be familiar with the college’s standards on academic integrity.\nI encourage you to work with your classmates to discuss material and ideas for assignments, but in order for you to receive individualized feedback on your own learning, you must submit your own work. This involves writing your own code and putting explanations into your own words. Always cite any sources you use, including AI (see section below)."
+  },
+  {
+    "objectID": "syllabus.html#artificial-intelligence-ai-use",
+    "href": "syllabus.html#artificial-intelligence-ai-use",
+    "title": "Syllabus",
+    "section": "Artificial intelligence (AI) use",
+    "text": "Artificial intelligence (AI) use\nAI can both interfere with and enhance our capacity to learn. We must be mindful of when it might hinder us and when it might provide us with new understanding and/or assistance.\nIn an introductory course like this one, we are learning the essentials of a new language and way of thinking. AI may be able to help you in this journey by providing explanations for concepts that are different from the ones provided by the course.\nHowever, in order to truly learn, AI should not be used to generate responses that replace your thinking.\nIn general, please be aware of the limits of AI:\n\nAI does not always generate accurate output. If it gives you a number, fact, or code, assume it is wrong unless you either know the answer or can check in with another source. AI works best for topics you already understand to a sufficient extent.\nIf you provide minimum effort prompts, you will get low quality results. You will need to refine your prompts in order to get good outcomes. This will take work.\nBe thoughtful about when this tool is useful. Don’t use it if it isn’t appropriate for the case or circumstance.\nThe environmental impact of AI should not be ignored. The building and usage of AI tools consumes a lot of energy (see here and here). For this reason, we will be very thoughtful about when we use AI and will discuss other sustainability behaviors that we can incorporate into our lives to offset this usage.\nAI is a tool, but one that you need to acknowledge using. Any ideas, language, or code that is produced by AI must be cited, just like any other resource.\n\nHow to cite AI: Please include a paragraph at the end of any assignment that uses AI explaining what you used the AI for and what prompts you used to get the results. Failure to do so is in violation of the academic integrity policy at Macalester College.\n\n\nIf you have any questions about your use of AI tools, please contact me to discuss them."
+  }
+]

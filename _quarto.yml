@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!activity_templates/"
+
+website:
+  title: "STAT 155"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - file: index.qmd
+        text: "Home"
+      - file: schedule.qmd
+        text: "Schedule"
+      - file: syllabus.qmd
+        text: "Syllabus"
+      - sidebar:activities
+      - sidebar:homework
+      - file: project.qmd
+        text: "Project"
+      - file: tech_setup.qmd
+        text: "Tech Setup"
+
+  sidebar:
+    - id: activities
+      title: "Activities"
+      contents:
+        - activities/01_foundations_welcome.qmd
+
+    - id: homework
+      title: "Practice Problems"
+      contents:
+        - assignments/pp1.qmd
+  
+  page-footer:
+    left: |
+      &copy; Leslie Myint, 2024<br>
+      All content licensed under ![](https://static.thenounproject.com/png/70967-200.png){height=20px} ([CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/))
+    right: |
+      Site built with [Quarto](https://quarto.org/)
+
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    toc: true
+    code-overflow: wrap
+
+editor: source

@@ -1,0 +1,16 @@
+---
+title: "STAT 155: Introduction to Statistical Modeling"
+sidebar: false
+---
+
+<img src="images/stat155_hex.png" width=300 style="float: right; padding-left: 20px; padding-bottom: 20px;">
+
+<br>
+<div style="font-size: 30px;">Learn the fundamentals of summarizing, visualizing, and modeling data to answer research questions</div>
+
+<br><br><br><br>
+
+**Instructor:** [Leslie Myint](https://www.lesliemyint.org) <br>
+**Class meeting times:** MWF 12:00-1:00pm <br>
+**Class location:** THEATR 204 <br>
+**Instructor drop-in hours:** TBD

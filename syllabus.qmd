@@ -1,0 +1,388 @@
+---
+title: "Syllabus"
+sidebar: false
+---
+
+# Welcome to STAT 155!
+
+Hello, and welcome to a new year at Macalester! I'm excited to spend the next 15 weeks with you journeying through a beloved field of mine.
+
+I will confess that early during college, I really didn't love statistics. In my first statistics class, we focused almost entirely on formulas and procedures, and I was continually left wondering: "Why should I care??" Still, I decided to give statistics another try, and the next year I had the fortune of taking a statistics class that really emphasized the connection between math and data. I began to see and imagine possibilities for collecting data in fields that could improve people's lives, and I found this incredibly inspiring.
+
+In graduate school, I quickly saw how much other disciplines use and benefit from statistics, and my admiration for the field deepened immensely. I've had the chance to use statistics to learn about many interesting areas including biology, epidemiology, public health, and even my own hobbies! Over the years, my students have used data to learn about redlining, renewable energy, cinema, sports, ecology, and so much more.
+
+I love teaching introductory statistics, and I can't wait to show you all the tools and ideas statistics has to offer. I'm also excited to find ways for you to connect to data and statistics in your own lives.
+
+Let's have a great semester!
+
+
+<br><br><br><br>
+
+
+# What is this course about?
+
+We live in a world replete with *data*. From smart devices, to online shopping, to medical data, to criminal justice records, and to environmental monitoring. These are but a few ways in which data leaves a mark on our society and our lives.
+
+Statistics is a discipline devoted to gaining insight from this abundant data. It provides one lens through which we can build knowledge of our world. In this course, you will learn how to use this lens to think critically and responsibly about data and to enhance your skills and experiences in other areas.
+
+We will cover the following topics:
+
+- Univariate and multivariate data visualization and summarization
+- Multivariate linear and logistic regression modeling
+- Statistical inference
+
+In terms of big picture goals, I hope that by the end of the course, you are able to:
+
+- Understand the role that statistics plays in society and daily life
+- Create effective visualizations of data and critique visualizations encountered in the media
+- Build and use statistical models and inference procedures to answer scientific questions
+- Understand how statistical analysis can contribute to bases of evidence and how limitations of data and methods can affect the quality of that evidence
+- Understand how questions of cause-and-effect can be answered with statistical tools
+- Gain confidence using statistical software to analyze data
+- Join the modern discussion within the statistics community on best practices for testing hypotheses and measuring evidence
+
+
+
+<br><br><br><br>
+
+
+
+# Course communication
+
+## Meet the instructional team
+
+**Instructor:** Leslie Myint (lez-lee mee-int) (she/her)
+
+- **About me:** Aside from data-related topics, I love talking about all things games! I love playing board games, Dungeons and Dragons (D&D), and Nintendo console games. I also love staying active with weightlifting, rock climbing, Mac intramural soccer, and dance. If it snows enough this winter (fingers crossed!), I'm hoping to learn how to cross-country ski.
+
+**Preceptors:** We have 9 preceptors across the 6 sections of STAT 155 this semester. We will also have the support of a dedicated R preceptor (Kyle Suelflow) who helps with R across all MSCS courses. 
+
+Ryan will be the preceptor dedicated to our section and will sometimes come to class to help with activities. Preceptor drop-in hours (office hours) will be shared across all sections of the course and posted on our [course homepage](index.qmd).
+
+- Ryan Mickelborough
+- Samina Stack
+- Owen Carr
+- Rana Rishmawi
+- Ilhaan Dhegadub
+- Julia Van Orman
+- Tanisha Dodla
+- Sydney Ohr
+- Lucas Nelson
+- Kyle Suelflow (R preceptor)
+
+## Contacting the instructor
+
+I love getting to talk to students outside of class time---whether about class-related topics or anything else. Come chat with me!
+
+I'll be setting times for drop-in hours based on feedback from the [pre-course survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link). I'll update my drop-in hours on our [course homepage](index.qmd) and Moodle when they're finalized.
+
+I'm also happy to meet one-on-one if my normal drop-in hours don't work. You can schedule a time to meet with me via [Calendly](https://calendly.com/lmyint).
+
+::: {.callout-note title="Call me \"Leslie\""}
+Students sometimes wonder what to call their professors. I prefer to be called Leslie, but if you prefer to be more formal, I am also ok with Professor Myint. My preferred gender pronouns are she/her/hers.
+
+Please help me make sure that I call you by your preferred name and pronouns too!
+:::
+
+
+
+<br><br><br><br>
+
+
+
+# Textbook
+
+[STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/): An online set of notes for STAT 155 written by the Macalester statistics faculty. Before some class days, we will require reading from this textbook or watching some online videos.
+
+
+
+<br><br><br><br>
+
+
+
+# Guiding values
+
+## Community is key
+
+A sense of [community](https://www.educause.edu/research-and-publications/books/learning-spaces/chapter-4-community-hidden-context-learning) and connectedness can provide a powerful environment for learning: Research shows that learning is maximized when students feel a sense of belonging in the educational environment (e.g., Booker, 2016). A negative climate may create barriers to learning, while a positive climate can energize students' learning (e.g., Pascarella & Terenzini, cited in How Learning Works, 2012).
+
+For these reasons, I will be designing our in-class group activities to intentionally foster community and connectedness. You can help cultivate our classroom community by being thoughtful about the way you engage with others in class.
+
+## Reflection is paramount
+
+Whether or not you continue learning statistics beyond this course, the skill of **reflection** is one that will be immensely useful whatever you do, and it is a skill that we will practice in this course.
+
+Reflection is not just fundamental to learning content--it's fundamental to learning any sort of intellectual, emotional, or physical skill. For this reason, we will practice reflection in our activities and assignments.
+
+## Mistakes are essential
+
+> An expert is a person who has made all the mistakes which can be made in a narrow field.
+> 
+> - *Niels Bohr, Nobel Prize-winning physicist*
+
+Perhaps paradoxically, an important way to gain confidence in an area is to make a lot of mistakes. Making mistakes can seem scary---I get it. The culture of math and science education in America perpetuates a "genius" culture in STEM, where making mistakes immediately marks someone as "less than" or unworthy. **I wholeheartedly DO NOT believe in this.** Everyone can thrive in this course and learn statistics. Mistakes are not only ok but necessary.
+
+## Communication is a superpower
+
+> The single biggest problem in communication is the illusion that it has taken place.
+>
+> - George Bernard Shaw
+
+Being able to share an idea with others and have true understanding occur is a gift for all involved. And it's really hard. We'll have a lot of opportunity for practice in this course. What's more, the *process* of crafting effective communication is invaluable for deepening your own understanding:
+
+<center>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Read to collect the dots, write to connect them <a href="https://t.co/YbgnKKFUNn">pic.twitter.com/YbgnKKFUNn</a></p>&mdash; David Perell (@david_perell) <a href="https://twitter.com/david_perell/status/1411871612702543872?ref_src=twsrc%5Etfw">July 5, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+
+
+<br><br><br><br>
+
+
+
+# What to expect in and out of class
+
+When taking a new course, figuring out the right workflow/cadence of effort throughout the week can be a big adjustment. And most of you are doing this for 4 different courses! Below are some suggestions for what to expect in the course and how to focus your time and attention during and outside of class.
+
+## Outside of class
+
+**Pre-class videos/readings:** Some class periods will have required videos or reading to get acquainted with new concepts before seeing them again in class. My goal for these videos and readings is for you to get the most out of class time by being able to more easily follow explanations in class and to engage most fully in class activities. When there are required readings or videos, there will be an associated checkpoint to complete on Moodle (due just before the start of class).
+
+::: {.callout-tip title="Suggestions"}
+- As you take notes on videos/readings, highlight or otherwise mark all the areas where you have questions. Gather up all of these questions in one place, and bring them to class with you.
+- Record any reflections from in-class time about your learning process or interactions with peers while they are still fresh.
+- After learning a new topic in class, it is helpful to attempt the upcoming assignment as soon as possible. Just by getting some rough ideas down quickly, you avoid the difficulty of starting from a blank slate.
+- Come to instructor and preceptor drop-in hours (office hours) to chat about the course or anything else! 😃
+:::
+
+
+## During class
+
+Class time will be a mix of interactive lecture and longer stretches of group work. During the lecture portion, I will pause explanation frequently to prompt a short exercise or ask questions that you'll reflect on individually or together.
+
+::: {.callout-tip title="Suggestions"}
+- As we review the material at the start of class and as you work on the class activity, reference your set of questions from the pre-class material. Have you made progress on addressing those questions? Who or what helped with improving your understanding, and how?
+:::
+
+
+
+<br><br><br><br>
+
+
+
+# Grading and feedback
+
+## My philosophy
+
+Grading is thorny issue for many educators because of its [known negative effects on learning and motivation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4041495/). Nonetheless, it is ever-present in the US education system and at Macalester. Because I am required to submit grades for this course, it's worth me taking a minute to share my philosophy about grading with you.
+
+What excites me about being a teacher is your learning. Learning flourishes in an environment where you find **meaning and value** in what we're exploring, feel **supported when engaging with challenges**, receive **useful feedback**, and **regularly reflect** on your learning.
+
+If I didn't have to give grades, I wouldn't. But because I am required to, it is important to me to create a course structure and grading system that allow learning to flourish:
+
+- **Finding meaning and value:** I am striving to achieve this by creating space for authentic connection between you, your peers, and myself and by encouraging you to explore a topic that intrigues you for our course project.
+
+- **Support in engaging with challenges:** The assignments and activities that we will use to learn are *meant to be challenging*, and perfect understanding on your first try is not my expectation. For this reason, there will be opportunities to show improvement in your understanding over time to improve your grade on past assignments and assessments. Strong learning does not occur under excessive stress, so my hope is that having multiple chances to show your understanding alleviates much of the stress that would normally arise from needing to do as well as possible with only one try.
+
+- **Receiving useful feedback and reflecting regularly:** My aim with feedback is to always provide guidance towards improvement, no matter where you are in your progress. But good feedback alone is useless. Learners need to engage deeply with feedback in order to benefit the most from it.
+
+## Assignments and assessments
+
+### Checkpoints
+
+For class days where some reading and/or videos are required beforehand, there will be a short multiple-choice Moodle checkpoint due at 11:30am (30 minutes before class starts).
+
+You can attempt a checkpoint quiz as many times as you want, but there is a 33% point deduction for each successive attempt on a question. For example, if your first attempt on a 1-point question is incorrect, the maximum possible score on that question is 0.67 points for the second attempt. On the third attempt, the maximum score is 0.33 points. No points are awarded for the 4th attempt and beyond.
+
+### Practice problems
+
+To practice concepts that we cover in class, there will be 8 weekly practice problems (PPs) due on Fridays at 5pm. (Note that if needed, extensions are possible---see the [late work policy](syllabus.qmd#late-work).)
+
+You will receive qualitative feedback on all questions on these practice problem sets. These assignments will receive on overall score on the following scale:
+
+- High pass: 2 points
+- Pass: 1 point
+- Needs improvement: 0 points
+
+**Showing growth:**  If, on a quiz, you demonstrate stronger understanding of the concepts that you missed on a PP, you have the chance to earn a higher score on the PP. Either via email or through an in-person conversation with the instructor, you must discuss how your understanding of the concept(s) changed from the PP to the quiz by addressing feedback from both the PP and the quiz. You can do this 3 times over the semester (once for each quiz), and you can show improvement on multiple PPs using a single quiz.
+
+### Quizzes
+
+There will be 3 quizzes over the course of the semester.
+
+- Quiz 1: Friday, 9/27. 1 hour in class.
+- Quiz 2: Friday, 11/1. 1 hour in class. Will cover material from the first quiz to some extent because of the way that material in this course builds on earlier ideas.
+- Quiz 3: Monday, 12/16 8:00-10:00am. ~1.25 hours during our final exam slot. Will cover content from the whole course.
+
+Each quiz question will be graded on the following scale:
+
+- 3 points: fully correct
+- 2 points: mostly correct with minor errors
+- 1 point: missing key understanding
+- 0 points: fully off target or blank
+
+Quiz format:
+
+- Fully pen/pencil and paper. You will not need to write code or use a calculator, but you will need to be able to read and interpret output from R code.
+- You are allowed to bring a 3x5 index card with notes written on both sides. Typing your notes and pasting them on the card is fine.
+
+**Showing growth:** You can earn up to 50% of missed points back on quizzes if you complete a quiz correction and reflection. You must:
+
+- Write a reflection of how you prepared for the quiz and where you felt strongest and more uncertain in your understanding before taking the quiz
+- Schedule a meeting with the instructor. During our conversation, you will correct your quiz responses and discuss the above reflection. You will get immediate feedback at this meeting. Use my [Calendly page](https://calendly.com/lmyint) to schedule this meeting.
+
+### Project
+
+The goal of the course project is to apply the data analysis skills from our course to investigate a research question in a dataset of your choosing. Through milestones over the course of the semester, you will make steady progress on your projects and iterate on feedback. Full details about the project will be available on the [Project page](project.qmd).
+
+
+## Course grading system
+
+In order to earn a given letter grade, **all** requirements listed under that column need to be met.
+
+```{=html}
+<style type="text/css">
+.tab-grading {
+    border-collapse: collapse;
+    border-spacing:0;
+}
+.tab-grading td {
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break:normal;
+}
+.tab-grading th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+.tab-grading .tg-0pky {
+    border-color:inherit;
+    text-align:left;
+    vertical-align:top
+}
+</style>
+<table class="tab-grading"><thead>
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Grade: A</th>
+    <th class="tg-0pky">Grade: B</th>
+    <th class="tg-0pky">Grade: C</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">Checkpoint average</td>
+    <td class="tg-0pky">≥ 80%</td>
+    <td class="tg-0pky">≥ 70%</td>
+    <td class="tg-0pky">≥ 60%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Practice problems (PPs)</td>
+    <td class="tg-0pky">14 out of 16 points across all 8 PPs.<br>Must submit all 8 PPs.</td>
+    <td class="tg-0pky">12 out of 16 points across all 8 PPs.</td>
+    <td class="tg-0pky">10 out of 16 points across all 8 PPs.</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Quiz average</td>
+    <td class="tg-0pky">≥ 90%</td>
+    <td class="tg-0pky">≥ 80%</td>
+    <td class="tg-0pky">≥ 70%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Project</td>
+    <td class="tg-0pky">Earn highest level (Excellent) on all 6 rubric categories</td>
+    <td class="tg-0pky">Earn highest level (Excellent) on all but 1 rubric category</td>
+    <td class="tg-0pky">Earn highest level (Excellent) on all but 2 rubric categories</td>
+  </tr>
+</tbody></table>
+```
+
+If your work for different course components falls under different letter grades, your final letter grade will be an "average" of the letter grades for the different components.
+
+```
+C  C  C  C --> C
+C  C  C  B --> C+
+C  C  C  A --> C+
+C  C  B  B --> B-
+C  C  B  A --> B-
+C  C  A  A --> B
+C  B  B  B --> B-
+C  B  B  A --> B
+C  B  A  A --> B+
+C  A  A  A --> B+
+B  B  B  B --> B
+B  B  B  A --> B+
+B  B  A  A --> A-
+B  A  A  A --> A-
+A  A  A  A --> A
+```
+
+
+<br><br><br><br>
+
+
+# Other policies
+
+## Late work
+
+Homework assignments will generally be due **weekly on Fridays at 5pm**. 
+
+Throughout the quarter, you may use up to **three** extensions on practice problems. You will These three extensions can be used on practice problems only, not checkpoints or quizzes. The purpose of deadlines (and extensions) is to keep you accountable for your own learning, to keep you on track with the pace of the course (which builds upon itself throughout the semester), and to provide preceptors and myself the ability to give you timely feedback on assignments.
+
+In order to use an extension, you must email me (lmyint@macalester.edu) **before** the practice problem deadline to inform me you plan to use an extension. In your email, please specify (1) that you are using an extension, and (2) your self-set deadline is for the assignment. For example, you could say "I am using my second extension. I will have Practice Problems #7 in by 5:00pm two days from now." Once you set your deadline, I expect you to stick to it. If you do not e-mail me prior to the practice problem deadline, the extension will not be counted, and your assignment will be counted as late. Late homework without prior communication receives no credit.
+
+If you have run out of extensions and/or an extenuating circumstance occurs that impacts your ability to submit assignments on time, please email me to discuss the situation. I am happy to be flexible as long as you communicate!
+
+## Academic integrity
+
+Academic integrity is the cornerstone of our learning community. Students are expected to be familiar with the [college's standards](http://www.macalester.edu/academicprograms/academicpolicies/academicintegrity/) on academic integrity.
+
+I encourage you to work with your classmates to discuss material and ideas for assignments, but in order for you to receive individualized feedback on your own learning, you must submit your own work. This involves writing your own code and putting explanations into your own words. Always cite any sources you use, including AI (see section below).
+
+## Artificial intelligence (AI) use
+
+AI can both interfere with and enhance our capacity to learn. We must be mindful of when it might hinder us and when it might provide us with new understanding and/or assistance.
+
+In an introductory course like this one, we are learning the essentials of a new language and way of thinking. AI may be able to help you in this journey by providing explanations for concepts that are different from the ones provided by the course.
+
+However, in order to truly learn, **AI should not be used to generate responses that replace your thinking**.
+
+In general, please be aware of the limits of AI:
+
+- AI does not always generate accurate output. If it gives you a number, fact, or code, assume it is wrong unless you either know the answer or can check in with another source. AI works best for topics you already understand to a sufficient extent.
+- If you provide minimum effort prompts, you will get low quality results. You will need to refine your prompts in order to get good outcomes. This will take work.
+- Be thoughtful about when this tool is useful. Don't use it if it isn't appropriate for the case or circumstance.
+- The environmental impact of AI should not be ignored. The building and usage of AI tools consumes a lot of energy (see [here](https://www.nature.com/articles/s42256-020-0219-9) and [here](https://www.cfr.org/blog/artificial-intelligences-environmental-costs-and-promise)). For this reason, we will be very thoughtful about when we use AI and will discuss other sustainability behaviors that we can incorporate into our lives to offset this usage.
+- AI is a tool, but one that you need to acknowledge using. Any ideas, language, or code that is produced by AI must be cited, just like any other resource.
+    - **How to cite AI:** Please include a paragraph at the end of any assignment that uses AI explaining what you used the AI for and what prompts you used to get the results. Failure to do so is in violation of the academic integrity policy at Macalester College.
+
+If you have any questions about your use of AI tools, please contact me to discuss them.
+
+
+<br><br><br><br>
+
+
+# Well-being
+
+I want you to succeed. Both here at Macalester and beyond. To help make this happen, I am committed to the following.
+
+**Respect:** Everyone comes from a different path through life, and it is our moral duty as human beings to listen to each other without judgment and to respect one another. I have no tolerance for discrimination of any kind, in and out of the classroom. If you are seeking campus resources regarding discrimination, the [Department of Multicultural Life](https://www.macalester.edu/multiculturallife/) and the [Center for Religious and Spiritual Life](https://www.macalester.edu/religiouslife/) are wonderful resources. We will also respect the [MSCS Community Guidelines](https://docs.google.com/document/d/e/2PACX-1vSlLLWmyOf8WKGDKJ_qypgA_kQI1dNFGEKH0mtFoqfAUARZN7ypVCgivnmPjccks9jJzW1rgEzt7QMI/pub).
+
+**Sensitive Topics:** Applications in this course span issues in science, policy, and society. As such, we may sometimes address topics that are sensitive for you. I will try to announce in class if an assignment or activity involves a potentially sensitive topic. If you have reservations about a particular topic, please come talk to me to discuss possible options.
+
+**Accommodations:** If you need accommodations for any reason, please contact [Disability Services](https://www.macalester.edu/studentaffairs/disabilityservices/accommodations/) to discuss your needs, and speak with me as soon as possible afterwards so that we can discuss your accommodation plan. If you already have official accommodations, please discuss these with me within the first week of class so that you get off to a great start. Contact me if you have other special circumstances. I will find resources for you.
+
+**Title IX:** You deserve a community free from discrimination, sexual harassment, hostility, sexual assault, domestic violence, dating violence, and stalking. If you or anyone you know has experienced harassment or discrimination, know that you are not alone. Macalester provides staff and resources to help you find support. More information is available on the [Title IX website](https://www.macalester.edu/titleix/).
+
+**General Health and Well-being:** I care that you prioritize your well-being in this semester and beyond. Investing time into taking care of yourself will have profound impacts on all aspects of your life. Remember that beyond being a student, you are a human being carrying your own experiences, thoughts, emotions, and identities. It is important to acknowledge any stressors you may be facing, which can be mental, emotional, physical, cultural, financial, etc., and how they can have an impact on you. I encourage you to remember that you have a body with needs. In the classroom, eat when you are hungry, drink water, use the restroom, and step out if you are upset and need some air. Please do what is necessary so long as it does not impede your or others' ability to be mentally and emotionally present in the course. Outside of the classroom, sleeping well, moving your body, and connecting with others can be strategies can help nourish you. If you are having difficulties maintaining your well-being, please don't hesitate to contact me and/or find support from physical and mental health resources [here](https://docs.google.com/document/d/1lz-ii5yze_OSkQJqz_7pap7fRjG81LJh0_saBniP-zg/edit), [here](https://docs.google.com/document/d/1iC-ykD8QJ-w2BVO1Gb0AobD-00Zq_8mznWR5C2mNiF0/edit?usp=sharing), and [here](https://www.macalester.edu/current-students/).

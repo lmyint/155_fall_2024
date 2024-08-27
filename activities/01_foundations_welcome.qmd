@@ -1,0 +1,22 @@
+---
+title: "Data Foundations"
+sidebar: false
+---
+
+# Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Get a sense for the kinds of statistical investigations that 
+- Define *cases* and *variables*
+- Apply the 5 W's + H (who, what, when, where, why, and how) to data collection
+
+Links to related reading(s):
+
+- [What is Data?](https://mac-stat.github.io/Stat155Notes/what-is-data.html)
+- [Data Context](https://mac-stat.github.io/Stat155Notes/data-context.html)
+
+<br><br><br><br>
+
+**Activity under construction**
+
