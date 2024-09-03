@@ -3,5 +3,28 @@ title: "Project"
 sidebar: false
 ---
 
-Details coming soon!
+A detailed description of the group project can be found [here](https://docs.google.com/document/d/1GpwqXcdKkyB9ctmUu54X4ukruu_WHNKJE0nkdVu041g/edit?usp=sharing). Important dates and key information are listed below.
 
+# Important dates
+
+- Friday, October 11: Project Checkpoint 1 due
+- Tuesday, November 26: Project Checkpoint 2 due
+- Wednesday, December 11: Project paper due, presentations in class
+
+# Grading
+
+The final paper will be graded using the rubric found [here](https://docs.google.com/spreadsheets/d/1yHYFqPwmK83aK0tPH8Qt0lTMeGFdtWZteNrQ0STXamw/edit?usp=sharing). Although the first two checkpoints will not directly contribute to your course grade, the feedback you receive on them will help you make an excellent final paper.
+
+# Resources
+
+Later in the semester, I will post at least one example of a successful final paper, as well as a Google Doc template for the final paper.
+
+# Project Groups
+
+Project groups will ultimately be determined by me, with the assistance of a Project Group Preferences survey. The survey will be sent out early in the semester (exact date TBD) and will allow you to either list people you would like to be in a group with or specify that you would like to be placed in a group randomly by me. I will do my best to ensure that groups are constructed as closely to survey responses as possible. Since one component of the project involves an in-class presentation, **you may** ***not*** **work with students in different sections on the project.**
+
+If for any reason there is an individual (or individuals) with whom you do not feel safe participating in a project group with, there will be a space to note this on the survey. You will not be expected to provide any justification for your response to this question, but note that as I need to place you in groups, the survey will not be anonymous.
+
+Group work and collaboration are important components of nearly all statistical analyses and projects. I recognize that individual contributions to a group project are not always consistent between group members. To this end, you will (as a group) be expected to explicitly specify the project tasks completed by each team member along with the final draft of your paper.
+
+If there are any concerns with project groups throughout the semester, I am happy to meet with groups or individuals to discuss ways to move forward.

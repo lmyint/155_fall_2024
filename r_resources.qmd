@@ -1,7 +1,18 @@
 ---
-title: "Tech Setup"
+title: "R Resources"
 sidebar: false
 ---
+
+# Getting Help
+
+- [Crowd-sourced R functions](https://docs.google.com/document/d/1YDLUpplJi8cnpJMCKOq9hKKjMGmFM-5_ZIU7lVySi-M/edit)
+- [Interactive RStudio tutorials](https://rstudio.cloud/learn/primers) on various topics, including R basics and visualizing data
+- Markdown (Quarto) [basics](https://quarto.org/docs/authoring/markdown-basics.html), and [tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)
+- [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- *Google!* If you have a question about R, you can be fairly certain that someone else has already asked it. Google is your best friend for answering questions about R. I recommend adding “R tidyverse” to the search term. For example, to find out how to make a scatterplot, try searching “scatterplot R tidyverse”.
+
+
+# Getting Started
 
 Follow these instructions to set up the software that we'll be using throughout the semester. **Even if you've already downloaded both R and RStudio, you'll want to re-download to make sure that you have the most current versions.**
 
@@ -14,7 +25,15 @@ Follow these instructions to set up the software that we'll be using throughout 
 
 <br><br><br><br>
 
-**Required:** Download R and RStudio.
+**Required:** Create a `STAT155` folder on your Desktop or in your Documents folder. Within the `STAT155` folder create 3 subfolders:
+
+- `Activities`
+- `Practice Problems`
+- `Project`
+
+<br><br><br><br>
+
+**Required:** Download R and RStudio by following the directions below.
 
 - **FIRST:** Download R [here](https://cran.rstudio.com/).
     - In the top section, you will see three links "Download R for ..."
@@ -23,10 +42,6 @@ Follow these instructions to set up the software that we'll be using throughout 
 - **SECOND:** Download RStudio [here](https://posit.co/download/rstudio-desktop/#download).
     - Click the button under step 2 to install the version of RStudio recommended for your computer.
     - As of August 27, 2024, the latest version of RStudio is 2024.04.2+764.
-
-<br>
-
-Suggested: Watch this [video](https://www.youtube.com/watch?v=LJiRSPoe8r0) describing key configuration options for RStudio.
 
 <br><br><br><br>
 

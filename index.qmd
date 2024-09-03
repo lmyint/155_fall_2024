@@ -1,5 +1,6 @@
 ---
 title: "STAT 155: Introduction to Statistical Modeling"
+subtitle: "Section 1 (Fall 2024)"
 sidebar: false
 ---
 
@@ -13,4 +14,4 @@ sidebar: false
 **Instructor:** [Leslie Myint](https://www.lesliemyint.org) <br>
 **Class meeting times:** MWF 12:00-1:00pm <br>
 **Class location:** THEATR 204 <br>
-**Instructor drop-in hours:** TBD
+**Instructor drop-in hours:** Olin Rice 232; Hours TBD

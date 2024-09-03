@@ -3,130 +3,264 @@ title: "Schedule"
 sidebar: false
 ---
 
-```{=html}
-<style type="text/css">
-.tab-schedule  {border-collapse:collapse;border-spacing:0;}
-.tab-schedule td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tab-schedule th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tab-schedule .tg-0lax{text-align:left;vertical-align:top}
-.tab-schedule .tg-m4uw{background-color:#E6B8AF;text-align:left;vertical-align:top}
-</style>
-<table class="tab-schedule"><thead>
-  <tr>
-    <th class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Week</span></th>
-    <th class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">M</span></th>
-    <th class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">W</span></th>
-    <th class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">F</span></th>
-    <th class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework </span><span style="color:#000;background-color:transparent">(due Fridays at 5pm)</span></th>
-  </tr></thead>
-<tbody>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1 (9/2 - 9/6)</span></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">First day!</span><br><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Welcome and data fundamentals</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Univariate visualization and summaries</span></td>
-    <td class="tg-0lax"></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2 (9/9 - 9/13)</span></td>
-    <td class="tg-0lax">Discovery day</td>
-    <td class="tg-0lax">Formalizing simple linear regression</td>
-    <td class="tg-0lax">Formalizing simple linear regression</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 1 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3 (9/16 - 9/20)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Model evaluation</span></td>
-    <td class="tg-0lax">Transformations</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Library activity.</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 2 due</span><br><span style="font-weight:400;font-style:normal">Group project survey due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4 (9/23 - 9/27)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Simple linear regression: categorical predictor</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Discovery day</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quiz 1</span></td>
-    <td class="tg-0lax"></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5 (9/30 - 10/4)</span></td>
-    <td class="tg-0lax">Multiple linear regression principles</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Confounding</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project work day</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 3 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6 (10/7 - 10/11)</span></td>
-    <td class="tg-0lax">Discovery day</td>
-    <td class="tg-0lax">Interaction models: practice</td>
-    <td class="tg-0lax">Flex day</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 4 due</span><br><span style="font-weight:400;font-style:normal">Project Checkpoint 1 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7 (10/14 - 10/18)</span></td>
-    <td class="tg-0lax">Model building (part 1)</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Model building (part 2)</span></td>
-    <td class="tg-m4uw"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:#E6B8AF">FALL BREAK</span></td>
-    <td class="tg-0lax"></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8 (10/21 - 10/25)</span></td>
-    <td class="tg-0lax">Probability and odds</td>
-    <td class="tg-0lax"><span style="color:#000">Simple logistic regression</span><br></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Multiple logistic regression and evaluation</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 5 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9 (10/28 - 11/1)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Tools for inference (sampling variation, sampling distributions)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Tools for inference (bootstrapping, normal distribution)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quiz 2</span></td>
-    <td class="tg-0lax"></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10 (11/4 - 11/8)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Confidence intervals</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:#E6B8AF">Flex day (day after election)</span><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent"> </span></td>
-    <td class="tg-0lax">Discovery day</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 6 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11 (11/11 - 11/15)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Hypothesis testing details (single coefficient)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Hypothesis testing practice (single coefficient)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project work day</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 7 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">12 (11/18 - 11/22)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Hypothesis testing for multiple coefficients</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">p-values discussion</span></td>
-    <td class="tg-0lax">Flex day</td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Homework 8 due</span></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">13 (11/25 - 11/29)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Time</span></td>
-    <td class="tg-m4uw"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:#E6B8AF">THANKSGIVING</span></td>
-    <td class="tg-m4uw"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:#E6B8AF">THANKSGIVING</span></td>
-    <td class="tg-0lax">Project Checkpoint 2 due<br>(Tuesday at 5pm)</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">14 (12/2 - 12/6)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Time</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Time</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Time</span></td>
-    <td class="tg-0lax"></td>
-  </tr>
-  <tr>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">15 (12/9 - 12/13)</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Time</span></td>
-    <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Project Paper due, Presentations</span></td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax">Quiz 3 Monday, 12/16 8:00-10:00am.<br>~1.25 hours during our final exam slot.</td>
-  </tr>
-</tbody></table>
-```
+::: {.callout-tip icon=false collapse="false" title="Week 1: 9/2 - 9/6 (Data fundamentals, univariate visualization and summaries)"}
+#### Announcements
+
+Welcome (back) to campus!
+
+#### Wednesday
+
+Before class:
+
+- Review the course [syllabus](syllabus.qmd)
+- Familiarize yourself with Moodle and the course website
+- Complete the [Welcome survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link)
+- Listen to the first episode of the [Sold a Story podcast](https://features.apmreports.org/sold-a-story/) (Episode 1: The Problem) (~30 minutes). This will provide some useful context for what we explore on our first day together.
+
+#### Friday
+
+Before class:
+
+- Complete all required steps on the [R Resources](r_resources.qmd) page
+- Complete the [Welcome survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link) (if you haven’t already!)
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=130247) on Moodle
+    - Do either the readings or videos for the Day 2 Activity (see Moodle checkpoint description for links to the readings and videos)
+    - Due 30 minutes before class today (11:30am on 9/6)
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 3: 9/16 - 9/20 (Simple linear regression: model evaluation and variable transformations)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Quiz 1 (1 hour in class)
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 5: 9/30 - 10/4 (Multiple linear regression: confounding)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 6: 10/7 - 10/11 (Multiple linear regression: interaction)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 7: 10/14 - 10/18 (Multiple linear regression: model building) (Fall Break)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 8: 10/21 - 10/25 (Logistic regression)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 9: 10/28 - 11/1 (Tools for statistical inference)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Quiz 2 (1 hour in class)
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 10: 11/4 - 11/8 (Confidence intervals)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 11: 11/11 - 11/15 (Hypothesis testing)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 12: 11/18 - 11/22 (Hypothesis testing)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 13: 11/25 - 11/29 (Hypothesis testing, p-values) (Thanksgiving Break)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 14: 12/2 - 12/6 (Project work)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+Before class:
+
+#### Friday
+
+Before class:
+
+:::
+
+::: {.callout-tip icon=false collapse="true" title="Week 15: 12/9 - 12/13 (Project work, paper, and presentations)"}
+#### Announcements
+
+#### Monday
+
+Before class:
+
+#### Wednesday
+
+(Last day of class)
+
+Before class:
+
+:::
 

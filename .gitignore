@@ -2,3 +2,5 @@
 .Rhistory
 *.Rproj*
 .quarto
+
+/.quarto/

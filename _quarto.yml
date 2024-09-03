@@ -21,8 +21,8 @@ website:
       - sidebar:homework
       - file: project.qmd
         text: "Project"
-      - file: tech_setup.qmd
-        text: "Tech Setup"
+      - file: r_resources.qmd
+        text: "R Resources"
 
   sidebar:
     - id: activities

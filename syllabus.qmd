@@ -23,9 +23,9 @@ Let's have a great semester!
 
 We live in a world replete with *data*. From smart devices, to online shopping, to medical data, to criminal justice records, and to environmental monitoring. These are but a few ways in which data leaves a mark on our society and our lives.
 
-Statistics is a discipline devoted to gaining insight from this abundant data. It provides one lens through which we can build knowledge of our world. In this course, you will learn how to use this lens to think critically and responsibly about data and to enhance your skills and experiences in other areas.
+Statistics is a discipline devoted to gaining insight from this abundant data. It provides one lens through which we can build knowledge of our world. In this course, we will explore how to use this lens to think critically and responsibly about data and to enhance your skills and experiences in other areas.
 
-We will cover the following topics:
+We will explore the following topics:
 
 - Univariate and multivariate data visualization and summarization
 - Multivariate linear and logistic regression modeling
@@ -53,11 +53,11 @@ In terms of big picture goals, I hope that by the end of the course, you are abl
 
 **Instructor:** Leslie Myint (lez-lee mee-int) (she/her)
 
-- **About me:** Aside from data-related topics, I love talking about all things games! I love playing board games, Dungeons and Dragons (D&D), and Nintendo console games. I also love staying active with weightlifting, rock climbing, Mac intramural soccer, and dance. If it snows enough this winter (fingers crossed!), I'm hoping to learn how to cross-country ski.
+- **About me:** Aside from data-related topics, I love talking about games! I love playing board games, Dungeons and Dragons (D&D), and Nintendo console games. I also love staying active with weightlifting, rock climbing, Mac intramural soccer, and dance. If it snows enough this winter (fingers crossed!), I'm hoping to learn how to cross-country ski.
 
 **Preceptors:** We have 9 preceptors across the 6 sections of STAT 155 this semester. We will also have the support of a dedicated R preceptor (Kyle Suelflow) who helps with R across all MSCS courses. 
 
-Ryan will be the preceptor dedicated to our section and will sometimes come to class to help with activities. Preceptor drop-in hours (office hours) will be shared across all sections of the course and posted on our [course homepage](index.qmd).
+Ryan will be the preceptor dedicated to our section and will sometimes come to class to help with activities. Preceptor drop-in hours (office hours) will be shared across all sections of the course and posted on Moodle.
 
 - Ryan Mickelborough
 - Samina Stack
@@ -74,7 +74,7 @@ Ryan will be the preceptor dedicated to our section and will sometimes come to c
 
 I love getting to talk to students outside of class time---whether about class-related topics or anything else. Come chat with me!
 
-I'll be setting times for drop-in hours based on feedback from the [pre-course survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link). I'll update my drop-in hours on our [course homepage](index.qmd) and Moodle when they're finalized.
+I'll be setting times for drop-in hours based on feedback from the [welcome survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link). I'll update my drop-in hours on our [course homepage](index.qmd) and Moodle when they're finalized.
 
 I'm also happy to meet one-on-one if my normal drop-in hours don't work. You can schedule a time to meet with me via [Calendly](https://calendly.com/lmyint).
 
@@ -92,7 +92,7 @@ Please help me make sure that I call you by your preferred name and pronouns too
 
 # Textbook
 
-[STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/): An online set of notes for STAT 155 written by the Macalester statistics faculty. Before some class days, we will require reading from this textbook or watching some online videos.
+[STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/): A free online set of notes for STAT 155 written by the Macalester statistics faculty. Before some class days, we will require reading from this textbook or watching some online videos.
 
 
 
@@ -161,7 +161,7 @@ When taking a new course, figuring out the right workflow/cadence of effort thro
 Class time will be a mix of interactive lecture and longer stretches of group work. During the lecture portion, I will pause explanation frequently to prompt a short exercise or ask questions that you'll reflect on individually or together.
 
 ::: {.callout-tip title="Suggestions"}
-- As we review the material at the start of class and as you work on the class activity, reference your set of questions from the pre-class material. Have you made progress on addressing those questions? Who or what helped with improving your understanding, and how?
+- As we review the material at the start of class and as you work on the class activity, reference your set of questions from the pre-class material. Have you made progress on addressing those questions? Who or what helped with improving your understanding, and how? Make notes of what concepts are still unclear so that you can review later.
 :::
 
 
@@ -176,7 +176,9 @@ Class time will be a mix of interactive lecture and longer stretches of group wo
 
 Grading is thorny issue for many educators because of its [known negative effects on learning and motivation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4041495/). Nonetheless, it is ever-present in the US education system and at Macalester. Because I am required to submit grades for this course, it's worth me taking a minute to share my philosophy about grading with you.
 
-What excites me about being a teacher is your learning. Learning flourishes in an environment where you find **meaning and value** in what we're exploring, feel **supported when engaging with challenges**, receive **useful feedback**, and **regularly reflect** on your learning.
+What excites me about being a teacher is *your learning*.
+
+Learning flourishes in an environment where you find **meaning and value** in what we're exploring, feel **supported when engaging with challenges**, receive **useful feedback**, and **regularly reflect** on your learning.
 
 If I didn't have to give grades, I wouldn't. But because I am required to, it is important to me to create a course structure and grading system that allow learning to flourish:
 
@@ -184,7 +186,7 @@ If I didn't have to give grades, I wouldn't. But because I am required to, it is
 
 - **Support in engaging with challenges:** The assignments and activities that we will use to learn are *meant to be challenging*, and perfect understanding on your first try is not my expectation. For this reason, there will be opportunities to show improvement in your understanding over time to improve your grade on past assignments and assessments. Strong learning does not occur under excessive stress, so my hope is that having multiple chances to show your understanding alleviates much of the stress that would normally arise from needing to do as well as possible with only one try.
 
-- **Receiving useful feedback and reflecting regularly:** My aim with feedback is to always provide guidance towards improvement, no matter where you are in your progress. But good feedback alone is useless. Learners need to engage deeply with feedback in order to benefit the most from it.
+- **Receiving useful feedback and reflecting regularly:** My aim with feedback is to always provide guidance towards improvement, no matter where you are in your progress. However, good feedback alone is useless---learners need to engage deeply with feedback in order to benefit the most from it. For this reason, opportunities to improve your scores on prior assignments will require reflecting on feedback.
 
 ## Assignments and assessments
 
@@ -204,7 +206,7 @@ You will receive qualitative feedback on all questions on these practice problem
 - Pass: 1 point
 - Needs improvement: 0 points
 
-**Showing growth:**  If, on a quiz, you demonstrate stronger understanding of the concepts that you missed on a PP, you have the chance to earn a higher score on the PP. Either via email or through an in-person conversation with the instructor, you must discuss how your understanding of the concept(s) changed from the PP to the quiz by addressing feedback from both the PP and the quiz. You can do this 3 times over the semester (once for each quiz), and you can show improvement on multiple PPs using a single quiz.
+**Showing growth:**  If, on a quiz, you demonstrate stronger understanding of the concepts that you missed on a PP, you have the chance to earn a higher score on the PP. Either via email or through an in-person conversation with the instructor, you must discuss how your understanding of the concept(s) changed from the PP to the quiz by addressing feedback from both the PP and the quiz. You can do this 2 times over the semester (once for Quizzes 1 and 2), and you can show improvement on multiple PPs using a single quiz.
 
 ### Quizzes
 
@@ -226,7 +228,7 @@ Quiz format:
 - Fully pen/pencil and paper. You will not need to write code or use a calculator, but you will need to be able to read and interpret output from R code.
 - You are allowed to bring a 3x5 index card with notes written on both sides. Typing your notes and pasting them on the card is fine.
 
-**Showing growth:** You can earn up to 50% of missed points back on quizzes if you complete a quiz correction and reflection. You must:
+**Showing growth:** For Quizzes 1 and 2, you can earn up to 50% of missed points back on quizzes if you complete a quiz correction and reflection. You must:
 
 - Write a reflection of how you prepared for the quiz and where you felt strongest and more uncertain in your understanding before taking the quiz
 - Schedule a meeting with the instructor. During our conversation, you will correct your quiz responses and discuss the above reflection. You will get immediate feedback at this meeting. Use my [Calendly page](https://calendly.com/lmyint) to schedule this meeting.
@@ -348,7 +350,7 @@ If you have run out of extensions and/or an extenuating circumstance occurs that
 
 Academic integrity is the cornerstone of our learning community. Students are expected to be familiar with the [college's standards](http://www.macalester.edu/academicprograms/academicpolicies/academicintegrity/) on academic integrity.
 
-I encourage you to work with your classmates to discuss material and ideas for assignments, but in order for you to receive individualized feedback on your own learning, you must submit your own work. This involves writing your own code and putting explanations into your own words. Always cite any sources you use, including AI (see section below).
+I encourage you to work with your classmates to discuss material and ideas for assignments, but in order for you to receive individualized feedback on your own learning, you must submit your own work. This involves writing your own code and putting explanations into your own words. Always cite any sources you use.
 
 ## Artificial intelligence (AI) use
 
@@ -356,16 +358,14 @@ AI can both interfere with and enhance our capacity to learn. We must be mindful
 
 In an introductory course like this one, we are learning the essentials of a new language and way of thinking. AI may be able to help you in this journey by providing explanations for concepts that are different from the ones provided by the course.
 
-However, in order to truly learn, **AI should not be used to generate responses that replace your thinking**.
+However, in order to truly learn, **AI should not be used to generate responses that replace your thinking**, so even if you use AI to help explain concepts, **please write responses in your own words on assignments**.
 
 In general, please be aware of the limits of AI:
 
 - AI does not always generate accurate output. If it gives you a number, fact, or code, assume it is wrong unless you either know the answer or can check in with another source. AI works best for topics you already understand to a sufficient extent.
 - If you provide minimum effort prompts, you will get low quality results. You will need to refine your prompts in order to get good outcomes. This will take work.
 - Be thoughtful about when this tool is useful. Don't use it if it isn't appropriate for the case or circumstance.
-- The environmental impact of AI should not be ignored. The building and usage of AI tools consumes a lot of energy (see [here](https://www.nature.com/articles/s42256-020-0219-9) and [here](https://www.cfr.org/blog/artificial-intelligences-environmental-costs-and-promise)). For this reason, we will be very thoughtful about when we use AI and will discuss other sustainability behaviors that we can incorporate into our lives to offset this usage.
-- AI is a tool, but one that you need to acknowledge using. Any ideas, language, or code that is produced by AI must be cited, just like any other resource.
-    - **How to cite AI:** Please include a paragraph at the end of any assignment that uses AI explaining what you used the AI for and what prompts you used to get the results. Failure to do so is in violation of the academic integrity policy at Macalester College.
+- The environmental impact of AI should not be ignored. The building and usage of AI tools consume a lot of energy (see [here](https://www.nature.com/articles/s42256-020-0219-9) and [here](https://www.cfr.org/blog/artificial-intelligences-environmental-costs-and-promise)). For this reason, let's be thoughtful about when we use AI and think about other sustainability behaviors that we can incorporate into our lives to offset this usage.
 
 If you have any questions about your use of AI tools, please contact me to discuss them.
 
