@@ -1,22 +1,196 @@
 ---
-title: "Data Foundations"
+title: "Data Fundamentals"
 sidebar: false
 ---
 
-# Learning goals
+Welcome to our first in-class activity! Today we will start thinking about fundamental ideas when working with data and get to know the people in this class.
+
+## Learning goals
 
 By the end of this lesson, you should be able to:
 
-- Get a sense for the kinds of statistical investigations that 
 - Define *cases* and *variables*
 - Apply the 5 W's + H (who, what, when, where, why, and how) to data collection
 
-Links to related reading(s):
+## Related reading
+
+If you would like to read more after class, see the following sections of our textbook:
 
 - [What is Data?](https://mac-stat.github.io/Stat155Notes/what-is-data.html)
 - [Data Context](https://mac-stat.github.io/Stat155Notes/data-context.html)
 
 <br><br><br><br>
 
-**Activity under construction**
+## Introductions
+
+Before we start talking about data, we will take time to get to know each other.
+
+Take 5 minutes to have a conversation with the people at your table:
+
+- Introduce yourselves however you see fit.
+- What's something that's on your mind this fall?
+
+<br><br><br><br>
+
+## What is data?
+
+In a word: information!
+
+The way that information is stored affects how we explore it.
+
+Spreadsheets are common for statistical explorations.
+
+![Structure of tidy data: variables are in columns, observations are in rows, and values are in cells.](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+- **Observations** are also called **cases** or **units of analysis**.
+
+Figure above comes from Chapter 12 of [R for Data Science](https://r4ds.had.co.nz/tidy-data.html).
+
+<br><br><br><br>
+
+## Data context
+
+When thinking about where data comes from, it is important to ask ourselves questions stemming from the 5 W's + H.
+
+- **Who?**
+    - Who is in the data?
+    - What is the observational unit?
+    - How did they end up in the data?
+    - Were they selected randomly or were they in a particular location a particular time?
+    - Who collected the data? An agency, a consortium of researchers, an individual researcher? What motivations did they have?
+
+- **What?**
+    - What is being measured or recorded on each unit?
+    - What are the characteristics, features, or variables that were collected?
+
+- **When?**
+    - When was the data collected? One point in time? Over time?
+    - If data quality degrades over time (e.g. lab specimens), we should be concerned.
+
+- **Where?**
+    - Where were the data collected? In one location? Multiple locations?
+
+- **Why?**
+    - Why were these data collected? For profit? For academic research? Are there conflicts of interest?
+
+- **How?**
+    - How were the data collected? What instruments and methods used for measurement? What questions were asked and how? Online survey? By phone? In person?
+
+<br><br><br><br>
+
+## Sold a Story
+
+- [Podcast](https://features.apmreports.org/sold-a-story/) produced in 2022 by the American Public Media Group
+- How did a flawed method for teaching children to read persist in American education despite evidence that showed its inefficacy?
+- Episode 1 details the problem and the flawed approach: the "three-cueing" method. When faced with an unknown word readers were instructed to use 3 cues in the following priority:
+    - Highest priority: the context of the story (pictures on the page, other words in the sentence)
+    - Middle priority: using grammar (is the unknown word a noun, verb, etc.? Past tense, present tense?)
+    - Lowest priority: sounding out the word using the individual letters
+
+<br><br><br><br>
+
+## Research into reading strategies
+
+We are going to listen to two short segments of [Sold a Story](https://features.apmreports.org/sold-a-story/) - Episode 2.
+
+These segments describe two different research studies.
+
+- First study
+    - Conducted by Marie Clay - her ideas would form the basis of the three-cueing method
+- Second study
+    - Conducted by reading research Bruce McCandliss
+
+<br><br><br><br>
+
+## Marie Clay's study
+
+Timestamp: 14:07 - 16:10
+
+Transcript:
+
+> It was 1963, the same year schools in New Zealand started using those little books. Clay identified 100 children in Auckland in their first year of school. And she observed them for an entire year.  
+> 
+> Clay: I went into classrooms. I recorded exactly what children were saying and doing. And this gave me new insights for building, um, almost a new theory of how our children were learning to read.  
+> 
+> Clay observed those 100 kids closely. She wanted to know: what were the good readers doing? And what were the poor readers doing that was different?   
+> 
+> (Music) 
+> 
+> She came away from that study and subsequent research with her theory. Her basic idea was that good readers are good problem solvers. They're like detectives, searching for clues. She wrote: "You will be familiar with the old game ‘Twenty Questions.' Reading is something like that game." According to Clay's theory, when good readers come to a word they don't know, they ask themselves good questions. Like, what word would make sense here? For example, if a girl in a story is getting ready to ride a horse, and she puts something on her horse that starts with an "s"…the word must be "saddle."   
+> 
+> Clay also noticed there are things good readers don't do. They don't laboriously sound out words. They don't get stuck on the letters. She thought good readers use the letters in words as one of their clues. But she was convinced that letters are not very good clues. Not that reliable and sometimes just kind of confusing. She concluded that good readers use the letters in words in an "incidental" way. She thought they just skim the letters to confirm they're getting the meaning of what they're reading. And their last resort when figuring out a word is to sound it out.
+
+<br><br><br><br>
+
+## Bruce McCandliss's study
+
+Timestamp: 38:58 - 43:24
+
+Transcript:
+
+> Bruce McCandliss did a study in 2015 to try to understand how different teaching methods affect reading development. He and his colleagues made up a new written language and brought people into their labs to learn this language. They divided their subjects into two groups. One group was taught the relationships between the symbols and sounds in this new language. The other group was told to just look at the whole words – the clusters of unfamiliar symbols – and try to remember them.  
+> 
+> (Music) 
+> 
+> At first, both groups were learning.  
+> 
+> McCandliss: Learning occurs in both cases. Like, people can master, you know, 20, 30, 40, 50, 60 of these words.  
+> 
+> In fact, the students who were memorizing the whole words did better at first. Learning was slower for the students focusing on letter-sound relationships. But those students were soon able to read more words than the group that hadn't been taught letters and sounds. And when Bruce and his colleagues looked at what was going on inside the brains of their study participants, they saw something interesting. People who were sounding out the words were reading differently than the other group.  
+> 
+> McCandliss: By really encouraging people to think about and attend to the nuances of the print and how they relate to the pronunciation, we see this activation pattern that looks a lot like what the expert reading circuitry looks like.   
+> 
+> In other words, the people who focused on letter-sound relationships increased activity in areas of the brain that are associated with skilled reading.  
+> 
+> People who were not taught to focus on letters and sounds used a different neural network to read. A network that is not as efficient or effective at helping you map written words into your memory. Other experiments – with adults and children – have shown similar patterns of brain activity.  
+> 
+> (Music) 
+> 
+> How a person is taught affects what areas of the brain they use to read. And you want to use the parts of your brain that are going to be most efficient and effective at helping you map words into your memory. Because that's how you become a good reader. You're not using your brain power to identify the words. You're using your brain power to understand what you're reading. And that's the goal. Bruce McCandliss says teaching kids that they don't have to look carefully at words and sound them out is putting many of them at risk of never getting there. Of never becoming good readers.  
+> 
+> McCandliss: I think more and more people are starting to recognize that there's a pretty significant number of kids out there that we're neglecting their needs. And the kids struggle and they suffer, and at times I've run reading clinics where the kids break down like the fourth word into a reading test and start crying and telling you that they're, they're a defective person who is stupid and doesn't belong in school and hates school and never wants to do anything with reading ever.  
+> 
+> (Music) 
+> 
+> When I first started doing all this reporting on reading a few years ago, I didn't realize how many people have a hard time learning how to read. I think it came pretty easily to me and to my kids, and I didn't think about it much because I didn't have to. But according to Reid Lyon, the guy who oversaw all that reading research at the NICHD, learning to read is a formidable challenge for a lot of people. He estimates that about 60% of kids need direct and explicit instruction. If they don't get it at school, they might get it at home. But if they don't get it, they're not likely to become very good readers – or spellers. And within that sixty percent of people who need good instruction, there's a group of people who need a lot of good instruction. Because learning to read is really, really hard for them. It's not about intelligence. There are very, very smart people who struggle to learn how to read. But what the research shows is that nearly everyone can learn how to do it – if they are taught.
+
+<br><br><br><br>
+
+## Group exercise: comparing the studies and their impact
+
+Feel free to write your responses anywhere - these responses are just for you. We'll discuss these as a class afterwards.
+
+1. Imagine that you were organizing the data from Marie Clay's and Bruce McCandliss's studies into spreadsheets. What would each row in the underlying data set represent? What would each column of the data set represent?
+
+2. Brainstorm some strengths and weaknesses of Marie Clay's and Bruce McCandliss's studies. As you brainstorm, think about each of the 5 W's + H. (Note: there's a lot of contextual information about the studies that we don't have from just the podcast. Focus on thinking about who, what, when, where, why, and how types of questions rather than on answering them for these 2 studies.)
+
+3. Marie Clay's study formed the basis for the flawed "three-cueing" approach that was in widespread use across the US for decades despite evidence from studies like Bruce McCandliss's. How do you think that this could happen?
+
+<br><br><br><br>
+
+## What to expect in this course
+
+Class activities
+
+- Short discussion together to introduce ideas or review ideas from readings/videos (hopefully no more than 15 minutes)
+- Work on practice exercises in small groups
+    - Starting Friday we will be working in RStudio almost every day
+    - Our preceptor Ryan and I will walk around to help with exercises
+- Solutions for exercises will be posted at the bottom of each activity page on the course website after class
+- Activities are for practice--not turned in to be graded
+    - If you understand the activities, you will have good understanding for the weekly practice problems, 3 quizzes, and the course project.
+
+> Core value in this course: **mistakes** are needed for **growth**, and growth occurs when we **reflect on feedback**
+
+This value is reflected in the ways that you can [show improvement](../syllabus.qmd#assignments-and-assessments) in the main assessments for our course.
+
+<br><br><br><br>
+
+## For next time
+
+How to prepare for subsequent classes will always be posted on the [Schedule page](../schedule.qmd).
+
+
+
+
 

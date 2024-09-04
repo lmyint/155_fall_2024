@@ -55,20 +55,11 @@ In terms of big picture goals, I hope that by the end of the course, you are abl
 
 - **About me:** Aside from data-related topics, I love talking about games! I love playing board games, Dungeons and Dragons (D&D), and Nintendo console games. I also love staying active with weightlifting, rock climbing, Mac intramural soccer, and dance. If it snows enough this winter (fingers crossed!), I'm hoping to learn how to cross-country ski.
 
-**Preceptors:** We have 9 preceptors across the 6 sections of STAT 155 this semester. We will also have the support of a dedicated R preceptor (Kyle Suelflow) who helps with R across all MSCS courses. 
+**Preceptors:** We have 9 preceptors across the 6 sections of STAT 155 this semester. We will also have the support of a dedicated R preceptor who helps with R across all MSCS courses. 
 
 Ryan will be the preceptor dedicated to our section and will sometimes come to class to help with activities. Preceptor drop-in hours (office hours) will be shared across all sections of the course and posted on Moodle.
 
-- Ryan Mickelborough
-- Samina Stack
-- Owen Carr
-- Rana Rishmawi
-- Ilhaan Dhegadub
-- Julia Van Orman
-- Tanisha Dodla
-- Sydney Ohr
-- Lucas Nelson
-- Kyle Suelflow (R preceptor)
+In addition, the Macalester Academic Excellence (MAX) Center provides tutoring for STAT 155. Check out their [website](https://www.macalester.edu/max/science-quantitative-support/stats/) for more information and their tutoring schedule.
 
 ## Contacting the instructor
 

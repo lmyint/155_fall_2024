@@ -16,6 +16,10 @@ sidebar: false
 
 Follow these instructions to set up the software that we'll be using throughout the semester. **Even if you've already downloaded both R and RStudio, you'll want to re-download to make sure that you have the most current versions.**
 
+<br>
+
+If you have issues getting R and RStudio installed, you can use [Macalester's RStudio server](https://rstudio.macalester.edu/). After you log in with your Macalester credentials, you will be able to work with a web version of RStudio.
+
 <br><br><br><br>
 
 **Required:** Change the default file download location for your internet browser.
