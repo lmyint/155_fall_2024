@@ -214,7 +214,7 @@ Given that Dear Abby column is an advice column, it seems natural that the senti
 
 We can use the `filter()` function in the `dplyr` package to look at the . Based on the plots of `afinn_overall` that you made in Exercise 5, pick a threshold for the `afinn_overall` variable---we'll say that questions with an overall sentiment score above this threshold are high outliers. Fill in this number where it says `YOUR_THRESHOLD` below.
 
-```{r eval=FALSE}
+```{r}
 abby %>% 
     filter(afinn_overall > YOUR_THRESHOLD) %>% 
     pull(question_only)
@@ -275,7 +275,7 @@ Daily weather data are available for 3 locations in Perth, Australia.
 - View the codebook [here](https://github.com/Mac-STAT/data/blob/main/weather_3_locations_codebook.md).
 - Complete the code below to read in the data.
 
-```{r eval=FALSE}
+```{r}
 # Replace the ??? with your own name for the weather data
 # Replace the ___ with the correct function
 ??? <- ___("https://mac-stat.github.io/data/weather_3_locations.csv")
@@ -337,7 +337,7 @@ Though you will naturally absorb some RStudio code throughout the semester, bein
 
 a. For the histogram below, add a title and more meaningful axis labels.  Specifically, title the plot "Distribution of max temperatures in Perth", change the x-axis label to "Maximum temperature" and y-axis label to "Number of days".  HINT: Do a Google search for something like "add axis labels ggplot".
 
-```{r eval=FALSE}
+```{r}
 # Add a title and axis labels
 ggplot(weather, aes(x = maxtemp)) + 
     geom_histogram()
@@ -345,7 +345,7 @@ ggplot(weather, aes(x = maxtemp)) +
 
 b. Adjust the code below in order to color the bars green.  NOTE: Color can be an effective tool, but here it is simply gratuitous.     
 
-```{r eval=FALSE}
+```{r}
 # Make the bars green
 ggplot(weather, aes(x = raintoday)) + 
     geom_bar()

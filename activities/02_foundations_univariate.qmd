@@ -189,7 +189,7 @@ American Anxieties](https://pudding.cool/2018/11/dearabby/) in which the authors
 
 ## Exercise 2: Importing and getting to know the data
 
-```{r setup}
+```{r setup, message=FALSE}
 # Load package
 library(readr)
 
@@ -205,7 +205,7 @@ c. What term do we use for the columns of the dataset?
 
 d. Try out each function below. Identify what each function tells you about the `abby` data and note this in the `???`:
 
-```{r explore}
+```{r explore, eval=FALSE}
 # ??? [what do both numbers mean?]
 dim(abby)
 
@@ -250,7 +250,7 @@ The code below searches for words related to mothers, fathers, marriage, and mon
 - The `dads`, `marriage`, and `money` variables are created similarly.
 - The `themes = str_c(moms, dads, marriage, money, sep = "|")` line takes the 4 created variables and combines the text of those variables separated with a |. For example, one value of the `themes` variable is "mom|no_dad|no_marriage|no_money" (which contains words about moms but not dads, marriage, or money).
 
-```{r}
+```{r message=FALSE}
 library(dplyr)
 library(stringr)
 
@@ -271,7 +271,7 @@ a. Modify the code above however you wish to replace themes (e.g., replace "moms
 
 b. The code below makes a **barplot** of the `themes` variable using the `ggplot2` visualization package. *Before making the plot*, make note of what you expect the plot might look like. (This might be hard--just do your best!) *Then* compare to what you observe when you run the code chunk to make the plot. (Clearly defining your expectations first is good scientific practice to avoid confirmation bias.)
 
-```{r}
+```{r eval=FALSE}
 # Load package
 library(ggplot2)
 
@@ -283,7 +283,7 @@ ggplot(abby, aes(x = themes)) +
 
 c. We can follow up on the barplot with a simple numerical summary. Whereas the `ggplot2` package is great for visualizations, `dplyr` is great for numerical summaries. The code below constructs a table of the number of questions with each theme. Make sure that these numerical summaries match up with what you saw in the barplot.
 
-```{r}
+```{r eval=FALSE}
 # Construct a table of counts
 abby %>% 
     count(themes)
@@ -291,25 +291,25 @@ abby %>%
 
 d. Before proceeding, let's break down the plotting code above. Run each chunk to see how the two lines of code above build up the plot in "layers". Add comments (on the lines starting with `#`) to document what you notice.
 
-```{r}
+```{r eval=FALSE}
 # ???
 ggplot(abby, aes(x = themes))
 ```
 
-```{r}
+```{r eval=FALSE}
 # ???
 ggplot(abby, aes(x = themes)) +
     geom_bar()
 ```
 
-```{r}
+```{r eval=FALSE}
 # ???
 ggplot(abby, aes(x = themes)) +
     geom_bar() +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-```{r}
+```{r eval=FALSE}
 # ???
 ggplot(abby, aes(x = themes)) +
     geom_bar() +
@@ -325,7 +325,7 @@ We'll look at the distribution of the `afinn_overall` sentiment variable and ass
 
 a. The code below creates a **boxplot** of this variable. In the comment, make note of how this code is simliar to the code for the barplot above. As in the previous exercise, *before* running the code chunk to create the plot, make note of what you expect the boxplot to look like.
 
-```{r}
+```{r eval=FALSE}
 # ???
 ggplot(abby, aes(x = afinn_overall)) +
     geom_boxplot()
@@ -335,7 +335,7 @@ b. **Challenge:** Using the code for the barplot and boxplot as a guide, try to 
     - What information is given by the tallest bar of the histogram?
     - How would you describe the shape of the distribution?
 
-```{r}
+```{r eval=FALSE}
 # Histogram
 
 # Density plot
@@ -344,7 +344,7 @@ b. **Challenge:** Using the code for the barplot and boxplot as a guide, try to 
 
 c. We can compute summary statistics (numerical summaries) for a quantitative variable using the `summary()` function or with the `summarize()` function from the `dplyr` package. (`1st Qu.` and `3rd Qu.` stand for first and third quartile.) After inspecting these summaries, look back to your boxplot, histogram, and density plot. Which plots show which summaries most clearly?
 
-```{r}
+```{r eval=FALSE}
 # Summary statistics
 # Using summary() - convenient for computing many summaries in one command
 # Does not show the standard deviation
@@ -450,7 +450,7 @@ Daily weather data are available for 3 locations in Perth, Australia.
 
 Check out the basic features of the weather data.
 
-```{r}
+```{r eval=FALSE}
 # Examine the first six cases
 
 # Find the dimensions of the data
@@ -469,7 +469,7 @@ The `raintoday` variable contains information about rainfall.
 - Create an appropriate visualization, and compute appropriate numerical summaries.
 - What do you learn about rainfall in Perth?
 
-```{r}
+```{r eval=FALSE}
 # Visualization
 
 # Numerical summaries
@@ -486,7 +486,7 @@ The `maxtemp` variable contains information on the daily high temperature.
 - Create an appropriate visualization, and compute appropriate numerical summaries.
 - What do you learn about high temperatures in Perth?
 
-```{r}
+```{r eval=FALSE}
 # Visualization
 
 # Numerical summaries
