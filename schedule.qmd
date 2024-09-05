@@ -1,7 +1,56 @@
 ---
 title: "Schedule"
 sidebar: false
+html-table-processing: none
 ---
+
+# Overview
+
+```{=html}
+<table class="tabsched"><thead>
+  <tr>
+    <th class="topleft" style="width:13%">Week</th>
+    <th class="topleft" style="width:22%">Monday</th>
+    <th class="topleft" style="width:22%">Wednesday</th>
+    <th class="topleft" style="width:22%">Friday</th>
+    <th class="topleft" style="width:21%">Announcements</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="topleft">1 (9/2 - 9/6)</td>
+    <td class="topleft"></td>
+    <td class="topleft">First day of class</td>
+    <td class="topleft">Univariate visualization and summaries</td>
+    <td class="topleft"></td>
+  </tr>
+  <tr>
+    <td class="topleft">2 (9/9 - 9/13)</td>
+    <td class="topleft">Introduction to simple linear regression</td>
+    <td class="topleft">Simple linear regression: formalizing concepts</td>
+    <td class="topleft">TBD</td>
+    <td class="topleft">PP1 due Friday 9/13 at 5pm</td>
+  </tr>
+  <tr>
+    <td class="topleft">3 (9/16 - 9/20)</td>
+    <td class="topleft"></td>
+    <td class="topleft"></td>
+    <td class="topleft">Data-finding activity with Mac librarians</td>
+    <td class="topleft"></td>
+  </tr>
+  <tr>
+    <td class="topleft">4 (9/23 - 9/27)</td>
+    <td class="topleft"></td>
+    <td class="topleft"></td>
+    <td class="topleft"><b>Quiz 1</b></td>
+    <td class="topleft"></td>
+  </tr>
+</tbody>
+</table>
+```
+
+
+
+# Weekly details
 
 ::: {.callout-tip icon=false collapse="false" title="Week 1: 9/2 - 9/6 (Data fundamentals, univariate visualization and summaries)"}
 #### Announcements
@@ -23,7 +72,7 @@ Before class:
 
 - Complete all required steps on the [R Resources](r_resources.qmd) page
 - Complete the [Welcome survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link) (if you haven’t already!)
-- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=130247) on Moodle
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=130247) (CP1) on Moodle
     - Do either the readings or videos for the Day 2 Activity (see Moodle checkpoint description for links to the readings and videos)
     - Due 30 minutes before class today (11:30am on 9/6)
 :::
@@ -31,13 +80,22 @@ Before class:
 ::: {.callout-tip icon=false collapse="true" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
 #### Announcements
 
+- [Practice Problems #1 (PP1)](assignments/pp1.qmd) due Friday 9/13 at 5pm
+
 #### Monday
 
 Before class:
 
+- Review material as needed
+- No checkpoint today!
+
 #### Wednesday
 
 Before class:
+
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=133478) (CP2) on Moodle
+    - Do either the readings or videos (see Moodle checkpoint description for links to the readings and videos)
+    - Due 30 minutes before class today (11:30am on 9/11)
 
 #### Friday
 
