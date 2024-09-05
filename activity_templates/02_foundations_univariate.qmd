@@ -1,0 +1,357 @@
+---
+title: "Univariate visualization and summaries"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+> **Guiding question:** What anxieties have been on Americans' minds over the decades?
+
+**Context:** *Dear Abby* is America's longest running advice column. Started in 1956 by Pauline Phillips under the pseudonym Abigail van Buren, the column continues to this day under the stewardship of her daughter Jeanne. Each column features one or more letters to Abby from anonymous individuals, all signed with a pseudonym. Abby's response follows each letter.
+
+In 2018, the data journalism site [The Pudding](https://pudding.cool/) published a visual article called [30 Years of
+American Anxieties](https://pudding.cool/2018/11/dearabby/) in which the authors explored themes in Dear Abby letters from 1985 to 2017. (We only have the questions, not Abby's responses.) The codebook is available [here](https://github.com/Mac-STAT/data/blob/main/dear_abby_codebook.md).
+
+## Exercise 1: Get curious
+
+- Hypothesize with each other: what themes do you think might come up often in Dear Abby letters?
+- After brainstorming, take a quick glance at the original article from [The Pudding](https://pudding.cool/2018/11/dearabby/) to see what themes they explored.
+- Go to the very end of the Pudding article to the section titled "Data and Method". In thinking about the who, what, when, where, why, and how of data context, what concerns/limitations surface with regards to using this data to learn about Americans' concerns over the decades?
+
+
+
+## Exercise 2: Importing and getting to know the data
+
+```{r setup}
+# Load package
+library(readr)
+
+# Read in the course evaluation data
+abby <- read_csv("https://mac-stat.github.io/data/dear_abby.csv")
+```
+
+a. Click on the Environment tab (generally in the upper right hand pane in RStudio). Then click the `abby` line. The `abby` data will pop up as a separate pane (like viewing a spreadsheet) -- check it out.
+
+b. In this **tidy** dataset, what is the unit of observation? That is, what is represented in each row of the dataset?
+
+c. What term do we use for the columns of the dataset?
+
+d. Try out each function below. Identify what each function tells you about the `abby` data and note this in the `???`:
+
+```{r explore}
+# ??? [what do both numbers mean?]
+dim(abby)
+
+# ???
+nrow(abby)
+
+# ???
+ncol(abby)
+
+# ???
+head(abby)
+
+# ???
+names(abby)
+```
+
+e. We can learn what functions do by pulling up help pages. To do this, click inside the Console pane, and enter `?function_name`. For example, to pull up a help page for the `dim()` function, we can type `?dim` and hit Enter. Pull up the help page for the `head()` function.
+    - Read the Description.
+    - **Challenge:** Look at the **Arguments** and **Examples** sections to figure out how to display the first 10 rows of the `evals` data (instead of the default first 6 rows).
+
+
+
+## Exercise 3: Preparing to summarize and visualize the data
+
+In the next exercises, we will be exploring themes in the Dear Abby questions and the overall "mood" or sentiment of the questions. Before continuing, read the [codebook](https://github.com/Mac-STAT/data/blob/main/dear_abby_codebook.md) for this dataset for some context about sentiment analysis, which gives us a measure of the mood/sentiment of a text.
+
+a. What sentiment variables do we have in the dataset? Are they **quantitative** or **categorical**?
+
+b. If we were able to create a `theme` variable that took values like "friendship", "marriage", and "relationships", would `theme` be **quantitative** or **categorical**?
+
+c. What visualizations are appropriate for looking at the distribution of a single quantitative variable? What about a single categorical variable?
+
+
+
+## Exercise 4: Exploring themes in the letters
+
+The `dplyr` package provides many useful functions for managing data (like creating new variables, summarizing information). The `stringr` package provides tools for working with strings (text). We'll use these packages to search for words in the questions in order to (roughly) identify themes/subjects.
+
+The code below searches for words related to mothers, fathers, marriage, and money and combines them into a single `theme` variable.
+
+- Inside `mutate()` the line `moms = ifelse(str_detect(question_only, "mother|mama|mom"), "mom", "no mom")` creates a new variable called `moms`. If any of the text "mother", "mama", or "mom" (which covers "mommy")  is found, then the variable takes the value "mom". Otherwise, the variable takes the value "no mom".
+- The `dads`, `marriage`, and `money` variables are created similarly.
+- The `themes = str_c(moms, dads, marriage, money, sep = "|")` line takes the 4 created variables and combines the text of those variables separated with a |. For example, one value of the `themes` variable is "mom|no_dad|no_marriage|no_money" (which contains words about moms but not dads, marriage, or money).
+
+```{r}
+library(dplyr)
+library(stringr)
+
+abby <- abby %>% 
+    mutate(
+        moms = ifelse(str_detect(question_only, "mother|mama|mom"), "mom", "no mom"),
+        dads = ifelse(str_detect(question_only, "father|papa|dad"), "dad", "no dad"),
+        marriage = ifelse(str_detect(question_only, "marriage|marry|married"), "marriage", "no marriage"),
+        money = ifelse(str_detect(question_only, "money|finance"), "money", "no money"),
+        themes = str_c(moms, dads, marriage, money, sep = "|")
+    )
+```
+
+a. Modify the code above however you wish to replace themes (e.g., replace "moms" with something else) or add new themes to search for. If you want to add a new subject to search for, copy and paste a line for an existing subject above the `themes` line, and modify the code like this:
+    - If your subject is captured by multiple words: `YOUR_SUBJECT = ifelse(str_detect(question_only, "WORD1|WORD2|ETC"), "SUBJECT", "NO SUBJECT"),`
+    - If your subject is captured by a single word: `YOUR_SUBJECT = ifelse(str_detect(question_only, "WORD"), "SUBJECT", "NO SUBJECT"),`
+    - Try to have no more than 6 subjects---otherwise we'll have too many themes, which will complicate exploration.
+
+b. The code below makes a **barplot** of the `themes` variable using the `ggplot2` visualization package. *Before making the plot*, make note of what you expect the plot might look like. (This might be hard--just do your best!) *Then* compare to what you observe when you run the code chunk to make the plot. (Clearly defining your expectations first is good scientific practice to avoid confirmation bias.)
+
+```{r}
+# Load package
+library(ggplot2)
+
+# barplot
+ggplot(abby, aes(x = themes)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+c. We can follow up on the barplot with a simple numerical summary. Whereas the `ggplot2` package is great for visualizations, `dplyr` is great for numerical summaries. The code below constructs a table of the number of questions with each theme. Make sure that these numerical summaries match up with what you saw in the barplot.
+
+```{r}
+# Construct a table of counts
+abby %>% 
+    count(themes)
+```
+
+d. Before proceeding, let's break down the plotting code above. Run each chunk to see how the two lines of code above build up the plot in "layers". Add comments (on the lines starting with `#`) to document what you notice.
+
+```{r}
+# ???
+ggplot(abby, aes(x = themes))
+```
+
+```{r}
+# ???
+ggplot(abby, aes(x = themes)) +
+    geom_bar()
+```
+
+```{r}
+# ???
+ggplot(abby, aes(x = themes)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+```{r}
+# ???
+ggplot(abby, aes(x = themes)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+    theme_classic()
+```
+
+
+
+## Exercise 5: Exploring sentiment
+
+We'll look at the distribution of the `afinn_overall` sentiment variable and associated summary statistics.
+
+a. The code below creates a **boxplot** of this variable. In the comment, make note of how this code is simliar to the code for the barplot above. As in the previous exercise, *before* running the code chunk to create the plot, make note of what you expect the boxplot to look like.
+
+```{r}
+# ???
+ggplot(abby, aes(x = afinn_overall)) +
+    geom_boxplot()
+```
+
+b. **Challenge:** Using the code for the barplot and boxplot as a guide, try to make a **histogram** and a **density** plot of the overall average ratings.
+    - What information is given by the tallest bar of the histogram?
+    - How would you describe the shape of the distribution?
+
+```{r}
+# Histogram
+
+# Density plot
+
+```
+
+c. We can compute summary statistics (numerical summaries) for a quantitative variable using the `summary()` function or with the `summarize()` function from the `dplyr` package. (`1st Qu.` and `3rd Qu.` stand for first and third quartile.) After inspecting these summaries, look back to your boxplot, histogram, and density plot. Which plots show which summaries most clearly?
+
+```{r}
+# Summary statistics
+# Using summary() - convenient for computing many summaries in one command
+# Does not show the standard deviation
+summary(abby$afinn_overall)
+
+# Using summarize() from dplyr
+# Note that we use %>% to pipe the data into the summarize() function
+# We need to use na.rm = TRUE because there are missing values (NAs)
+abby %>% 
+    summarize(mean(afinn_overall, na.rm = TRUE), median(afinn_overall, na.rm = TRUE), sd(afinn_overall, na.rm = TRUE))
+```
+
+d. Write a good paragraph describing the information in the histogram (or density plot) by discussing shape, center, spread, and outliers. Incorporate the numerical summaries from part c.
+
+
+
+## Exercise 6: Box plots vs. histograms vs. density plots
+
+We took 3 different approaches to plotting the quantitative average course variable above. They all have pros and cons.
+
+a. What is one pro about the boxplot in comparison to the histogram and density plot?
+b. What is one con about the boxplot in comparison to the histogram and density plots?
+c. In this example, which plot do you prefer and why?
+
+
+
+## Exercise 7: Explore outliers
+
+Given that Dear Abby column is an advice column, it seems natural that the sentiment of the questions would lean more negative. What's going on with the questions that have particularly positive sentiments?
+
+We can use the `filter()` function in the `dplyr` package to look at the . Based on the plots of `afinn_overall` that you made in Exercise 5, pick a threshold for the `afinn_overall` variable---we'll say that questions with an overall sentiment score above this threshold are high outliers. Fill in this number where it says `YOUR_THRESHOLD` below.
+
+```{r eval=FALSE}
+abby %>% 
+    filter(afinn_overall > YOUR_THRESHOLD) %>% 
+    pull(question_only)
+```
+
+What do you notice? Why might these questions have such high sentiment scores?
+
+
+
+## Exercise 8: Returning to our context, looking ahead
+
+In this activity, we explored data on Dear Abby question, with a focus on exploring a single variable at a time.
+
+- In big picture terms, what have we learned about Dear Abby questions?
+- What further curiosities do you have about the data?
+
+
+
+## Exercise 9: Different ways to think about data visualization 
+
+In working with and visualizing data, it's important to keep in mind what a data point *represents*. It can reflect the experience of a real person. It might reflect the sentiment in a piece of art. It might reflect history. We've taken one very narrow and technical approach to data visualization. Check out the following examples, and write some notes about anything you find interesting.
+
+- [Dear Data](http://www.dear-data.com/by-week)
+- [W.E.B. DuBois](https://hyperallergic.com/476334/how-w-e-b-du-bois-meticulously-visualized-20th-century-black-america/)
+- [Decolonizing Data Viz](https://stephanieevergreen.com/decolonizing-data-viz/)
+- [Phase Change Project (by Prof Kim, Mac research students)](http://www.variableprojects.com/#/phase-change/)
+
+
+
+## Exercise 10: Rendering your work
+
+Save this file, and then click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+
+- Scroll through and inspect the document to see how your work was translated into this HTML format. Neat!
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
+
+## Reflection
+
+Go to the top of this file and review the learning objectives for this lesson. Which objectives do you have a good handle on, are at least familiar with, or are struggling with? What feels challenging right now? What are some wins from the day?
+
+> **Response:** Put your response here.
+
+
+
+
+# Additional Practice
+
+If you have time and want additional practice, try out the following exercises.
+
+## Exercise 11: Read in and get to know the weather data
+
+Daily weather data are available for 3 locations in Perth, Australia.
+
+- View the codebook [here](https://github.com/Mac-STAT/data/blob/main/weather_3_locations_codebook.md).
+- Complete the code below to read in the data.
+
+```{r eval=FALSE}
+# Replace the ??? with your own name for the weather data
+# Replace the ___ with the correct function
+??? <- ___("https://mac-stat.github.io/data/weather_3_locations.csv")
+```
+
+
+
+## Exercise 12: Exploring the data structure
+
+Check out the basic features of the weather data.
+
+```{r}
+# Examine the first six cases
+
+# Find the dimensions of the data
+
+```
+
+What does a case represent in this data?
+
+
+
+## Exercise 13: Exploring rainfall
+
+The `raintoday` variable contains information about rainfall.
+
+- Is this variable quantitative or categorical?
+- Create an appropriate visualization, and compute appropriate numerical summaries.
+- What do you learn about rainfall in Perth?
+
+```{r}
+# Visualization
+
+# Numerical summaries
+
+```
+
+
+
+## Exercise 14: Exploring temperature
+
+The `maxtemp` variable contains information on the daily high temperature.
+
+- Is this variable quantitative or categorical?
+- Create an appropriate visualization, and compute appropriate numerical summaries.
+- What do you learn about high temperatures in Perth?
+
+```{r}
+# Visualization
+
+# Numerical summaries
+
+```
+
+
+## Exercise 15: Customizing! (CHALLENGE)
+
+Though you will naturally absorb some RStudio code throughout the semester, being an effective statistical thinker and "programmer" does not require that we memorize *all* code. That would be impossible! In contrast, using the *foundation* you built today, do some digging online to learn how to customize your visualizations.    
+
+a. For the histogram below, add a title and more meaningful axis labels.  Specifically, title the plot "Distribution of max temperatures in Perth", change the x-axis label to "Maximum temperature" and y-axis label to "Number of days".  HINT: Do a Google search for something like "add axis labels ggplot".
+
+```{r eval=FALSE}
+# Add a title and axis labels
+ggplot(weather, aes(x = maxtemp)) + 
+    geom_histogram()
+```
+
+b. Adjust the code below in order to color the bars green.  NOTE: Color can be an effective tool, but here it is simply gratuitous.     
+
+```{r eval=FALSE}
+# Make the bars green
+ggplot(weather, aes(x = raintoday)) + 
+    geom_bar()
+```
+
+c. Check out the `ggplot2` [cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf). Try making some of the other kinds of univariate plots outlined there.
+
+d. What else would you like to change about your plot? Try it!
+

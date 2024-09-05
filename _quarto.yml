@@ -29,6 +29,7 @@ website:
       title: "Activities"
       contents:
         - activities/01_foundations_welcome.qmd
+        - activities/02_foundations_univariate.qmd
 
     - id: homework
       title: "Practice Problems"

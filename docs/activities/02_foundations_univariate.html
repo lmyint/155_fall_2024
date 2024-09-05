@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>STAT 155 - Univariate visualization and summaries</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 155</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Activities</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
+        <li>
+    <a class="dropdown-item" href="../activities/01_foundations_welcome.html">
+ <span class="dropdown-text">Data Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/02_foundations_univariate.html">
+ <span class="dropdown-text">Univariate visualization and summaries</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practice-problems" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practice Problems</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
+        <li>
+    <a class="dropdown-item" href="../assignments/pp1.html">
+ <span class="dropdown-text">Practice Problems 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_resources.html"> 
+<span class="menu-text">R Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-get-curious" id="toc-exercise-1-get-curious" class="nav-link" data-scroll-target="#exercise-1-get-curious">Exercise 1: Get curious</a></li>
+  <li><a href="#exercise-2-importing-and-getting-to-know-the-data" id="toc-exercise-2-importing-and-getting-to-know-the-data" class="nav-link" data-scroll-target="#exercise-2-importing-and-getting-to-know-the-data">Exercise 2: Importing and getting to know the data</a></li>
+  <li><a href="#exercise-3-preparing-to-summarize-and-visualize-the-data" id="toc-exercise-3-preparing-to-summarize-and-visualize-the-data" class="nav-link" data-scroll-target="#exercise-3-preparing-to-summarize-and-visualize-the-data">Exercise 3: Preparing to summarize and visualize the data</a></li>
+  <li><a href="#exercise-4-exploring-themes-in-the-letters" id="toc-exercise-4-exploring-themes-in-the-letters" class="nav-link" data-scroll-target="#exercise-4-exploring-themes-in-the-letters">Exercise 4: Exploring themes in the letters</a></li>
+  <li><a href="#exercise-5-exploring-sentiment" id="toc-exercise-5-exploring-sentiment" class="nav-link" data-scroll-target="#exercise-5-exploring-sentiment">Exercise 5: Exploring sentiment</a></li>
+  <li><a href="#exercise-6-box-plots-vs.-histograms-vs.-density-plots" id="toc-exercise-6-box-plots-vs.-histograms-vs.-density-plots" class="nav-link" data-scroll-target="#exercise-6-box-plots-vs.-histograms-vs.-density-plots">Exercise 6: Box plots vs.&nbsp;histograms vs.&nbsp;density plots</a></li>
+  <li><a href="#exercise-7-explore-outliers" id="toc-exercise-7-explore-outliers" class="nav-link" data-scroll-target="#exercise-7-explore-outliers">Exercise 7: Explore outliers</a></li>
+  <li><a href="#exercise-8-returning-to-our-context-looking-ahead" id="toc-exercise-8-returning-to-our-context-looking-ahead" class="nav-link" data-scroll-target="#exercise-8-returning-to-our-context-looking-ahead">Exercise 8: Returning to our context, looking ahead</a></li>
+  <li><a href="#exercise-9-different-ways-to-think-about-data-visualization" id="toc-exercise-9-different-ways-to-think-about-data-visualization" class="nav-link" data-scroll-target="#exercise-9-different-ways-to-think-about-data-visualization">Exercise 9: Different ways to think about data visualization</a></li>
+  <li><a href="#exercise-10-rendering-your-work" id="toc-exercise-10-rendering-your-work" class="nav-link" data-scroll-target="#exercise-10-rendering-your-work">Exercise 10: Rendering your work</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  </ul></li>
+  <li><a href="#additional-practice" id="toc-additional-practice" class="nav-link" data-scroll-target="#additional-practice">Additional Practice</a>
+  <ul class="collapse">
+  <li><a href="#exercise-11-read-in-and-get-to-know-the-weather-data" id="toc-exercise-11-read-in-and-get-to-know-the-weather-data" class="nav-link" data-scroll-target="#exercise-11-read-in-and-get-to-know-the-weather-data">Exercise 11: Read in and get to know the weather data</a></li>
+  <li><a href="#exercise-12-exploring-the-data-structure" id="toc-exercise-12-exploring-the-data-structure" class="nav-link" data-scroll-target="#exercise-12-exploring-the-data-structure">Exercise 12: Exploring the data structure</a></li>
+  <li><a href="#exercise-13-exploring-rainfall" id="toc-exercise-13-exploring-rainfall" class="nav-link" data-scroll-target="#exercise-13-exploring-rainfall">Exercise 13: Exploring rainfall</a></li>
+  <li><a href="#exercise-14-exploring-temperature" id="toc-exercise-14-exploring-temperature" class="nav-link" data-scroll-target="#exercise-14-exploring-temperature">Exercise 14: Exploring temperature</a></li>
+  <li><a href="#exercise-15-customizing-challenge" id="toc-exercise-15-customizing-challenge" class="nav-link" data-scroll-target="#exercise-15-customizing-challenge">Exercise 15: Customizing! (CHALLENGE)</a></li>
+  </ul></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-get-curious-1" id="toc-exercise-1-get-curious-1" class="nav-link" data-scroll-target="#exercise-1-get-curious-1">Exercise 1: Get curious</a></li>
+  <li><a href="#exercise-2-importing-and-getting-to-know-the-data-1" id="toc-exercise-2-importing-and-getting-to-know-the-data-1" class="nav-link" data-scroll-target="#exercise-2-importing-and-getting-to-know-the-data-1">Exercise 2: Importing and getting to know the data</a></li>
+  <li><a href="#exercise-3-preparing-to-summarize-and-visualize-the-data-1" id="toc-exercise-3-preparing-to-summarize-and-visualize-the-data-1" class="nav-link" data-scroll-target="#exercise-3-preparing-to-summarize-and-visualize-the-data-1">Exercise 3: Preparing to summarize and visualize the data</a></li>
+  <li><a href="#exercise-4-exploring-themes-in-the-letters-1" id="toc-exercise-4-exploring-themes-in-the-letters-1" class="nav-link" data-scroll-target="#exercise-4-exploring-themes-in-the-letters-1">Exercise 4: Exploring themes in the letters</a></li>
+  <li><a href="#exercise-5-exploring-course-overall-ratings" id="toc-exercise-5-exploring-course-overall-ratings" class="nav-link" data-scroll-target="#exercise-5-exploring-course-overall-ratings">Exercise 5: Exploring course overall ratings</a></li>
+  <li><a href="#exercise-6-box-plots-vs.-histograms-vs.-density-plots-1" id="toc-exercise-6-box-plots-vs.-histograms-vs.-density-plots-1" class="nav-link" data-scroll-target="#exercise-6-box-plots-vs.-histograms-vs.-density-plots-1">Exercise 6: Box plots vs.&nbsp;histograms vs.&nbsp;density plots</a></li>
+  <li><a href="#exercise-7-explore-outliers-1" id="toc-exercise-7-explore-outliers-1" class="nav-link" data-scroll-target="#exercise-7-explore-outliers-1">Exercise 7: Explore outliers</a></li>
+  <li><a href="#exercise-8-returning-to-our-context-looking-ahead-1" id="toc-exercise-8-returning-to-our-context-looking-ahead-1" class="nav-link" data-scroll-target="#exercise-8-returning-to-our-context-looking-ahead-1">Exercise 8: Returning to our context, looking ahead</a></li>
+  <li><a href="#exercise-11-read-in-and-get-to-know-the-weather-data-1" id="toc-exercise-11-read-in-and-get-to-know-the-weather-data-1" class="nav-link" data-scroll-target="#exercise-11-read-in-and-get-to-know-the-weather-data-1">Exercise 11: Read in and get to know the weather data</a></li>
+  <li><a href="#exercise-12-exploring-the-data-structure-1" id="toc-exercise-12-exploring-the-data-structure-1" class="nav-link" data-scroll-target="#exercise-12-exploring-the-data-structure-1">Exercise 12: Exploring the data structure</a></li>
+  <li><a href="#exercise-13-exploring-rainfall-1" id="toc-exercise-13-exploring-rainfall-1" class="nav-link" data-scroll-target="#exercise-13-exploring-rainfall-1">Exercise 13: Exploring rainfall</a></li>
+  <li><a href="#exercise-14-exploring-temperature-1" id="toc-exercise-14-exploring-temperature-1" class="nav-link" data-scroll-target="#exercise-14-exploring-temperature-1">Exercise 14: Exploring temperature</a></li>
+  <li><a href="#exercise-15-customizing-challenge-1" id="toc-exercise-15-customizing-challenge-1" class="nav-link" data-scroll-target="#exercise-15-customizing-challenge-1">Exercise 15: Customizing! (CHALLENGE)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Univariate visualization and summaries</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="notes" class="level1">
+<h1>Notes</h1>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>Describe what a <strong>case</strong> (or <strong>unit of analysis</strong>) represents in a dataset.</li>
+<li>Describe what a <strong>variable</strong> represents in a dataset.</li>
+<li>Identify whether a variable is <strong>categorical</strong> or <strong>quantitative</strong> and what summarizations and visualizations are appropriate for that variable</li>
+<li>Write R code to read in data and to summarize and visualize a single variable at a time.</li>
+<li>Interpret key features of barplots, boxplots, histograms, and density plots</li>
+<li>Describe information about the distribution of a quantitative variable using the concepts of shape, center, spread, and outliers</li>
+<li>Relate summary statistics of data to the concepts of shape, center, spread, and outliers</li>
+</ul>
+</section>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>Before class you should have read and/or watched:</p>
+<ul>
+<li>Reading: Sections 2.1-2.4, 2.6 in the <a href="https://mac-stat.github.io/Stat155Notes/">STAT 155 Notes</a></li>
+<li>Videos:
+<ul>
+<li><a href="https://youtu.be/7zQmWTT_m-Y">Univariate visualization and summarization</a> (<a href="https://drive.google.com/file/d/1QJgnchneN-cHfa2TNa-amBAx6VWO3UGT/view?usp=drive_link">slides</a>)</li>
+<li><a href="https://voicethread.com/share/14968914/">R Code for Categorical Visualization and Summarization</a></li>
+<li><a href="https://voicethread.com/share/14923042/">R Code for Quantitative Visualization and Summarization</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
+<p><strong>Cases</strong></p>
+<p>When Macalester <a href="https://www.macalester.edu/admissions/5-things-to-know-about-macalester/">advertises</a> an average class size of 17, what do you think the cases in this dataset represent?</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Response">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Response
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose we had just had 2 classes: one with a class size of 20 and the other with a class size of 28. If the cases are classes, the average class size is 24.</p>
+<p>However, if the cases are students, the average class size looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">20</span><span class="sc">*</span><span class="dv">20</span> <span class="sc">+</span> <span class="dv">28</span><span class="sc">*</span><span class="dv">28</span>)<span class="sc">/</span>(<span class="dv">20</span><span class="sc">+</span><span class="dv">28</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24.66667</code></pre>
+</div>
+</div>
+<p>This is another viewpoint for what “average class size” means from the student perspective.</p>
+<p>Note: From the student perspective (when cases are students), average class size will almost always be higher than when cases are classes.</p>
+<p>(Thanks to <a href="https://weallcount.com/2019/07/11/auto-draft/">this post</a> for the idea for this example.)</p>
+</div>
+</div>
+</div>
+<p><br><br><br><br></p>
+<p><strong>Univariate visualization</strong></p>
+<p>In August 2018, the data journalism group <a href="https://pudding.cool/">The Pudding</a> published an article about the size of men’s and women’s jeans pockets (called <a href="https://pudding.cool/2018/08/pockets/">Women’s Pockets are Inferior</a>).</p>
+<p>We’ll explore this data to review univariate visualization.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Tips for navigating code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips for navigating code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Whenever you see a parenthesis <code>(</code>, you are using a <strong>function</strong>. Look at the text to the left of the <code>(</code> to see the function name. You can think of function names as <strong>verbs</strong>. They do things to data.</li>
+<li>Whenever you see an arrow <code>&lt;-</code>, whatever is happening on the right is being stored in a “box” with the label on the left. (So the result of <code>read_csv()</code> is being stored in a “box” called <code>pockets</code>—<code>pockets</code> is the name/label of our dataset.)</li>
+</ul>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pockets <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/the-pudding/data/master/pockets/measurements.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The documentation (<strong>codebook</strong>) for this data is available <a href="https://github.com/the-pudding/data/blob/master/pockets/README.md">here</a>.</p>
+<p>The <code>menWomen</code> variable is a categorical variable. We can use the code below to make a barplot to explore how many men’s and women’s jeans were examined.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Tips for navigating code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips for navigating code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Inside parentheses (which indicate that a function is being called), look for lists of things separated by commas. The items in that list are <strong>inputs</strong> (also called <strong>arguments</strong>) for the function. These inputs supply essential information for the function.</li>
+<li>For plots, look for <code>+</code> signs. These indicate “layers” of a plot, kind of like layers of a painting.</li>
+</ul>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pockets, <span class="fu">aes</span>(<span class="at">x =</span> menWomen)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also tabulate categorical variables with the <code>count()</code> function from the <code>dplyr</code> data wrangling/manipulation package.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Tips for navigating code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips for navigating code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>The <code>%&gt;%</code> symbol is called a <strong>pipe</strong>. It takes the object before it and feeds it in as the first input to the function after it. Whenever you see the pipe symbol, you can replace it in your mind with the words “and then”.</li>
+</ul>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pockets <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(menWomen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  menWomen     n
+  &lt;chr&gt;    &lt;int&gt;
+1 men         40
+2 women       40</code></pre>
+</div>
+</div>
+<p>The <code>minHeightFront</code> variable gives the minimum height of the front pocket and is quantitative. For a single quantitative variable, we can make a boxplot, density plot, or histogram. Let’s look at a histogram:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pockets, <span class="fu">aes</span>(<span class="at">x =</span> minHeightFront)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When you interpret a plot of a quantitative variable, there are 4 aspects to keep in mind:</p>
+<ol type="1">
+<li>Shape</li>
+<li>Center</li>
+<li>Spread</li>
+<li>Outliers</li>
+</ol>
+<p><strong>Shape</strong>: How are values distributed along the observed range? What does the <strong>distribution</strong> of the variable look like?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/02_shapes-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+<p><strong>Center:</strong> What is a typical value of the variable?</p>
+<ul>
+<li>Quantified with summary statistics like the <strong>mean</strong> and <strong>median</strong>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pockets<span class="sc">$</span>minHeightFront)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   9.50   13.00   15.00   15.65   17.00   25.00 </code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>Spread:</strong> How spread out are the values? Are most values very close together or far apart?</p>
+<ul>
+<li>Quantified with summary statistics like the <strong>variance</strong>, <strong>standard deviation</strong>, <strong>range</strong> (difference between min and max), <strong>interquartile range (IQR)</strong> (difference between the 75th percentile and 25th percentile)</li>
+<li>Interpretation of the variance: it is the average (roughly) squared distance of each value to the mean. Units are the squared version of the original variable.</li>
+<li>Interpretation of the standard deviation: square root of the variance. Measures spread on the same scale as the original variable (same units as the original variable).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(pockets<span class="sc">$</span>minHeightFront)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.27745</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(pockets<span class="sc">$</span>minHeightFront)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.50392</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>Outliers:</strong> Are there any values that are particularly high or low relative to the rest?</p>
+<p><br></p>
+<p><strong>A good paragraph putting all of these aspects together:</strong></p>
+<blockquote class="blockquote">
+<p>The distribution of the minimum height of front pockets seems right skewed with values ranging from 9.5 to 25cm. The average pocket height is about 15cm (median). Pocket heights tend to deviate from this average by about 3.5cm (SD), and there don’t seem to be extreme outliers.</p>
+</blockquote>
+<p><br><br><br><br></p>
+<p><strong>File organization:</strong> You can download a template file to work with <a href="../activity_templates/02_foundations_univariate.qmd">here</a>. Save this file in the “Activities” subfolder of your “STAT155” folder.</p>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<blockquote class="blockquote">
+<p><strong>Guiding question:</strong> What anxieties have been on Americans’ minds over the decades?</p>
+</blockquote>
+<p><strong>Context:</strong> <em>Dear Abby</em> is America’s longest running advice column. Started in 1956 by Pauline Phillips under the pseudonym Abigail van Buren, the column continues to this day under the stewardship of her daughter Jeanne. Each column features one or more letters to Abby from anonymous individuals, all signed with a pseudonym. Abby’s response follows each letter.</p>
+<p>In 2018, the data journalism site <a href="https://pudding.cool/">The Pudding</a> published a visual article called <a href="https://pudding.cool/2018/11/dearabby/">30 Years of American Anxieties</a> in which the authors explored themes in Dear Abby letters from 1985 to 2017. (We only have the questions, not Abby’s responses.) The codebook is available <a href="https://github.com/Mac-STAT/data/blob/main/dear_abby_codebook.md">here</a>.</p>
+<section id="exercise-1-get-curious" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-get-curious">Exercise 1: Get curious</h2>
+<ul>
+<li>Hypothesize with each other: what themes do you think might come up often in Dear Abby letters?</li>
+<li>After brainstorming, take a quick glance at the original article from <a href="https://pudding.cool/2018/11/dearabby/">The Pudding</a> to see what themes they explored.</li>
+<li>Go to the very end of the Pudding article to the section titled “Data and Method”. In thinking about the who, what, when, where, why, and how of data context, what concerns/limitations surface with regards to using this data to learn about Americans’ concerns over the decades?</li>
+</ul>
+</section>
+<section id="exercise-2-importing-and-getting-to-know-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-importing-and-getting-to-know-the-data">Exercise 2: Importing and getting to know the data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the course evaluation data</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>abby <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/dear_abby.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20034 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): day, url, title, question_only
+dbl (7): year, month, letterId, afinn_overall, afinn_pos, afinn_neg, bing_pos
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<ol type="a">
+<li><p>Click on the Environment tab (generally in the upper right hand pane in RStudio). Then click the <code>abby</code> line. The <code>abby</code> data will pop up as a separate pane (like viewing a spreadsheet) – check it out.</p></li>
+<li><p>In this <strong>tidy</strong> dataset, what is the unit of observation? That is, what is represented in each row of the dataset?</p></li>
+<li><p>What term do we use for the columns of the dataset?</p></li>
+<li><p>Try out each function below. Identify what each function tells you about the <code>abby</code> data and note this in the <code>???</code>:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ??? [what do both numbers mean?]</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20034    11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20034</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+   year month day   url     title letterId question_only afinn_overall afinn_pos
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
+1  1985     1 01    proque… WOMA…        1 "i have been…           -30         5
+2  1985     1 01    proque… WOMA…        1 "this is for…           -30         5
+3  1985     1 02    proque… LAME…        1 "our 16-year…             1         3
+4  1985     1 03    proque… 'NOR…        1 "i was a hap…            -3         7
+5  1985     1 04    proque… IT'S…        1 "you be the …            13        31
+6  1985     1 04    proque… IT'S…        1 "a further w…            13        31
+# ℹ 2 more variables: afinn_neg &lt;dbl&gt;, bing_pos &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "year"          "month"         "day"           "url"          
+ [5] "title"         "letterId"      "question_only" "afinn_overall"
+ [9] "afinn_pos"     "afinn_neg"     "bing_pos"     </code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>We can learn what functions do by pulling up help pages. To do this, click inside the Console pane, and enter <code>?function_name</code>. For example, to pull up a help page for the <code>dim()</code> function, we can type <code>?dim</code> and hit Enter. Pull up the help page for the <code>head()</code> function.
+<ul>
+<li>Read the Description.</li>
+<li><strong>Challenge:</strong> Look at the <strong>Arguments</strong> and <strong>Examples</strong> sections to figure out how to display the first 10 rows of the <code>evals</code> data (instead of the default first 6 rows).</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercise-3-preparing-to-summarize-and-visualize-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-preparing-to-summarize-and-visualize-the-data">Exercise 3: Preparing to summarize and visualize the data</h2>
+<p>In the next exercises, we will be exploring themes in the Dear Abby questions and the overall “mood” or sentiment of the questions. Before continuing, read the <a href="https://github.com/Mac-STAT/data/blob/main/dear_abby_codebook.md">codebook</a> for this dataset for some context about sentiment analysis, which gives us a measure of the mood/sentiment of a text.</p>
+<ol type="a">
+<li><p>What sentiment variables do we have in the dataset? Are they <strong>quantitative</strong> or <strong>categorical</strong>?</p></li>
+<li><p>If we were able to create a <code>theme</code> variable that took values like “friendship”, “marriage”, and “relationships”, would <code>theme</code> be <strong>quantitative</strong> or <strong>categorical</strong>?</p></li>
+<li><p>What visualizations are appropriate for looking at the distribution of a single quantitative variable? What about a single categorical variable?</p></li>
+</ol>
+</section>
+<section id="exercise-4-exploring-themes-in-the-letters" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-exploring-themes-in-the-letters">Exercise 4: Exploring themes in the letters</h2>
+<p>The <code>dplyr</code> package provides many useful functions for managing data (like creating new variables, summarizing information). The <code>stringr</code> package provides tools for working with strings (text). We’ll use these packages to search for words in the questions in order to (roughly) identify themes/subjects.</p>
+<p>The code below searches for words related to mothers, fathers, marriage, and money and combines them into a single <code>theme</code> variable.</p>
+<ul>
+<li>Inside <code>mutate()</code> the line <code>moms = ifelse(str_detect(question_only, "mother|mama|mom"), "mom", "no mom")</code> creates a new variable called <code>moms</code>. If any of the text “mother”, “mama”, or “mom” (which covers “mommy”) is found, then the variable takes the value “mom”. Otherwise, the variable takes the value “no mom”.</li>
+<li>The <code>dads</code>, <code>marriage</code>, and <code>money</code> variables are created similarly.</li>
+<li>The <code>themes = str_c(moms, dads, marriage, money, sep = "|")</code> line takes the 4 created variables and combines the text of those variables separated with a |. For example, one value of the <code>themes</code> variable is “mom|no_dad|no_marriage|no_money” (which contains words about moms but not dads, marriage, or money).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>abby <span class="ot">&lt;-</span> abby <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">moms =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(question_only, <span class="st">"mother|mama|mom"</span>), <span class="st">"mom"</span>, <span class="st">"no mom"</span>),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">dads =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(question_only, <span class="st">"father|papa|dad"</span>), <span class="st">"dad"</span>, <span class="st">"no dad"</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">marriage =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(question_only, <span class="st">"marriage|marry|married"</span>), <span class="st">"marriage"</span>, <span class="st">"no marriage"</span>),</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">money =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(question_only, <span class="st">"money|finance"</span>), <span class="st">"money"</span>, <span class="st">"no money"</span>),</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">themes =</span> <span class="fu">str_c</span>(moms, dads, marriage, money, <span class="at">sep =</span> <span class="st">"|"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li>Modify the code above however you wish to replace themes (e.g., replace “moms” with something else) or add new themes to search for. If you want to add a new subject to search for, copy and paste a line for an existing subject above the <code>themes</code> line, and modify the code like this:
+<ul>
+<li>If your subject is captured by multiple words: <code>YOUR_SUBJECT = ifelse(str_detect(question_only, "WORD1|WORD2|ETC"), "SUBJECT", "NO SUBJECT"),</code></li>
+<li>If your subject is captured by a single word: <code>YOUR_SUBJECT = ifelse(str_detect(question_only, "WORD"), "SUBJECT", "NO SUBJECT"),</code></li>
+<li>Try to have no more than 6 subjects—otherwise we’ll have too many themes, which will complicate exploration.</li>
+</ul></li>
+<li>The code below makes a <strong>barplot</strong> of the <code>themes</code> variable using the <code>ggplot2</code> visualization package. <em>Before making the plot</em>, make note of what you expect the plot might look like. (This might be hard–just do your best!) <em>Then</em> compare to what you observe when you run the code chunk to make the plot. (Clearly defining your expectations first is good scientific practice to avoid confirmation bias.)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>We can follow up on the barplot with a simple numerical summary. Whereas the <code>ggplot2</code> package is great for visualizations, <code>dplyr</code> is great for numerical summaries. The code below constructs a table of the number of questions with each theme. Make sure that these numerical summaries match up with what you saw in the barplot.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct a table of counts</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(themes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   themes                                 n
+   &lt;chr&gt;                              &lt;int&gt;
+ 1 mom|dad|marriage|money                67
+ 2 mom|dad|marriage|no money            567
+ 3 mom|dad|no marriage|money            109
+ 4 mom|dad|no marriage|no money         906
+ 5 mom|no dad|marriage|money            121
+ 6 mom|no dad|marriage|no money         839
+ 7 mom|no dad|no marriage|money         293
+ 8 mom|no dad|no marriage|no money     2462
+ 9 no mom|dad|marriage|money             41
+10 no mom|dad|marriage|no money         350
+11 no mom|dad|no marriage|money          96
+12 no mom|dad|no marriage|no money      760
+13 no mom|no dad|marriage|money         360
+14 no mom|no dad|marriage|no money     2967
+15 no mom|no dad|no marriage|money      865
+16 no mom|no dad|no marriage|no money  9231</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Before proceeding, let’s break down the plotting code above. Run each chunk to see how the two lines of code above build up the plot in “layers”. Add comments (on the lines starting with <code>#</code>) to document what you notice.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-exploring-sentiment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-exploring-sentiment">Exercise 5: Exploring sentiment</h2>
+<p>We’ll look at the distribution of the <code>afinn_overall</code> sentiment variable and associated summary statistics.</p>
+<ol type="a">
+<li>The code below creates a <strong>boxplot</strong> of this variable. In the comment, make note of how this code is simliar to the code for the barplot above. As in the previous exercise, <em>before</em> running the code chunk to create the plot, make note of what you expect the boxplot to look like.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ???</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> afinn_overall)) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 490 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li><strong>Challenge:</strong> Using the code for the barplot and boxplot as a guide, try to make a <strong>histogram</strong> and a <strong>density</strong> plot of the overall average ratings.
+<ul>
+<li>What information is given by the tallest bar of the histogram?</li>
+<li>How would you describe the shape of the distribution?</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li>We can compute summary statistics (numerical summaries) for a quantitative variable using the <code>summary()</code> function or with the <code>summarize()</code> function from the <code>dplyr</code> package. (<code>1st Qu.</code> and <code>3rd Qu.</code> stand for first and third quartile.) After inspecting these summaries, look back to your boxplot, histogram, and density plot. Which plots show which summaries most clearly?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using summary() - convenient for computing many summaries in one command</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Does not show the standard deviation</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abby<span class="sc">$</span>afinn_overall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+-140.000   -6.000   -1.000   -1.401    3.000  100.000      490 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using summarize() from dplyr</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we use %&gt;% to pipe the data into the summarize() function</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to use na.rm = TRUE because there are missing values (NAs)</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">median</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">sd</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  mean(afinn_overall, na.rm = TR…¹ median(afinn_overall…² sd(afinn_overall, na…³
+                             &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+1                            -1.40                     -1                   11.1
+# ℹ abbreviated names: ¹​`mean(afinn_overall, na.rm = TRUE)`,
+#   ²​`median(afinn_overall, na.rm = TRUE)`, ³​`sd(afinn_overall, na.rm = TRUE)`</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Write a good paragraph describing the information in the histogram (or density plot) by discussing shape, center, spread, and outliers. Incorporate the numerical summaries from part c.</li>
+</ol>
+</section>
+<section id="exercise-6-box-plots-vs.-histograms-vs.-density-plots" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-box-plots-vs.-histograms-vs.-density-plots">Exercise 6: Box plots vs.&nbsp;histograms vs.&nbsp;density plots</h2>
+<p>We took 3 different approaches to plotting the quantitative average course variable above. They all have pros and cons.</p>
+<ol type="a">
+<li>What is one pro about the boxplot in comparison to the histogram and density plot?</li>
+<li>What is one con about the boxplot in comparison to the histogram and density plots?</li>
+<li>In this example, which plot do you prefer and why?</li>
+</ol>
+</section>
+<section id="exercise-7-explore-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7-explore-outliers">Exercise 7: Explore outliers</h2>
+<p>Given that Dear Abby column is an advice column, it seems natural that the sentiment of the questions would lean more negative. What’s going on with the questions that have particularly positive sentiments?</p>
+<p>We can use the <code>filter()</code> function in the <code>dplyr</code> package to look at the . Based on the plots of <code>afinn_overall</code> that you made in Exercise 5, pick a threshold for the <code>afinn_overall</code> variable—we’ll say that questions with an overall sentiment score above this threshold are high outliers. Fill in this number where it says <code>YOUR_THRESHOLD</code> below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(afinn_overall <span class="sc">&gt;</span> YOUR_THRESHOLD) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(question_only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What do you notice? Why might these questions have such high sentiment scores?</p>
+</section>
+<section id="exercise-8-returning-to-our-context-looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-8-returning-to-our-context-looking-ahead">Exercise 8: Returning to our context, looking ahead</h2>
+<p>In this activity, we explored data on Dear Abby question, with a focus on exploring a single variable at a time.</p>
+<ul>
+<li>In big picture terms, what have we learned about Dear Abby questions?</li>
+<li>What further curiosities do you have about the data?</li>
+</ul>
+</section>
+<section id="exercise-9-different-ways-to-think-about-data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-9-different-ways-to-think-about-data-visualization">Exercise 9: Different ways to think about data visualization</h2>
+<p>In working with and visualizing data, it’s important to keep in mind what a data point <em>represents</em>. It can reflect the experience of a real person. It might reflect the sentiment in a piece of art. It might reflect history. We’ve taken one very narrow and technical approach to data visualization. Check out the following examples, and write some notes about anything you find interesting.</p>
+<ul>
+<li><a href="http://www.dear-data.com/by-week">Dear Data</a></li>
+<li><a href="https://hyperallergic.com/476334/how-w-e-b-du-bois-meticulously-visualized-20th-century-black-america/">W.E.B. DuBois</a></li>
+<li><a href="https://stephanieevergreen.com/decolonizing-data-viz/">Decolonizing Data Viz</a></li>
+<li><a href="http://www.variableprojects.com/#/phase-change/">Phase Change Project (by Prof Kim, Mac research students)</a></li>
+</ul>
+</section>
+<section id="exercise-10-rendering-your-work" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-10-rendering-your-work">Exercise 10: Rendering your work</h2>
+<p>Save this file, and then click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</p>
+<ul>
+<li>Scroll through and inspect the document to see how your work was translated into this HTML format. Neat!</li>
+<li>Close the browser tab.</li>
+<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
+<li>Navigate to your “Activities” subfolder within your “STAT155” folder and locate the HTML file. You can open it again in your browser to double check.</li>
+</ul>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>Go to the top of this file and review the learning objectives for this lesson. Which objectives do you have a good handle on, are at least familiar with, or are struggling with? What feels challenging right now? What are some wins from the day?</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Put your response here.</p>
+</blockquote>
+</section>
+</section>
+<section id="additional-practice" class="level1">
+<h1>Additional Practice</h1>
+<p>If you have time and want additional practice, try out the following exercises.</p>
+<section id="exercise-11-read-in-and-get-to-know-the-weather-data" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-11-read-in-and-get-to-know-the-weather-data">Exercise 11: Read in and get to know the weather data</h2>
+<p>Daily weather data are available for 3 locations in Perth, Australia.</p>
+<ul>
+<li>View the codebook <a href="https://github.com/Mac-STAT/data/blob/main/weather_3_locations_codebook.md">here</a>.</li>
+<li>Complete the code below to read in the data.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ??? with your own name for the weather data</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ___ with the correct function</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>??? <span class="ot">&lt;-</span> <span class="fu">___</span>(<span class="st">"https://mac-stat.github.io/data/weather_3_locations.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-12-exploring-the-data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-12-exploring-the-data-structure">Exercise 12: Exploring the data structure</h2>
+<p>Check out the basic features of the weather data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the first six cases</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the dimensions of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What does a case represent in this data?</p>
+</section>
+<section id="exercise-13-exploring-rainfall" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-13-exploring-rainfall">Exercise 13: Exploring rainfall</h2>
+<p>The <code>raintoday</code> variable contains information about rainfall.</p>
+<ul>
+<li>Is this variable quantitative or categorical?</li>
+<li>Create an appropriate visualization, and compute appropriate numerical summaries.</li>
+<li>What do you learn about rainfall in Perth?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-14-exploring-temperature" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-14-exploring-temperature">Exercise 14: Exploring temperature</h2>
+<p>The <code>maxtemp</code> variable contains information on the daily high temperature.</p>
+<ul>
+<li>Is this variable quantitative or categorical?</li>
+<li>Create an appropriate visualization, and compute appropriate numerical summaries.</li>
+<li>What do you learn about high temperatures in Perth?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-15-customizing-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-15-customizing-challenge">Exercise 15: Customizing! (CHALLENGE)</h2>
+<p>Though you will naturally absorb some RStudio code throughout the semester, being an effective statistical thinker and “programmer” does not require that we memorize <em>all</em> code. That would be impossible! In contrast, using the <em>foundation</em> you built today, do some digging online to learn how to customize your visualizations.</p>
+<ol type="a">
+<li>For the histogram below, add a title and more meaningful axis labels. Specifically, title the plot “Distribution of max temperatures in Perth”, change the x-axis label to “Maximum temperature” and y-axis label to “Number of days”. HINT: Do a Google search for something like “add axis labels ggplot”.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a title and axis labels</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> maxtemp)) <span class="sc">+</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Adjust the code below in order to color the bars green. NOTE: Color can be an effective tool, but here it is simply gratuitous.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the bars green</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> raintoday)) <span class="sc">+</span> </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li><p>Check out the <code>ggplot2</code> <a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">cheat sheet</a>. Try making some of the other kinds of univariate plots outlined there.</p></li>
+<li><p>What else would you like to change about your plot? Try it!</p></li>
+</ol>
+<p><br><br><br><br><br><br></p>
+</section>
+</section>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-get-curious-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-get-curious-1">Exercise 1: Get curious</h2>
+<ul>
+<li>Results of brainstorming themes will vary</li>
+<li>From the “Data and Method” section at the end of the Pudding article, we see this paragraph:</li>
+</ul>
+<blockquote class="blockquote">
+<p>The writers of these questions likely skew roughly 2/3 female (according to Pauline Phillips, who mentions the demographics of responses to a survey she disseminated in 1987), and consequently, their interests are overrepresented; we’ve been unable to find other demographic data surrounding their origins. There is, doubtless, a level of editorializing here: only a fraction of the questions that people have written in have seen publication, because agony aunts (the writers of advice columns) must selectively filter what gets published. Nevertheless, the concerns of the day seem to be represented, such as the HIV/AIDS crisis in the 1980s. Additionally, we believe that the large sample of questions in our corpus (20,000+) that have appeared over recent decades gives a sufficient directional sense of broad trends.</p>
+</blockquote>
+<ul>
+<li>Writers of the questions are predominately female. The 2/3 proportion was estimated in 1987, so it would be useful to understand shifts in demographics over time.</li>
+<li>What questions were chosen to be answered on the column? Likely a small fraction of what got submitted. What themes tended to get cut out?</li>
+</ul>
+</section>
+<section id="exercise-2-importing-and-getting-to-know-the-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-importing-and-getting-to-know-the-data-1">Exercise 2: Importing and getting to know the data</h2>
+<ol type="a">
+<li><p>Note how clicking the <code>abby</code> data causes both a popup pane and the command <code>View(abby)</code> to appear in the Console. In fact, the <code>View()</code> function is the underlying command that opens a dataset pane. (<code>View()</code> should always be entered in the Console and NOT your Quarto document.)</p></li>
+<li><p>Each row / case corresponds to a single question.</p></li>
+<li><p>Columns = variables</p></li>
+<li><p>Try out each function below. Identify what each function tells you about the <code>abby</code> data and note this in the <code>???</code>:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First number = number of rows / cases</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Second number = number of columns / variables</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20034    16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of rows (cases)</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20034</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of columns (variables)</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View first few rows of the dataset (6 rows, by default)</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 16
+   year month day   url     title letterId question_only afinn_overall afinn_pos
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
+1  1985     1 01    proque… WOMA…        1 "i have been…           -30         5
+2  1985     1 01    proque… WOMA…        1 "this is for…           -30         5
+3  1985     1 02    proque… LAME…        1 "our 16-year…             1         3
+4  1985     1 03    proque… 'NOR…        1 "i was a hap…            -3         7
+5  1985     1 04    proque… IT'S…        1 "you be the …            13        31
+6  1985     1 04    proque… IT'S…        1 "a further w…            13        31
+# ℹ 7 more variables: afinn_neg &lt;dbl&gt;, bing_pos &lt;dbl&gt;, moms &lt;chr&gt;, dads &lt;chr&gt;,
+#   marriage &lt;chr&gt;, money &lt;chr&gt;, themes &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all column (variable) names</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(abby)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "year"          "month"         "day"           "url"          
+ [5] "title"         "letterId"      "question_only" "afinn_overall"
+ [9] "afinn_pos"     "afinn_neg"     "bing_pos"      "moms"         
+[13] "dads"          "marriage"      "money"         "themes"       </code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>We can display the first 10 rows with <code>head(abby, n = 10)</code>.</li>
+</ol>
+</section>
+<section id="exercise-3-preparing-to-summarize-and-visualize-the-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-preparing-to-summarize-and-visualize-the-data-1">Exercise 3: Preparing to summarize and visualize the data</h2>
+<ol type="a">
+<li><p>The sentiment variables are <code>afinn_overall</code>, <code>afinn_pos</code>, <code>afinn_neg</code>, and <code>bing_pos</code>, and they are <strong>quantitative</strong>. The <code>afinn</code> variables don’t have units but we can still get a sense of the scale by remembering that each word gets a score between -5 and 5. The <code>bing_pos</code> variable doesn’t have units because it’s a fraction, but we know that it ranges from 0 to 1.</p></li>
+<li><p><code>theme</code> would be <strong>categorical</strong>.</p></li>
+<li><p>Appropriate visualizations:</p>
+<ul>
+<li>single quantitative variable: boxplot, histogram, density plot</li>
+<li>single categorical variable: barplot</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercise-4-exploring-themes-in-the-letters-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-exploring-themes-in-the-letters-1">Exercise 4: Exploring themes in the letters</h2>
+<ol type="a">
+<li><p>Code will vary</p></li>
+<li><p>Expectations about the plot will vary</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Counts in the table below match the barplot</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct a table of counts</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(themes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   themes                                 n
+   &lt;chr&gt;                              &lt;int&gt;
+ 1 mom|dad|marriage|money                67
+ 2 mom|dad|marriage|no money            567
+ 3 mom|dad|no marriage|money            109
+ 4 mom|dad|no marriage|no money         906
+ 5 mom|no dad|marriage|money            121
+ 6 mom|no dad|marriage|no money         839
+ 7 mom|no dad|no marriage|money         293
+ 8 mom|no dad|no marriage|no money     2462
+ 9 no mom|dad|marriage|money             41
+10 no mom|dad|marriage|no money         350
+11 no mom|dad|no marriage|money          96
+12 no mom|dad|no marriage|no money      760
+13 no mom|no dad|marriage|money         360
+14 no mom|no dad|marriage|no money     2967
+15 no mom|no dad|no marriage|money      865
+16 no mom|no dad|no marriage|no money  9231</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>What do the plot layers do?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just sets up the "canvas" of the plot with axis labels</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adds the bars</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotates the x axis labels</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changes the visual theme of the plot with a white background and removes gridlines</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> themes)) <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-exploring-course-overall-ratings" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-exploring-course-overall-ratings">Exercise 5: Exploring course overall ratings</h2>
+<p>Now we’ll look at the distribution of the <code>avg_rating</code> variable and associated summary statistics.</p>
+<ol type="a">
+<li><ul>
+<li>We might expect the mean of this variable is less than zero given that more negative words might be appear in questions on an advice column.</li>
+<li>The code has a similar structure to the barplot in that there is an initial <code>ggplot()</code> layer which sets the canvas, then a <code>+</code> to add a layer, then the final layer <code>geom_boxplot()</code> (like <code>geom_bar()</code>) which tells R what type of plot to make.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> afinn_overall)) <span class="sc">+</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 490 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>We replace <code>geom_boxplot()</code> with <code>geom_histogram()</code> and <code>geom_density()</code>.
+<ul>
+<li>The tallest bar of the histogram indicates that over 7500 questions had an overall <code>afinn</code> sentiment score between around -8 to 0.(The -8 to 0 comes from eyeballing where the tallest bar is placed on the x-axis, and the height of this bar indicates how many cases fall into that bin.)</li>
+<li>The shape of the distribution: roughly symmetric</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> afinn_overall)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 490 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abby, <span class="fu">aes</span>(<span class="at">x =</span> afinn_overall)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 490 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-31-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li><ul>
+<li>Boxplot shows min, max, median, 1st and 3rd quartile easily. (It shows median, 1st and 3rd quartile directly as lines)</li>
+<li>Histogram and density plot show min and max but the mean and median aren’t shown directly–we have to roughly guess based on the peak of the distribution</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(abby<span class="sc">$</span>afinn_overall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+-140.000   -6.000   -1.000   -1.401    3.000  100.000      490 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">median</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">sd</span>(afinn_overall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  mean(afinn_overall, na.rm = TR…¹ median(afinn_overall…² sd(afinn_overall, na…³
+                             &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+1                            -1.40                     -1                   11.1
+# ℹ abbreviated names: ¹​`mean(afinn_overall, na.rm = TRUE)`,
+#   ²​`median(afinn_overall, na.rm = TRUE)`, ³​`sd(afinn_overall, na.rm = TRUE)`</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>The distribution of sentiment scores is roughly symmetric with a mean of -1.4 and a similar median of -1. The median and mean are quite similar because the distribution is fairly symmetric. The standard deviation of the sentiment cores is about 0.48, which could be seen as a large amount of spread because a professor might feel qualitatively different if their course’s rating increased or decreased by that amount. The left skew also means that there are low outliers (for example, the course with an average rating of 2).</li>
+</ol>
+</section>
+<section id="exercise-6-box-plots-vs.-histograms-vs.-density-plots-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-box-plots-vs.-histograms-vs.-density-plots-1">Exercise 6: Box plots vs.&nbsp;histograms vs.&nbsp;density plots</h2>
+<ol type="a">
+<li>Boxplots very clearly show key summary statistics like median, 1st and 3rd quartile</li>
+<li>Boxplots can oversimplify by not showing the shape of the distribution.</li>
+</ol>
+</section>
+<section id="exercise-7-explore-outliers-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7-explore-outliers-1">Exercise 7: Explore outliers</h2>
+<p>There are some positive words in the questions that seem to pull up the sentiment score a lot despite the negative overall tone. From this we can see the limitations of a basic sentiment analysis in which the sentiment of each word is considered in isolation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>abby <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(afinn_overall <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(question_only) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="co"># Just to look at first 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "i am a 36-year-old college dropout whose lifelong ambition was to be a physician. i have a very good job selling pharmaceutical supplies, but my heart is still in the practice of medicine. i do volunteer work at the local hospital on my time off, and people tell me i would have made a wonderful doctor.\nif i go back to college and get my degree, then go to medical school, do my internship and finally get into the actual practice of medicine, it will take me seven years! but, abby, in seven years i will be 43 years old. what do you think?\nunfulfilled in philly"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+[2] "we have an only child--a grown daughter we dearly love--and when we pass on, we want to leave her our entire estate, which is considerable.\nthe thing that troubles us is this: our daughter is married to a very unworthy character. for years he has taken advantage of her sweet, forgiving, generous nature because he knows she worships him. we are sure that whatever we leave our daughter will be spent on this dirty dog.\nhow can we prevent this from happening?\nbewildered"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+[3] "both of our sons have been married for about 15 years. their wives were of normal weight when they married our sons, but one daughter-in- law weighs about 300 pounds and the other weighs about 225. their ages are 35 and 37. both our sons are good-looking, and neither is fat.\nour daughters-in-law seem to have no pride in their appearance, which upsets everyone in the family, except themselves. they are fat, they know it and they don't care! when they first began to put on weight, they tried various diets, pills, doctors, etc., but they both gave up and decided to \"accept\" themselves as they are.\nthey wear the wrong kind of clothes (shorts and blue jeans) without any apologies.\nour problem (my husband's and mine) is how do we cope with this? we are ashamed to be around them. our sons have accepted the situation, but we seem unable to.\nperhaps we need more help than the girls. any suggestions?\nupset in florida"                                                                                                                                                                                                                                                                                                                                                                                                                                           
+[4] "the letter from \"concerned mom,\" who was trying to teach her 5-year-old not to accept gifts from strangers, prompts this letter.\na gentleman friend of mine recently stood in line behind a mother and her young daughter at a bank. the child remarked on the visor he was wearing, as it had the name of a popular pizza imprinted on it.\nmy friend, who is the public relations director for this pizza firm, wanted the child to have the visor but, instead of giving it to the child, he handed the visor to her mother and said to the child: \"i'm giving this to your mother to give to you, because she's probably told you never to accept gifts from a stranger. you won't ever do that, will you?\"\nwhat a thoughtful way to be friendly while reinforcing a message mothers cannot stress enough.\nsue in wichita, kan."                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+[5] "in january, i sent an original manuscript as a gift to woody allen. i had hand-bound the pages, and decorated the binding with baroque pearls and amethyst. i enclosed my name, address and telephone number. i had hoped that woody would send me a note or call me, or at the very least, instruct his secretary to do so.\nto date, i haven't received even an acknowledgment that my gift was received. is it unrealistic of me to expect a thank-you from a famous person?\ndisappointed in california."                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+[6] "will you please, please discourage high school and college graduates from sending graduation invitations to every distant relative they and their parents ever heard of? we all know that sending \"invitations\" to people we hardly know is a flagrant, shameless bid for a gift. and if, in a moment of weakness, one does send a gift, a barrage of birth announcements and invitations to weddings, showers and more graduations is sure to follow.\ni am a 75-year-old widow, living on social security and very little else. i just received a high school graduation invitation from the granddaughter of a third cousin whom i have not seen in so long i wouldn't even recognize her. (i have never even met her granddaughter.)\ni have many relatives in this town, but i never hear from them unless they are celebrating something that requires a gift. i have no car, yet they \"invite\" me to every imaginable event, knowing full well i can't possibly attend. this is just shameless begging.\ni am not cheap. i just sent a generous graduation gift to a neighbor girl who used to stop by every day to bring in my mail and newspaper and ask if i needed any errands run.\ndon't suggest that i send \"a nice card\" to the relatives who send me invitations to events they know i can't attend. we both know a card is not what these spongers want.\nsick of them in iowa city"</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-8-returning-to-our-context-looking-ahead-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-8-returning-to-our-context-looking-ahead-1">Exercise 8: Returning to our context, looking ahead</h2>
+<ul>
+<li>Answers will vary</li>
+</ul>
+</section>
+<section id="exercise-11-read-in-and-get-to-know-the-weather-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-11-read-in-and-get-to-know-the-weather-data-1">Exercise 11: Read in and get to know the weather data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Mac-STAT/data/main/weather_3_locations.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2367 Columns: 24
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr   (6): location, windgustdir, winddir9am, winddir3pm, raintoday, raintom...
+dbl  (17): mintemp, maxtemp, rainfall, evaporation, sunshine, windgustspeed,...
+date  (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-12-exploring-the-data-structure-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-12-exploring-the-data-structure-1">Exercise 12: Exploring the data structure</h2>
+<p>Check out the basic features of the weather data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the first six cases</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(weather)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 24
+  date       location  mintemp maxtemp rainfall evaporation sunshine windgustdir
+  &lt;date&gt;     &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
+1 2020-01-01 Wollongo…    17.1    23.1        0          NA       NA SSW        
+2 2020-01-02 Wollongo…    17.7    24.2        0          NA       NA SSW        
+3 2020-01-03 Wollongo…    19.7    26.8        0          NA       NA NE         
+4 2020-01-04 Wollongo…    20.4    35.5        0          NA       NA SSW        
+5 2020-01-05 Wollongo…    19.8    21.4        0          NA       NA SSW        
+6 2020-01-06 Wollongo…    18.3    22.9        0          NA       NA NE         
+# ℹ 16 more variables: windgustspeed &lt;dbl&gt;, winddir9am &lt;chr&gt;, winddir3pm &lt;chr&gt;,
+#   windspeed9am &lt;dbl&gt;, windspeed3pm &lt;dbl&gt;, humidity9am &lt;dbl&gt;,
+#   humidity3pm &lt;dbl&gt;, pressure9am &lt;dbl&gt;, pressure3pm &lt;dbl&gt;, cloud9am &lt;dbl&gt;,
+#   cloud3pm &lt;dbl&gt;, temp9am &lt;dbl&gt;, temp3pm &lt;dbl&gt;, raintoday &lt;chr&gt;,
+#   risk_mm &lt;dbl&gt;, raintomorrow &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the dimensions of the data</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(weather)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2367   24</code></pre>
+</div>
+</div>
+<p>A case represents a day of the year in a particular area (Hobart, Uluru, Wollongong as seen by the <code>location</code> variable).</p>
+</section>
+<section id="exercise-13-exploring-rainfall-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-13-exploring-rainfall-1">Exercise 13: Exploring rainfall</h2>
+<p>The <code>raintoday</code> variable contains information about rainfall.</p>
+<ul>
+<li><code>raintoday</code> is categorical (No, Yes)</li>
+<li>It is more common to have no rain.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> raintoday)) <span class="sc">+</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical summaries</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(raintoday)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  raintoday     n
+  &lt;chr&gt;     &lt;int&gt;
+1 No         1864
+2 Yes         446
+3 &lt;NA&gt;         57</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-14-exploring-temperature-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-14-exploring-temperature-1">Exercise 14: Exploring temperature</h2>
+<p>The <code>maxtemp</code> variable contains information on the daily high temperature.</p>
+<ul>
+<li><code>maxtemp</code> is quantitative</li>
+<li>The <em>typical</em> max temperature is around 23 degrees Celsius (with an average of 23.62 and a median of 22 degrees). The max temperatures ranged from 8.6 to 45.4 degrees. Finally, on the typical day, the max temp falls about 7.8 degrees from the mean. There are multiple modes in the distribution of max temperature—this likely reflects the different cities in the dataset.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> maxtemp)) <span class="sc">+</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 34 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical summaries</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weather<span class="sc">$</span>maxtemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   8.60   18.10   22.00   23.62   27.40   45.40      34 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are missing values (NAs) in this variable, so we add</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the na.rm = TRUE argument</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">sd</span>(maxtemp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `sd(maxtemp, na.rm = TRUE)`
+                        &lt;dbl&gt;
+1                        7.80</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-15-customizing-challenge-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-15-customizing-challenge-1">Exercise 15: Customizing! (CHALLENGE)</h2>
+<ol type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> maxtemp)) <span class="sc">+</span> </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Maximum temperature"</span>, <span class="at">y =</span> <span class="st">"Number of days"</span>, <span class="at">title =</span> <span class="st">"Distribution of max temperatures in Perth"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 34 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the bars green</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> raintoday)) <span class="sc">+</span> </span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_foundations_univariate_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Leslie Myint, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Site built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
