@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!activity_templates/"
+    - "!activities/04_slr_formalization.qmd"
 
 website:
   title: "STAT 155"
@@ -30,6 +31,7 @@ website:
       contents:
         - activities/01_foundations_welcome.qmd
         - activities/02_foundations_univariate.qmd
+        - activities/03_slr_introduction.qmd
 
     - id: homework
       title: "Practice Problems"
