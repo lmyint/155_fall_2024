@@ -17,7 +17,7 @@ By the end of this lesson, you should be able to:
 
 ## Readings and videos
 
-Before class you should have read and/or watched:
+These readings and videos are for **AFTER** class.
 
 - Reading: Sections 2.8, 3.1-3.3, 3.6 in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
 - Videos:
@@ -401,7 +401,7 @@ dim(lifts)
 
 c. A case represents an individual lifter at a single weightlifting competition.
 
-d. It looks like some meets may be missing if they weren't detected by the web scraper used by the maintainers of the Open Powerlifting database. They don't describe in detail the process used for transferring PDFs of results to their databse, so it's unclear what errors in trancription might have resulted. Still, it's worth taking a moment to appreciate the labor they put into making these results available for passionate powerlifters to explore.
+d. It looks like some meets may be missing if they weren't detected by the web scraper used by the maintainers of the Open Powerlifting database. They don't describe in detail the process used for transferring PDFs of results to their database, so it's unclear what errors in transcription might have resulted. Still, it's worth taking a moment to appreciate the labor they put into making these results available for passionate powerlifters to explore.
 
 
 
