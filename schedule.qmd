@@ -52,7 +52,7 @@ html-table-processing: none
 
 # Weekly details
 
-::: {.callout-tip icon=false collapse="false" title="Week 1: 9/2 - 9/6 (Data fundamentals, univariate visualization and summaries)"}
+::: {.callout-tip icon=false collapse="true" title="Week 1: 9/2 - 9/6 (Data fundamentals, univariate visualization and summaries)"}
 #### Announcements
 
 Welcome (back) to campus!
@@ -77,7 +77,7 @@ Before class:
     - Due 30 minutes before class today (11:30am on 9/6)
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
+::: {.callout-tip icon=false collapse="false" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
 #### Announcements
 
 - [Practice Problems #1 (PP1)](assignments/pp1.qmd) due Friday 9/13 at 5pm
@@ -100,6 +100,9 @@ Before class:
 #### Friday
 
 Before class:
+
+- Review material as needed
+- Work on [Practice Problems #1 (PP1)](assignments/pp1.qmd). We will also have time in class to work on them.
 
 :::
 
