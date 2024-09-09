@@ -672,7 +672,7 @@ abby %>%
     summarize(mean(afinn_overall, na.rm = TRUE), median(afinn_overall, na.rm = TRUE), sd(afinn_overall, na.rm = TRUE))
 ```
 
-d. The distribution of sentiment scores is roughly symmetric with a mean of -1.4 and a similar median of -1. The median and mean are quite similar because the distribution is fairly symmetric. The standard deviation of the sentiment cores is about 0.48, which could be seen as a large amount of spread because a professor might feel qualitatively different if their course's rating increased or decreased by that amount. The left skew also means that there are low outliers (for example, the course with an average rating of 2).
+d. The distribution of sentiment scores is roughly symmetric with a mean of -1.4 and a similar median of -1. The median and mean are quite similar because the distribution is fairly symmetric. The standard deviation of the sentiment scores is about 11.08 which tells us how much variation there is from the center of the distribution. 11.08 is somewhat high given the IQR of -6 to 3 (which is a span of 9 units).
 
 
 
