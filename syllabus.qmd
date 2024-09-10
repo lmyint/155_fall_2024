@@ -185,7 +185,7 @@ If I didn't have to give grades, I wouldn't. But because I am required to, it is
 
 For class days where some reading and/or videos are required beforehand, there will be a short multiple-choice Moodle checkpoint due at 11:30am (30 minutes before class starts).
 
-You can attempt a checkpoint quiz as many times as you want, but there is a 33% point deduction for each successive attempt on a question. For example, if your first attempt on a 1-point question is incorrect, the maximum possible score on that question is 0.67 points for the second attempt. On the third attempt, the maximum score is 0.33 points. No points are awarded for the 4th attempt and beyond.
+You can attempt a checkpoint question as many times as you want, but there is a 33% point deduction for each successive attempt on a question. For example, if your first attempt on a 1-point question is incorrect, the maximum possible score on that question is 0.67 points for the second attempt. On the third attempt, the maximum score is 0.33 points. No points are awarded for the 4th attempt and beyond.
 
 ### Practice problems
 
