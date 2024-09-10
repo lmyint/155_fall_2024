@@ -1,0 +1,561 @@
+---
+title: "Simple linear regression: formalizing concepts"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/04_slr_formalization.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Differentiate between a **response** / **outcome variable** and a **predictor** / **explanatory variable**
+- Write a **model formula** for a simple linear regression model with a quantitative predictor
+- Write R code to fit a linear regression model
+- Interpret the **intercept** and **slope** coefficients in a simple linear regression model with a quantitative predictor
+- Compute **expected / predicted / fitted values** and **residuals** from a linear regression model formula
+- Interpret predicted values and residuals in the context of the data
+- Explain the connection between residuals and the **least squares criterion**
+
+## Readings and videos
+
+Before class you should have read and/or watched:
+
+- Reading: Sections 2.8, 3.1-3.3, 3.6 in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
+- Videos:
+    - [Summarizing the Relationships between Two Quantitative Variables](https://voicethread.com/share/14942266/) (Time: 12:12)
+    - [Introduction to Linear Models](https://voicethread.com/share/14927659/) (Time: 10:57)
+    - [Method of Least Squares](https://voicethread.com/share/14980221/) (Time: 5:10)
+    - [Interpretation of Intercept and Slope](https://voicethread.com/share/15148106/) (Time: 11:09)
+    - [R Code for Fitting a Linear Model](https://voicethread.com/share/14928147/) (Time: 11:07)
+
+
+
+<br><br><br><br>
+
+
+
+# Exercises
+
+**Context:** Today we'll explore data from [Capital Bikeshare](https://capitalbikeshare.com/), a company in Washington DC. Our main goal will be to explore daily ridership among registered users, as measured by `riders_registered`. Read in the data below.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")
+```
+
+## Exercise 1: Get to know the data
+
+Create a new code chunk to look at the first few rows of the data and learn how much data (in terms of cases and variables) we have.
+
+a. What does a case represent?
+b. How many and what kinds of variables do we have?
+c. Thinking about the who, what, when, where, why, and how of this data, which of the 5W's + H seem most relevant to our investigations? Explain your thoughts.
+
+
+
+## Exercise 2: Get to know the outcome/response variable
+
+Let's get acquainted with the `riders_registered` variable.
+
+- Construct an appropriate plot to visualize the distribution of this variable, and compute appropriate numerical summaries.
+- Write a good paragraph interpreting the plot and numerical summaries.
+
+
+
+## Exercise 3: Explore the relationship between ridership and temperature
+
+We'd like to understand how daily ridership among registered users relates with the temperature that it feels like that day (`temp_feel`).
+
+a. What type of plot would be appropriate to visualize this relationship? Sketch and describe what you expect this plot to look like.
+b. Create an appropriate plot using `ggplot()`. How does the plot compare to what you predicted?
+c. Add the following two lines after your plot to add a linear (blue) and curved (red) smoothing line. What do you notice? Is a simple linear regression model appropriate for this data?
+
+```{r eval=FALSE}
+# Add a red straight line of best fit and a blue curve of best fit
+YOUR_PLOT +
+    geom_smooth(method = "lm", color = "red", se = FALSE) +
+    geom_smooth(color = "blue", se = FALSE)
+```
+
+
+
+
+## Exercise 4: Filtering our data
+
+The relationship between registered riders and temperature looks linear below 80 degrees. We can use the `filter()` function from the `dplyr` package to subset our cases. (We'll learn techniques soon for handling this nonlinear relationship.)
+
+If we wanted to only keep cases where registered ridership was greater than 2000, we would use the following code:
+
+```{r eval=FALSE}
+# The %>% is called a "pipe" and feeds what comes before it
+# into what comes after (bikes data is "fed into" the filter() function)
+NEW_DATASET_NAME <- bikes %>% 
+    filter(riders_registered > 2000)
+```
+
+Adapt the example above to create a new dataset called `bikes_sub` that only keeps cases where the felt temperature is less than 80 degrees.
+
+
+
+## Exercise 5: Model fitting and coefficient interpretation
+
+Let's fit a simple linear regression model and examine the results. Step through code chunk slowly, and make note of new code.
+
+```{r eval=FALSE}
+# Construct and save the model as bike_mod
+# What's the purpose of "riders_registered ~ temp_feel"?
+# What's the purpose of "data = bikes_sub"?
+bike_mod <- lm(riders_registered ~ temp_feel, data = bikes_sub)
+```
+
+```{r eval=FALSE}
+# A long summary of the model stored in bike_mod
+summary(bike_mod)
+```
+
+```{r eval=FALSE}
+# A simplified model summary
+coef(summary(bike_mod))
+```
+
+a. Using the model summary output, complete the following model formula:    
+    E[riders_registered | temp_feel] = ___ + ___ * temp_feel
+
+b. Interpret the intercept in terms of the data context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.* Is the intercept meaningful in this situation?
+
+c. Interpret the slope in terms of the data context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.*
+
+## Exercise 6: Predictions and residuals
+
+On August 17, 2012, the `temp_feel` was 53.816 degrees and there were 5665 riders. We can get data for this day using the `filter()` and `select()` `dplyr` functions. Note, but don't worry about the syntax -- we haven't learned this yet:
+    
+```{r eval=FALSE}
+bikes_sub %>% 
+    filter(date == "2012-08-17") %>% 
+    select(riders_registered, temp_feel) 
+```
+
+a. Peak back at the scatterplot. Identify which point corresponds to August 17, 2012. Is it close to the trend? Were there *more* riders than expected or *fewer* than expected?
+
+b. Use your model formula from the previous exercise to *predict* the ridership on August 17, 2012 from the temperature on that day. (That is, where do days with this temperature fall on the model trend line? How many registered riders would we *expect* on a 53.816 degree day?)
+
+c. Check your part b calculation using the `predict()` function. Take careful note of the syntax -- there's a lot going on!
+
+```{r eval=FALSE}
+# What is the purpose of newdata = ___???
+predict(bike_mod, newdata = data.frame(temp_feel = 53.816))
+```
+
+d. Calculate the **residual** or **prediction error**. How far does the *observed* ridership fall from the *model prediction*?    
+    
+    residual = observed y - predicted y = ???
+
+e. Are positive residuals above or below the trend line? When we have positive residuals, does the model over- or under-estimate ridership? Repeat these questions for negative residuals.
+
+f. For an 85 degree day, how many registered riders would we expect? Do you think it's a good idea to make this prediction? (Revisit the visualization and filtering we did in Exercises 3 and 4.)
+
+
+
+## Exercise 7: Changing temperature units (CHALLENGE)
+
+Suppose we had measured temperature in degrees Celsius rather than degrees Fahrenheit. How do you think our intercept and slope estimates, and their coefficient interpretations, would change?
+
+
+
+## Reflection
+
+Statistics is a particular kind of language and collection of tools for channeling **curiosity** to improve our world.
+
+Review the learning objectives at the top of this file and the flow of today's activity. How do the concepts we practiced today facilitate curiosity?
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
+
+# Additional Practice
+
+## Exercise 8: Ridership and windspeed
+
+Let's pull together everything that you've practiced in the preceding exercises to investigate the relationship between `riders_registered` and `windspeed`. Go back to using the `bikes` dataset (instead of `bikes_sub`) because we no longer need to only keep days less than 80 degrees.
+    
+```{r}
+# Construct and interpret a visualization of this relationship
+# Include a representation of the relationship trend
+
+
+# Use lm to construct a model of riders_registered vs windspeed
+# Save this as bike_mod2
+
+
+# Get a short summary of this model
+
+```
+
+a. Summarize your observations from the visualizations.
+b. Write out a formula for the model trend.
+c. Interpret both the intercept and the windspeed coefficient. (Note: What does a negative slope indicate?)
+d. Use this model to predict the ridership on August 17, 2012 and calculate the corresponding residual. (Note: You’ll first need to find the windspeed on this date!)
+
+## Exercise 9: Data drills (`filter`, `select`, `summarize`)
+
+This exercise is designed to help you keep building your `dplyr` skills. These skills are important to data cleaning and digging, which in turn is important to really making meaning of our data. We'll work with a simpler set of 10 data points:
+
+```{r}
+new_bikes <- bikes %>% 
+    select(date, temp_feel, humidity, riders_registered, day_of_week) %>% 
+    head(10)
+```
+
+### Verb 1: `summarize`
+
+Thus far, in the `dplyr` grammar you've seen 3 **verbs** or action words: `summarize()`, `select()`, `filter()`. Try out the following code and then summarize the point of the `summarize()` function:
+    
+```{r eval=FALSE}
+new_bikes %>% 
+    summarize(mean(temp_feel), mean(humidity))
+```
+    
+
+### Verb 2: `select`
+
+Try out the following code and then summarize the point of the `select()` function:
+
+```{r eval=FALSE}
+new_bikes %>%
+    select(date, temp_feel)
+```
+
+```{r eval=FALSE}
+new_bikes %>% 
+    select(-date, -temp_feel)
+```
+
+### Verb 3: `filter`
+
+Try out the following code and then summarize the point of the `filter()` function:
+
+```{r eval=FALSE}
+new_bikes %>% 
+    filter(riders_registered > 850)
+```
+
+```{r eval=FALSE}
+new_bikes %>% 
+    filter(day_of_week == "Sat")
+```
+
+```{r eval=FALSE}
+new_bikes %>% 
+    filter(riders_registered > 850, day_of_week == "Sat")
+```
+
+## Exercise 10: Your turn
+
+Use `dplyr` verbs to complete each task below.
+   
+```{r}
+# Keep only information about the humidity and day of week
+
+# Keep only information about the humidity and day of week using a different approach
+
+# Keep only information for Sundays
+
+# Keep only information for Sundays with temperatures below 50
+
+# Calculate the maximum and minimum temperatures
+
+```
+
+
+
+<br><br><br><br><br><br>
+
+
+
+# Solutions
+
+## Exercise 1: Get to know the data
+
+```{r}
+dim(bikes)
+
+head(bikes)
+```
+
+a. A case represents a day of the year.
+b. We have 15 variables broadly concerning weather, day of week information, whether the day is a holiday.
+c. Lots of answers are reasonable here! When and where seem to be particularly relevant because this is for a rideshare based in Washington DC with data from 2011-2012. Ridership likely changes a lot from city to city and over time.
+
+
+
+## Exercise 2: Get to know the outcome/response variable
+
+The distribution of the `riders_registered` variable looks fairly symmetric. On average there are about 3600 registered riders per day (mean = 3656, median = 3662). On any given day, the number of registered riders is about 1560 from the mean. There seem to be a small number of low outliers (minimum ridership was 20).
+
+```{r}
+ggplot(bikes, aes(x = riders_registered)) +
+    geom_histogram()
+
+ggplot(bikes, aes(y = riders_registered)) +
+    geom_boxplot()
+
+summary(bikes$riders_registered)
+
+bikes %>% 
+    summarize(sd(riders_registered))
+```
+
+
+
+
+## Exercise 3: Explore the relationship between ridership and temperature
+
+We'd like to understand how daily ridership among registered users relates with the temperature that it feels like that day (`temp_feel`).
+
+a. Scatterplot (outcome and predictor are both quantitative)
+b.
+
+```{r}
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) +
+    geom_point()
+```
+
+c. If we only displayed the red line of best fit on the plot, we might miss the slight downward trend at the highest temperatures that we can see more clearly with the blue curve of best fit. A linear model is not appropriate if fit to the whole range of the data, but there does seem to be a linear relationship between ridership and temperature below 80 degrees Fahrenheit.
+
+```{r}
+# Add a red straight line of best fit and a blue curve of best fit
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) +
+    geom_point() +
+    geom_smooth(method = "lm", color = "red", se = FALSE) +
+    geom_smooth(color = "blue", se = FALSE)
+```
+
+
+
+## Exercise 4: Filtering our data
+
+```{r}
+# The %>% is called a "pipe" and feeds what comes before it
+# into what comes after (bikes data is "fed into" the filter() function)
+bikes_sub <- bikes %>% 
+    filter(temp_feel < 80)
+```
+
+
+
+## Exercise 5: Model fitting and coefficient interpretation
+
+Let's fit a simple linear regression model and examine the results. Step through code chunk slowly, and make note of new code.
+
+```{r}
+# Construct and save the model as bike_mod
+# What's the purpose of "riders_registered ~ temp_feel"?
+# What's the purpose of "data = bikes_sub"?
+bike_mod <- lm(riders_registered ~ temp_feel, data = bikes_sub)
+```
+
+```{r}
+# A long summary of the model stored in bike_mod
+summary(bike_mod)
+```
+
+```{r}
+# A simplified model summary
+coef(summary(bike_mod))
+```
+
+a. E[riders_registered | temp_feel] = -2486.41180 + 86.49251 * temp_feel
+
+b. **Intercept interpretation:** On days that feel like 0 degrees Fahrenheit, we can expect an average of -2486.41180 riders---a negative number of riders doesn't make sense! This results because of **extrapolation**---0 degrees is so far below the minimum temperature in the data. We only have information on the relationship between ridership and temperature in the ~40-100 degree range and have no idea what that relationship looks like outside that range.
+
+c. **Slope interpretation:** Every 1 degree increase in feeling temperature is associated with an average of about 86 more riders.
+
+
+
+## Exercise 6: Predictions and residuals
+
+On August 17, 2012, the `temp_feel` was 53.816 degrees and there were 5665 riders. We can get data for this day using the `filter()` and `select()` `dplyr` functions. Note, but don't worry about the syntax -- we haven't learned this yet:
+    
+```{r}
+bikes_sub %>% 
+    filter(date == "2012-08-17") %>% 
+    select(riders_registered, temp_feel) 
+```
+
+a. *More* riders than expected -- the point is far above the trend line
+
+b. -2486.41180 + 86.49251 * 53.816 = 2168.269
+
+c. We get the same result with `predict()`:
+
+```{r}
+# What is the purpose of newdata = ___???
+predict(bike_mod, newdata = data.frame(temp_feel = 53.816))
+```
+
+d. residual = 5665 - 2168.269 = 3496.731. On August 17, 2012, there were 3496.731 more riders than would be expected from our model.
+
+e. 
+    - Positive residuals are above the trend line---we under-estimate ridership.
+    - Negative residuals are below the trend line---we over-estimate ridership.
+
+f. On an 85 degree day, we would predict 4865.452 riders. Even though we can compute this prediction, it's not a good idea because of extrapolation--the data that we used to fit our model was filtered to days less than 80 degrees.
+
+```{r}
+-2486.41180 + 86.49251 * 85
+predict(bike_mod, newdata = data.frame(temp_feel = 85))
+```
+
+
+
+
+## Exercise 7: Changing temperature units (CHALLENGE)
+
+If we had measured temperature in degrees Celsius rather than degrees Fahrenheit, both the intercept and slope should change. The intercept would now represent 0 degrees Celsius (32 degrees Fahrenheit) and a one unit change in temperature is now 1 degree Celsius (1.8 degrees Fahrenheit).
+
+
+
+## Exercise 8: Ridership and windspeed
+
+Let's pull together everything that you've practiced in the preceding exercises to investigate the relationship between `riders_registered` and `windspeed`. Go back to using the `bikes` dataset (instead of `bikes_sub`) because we no longer need to only keep days less than 80 degrees.
+    
+```{r}
+# Construct and interpret a visualization of this relationship
+# Include a representation of the relationship trend
+ggplot(bikes, aes(x = windspeed, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE) +
+    geom_smooth(color = "blue", se = FALSE)
+
+# Use lm to construct a model of riders_registered vs windspeed
+# Save this as bike_mod2
+bike_mod2 <- lm(riders_registered ~ windspeed, data = bikes)
+
+# Get a short summary of this model
+coef(summary(bike_mod2))
+```
+
+a. There’s a weak, negative relationship – ridership tends to be smaller on windier days.
+
+b. E[riders_registered | windspeed] = 4490.09761 - 65.34145 windspeed
+
+c.
+    - **Intercept:** On days with no wind, we’d expect around 4490 riders. (0 is a little below the minimum of the observed data, but not by much! So extrapolation in interpreting the intercept isn't a huge concern.)
+    - **Slope:** Every 1mph increase in windspeed is associated with a ridership decrease of 65 riders on average.
+
+d. See the code below to predict ridership on August 17, 2012 and calculate the corresponding residual. Note that this residual is smaller than the residual from the temperature model (that residual was 3496.731). This indicates that August 17 was more of an outlier in ridership given the temperature than the windspeed.
+
+```{r}
+bikes %>% 
+    filter(date == "2012-08-17") %>% 
+    select(riders_registered, windspeed)
+
+# prediction
+4490.09761 - 65.34145 * 15.50072
+
+# residual 
+5665 - 3477.258
+```
+
+
+## Exercise 9: Data drills (`filter`, `select`, `summarize`)
+
+This exercise is designed to help you keep building your `dplyr` skills. These skills are important to data cleaning and digging, which in turn is important to really making meaning of our data. We'll work with a simpler set of 10 data points:
+
+```{r}
+new_bikes <- bikes %>% 
+    select(date, temp_feel, humidity, riders_registered, day_of_week) %>% 
+    head(10)
+```
+
+### Verb 1: `summarize`
+
+`summarize()` calculates numerical summaries of variables (columns).
+    
+```{r}
+new_bikes %>% 
+    summarize(mean(temp_feel), mean(humidity))
+```
+    
+
+### Verb 2: `select`
+
+`select()` selects variables (columns).
+
+```{r}
+new_bikes %>%
+    select(date, temp_feel)
+```
+
+```{r}
+new_bikes %>% 
+    select(-date, -temp_feel)
+```
+
+### Verb 3: `filter`
+
+`filter()` keeps only days (rows) that meet the given condition(s).
+
+```{r}
+new_bikes %>% 
+    filter(riders_registered > 850)
+```
+
+```{r}
+new_bikes %>% 
+    filter(day_of_week == "Sat")
+```
+
+```{r}
+new_bikes %>% 
+    filter(riders_registered > 850, day_of_week == "Sat")
+```
+
+## Exercise 10: Your turn
+
+Use `dplyr` verbs to complete each task below.
+   
+```{r}
+# Keep only information about the humidity and day of week
+new_bikes %>% 
+    select(humidity, day_of_week)
+
+# Keep only information about the humidity and day of week using a different approach
+new_bikes %>% 
+    select(-date, -temp_feel, -riders_registered)
+
+# Keep only information for Sundays
+new_bikes %>% 
+    filter(day_of_week == "Sun")
+
+# Keep only information for Sundays with temperatures below 50
+new_bikes %>% 
+    filter(day_of_week == "Sun", temp_feel < 50)
+
+# Calculate the maximum and minimum temperatures
+new_bikes %>% 
+    summarize(min(temp_feel), max(temp_feel))
+```
+
+
+
+
