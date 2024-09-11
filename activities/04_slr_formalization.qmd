@@ -33,6 +33,148 @@ Before class you should have read and/or watched:
     - [Interpretation of Intercept and Slope](https://voicethread.com/share/15148106/) (Time: 11:09)
     - [R Code for Fitting a Linear Model](https://voicethread.com/share/14928147/) (Time: 11:07)
 
+## Review
+
+Last class we were looking at powerlifting data.
+
+> **Guiding question:** Are bigger (heavier) lifters stronger for their weight (SWR = total lifted/bodyweight)?
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+lifts <- read_csv("https://mac-stat.github.io/data/powerlifting.csv")
+
+lifts <- lifts %>% 
+    mutate(SWR = TotalKg/BodyweightKg)
+```
+
+```{r}
+ggplot(lifts, aes(x = BodyweightKg, y = SWR)) +
+    geom_point() +
+    geom_smooth()
+```
+
+Observations:
+
+- The relationship looks slightly curved: positively correlated at first and then negatively correlated afterward.
+- The strong positive slope at the beginning and strong negative slope at the end are caused by a few outlier observations and are less trustworthy.
+    - The height of the gray band around the blue trend represents uncertainty about the value of the blue line at that location. The band is thicker towards the ends of the plot.
+- There may be a slightly positive relationship between 50kg and 80kg, but afterward the relationship looks clearly negative.
+
+A natural next question to ask is:
+
+> How steep are the upsloping and downsloping parts of this trend?
+
+Because our pre-class material focused on single lines as models, let's focus on the downslope.
+
+
+<br><br><br><br>
+
+
+We can focus on lifters above 80kg using the `filter()` function from the `dplyr` package for data wrangling. `filter()` selectively keeps rows based on a condition:
+
+```{r}
+lifts_subs <- lifts %>% 
+    filter(BodyweightKg > 80)
+```
+
+Let's look at the relationship again with a linear smoothing line (a **line of best fit**):
+
+```{r}
+ggplot(lifts_subs, aes(x = BodyweightKg, y = SWR)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+The line is governed by a formula that looks like:
+
+$$
+y = a + bx
+$$
+
+We can rewrite that formula for our context, where SWR is our **outcome** or **response** variable (the variable we're interested in explaining) and BodyweightKg is a **predictor** or **explanatory variable**:
+
+$$
+\text{SWR} = a + b \,\text{BodyweightKg}
+$$
+
+"Best" is determined by the **least squares criterion**: we find the values of $a$ and $b$ such that we **minimize the sum of squared residuals**. A **residual** is the vertical distance from a point to the line:
+
+$$
+\text{residual} = \text{observed y} - \text{predicted y}
+$$
+
+In other words, a residual quantifies the error in our model. The idea with the least squares criterion is that we want our line to minimize these errors.
+
+
+<br><br><br><br>
+
+
+Note that we will be writing the formula for our line in a slightly different way. Instead of:
+
+$$
+\text{SWR} = a + b \,\text{BodyweightKg}
+$$
+
+We will be writing model formula as such:
+
+$$
+E[\text{SWR} \mid \text{BodyweightKg}] = \beta_0 + \beta_1\text{BodyweightKg}
+$$
+
+- The $E[]$ is read as "expected value" which is another way to describe the average value.
+    - Expected value is important in describing our line because our line describes the trend in our data *on average*. It does not describe what to expect for any individual case.
+- The $E[\text{SWR} \mid \text{BodyweightKg}]$ part is read as "expected value of SWR given body weight". This is saying that the average value of SWR is function of body weight.
+- The expected value shows up in the way that we interpret the intercept and slope in our line:
+    - Intercept $\beta_0$: The average SWR for someone who weights 0kg. (Not meaningful! But the intercept is important for placing our line vertically)
+    - Slope $\beta_1$: Every 1kg increase in body weight is linked with a $\beta_1$ change in SWR on average.
+
+Let's see these interpretations with numbers:
+
+```{r}
+mod <- lm(SWR ~ BodyweightKg, data = lifts_subs)
+
+coef(summary(mod))
+```
+
+- The "Estimate" column contains the estimated coefficients in our model (the intercept and slope).
+    - Full model formula: $E[\text{SWR} \mid \text{BodyweightKg}] = 6.44 - 0.02\,\text{BodyweightKg}$
+    - Intercept $\beta_0$: The average SWR for someone who weights 0kg is 6.44. (Not meaningful! No one weighs 0kg!)
+    - Slope $\beta_1$: Every 1kg increase in body weight is linked with a 0.02 decrease in SWR. So a 10kg increase in body weight is linked with a 0.2 decrease in SWR on average. **Interpreting this coefficient addresses our guiding question.** 
+- Key features of slope interpretation:
+    - **Units:** Provided units of kg for the predictor. Note that there are no units for SWR because we're dividing kilograms lifted by kilograms of body weight. 
+    - **Averages vs. individuals:** *On average* lifters who differ by 1kg in body weight will differ in SWR by 0.02, but any given pair of lifters who  differ by 1kg in body weight will not always differ in SWR by 0.02.
+    - **Causal language:** We want to be careful to not say "Increasing your body weight by 1 kg will decrease your SWR by 0.02 on average" because there may be other factors at play.
+        - For example, maybe heavier lifters tend to also use equipment that helps them lift more while lighter lifters don't.
+        - This might make heavier lifters seem stronger than they are.
+        - When accounting for equipment usage, the relationship between body weight and SWR might change.
+
+
+<br><br><br><br>
+
+
+We can use our estimated model formula to get **predictions** and **residuals**.
+
+What would we expect the SWR to be for a lifter who weighs 100kg? (On average, what is the SWR for a 100kg lifter?)
+
+```{r}
+6.44 - 0.02 * 100
+```
+
+> On average, a lifter who weighs 100kg is expected to have a SWR of 4.44.
+
+Suppose that Alice is a 100kg lifter who has a SWR of 5.5. What would her residual be?
+
+```{r}
+# residual = observed y - predicted y
+5.5 - 4.44
+```
+
+> We **underpredict** Alice's SWR by 1.06.
+
 
 
 <br><br><br><br>

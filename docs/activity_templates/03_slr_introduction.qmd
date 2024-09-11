@@ -148,8 +148,9 @@ We can compute the correlation between body weight and SWR using `summarize` and
 
 # Note: the order in which you put your two quantitative variables into the cor
 # function doesn't matter! Try switching them around to confirm this for yourself
+# Because of the missing data, we need to include the use = "complete.obs" - otherwise the correlation would be computed as NA
 lifts %>%
-    summarize(cor(SWR, BodyweightKg))
+    summarize(cor(SWR, BodyweightKg, use = "complete.obs"))
 ```
 
 Is the computed correlation close to what you guessed in Exercise 6 part (c)?

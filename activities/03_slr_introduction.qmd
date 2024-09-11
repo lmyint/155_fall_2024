@@ -172,8 +172,9 @@ We can compute the correlation between body weight and SWR using `summarize` and
 
 # Note: the order in which you put your two quantitative variables into the cor
 # function doesn't matter! Try switching them around to confirm this for yourself
+# Because of the missing data, we need to include the use = "complete.obs" - otherwise the correlation would be computed as NA
 lifts %>%
-    summarize(cor(SWR, BodyweightKg))
+    summarize(cor(SWR, BodyweightKg, use = "complete.obs"))
 ```
 
 Is the computed correlation close to what you guessed in Exercise 6 part (c)?
@@ -492,9 +493,10 @@ c. I'll guess -0.1, since the line is negative, and the points are very disperse
 # correlation
 
 # Note: the order in which you put your two quantitative variables into the cor
-# function doesn't matter! Try switching them around to cpmfor, this for yourself
+# function doesn't matter! Try switching them around to confirm this for yourself
+# Because of the missing data, we need to include the use = "complete.obs" - otherwise the correlation would be computed as NA
 lifts %>%
-    summarize(cor(SWR, BodyweightKg))
+    summarize(cor(SWR, BodyweightKg, use = "complete.obs"))
 ```
 
 So close to our guess!
@@ -547,6 +549,60 @@ anscombe %>%
 ```
 
 e. The message of this exercise is that data visualization is important *in addition* to numerical summaries! Many different sets of points can have nearly the same correlation, but display very different patterns in point clouds upon closer inspection. Reporting correlation alone is not enough to summarize the relationship between two quantitative variables, and should be accompanied by a scatter plot!
+
+
+
+## Exercise 9: Lines of best fit (intuition for least squares)
+
+```{r}
+# scatterplot with a fitted line, whose slope is 0.4 and intercept is 3
+anscombe %>%
+    ggplot(aes(x = x1, y = y1)) +
+    geom_point() +
+    geom_abline(slope = 0.4, intercept = 3, col = "blue", size = 1)
+```
+
+Describe the line that you see. Do you think the line is "good"? What are you using to define "good"?
+
+Some things to think about:
+
+- How many points are **above** the line?
+- How many points are **below** the line?
+- Are the **distances** of the points above and below the line roughly similar, or is there meaningful difference?
+
+Now we'll add *another* line to our plot. Which line do you think is *better* suited for this data? Why? Be specific!
+
+```{r}
+# scatterplot with a fitted line, whose slope is 0.4 and intercept is 3
+anscombe %>%
+    ggplot(aes(x = x1, y = y1)) +
+    geom_point() +
+    geom_abline(slope = 0.4, intercept = 3, col = "blue", size = 1) +
+    geom_abline(slope = 0.5, intercept = 4, col = "orange", size = 1)
+```
+
+It's usually quite simple to note when a line is *bad*, but more difficult to quantify when a line is a *good* fit for our data. Consider the following line:
+
+```{r}
+# scatterplot with a fitted line, whose slope is 0.4 and intercept is 3
+anscombe %>%
+    ggplot(aes(x = x1, y = y1)) +
+    geom_point() +
+    geom_abline(slope = -0.5, intercept = 10, col = "red", size = 1) 
+```
+
+In the next activity, we'll formalize the **principle of least squares**, which will give us one particular definition of a *line of best fit* that is commonly used in statistics! We'll take advantage of the vertical distances between each point and the fitted line (**residuals**), which will help us define (mathematically) a line that best fits our data:
+
+```{r}
+library(broom)
+mod <- lm(y1 ~ x1, data = anscombe)
+
+augment(mod) %>%
+    ggplot(aes(x = x1, y = y1)) +
+    geom_smooth(method = "lm", se = FALSE) +
+    geom_segment(aes(xend = x1, yend = .fitted), col = "red") +
+    geom_point()
+```
 
 
 
