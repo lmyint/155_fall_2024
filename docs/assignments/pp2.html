@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STAT 155 - Project</title>
+<title>STAT 155 - Practice Problems 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,8 +67,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">STAT 155</span>
     </a>
   </div>
@@ -89,15 +118,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedule.html"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -106,19 +135,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
         <li>
-    <a class="dropdown-item" href="./activities/01_foundations_welcome.html">
+    <a class="dropdown-item" href="../activities/01_foundations_welcome.html">
  <span class="dropdown-text">Data Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./activities/02_foundations_univariate.html">
+    <a class="dropdown-item" href="../activities/02_foundations_univariate.html">
  <span class="dropdown-text">Univariate visualization and summaries</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./activities/03_slr_introduction.html">
+    <a class="dropdown-item" href="../activities/03_slr_introduction.html">
  <span class="dropdown-text">Simple linear regression: Visualization and Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./activities/04_slr_formalization.html">
+    <a class="dropdown-item" href="../activities/04_slr_formalization.html">
  <span class="dropdown-text">Simple linear regression: formalizing concepts</span></a>
   </li>  
     </ul>
@@ -129,21 +158,21 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
         <li>
-    <a class="dropdown-item" href="./assignments/pp1.html">
+    <a class="dropdown-item" href="../assignments/pp1.html">
  <span class="dropdown-text">Practice Problems 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./assignments/pp2.html">
+    <a class="dropdown-item" href="../assignments/pp2.html">
  <span class="dropdown-text">Practice Problems 2</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./project.html" aria-current="page"> 
+    <a class="nav-link" href="../project.html"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./r_resources.html"> 
+    <a class="nav-link" href="../r_resources.html"> 
 <span class="menu-text">R Resources</span></a>
   </li>  
 </ul>
@@ -162,10 +191,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#important-dates" id="toc-important-dates" class="nav-link active" data-scroll-target="#important-dates">Important dates</a></li>
-  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#project-groups" id="toc-project-groups" class="nav-link" data-scroll-target="#project-groups">Project Groups</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
+  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
+  <li><a href="#exercise-1-visual-and-numerical-summaries" id="toc-exercise-1-visual-and-numerical-summaries" class="nav-link" data-scroll-target="#exercise-1-visual-and-numerical-summaries">Exercise 1: Visual and numerical summaries</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-fitting-a-simple-linear-regression-model" id="toc-exercise-2-fitting-a-simple-linear-regression-model" class="nav-link" data-scroll-target="#exercise-2-fitting-a-simple-linear-regression-model">Exercise 2: Fitting a simple linear regression model</a></li>
+  <li><a href="#exercise-3-model-eval-correct-and-fair" id="toc-exercise-3-model-eval-correct-and-fair" class="nav-link" data-scroll-target="#exercise-3-model-eval-correct-and-fair">Exercise 3: Model Eval: “Correct” and “Fair”</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-model-eval-strong" id="toc-exercise-4-model-eval-strong" class="nav-link" data-scroll-target="#exercise-4-model-eval-strong">Exercise 4: Model Eval: “Strong”</a></li>
+  <li><a href="#exercise-5-thinking-about-transformations" id="toc-exercise-5-thinking-about-transformations" class="nav-link" data-scroll-target="#exercise-5-thinking-about-transformations">Exercise 5: Thinking about transformations</a>
+  <ul class="collapse">
+  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part a</a></li>
+  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part b</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -174,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project</h1>
+<h1 class="title">Practice Problems 2</h1>
 </div>
 
 
@@ -191,31 +239,103 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A detailed description of the group project can be found <a href="https://docs.google.com/document/d/1GpwqXcdKkyB9ctmUu54X4ukruu_WHNKJE0nkdVu041g/edit?usp=sharing">here</a>. Important dates and key information are listed below.</p>
-<section id="important-dates" class="level1">
-<h1>Important dates</h1>
+<center>
+<strong>Due Friday, 9/20 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=135801">Moodle</a>.</strong>
+</center>
+<section id="purpose" class="level1">
+<h1>Purpose</h1>
+<p>The goal of this set of practice problems is to practice the following skills:</p>
 <ul>
-<li>Friday, October 11: Project Checkpoint 1 due</li>
-<li>Tuesday, November 26: Project Checkpoint 2 due</li>
-<li>Wednesday, December 11: Project paper due, presentations in class</li>
+<li>Model evaluation: Is the model “correct”? Is the model “strong”? Is the model “fair”?</li>
+<li>Transformations of variables: center, scale, and log</li>
+<li>Making and interpreting residual plots</li>
 </ul>
+<p><strong>You can download a template to start from <a href="../activity_templates/pp2.qmd">here</a>.</strong></p>
 </section>
-<section id="grading" class="level1">
-<h1>Grading</h1>
-<p>The final paper will be graded using the rubric found <a href="https://docs.google.com/spreadsheets/d/1yHYFqPwmK83aK0tPH8Qt0lTMeGFdtWZteNrQ0STXamw/edit?usp=sharing">here</a>. Although the first two checkpoints will not directly contribute to your course grade, the feedback you receive on them will help you make an excellent final paper.</p>
+<section id="directions" class="level1">
+<h1>Directions</h1>
+<ol type="1">
+<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following command in the code chunk to read in the data: <code>enroll &lt;- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")</code></p></li>
+<li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
+</blockquote>
+<ol start="3" type="1">
+<li>Render your work for submission:
+<ul>
+<li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
+<li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
+<li>Close the browser tab.</li>
+<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
+<li>Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.</li>
+</ul></li>
+</ol>
 </section>
-<section id="resources" class="level1">
-<h1>Resources</h1>
-<p>Later in the semester, I will post at least one example of a successful final paper, as well as a Google Doc template for the final paper.</p>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>In the following exercises, we’ll work with data from the World Bank on secondary school enrollment.</p>
+<p>We have access to the following information:</p>
+<ul>
+<li><code>Country</code>: country name</li>
+<li><code>Year</code>: year enrollment was measured (ranges from 2004 - 2019)</li>
+<li><code>GER</code>: gross enrollment rate in secondary school (%)</li>
+<li><code>NER</code>: net enrollment rate in secondary school (%)</li>
+</ul>
+<p>Net enrollment rate (NER) is the ratio of children who are <em>of secondary school age</em> who are enrolled in secondary school, out of the total number of children of secondary school age. In contrast, gross enrollment rate (GER) is the ratio of children who are enrolled in secondary school <em>regardless of age</em>, out of the total number of children of secondary school age. NER ranges from 0 to 100%, since it is a true proportion, while GER can exceed 100% (some children who are <em>not</em> of secondary school age may in fact be enrolled).</p>
+<p>Historically, NER is more difficult to measure than GER (particularly in low- and middle-income countries), since it requires knowledge of the age of the children enrolled in school.</p>
+<p>A relevant research question is: If we know GER, can we accurately predict NER? In order to answer this question, we first want to better understand the relationship between GER and NER.</p>
+<p>These practice problems are inspired by a <a href="https://arxiv.org/pdf/2401.01872">recent paper</a> that aims to develop statistical methods for analyzing this problem. The methods described in this paper are beyond the scope of this course, but we link it here in case you are interested in learning more!</p>
 </section>
-<section id="project-groups" class="level1">
-<h1>Project Groups</h1>
-<p>Project groups will ultimately be determined by me, with the assistance of a Project Group Preferences survey. The survey will be sent out early in the semester (exact date TBD) and will allow you to either list people you would like to be in a group with or specify that you would like to be placed in a group randomly by me. I will do my best to ensure that groups are constructed as closely to survey responses as possible. Since one component of the project involves an in-class presentation, <strong>you may</strong> <strong><em>not</em></strong> <strong>work with students in different sections on the project.</strong></p>
-<p>If for any reason there is an individual (or individuals) with whom you do not feel safe participating in a project group with, there will be a space to note this on the survey. You will not be expected to provide any justification for your response to this question, but note that as I need to place you in groups, the survey will not be anonymous.</p>
-<p>Group work and collaboration are important components of nearly all statistical analyses and projects. I recognize that individual contributions to a group project are not always consistent between group members. To this end, you will (as a group) be expected to explicitly specify the project tasks completed by each team member along with the final draft of your paper.</p>
-<p>If there are any concerns with project groups throughout the semester, I am happy to meet with groups or individuals to discuss ways to move forward.</p>
+<section id="exercise-1-visual-and-numerical-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-visual-and-numerical-summaries">Exercise 1: Visual and numerical summaries</h2>
+<section id="part-a" class="level3">
+<h3 class="anchored" data-anchor-id="part-a">Part a</h3>
+<p>Construct an appropriate visualization of the <code>GER</code> and <code>NER</code> variables (<code>NER</code> should be the dependent variable in your visualization). Add both a curved and linear trend line to your plot. Based on this visualization, do you think a linear regression model would correctly explain the relationship between NER and GER? Explain why or why not.</p>
+</section>
+<section id="part-b" class="level3">
+<h3 class="anchored" data-anchor-id="part-b">Part b</h3>
+<p>Calculate and report the correlation between GER and NER. Do you think correlation is an appropriate numerical summary for the relationship between GER and NER? Explain why or why not (you may make reference to your answer to Part a, if relevant).</p>
+</section>
+</section>
+<section id="exercise-2-fitting-a-simple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-fitting-a-simple-linear-regression-model">Exercise 2: Fitting a simple linear regression model</h2>
+<p>Suppose we decide to go ahead and fit a linear regression model, with GER as our predictor and NER as our outcome. Fill in the model statement below (using proper notation) that corresponds to this regression:</p>
+<p><span class="math display">\[
+E[___ | ___] = ...
+\]</span></p>
+<p>Fit the linear regression model that you wrote above.</p>
+</section>
+<section id="exercise-3-model-eval-correct-and-fair" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-model-eval-correct-and-fair">Exercise 3: Model Eval: “Correct” and “Fair”</h2>
+<section id="part-a-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
+<p>Make a plot of residuals vs.&nbsp;fitted values for the model you fit in Exercise 2. Does this diagnostic plot suggest that your model is <em>wrong</em>? Explain why or why not.</p>
+</section>
+<section id="part-b-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
+<p>Does the diagnostic plot in part a suggest that your model is <em>fair</em>? If the model seems fair, explain what about the plot suggests that. If the model does <em>not</em> seem fair, note which observations your model does a <em>worse</em> job at predicting NER for (high values of GER? low values of GER?).</p>
+</section>
+</section>
+<section id="exercise-4-model-eval-strong" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-model-eval-strong">Exercise 4: Model Eval: “Strong”</h2>
+<p>Report and interpret the multiple <span class="math inline">\(R^2\)</span> value from the linear regression model you fit in Exercise 2. Does this value suggest the model is strong or weak?</p>
+</section>
+<section id="exercise-5-thinking-about-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-thinking-about-transformations">Exercise 5: Thinking about transformations</h2>
+<section id="part-a-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-2">Part a</h3>
+<p>Currently in the data, NER is reported on a scale from 0 - 100. How would the slope in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? How would the intercept in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? <strong>If it helps you think it through, mutate NER and fit this model!</strong></p>
+</section>
+<section id="part-b-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-2">Part b</h3>
+<p>Suppose I want the intercept of my model of NER by GER to have the interpretation of the expected average NER for a GER of 80%. Suggest a transformation I could make to one or both of these variables that would give the intercept of my linear regression model this interpretation.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,0 +1,117 @@
+---
+title: "Practice Problems 2"
+sidebar: false
+eval: false
+---
+
+<center>
+**Due Friday, 9/20 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=135801).**
+</center>
+
+# Purpose
+
+The goal of this set of practice problems is to practice the following skills:
+
+- Model evaluation: Is the model "correct"? Is the model "strong"? Is the model "fair"?
+- Transformations of variables: center, scale, and log
+- Making and interpreting residual plots
+
+**You can download a template to start from [here](../activity_templates/pp2.qmd).**
+
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, and `readr` packages. Include the following command in the code chunk to read in the data: `enroll <- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")`
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+# Exercises
+
+## Context
+
+In the following exercises, we'll work with data from the World Bank on secondary school enrollment. 
+
+We have access to the following information:
+
+- `Country`: country name
+- `Year`: year enrollment was measured (ranges from 2004 - 2019)
+- `GER`: gross enrollment rate in secondary school (%)
+- `NER`: net enrollment rate in secondary school (%)
+
+Net enrollment rate (NER) is the ratio of children who are *of secondary school age* who are enrolled in secondary school, out of the total number of children of secondary school age. In contrast, gross enrollment rate (GER) is the ratio of children who are enrolled in secondary school *regardless of age*, out of the total number of children of secondary school age. NER ranges from 0 to 100%, since it is a true proportion, while GER can exceed 100% (some children who are *not* of secondary school age may in fact be enrolled).
+
+Historically, NER is more difficult to measure than GER (particularly in low- and middle-income countries), since it requires knowledge of the age of the children enrolled in school. 
+
+A relevant research question is: If we know GER, can we accurately predict NER? In order to answer this question, we first want to better understand the relationship between GER and NER.
+
+
+
+These practice problems are inspired by a [recent paper](https://arxiv.org/pdf/2401.01872) that aims to develop statistical methods for analyzing this problem. The methods described in this paper are beyond the scope of this course, but we link it here in case you are interested in learning more!
+
+
+## Exercise 1: Visual and numerical summaries
+
+### Part a
+
+Construct an appropriate visualization of the `GER` and `NER` variables (`NER` should be the dependent variable in your visualization). Add both a curved and linear trend line to your plot. Based on this visualization, do you think a linear regression model would correctly explain the relationship between NER and GER? Explain why or why not.
+
+### Part b
+
+Calculate and report the correlation between GER and NER. Do you think correlation is an appropriate numerical summary for the relationship between GER and NER? Explain why or why not (you may make reference to your answer to Part a, if relevant).
+
+## Exercise 2: Fitting a simple linear regression model
+
+Suppose we decide to go ahead and fit a linear regression model, with GER as our predictor and NER as our outcome. Fill in the model statement below (using proper notation) that corresponds to this regression:
+
+$$
+E[___ | ___] = ...
+$$
+
+Fit the linear regression model that you wrote above.
+
+## Exercise 3: Model Eval: "Correct" and "Fair"
+
+### Part a
+
+Make a plot of residuals vs. fitted values for the model you fit in Exercise 2. Does this diagnostic plot suggest that your model is *wrong*? Explain why or why not.
+
+### Part b
+
+Does the diagnostic plot in part a suggest that your model is *fair*? If the model seems fair, explain what about the plot suggests that. If the model does *not* seem fair, note which observations your model does a *worse* job at predicting NER for (high values of GER? low values of GER?).
+
+## Exercise 4: Model Eval: "Strong"
+
+Report and interpret the multiple $R^2$ value from the linear regression model you fit in Exercise 2. Does this value suggest the model is strong or weak?
+
+
+## Exercise 5: Thinking about transformations
+
+### Part a
+
+Currently in the data, NER is reported on a scale from 0 - 100. How would the slope in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? How would the intercept in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? **If it helps you think it through, mutate NER and fit this model!**
+
+### Part b
+
+Suppose I want the intercept of my model of NER by GER to have the interpretation of the expected average NER for a GER of 80%. Suggest a transformation I could make to one or both of these variables that would give the intercept of my linear regression model this interpretation.
+
+
+
+
+
+
+
+
+
+

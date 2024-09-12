@@ -37,6 +37,7 @@ website:
       title: "Practice Problems"
       contents:
         - assignments/pp1.qmd
+        - assignments/pp2.qmd
   
   page-footer:
     left: |
@@ -47,7 +48,7 @@ website:
 
 format:
   html:
-    theme: sandstone
+    theme: sandstone # lumen, yeti, flatly
     css: styles.css
     toc: true
     code-overflow: wrap

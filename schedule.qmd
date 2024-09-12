@@ -20,22 +20,37 @@ html-table-processing: none
     <td class="topleft">1 (9/2 - 9/6)</td>
     <td class="topleft"></td>
     <td class="topleft">First day of class</td>
-    <td class="topleft">Univariate visualization and summaries</td>
+    <td class="topleft">
+        Univariate visualization and summaries<br>
+        <b>Checkpoint 1 due 11:30am<b>
+    </td>
     <td class="topleft"></td>
   </tr>
   <tr>
     <td class="topleft">2 (9/9 - 9/13)</td>
     <td class="topleft">Introduction to simple linear regression</td>
-    <td class="topleft">Simple linear regression: formalizing concepts</td>
+    <td class="topleft">
+        Simple linear regression: formalizing concepts<br>
+        <b>Checkpoint 2 due 11:30am<b>
+    </td>
     <td class="topleft">Time to work on PP1</td>
-    <td class="topleft">PP1 due Friday 9/13 at 5pm</td>
+    <td class="topleft"><b>PP1 due Friday 9/13 at 5pm</b></td>
   </tr>
   <tr>
     <td class="topleft">3 (9/16 - 9/20)</td>
-    <td class="topleft">Model evaluation</td>
-    <td class="topleft">Variable transformations</td>
-    <td class="topleft">Data-finding activity with Mac librarians</td>
-    <td class="topleft"></td>
+    <td class="topleft">
+        Model evaluation<br>
+        <b>Checkpoint 3 due 11:30am<b>
+    </td>
+    <td class="topleft">
+        Variable transformations<br>
+        <b>Checkpoint 4 due 11:30am<b>
+    </td>
+    <td class="topleft">
+        Data-finding activity with Mac librarians<br>
+        <b>Project Group Preferences survey due 5pm<b>
+    </td>
+    <td class="topleft"><b>PP2 due Friday 9/20 at 5pm</b></td>
   </tr>
   <tr>
     <td class="topleft">4 (9/23 - 9/27)</td>
@@ -57,7 +72,7 @@ html-table-processing: none
 
 Welcome (back) to campus!
 
-#### Wednesday
+#### Wednesday (9/4)
 
 Before class:
 
@@ -66,7 +81,7 @@ Before class:
 - Complete the [Welcome survey](https://docs.google.com/forms/d/e/1FAIpQLSe7RhOK_7B3XgKNfJ94gdRjftEZjqOtHotYeqF1__B-c_uhIQ/viewform?usp=sf_link)
 - Listen to the first episode of the [Sold a Story podcast](https://features.apmreports.org/sold-a-story/) (Episode 1: The Problem) (~30 minutes). This will provide some useful context for what we explore on our first day together.
 
-#### Friday
+#### Friday (9/6)
 
 Before class:
 
@@ -82,14 +97,14 @@ Before class:
 
 - [Practice Problems #1 (PP1)](assignments/pp1.qmd) due Friday 9/13 at 5pm
 
-#### Monday
+#### Monday (9/9)
 
 Before class:
 
 - Review material as needed
 - No checkpoint today!
 
-#### Wednesday
+#### Wednesday (9/11)
 
 Before class:
 
@@ -97,7 +112,7 @@ Before class:
     - Do either the readings or videos (see Moodle checkpoint description for links to the readings and videos)
     - Due 30 minutes before class today (11:30am on 9/11)
 
-#### Friday
+#### Friday (9/13)
 
 Before class:
 
@@ -106,20 +121,35 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 3: 9/16 - 9/20 (Simple linear regression: model evaluation and variable transformations)"}
+::: {.callout-tip icon=false collapse="false" title="Week 3: 9/16 - 9/20 (Simple linear regression: model evaluation and variable transformations)"}
 #### Announcements
 
-#### Monday
+- [Practice Problems #2 (PP2)](assignments/pp2.qmd) due Friday 9/20 at 5pm
+- [Project Group Preferences Survey](https://docs.google.com/forms/d/e/1FAIpQLSeqclT9Eb7yQZs-_N7Qn1b-NQYJ7pB0PktPKkRIwa3w1s0Ldw/viewform?usp=sf_link) due Friday 9/20 at 5pm
+    - This is a short survey to help me determine groups for the course project.
+
+#### Monday (9/16)
 
 Before class:
 
-#### Wednesday
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=135166) (CP3) on Moodle. 
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
+
+#### Wednesday (9/18)
 
 Before class:
 
-#### Friday
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=135661) (CP4) on Moodle. 
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
 
-Before class:
+#### Friday (9/20)
+
+Before class
+
+- Think about an area that you might want to explore for the [course project](project.qmd). Macalester's librarians will be coming in to lead a workshop on finding data.
+
 
 :::
 

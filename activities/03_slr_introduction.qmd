@@ -430,13 +430,13 @@ lifts %>%
     ggplot(aes(SWR)) +
     geom_histogram(bins = 10, col = "black")
 
-lifts %>% summarize(mean(SWR), min(SWR), max(SWR))
+lifts %>% summarize(mean(SWR, na.rm = TRUE), min(SWR, na.rm = TRUE), max(SWR, na.rm = TRUE), sd(SWR, na.rm = TRUE))
 ```
 
 
 - Write a good paragraph interpreting the plot and numerical summaries.
 
-Strength-to-weight (SWR) ratio ranges from 0.3 to 13.2, with a mean SWR of 4.8. We observe that most SWRs appear to be centered between 4 and 7, with a slight right-skew to the data. The distribution of SWRs appears to be unimodal.  
+Strength-to-weight (SWR) ratio ranges from 0.18 to 12.46, with a mean SWR of 4.4. SWR varies about 2.08 units above and below the mean. We observe that most SWRs appear to be centered between 4 and 7, with a slight right-skew to the data. The distribution of SWRs appears to be unimodal. 
 
 
 
