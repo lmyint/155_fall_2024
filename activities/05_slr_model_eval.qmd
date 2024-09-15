@@ -1,0 +1,458 @@
+---
+title: "Simple linear regression: model evaluation"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/05_slr_model_eval.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Use residual plots to evaluate the correctness of a model
+- Explain the rationale for the R-squared metric of model strength
+- Interpret the R-squared metric
+- Think about ethical implications of modeling by examining the impacts of biased data, power dynamics, the role of categorization, and the role of emotion and lived experience
+
+## Readings and videos
+
+Before class you should have read and/or watched:
+
+- Reading: Sections 1.7, 3.7, and 3.8 in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
+- Videos:
+    - [Model evaluation: is the model wrong?](https://youtu.be/12Y4r57GuKc) ([slides](https://drive.google.com/file/d/1fkrCKhmUrorMaJEqKQBu3BFV6Y8T1A-Y/view?usp=drive_link))
+    - [Model evaluation: is the model strong?](https://youtu.be/7ovhiVjXwM0) ([slides](https://drive.google.com/file/d/1QIYkfAVeSw-dFVBRJvj22zxf3cohd-SZ/view?usp=drive_link))
+    - [Model evaluation: is the model fair?](https://youtu.be/40PWKLns0B4) ([slides](https://drive.google.com/file/d/1fhVyieXzUf4zqRj-0H5gu4ubJkIkl8RX/view?usp=drive_link))
+    - [R Code for Evaluating and Using a Linear Model](https://voicethread.com/share/14931045/)
+
+
+
+# Exercises
+
+We'll start by revisiting the Capital Bikeshare data from a previous activity. This data contains information on daily ridership for a bike sharing service in Washington DC alongside weather and calendar information. Read in the data and load required packages:
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")
+```
+
+## Exercise 1: Is the model correct?
+
+We previously explored modeling daily ridership among registered users as a function of temperature. Create a plot of this relationship with both a curved and linear trend line. Based on this plot, do you think a linear model is correct?
+  
+```{r eval=FALSE}
+# Plot riders_registered vs temp_feel with both a curved and linear trend
+___(___, aes(x = ___, y = ___)) + 
+    geom___() + 
+    geom___(se = FALSE) +
+    geom___(method = "lm", se = FALSE, color = "red")
+```
+    
+    
+   
+## Exercise 2: Fixing the model
+
+In this course, we have and will continue to build "linear" regression models. "Linear" means we have a *linear combination of predictors*. It does *not* mean that the models themselves must look linear! It's possible to include "transformations" in our models in order to better match the trend. Below we create a squared version of temperature and visualize the predictions from 2 models: (1) with just temperature as a linear term and (2) with both temperature and squared temperature. (Don't worry about the new syntax in `geom_smooth()`.)
+
+How does the quality (correctness) of the two models compare?
+
+```{r eval=FALSE}
+bikes <- bikes %>% 
+    mutate(temp_feel_squared = temp_feel^2)
+
+# Plot the model WITHOUT squared temperature
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", se = FALSE, color = "red")
+# Plot the model WITH squared temperature
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE, color = "red")
+```
+
+
+## Exercise 3: Residual plots
+
+Plotting the **residuals** vs the **predictions** (also called "fitted values") for each case can help us assess how wrong our model is. This will be a particularly important tool when evaluating models with multiple predictors. Construct the residual plots for our two temperature models. Do these suggest that `bike_mod1` is wrong? What about `bike_mod2`? Explain.
+    
+Note: Information about the residuals (`.resid`) and predictions (`.fitted`) are stored within our *model*, thus we start our `ggplot()` with the model name as opposed to the raw dataset. We will *rarely* start `ggplot()` with a model instead of the data.
+
+```{r eval=FALSE}
+# Fit a linear model
+bike_mod1 <- lm(riders_registered ~ temp_feel, data = bikes)
+# Fit a quadratic model
+bike_mod2 <- lm(riders_registered ~ temp_feel + temp_feel_squared, data = bikes)
+
+# Check out the residual plot for bike_mod1 (the incorrect model)
+ggplot(bike_mod1, aes(x = .fitted, y = .resid)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0) +
+    geom_smooth(se = FALSE)
+
+# Construct the residual plot for bike_mod2 (the good model)
+
+```
+
+
+
+## Exercise 4: Another example of an incorrect model
+
+The [Bechdel test](https://en.wikipedia.org/wiki/Bechdel_test) is a test applied to films to assess the quality of women's presence in the film. We'll be looking at movies that have had the Bechdel test applied available in the `fivethirtyeight` R package.
+
+We'll be using the `bechdel` data. You can view the codebook by entering `?bechdel` in the Console.
+
+Let's examine the relationship between international earnings (`intgross`) and movie budget (`budget`) for **films made in 1997**.
+
+```{r message=FALSE}
+# Import the data
+library(fivethirtyeight)
+data(bechdel)
+
+# Get only 1997 movies
+movies_1997 <- bechdel %>% 
+    filter(year == 1997)
+
+# Construct the model
+bechdel_model <- lm(intgross ~ budget, movies_1997)
+```
+
+
+a. Construct two plots:
+
+```{r eval=FALSE}
+# Scatterplot of earnings and budget with linear and curved trend lines
+
+
+# Residual plot for bechdel_model
+
+```
+
+b. These two plots confirm that our model is wrong. *What* is wrong and how might we fix it?
+
+c. Identify which movie is causing the problem. Hint: `filter()` according to `budget`. Also, note that we could, but won't, take that film out of the data set and re-build the model.
+    
+```{r eval=FALSE}
+# Many numbers could go in the ___ to successfully identify the outlier
+movies_1997 %>%
+    filter(budget > ___)
+```
+
+
+
+## Exercise 5: Is the model strong? Developing R-squared intuition
+
+The R-squared metric is a way to quantify the strength of a model. It measures how much variation in the outcome/response variable can be explained by the model.
+
+Where does R-squared come from? Well, it turns out that we can **partition the variance** of the observed response values into the variability that's explained by the model (the variance of the predictions) and the variability that's left unexplained by the model (the variance of the residuals):
+
+$$\text{Var(observed) = Var(predicted) + Var(residuals)}$$
+
+"Good" models have residuals that don't deviate far from 0.  So the smaller the variance in the residuals (thus larger the variance in the predictions), the stronger the model. Take a look at the picture below and write a few sentences addressing the following:
+
+- The two rows of plots show a stronger and a weaker model. Just by looking at the blue trend line and the dispersion of the points about the line, which row corresponds to the stronger model? How can you tell? Which row would you expect to have a higher correlation?
+- What is different about the variance of the residuals from the first to the second row?
+
+![](https://mac-stat.github.io/images/155/rsquared.png)
+
+
+Putting this together, the R-squared compares Var(predicted) to Var(response):
+
+$$R^2 = \frac{\text{variance of predicted values}}{\text{variance of observed response values}} = 1 - \frac{\text{variance of residuals}}{\text{variance of observed response values}}$$
+
+
+
+## Exercise 6: Further exploring R-squared
+
+In this exercise, we'll look at data from a synthetic dataset called Anscombe's quartet. Load the data in as follows, and look at the first few rows:
+
+```{r eval=FALSE}
+data(anscombe)
+
+# Look at the first few rows
+
+```
+
+The `anscombe` data is actually 4 datasets in one: `x1` and `y1` go together, and so forth. Examine the coefficient estimates (in the "Estimate" column of the "Coefficients:" part) and the "Multiple R-squared" value on the second to last line. What do you notice? How do these models compare?
+
+```{r eval=FALSE}
+anscombe_mod1 <- lm(y1 ~ x1, data = anscombe)
+anscombe_mod2 <- lm(y2 ~ x2, data = anscombe)
+anscombe_mod3 <- lm(y3 ~ x3, data = anscombe)
+anscombe_mod4 <- lm(y4 ~ x4, data = anscombe)
+
+summary(anscombe_mod1)
+summary(anscombe_mod2)
+summary(anscombe_mod3)
+summary(anscombe_mod4)
+```
+
+Now take a look at the following scatterplots of the 4 pairs of variables. What do you notice? What takeaway can we draw from this exercise?
+
+```{r eval=FALSE}
+ggplot(anscombe, aes(x = x1, y = y1)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x2, y = y2)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x3, y = y3)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x4, y = y4)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+```
+
+
+
+## Exercise 7: Biased data, biased results: example 1
+
+DATA ARE NOT NEUTRAL. Data can reflect personal biases, institutional biases, power dynamics, societal biases, the limits of our knowledge, and so on. In turn, biased data can lead to biased analyses. Consider an example.    
+
+- Do a Google image search for "statistics professor." What do you observe?
+
+- These search results are produced by a search algorithm / model. Explain why the data used by this model are not neutral.
+
+- What are the potential implications, personal or societal, of the search results produced from this biased data?
+
+
+
+## Exercise 8: Biased data, biased results: example 2
+
+Consider the example of a large company that developed a model / algorithm to review the résumés of applicants for software developer & other tech positions. The model then gave each applicant a score indicating their hireability or potential for success at the company. You can think of this model as something like:            
+
+$$\text{potential for success } = \beta_0 + \beta_1 (\text{features from the résumé})$$
+
+Skim this [Reuter's article](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G) about the company's résumé model.    
+
+- Explain why the data used by this model are not neutral.
+
+- What are the potential implications, personal or societal, of the results produced from this biased data?
+
+
+
+## Exercise 9: Rigid data collection systems
+
+When working with categorical variables, we've seen that our units of observation fall into neat groups. Reality isn't so discrete. For example, check out questions 6 and 9 on [page 2 of the 2020 US Census](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/questionnaires-and-instructions/questionnaires/2020-informational-questionnaire-english_DI-Q1.pdf). With your group, discuss the following:    
+
+- What are a couple of issues you see with these questions?
+
+- What impact might this type of data collection have on a subsequent *analysis* of the census responses and the policies it might inform?
+
+- Can you think of a better way to write these questions while still preserving the privacy of respondents?
+
+**FOR A DEEPER DISCUSSION:** Read [Chapter 4 of Data Feminism](https://data-feminism.mitpress.mit.edu/pub/h1w0nbqp/release/3) on "What gets counted counts". 
+
+
+
+## Exercise 10: Presenting data: "Elevating emotion and embodiment"
+
+Note: The following example highlights work done by W.E.B. Du Bois in the late 1800s / early 1900s. His work uses language common to that time period and addresses the topic of slavery.
+
+The types of visualizations we've been learning in this course are standard practice, hence widely understood. Yet these standard visualizations can also suppress the lived experiences of people represented in the data, hence can miss the larger point. W.E.B. Du Bois (1868--1963), a "sociologist, socialist, historian, civil rights activist, Pan-Africanist, author, writer, and editor"^[https://en.wikipedia.org/wiki/W._E._B._Du_Bois], was a pioneer in elevating emotion and embodiment in data visualization. For the Paris World Fair of 1900, Du Bois and his team of students from Atlanta University presented 60 data visualizations of the Black experience in America, less than 50 years after the abolishment of slavery. To this end, Du Bois noted that *"I wanted to set down its aim and method in some outstanding way which would bring my work to notice by the thinking world."* That is, he wanted to increase the impact of his work by partnering technical visualizations with design that better connects to lived experiences. Check out:
+    
+- An [article by Allen Hillery](https://dataliteracy.com/web-du-bois-story-of-resilience/) (@AlDatavizguy).
+
+- A [complete set of the data visualizations provided by Anthony Starks](https://speakerdeck.com/ajstarks/du-bois-visualizations-originals) (@ajstarks).
+
+Discuss your observations. In what ways do you think the W.E.B. Du Bois visualizations might have been more effective at sharing his work than, say, plainer bar charts?
+
+**FOR A DEEPER DISCUSSION AND MORE MODERN EXAMPLES:** Read [Chapter 3 of Data Feminism](https://data-feminism.mitpress.mit.edu/pub/5evfe9yd/release/5) on the principle of elevating emotion and embodiment, i.e. the value of "multiple forms of knowledge, including the knowledge that comes from people as living, feeling bodies in the world."
+
+
+
+## Reflection
+
+What has stuck with you most in our exploration of model evaluation? Why
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
+
+# Solutions
+
+## Exercise 1: Is the model correct?
+
+The blue curved trend line shows a clear downward trend around 85 degrees, which contextually makes plenty of sense---extremely hot days would naturally see less riders. Overall the combination of the upward trend and downward trend makes for a curved relationship that is not captured well by a straight line of best fit.
+  
+```{r}
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", se = FALSE, color = "red")
+```
+
+    
+    
+   
+## Exercise 2: Fixing the model
+
+The second plot (showing the model *with* squared temperature) follows the natural curve in the trend better.
+
+```{r}
+bikes <- bikes %>% 
+    mutate(temp_feel_squared = temp_feel^2)
+
+# Plot the model WITHOUT squared temperature
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", se = FALSE, color = "red")
+# Plot the model WITH squared temperature
+ggplot(bikes, aes(x = temp_feel, y = riders_registered)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE, color = "red")
+```
+
+
+## Exercise 3: Residual plots
+
+The first residual plot (from the model with just a straight line trend) shows a lingering trend in the residuals---the blue curve traces the trend in the residuals, and it does not lie flat on the y = 0 line.
+
+On the other hand, the second residual plot (from the model which uses a squared term to allow for curvature) shows very little trend in the residuals---the blue curve is almost flat on the y = 0 line.
+
+```{r}
+# Fit a linear model
+bike_mod1 <- lm(riders_registered ~ temp_feel, data = bikes)
+# Fit a quadratic model
+bike_mod2 <- lm(riders_registered ~ temp_feel + temp_feel_squared, data = bikes)
+
+# Check out the residual plot for bike_mod1 (the incorrect model)
+ggplot(bike_mod1, aes(x = .fitted, y = .resid)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0) +
+    geom_smooth(se = FALSE)
+
+# Construct the residual plot for bike_mod2 (the good model)
+ggplot(bike_mod2, aes(x = .fitted, y = .resid)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0) +
+    geom_smooth(se = FALSE)
+```
+
+
+
+## Exercise 4: Another example of an incorrect model
+
+a.
+
+```{r}
+# Scatterplot of earnings and budget with linear and curved trend lines
+ggplot(movies_1997, aes(x = budget, y = intgross)) +
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    geom_smooth(method = "lm", se = FALSE, color = "red")
+
+# Residual plot for bechdel_model
+ggplot(bechdel_model, aes(x = .fitted, y = .resid)) +
+    geom_point() +
+    geom_hline(yintercept = 0) +
+    geom_smooth(se = FALSE)
+```
+
+b. From the scatterplot, we can see that there is one movie that is a massive outlier in both budget and earnings, and this outlier is pulling up the trend line that makes the model for "regular" movies that have budgets and earnings in "normal" ranges.
+
+c. The outlier movie is [Titanic](https://www.imdb.com/title/tt0120338/):
+
+```{r}
+# One of many ways to filter to find the outlier movie!
+movies_1997 %>% 
+    filter(intgross > 2000000000)
+```
+
+
+
+## Exercise 5: Is the model strong? Developing R-squared intuition
+
+The R-squared metric is a way to quantify the strength of a model. It measures how much variation in the outcome/response variable can be explained by the model.
+
+Where does R-squared come from? Well, it turns out that we can **partition the variance** of the observed response values into the variability that's explained by the model (the variance of the predictions) and the variability that's left unexplained by the model (the variance of the residuals):
+
+$$\text{Var(observed) = Var(predicted) + Var(residuals)}$$
+
+"Good" models have residuals that don't deviate far from 0.  So the smaller the variance in the residuals (thus larger the variance in the predictions), the stronger the model. Take a look at the picture below and write a few sentences addressing the following:
+
+- The first row corresponds to the weaker model. We can tell because the points are much more dispersed from the trend line than in the second row. Recall that the correlation metric measures how closely clustered points are about a straight line of best fit, so we would expect the correlation to be lower for the first row than the second row.
+- The variance of the residuals is much lower for the second row---the residuals are *all* quite small. This indicates a stronger model.
+
+![](https://mac-stat.github.io/images/155/rsquared.png)
+
+
+
+## Exercise 6: Further exploring R-squared
+
+In this exercise, we'll look at data from a synthetic dataset called Anscombe's quartet. Load the data in as follows, and look at the first few rows:
+
+```{r}
+data(anscombe)
+
+# Look at the first few rows
+head(anscombe)
+```
+
+All of these models have close to the same intercept, slope, and R-squared!
+
+```{r}
+anscombe_mod1 <- lm(y1 ~ x1, data = anscombe)
+anscombe_mod2 <- lm(y2 ~ x2, data = anscombe)
+anscombe_mod3 <- lm(y3 ~ x3, data = anscombe)
+anscombe_mod4 <- lm(y4 ~ x4, data = anscombe)
+
+summary(anscombe_mod1)
+summary(anscombe_mod2)
+summary(anscombe_mod3)
+summary(anscombe_mod4)
+```
+
+But when we look at the scatterplots, they all look substantially different, and we would want to approach our modeling differently for each one:
+
+- `x1` and `y1`: A linear model seems appropriate for this data.
+- `x2` and `y2`: The scatterplot is clearly curved---a "linear" regression model with squared terms, for example, would be more appropriate for this data. (We'll talk more about ways to handle nonlinear relationships soon!)
+- `x3` and `y3`: There is a very clear outlier at about `x3 = 13` that we would want to dig into to better understand the context. After that investigation, we might consider removing this outlier and refitting the model.
+- `x4` and `y4`: There is clearly something strange going on with most of the cases having an `x4` value of exactly 8. We would not want to jump straight into modeling. Instead, we should dig deeper to find out more about this data.
+
+```{r}
+ggplot(anscombe, aes(x = x1, y = y1)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x2, y = y2)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x3, y = y3)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+
+ggplot(anscombe, aes(x = x4, y = y4)) +
+    geom_point() + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
+```
+
+## Exercises 7 - 10
+
+No solutions for these exercises. These require longer discussions, not discrete answers.
