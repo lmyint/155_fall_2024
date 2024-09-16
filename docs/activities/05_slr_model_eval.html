@@ -233,6 +233,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
   <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
@@ -314,6 +315,75 @@ window.Quarto = {
 <li><a href="https://voicethread.com/share/14931045/">R Code for Evaluating and Using a Linear Model</a></li>
 </ul></li>
 </ul>
+</section>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
+<blockquote class="blockquote">
+<p><strong>Guiding question:</strong> How <strong>good</strong> is a model?</p>
+</blockquote>
+<p>When we evaluate the quality of a model, it helps to consider 3 questions:</p>
+<ol type="1">
+<li>Is the model wrong?</li>
+<li>Is the model strong?</li>
+<li>Is the model fair?</li>
+</ol>
+<p><br><br><br><br></p>
+<p>Is the model wrong?</p>
+<ul>
+<li>A model is wrong if it is systematically inaccurate in describing reality.</li>
+<li>We can assess this with <strong>residual plots</strong> in which we plot:
+<ul>
+<li>the predicted values (fitted values) from the model on the x axis.
+<ul>
+<li>We get the predicted values by taking each case and plugging the predictor into the model to get a prediction.</li>
+</ul></li>
+<li>the residuals from the model on the y axis
+<ul>
+<li>We get the residuals by computing for each case: observed y - predicted y</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Example: <a href="https://drive.google.com/file/d/1fkrCKhmUrorMaJEqKQBu3BFV6Y8T1A-Y/view?usp=drive_link">Slide 6</a> from the <a href="https://youtu.be/12Y4r57GuKc">Is the model wrong?</a> video</p>
+<p><br><br><br><br></p>
+<p>Is the model strong?</p>
+<ul>
+<li>A strong model is able to explain a lot about why the outcome/response variable varies.</li>
+<li>We explored correlation last week.
+<ul>
+<li>The closer the correlation is to -1 or 1 for linearly related variables, the stronger the trend.</li>
+<li>Correlation is unfortunately limited to looking at the linear relationship between 2 quantitative variables.</li>
+</ul></li>
+<li>The <strong>R-squared</strong> (<span class="math inline">\(R^2\)</span>) metric can be used for linear regression models with a quantitative predictor, a categorical predictor, and a mix of multiple quantitative and/or categorical predictors.
+<ul>
+<li>Ranges from 0 to 1.</li>
+<li>Values closer to 1 indicate a stronger model.</li>
+<li><span class="math inline">\(R^2\)</span> is interpreted as the proportion of variation in the outcome that is explained by the model.</li>
+</ul></li>
+</ul>
+<p>Example: <a href="https://drive.google.com/file/d/1QIYkfAVeSw-dFVBRJvj22zxf3cohd-SZ/view?usp=drive_link">Slide 4</a> from the <a href="https://youtu.be/7ovhiVjXwM0">Is the model strong?</a> video</p>
+<p><br><br><br><br></p>
+<p>Is the model fair?</p>
+<ul>
+<li>When we make models, we are able to use them by:
+<ul>
+<li>Using the coefficients to gain some understanding about the world.
+<ul>
+<li>Example: How much do movie earnings tend to increase as movie budget increases? (The slope coefficient from a model of earnings vs.&nbsp;budget can help us address this.)</li>
+</ul></li>
+<li>Make predictions for individual cases
+<ul>
+<li>Example: Predict house price given physical characteristics of the house.</li>
+</ul></li>
+</ul></li>
+<li>When assessing fairness we need to think about:
+<ul>
+<li>Are we generating explanations of the world that may harm others?</li>
+<li>Are we making predictions from our models that systematically harm certain groups?</li>
+<li>If the answers to any of the above 2 questions is “yes”, why is that happening? How can we think about the who, what, when, where, why, and how behind the data to dig deeper?</li>
+<li>Example: <a href="https://www.nytimes.com/2024/03/25/realestate/racial-bias-appraisal-settlement.html">Lawsuit Alleging Racial Bias in Home Appraisals Is Settled</a></li>
+</ul></li>
+</ul>
+<p><br><br><br><br></p>
 </section>
 </section>
 <section id="exercises" class="level1">
@@ -508,7 +578,7 @@ window.Quarto = {
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
-<p>What has stuck with you most in our exploration of model evaluation? Why</p>
+<p>What has stuck with you most in our exploration of model evaluation? Why?</p>
 <blockquote class="blockquote">
 <p><strong>Response:</strong> Put your response here.</p>
 </blockquote>

@@ -29,6 +29,68 @@ Before class you should have read and/or watched:
     - [Model evaluation: is the model fair?](https://youtu.be/40PWKLns0B4) ([slides](https://drive.google.com/file/d/1fhVyieXzUf4zqRj-0H5gu4ubJkIkl8RX/view?usp=drive_link))
     - [R Code for Evaluating and Using a Linear Model](https://voicethread.com/share/14931045/)
 
+## Review
+
+> **Guiding question:** How **good** is a model?
+
+When we evaluate the quality of a model, it helps to consider 3 questions:
+
+1. Is the model wrong?
+2. Is the model strong?
+3. Is the model fair?
+
+
+<br><br><br><br>
+
+
+Is the model wrong?
+
+- A model is wrong if it is systematically inaccurate in describing reality.
+- We can assess this with **residual plots** in which we plot:
+    - the predicted values (fitted values) from the model on the x axis.
+        - We get the predicted values by taking each case and plugging the predictor into the model to get a prediction.
+    - the residuals from the model on the y axis
+        - We get the residuals by computing for each case: observed y - predicted y
+
+Example: [Slide 6](https://drive.google.com/file/d/1fkrCKhmUrorMaJEqKQBu3BFV6Y8T1A-Y/view?usp=drive_link) from the [Is the model wrong?](https://youtu.be/12Y4r57GuKc) video
+
+
+<br><br><br><br>
+
+
+Is the model strong?
+
+- A strong model is able to explain a lot about why the outcome/response variable varies.
+- We explored correlation last week.
+    - The closer the correlation is to -1 or 1 for linearly related variables, the stronger the trend.
+    - Correlation is unfortunately limited to looking at the linear relationship between 2 quantitative variables.
+- The **R-squared** ($R^2$) metric can be used for linear regression models with a quantitative predictor, a categorical predictor, and a mix of multiple quantitative and/or categorical predictors.
+    - Ranges from 0 to 1.
+    - Values closer to 1 indicate a stronger model.
+    - $R^2$ is interpreted as the proportion of variation in the outcome that is explained by the model.
+
+Example: [Slide 4](https://drive.google.com/file/d/1QIYkfAVeSw-dFVBRJvj22zxf3cohd-SZ/view?usp=drive_link) from the [Is the model strong?](https://youtu.be/7ovhiVjXwM0) video
+
+
+<br><br><br><br>
+
+
+Is the model fair?
+
+- When we make models, we are able to use them by:
+    - Using the coefficients to gain some understanding about the world.
+        - Example: How much do movie earnings tend to increase as movie budget increases? (The slope coefficient from a model of earnings vs. budget can help us address this.)
+    - Make predictions for individual cases
+        - Example: Predict house price given physical characteristics of the house.
+
+- When assessing fairness we need to think about:
+    - Are we generating explanations of the world that may harm others?
+    - Are we making predictions from our models that systematically harm certain groups?
+    - If the answers to any of the above 2 questions is "yes", why is that happening? How can we think about the who, what, when, where, why, and how behind the data to dig deeper?
+    - Example: [Lawsuit Alleging Racial Bias in Home Appraisals Is Settled](https://www.nytimes.com/2024/03/25/realestate/racial-bias-appraisal-settlement.html)
+
+
+<br><br><br><br>
 
 
 # Exercises
@@ -276,7 +338,7 @@ Discuss your observations. In what ways do you think the W.E.B. Du Bois visualiz
 
 ## Reflection
 
-What has stuck with you most in our exploration of model evaluation? Why
+What has stuck with you most in our exploration of model evaluation? Why?
 
 > **Response:** Put your response here.
 
