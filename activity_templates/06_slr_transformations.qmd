@@ -1,0 +1,203 @@
+---
+title: "Simple linear regression: Transformations"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+**Context:** Today we'll explore three different datasets that motivate center (location), scale, and log transformations of our predictor of interest. We'll see why these transformations can change the interpretations of our regression coefficients in meaningful ways in certain contexts. Read in the data below.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+homes <- read_csv("https://mac-stat.github.io/data/homes.csv")
+
+bigmac <- read_csv("https://mac-stat.github.io/data/bigmac.csv")
+
+college <- read_csv("https://mac-stat.github.io/data/college.csv")
+```
+
+## Exercise 1: Location transformations
+
+Location transformations are ones that shift a predictor variable up or down by a fixed amount. Using a location transformation is sometimes also called **centering** a predictor.
+
+We'll use the `homes` data in this exercise.
+
+a. Fit a linear regression model of `Price` as a function of `Living.Area`, and call this model `home_mod`.
+
+```{r}
+# Fit the model
+
+
+# Display model summary output
+
+```
+
+b. Interpret the intercept and the coefficient for `Living.Area`. Is the interpretation of the intercept meaningful?
+
+c. We can use a location transformation on `Living.Area` to "start" it at a more reasonable value. We can see from the `summarize()` code below that the smallest house is 616 square feet, so let's center this predictor at 600 square feet. There is no code to fill in here, but make note of the `mutate()` syntax.
+
+```{r}
+homes %>% 
+    summarize(min(Living.Area))
+
+# What is mutate() doing???
+homes <- homes %>%
+    mutate(Living.Area.Shifted = Living.Area-600)
+```
+
+d. We can actually determine the coefficients of the `Price ~ Living.Area.Shifted` model by hand.
+    - First, write out in general terms (without specific numbers) how we would interpret the intercept and slope in this model. 
+    - Use these general interpretations as well as the summary output of `home_mod` to determine what these new coefficients should be.
+
+e. Now check your answer to part d by fitting the model.
+
+```{r}
+# Fit a model of Price vs. Living.Area.Shifted
+
+
+# Display model summary output
+
+```
+
+
+
+## Exercise 2: Scale transformations
+
+In this exercise, we'll explore the relationship between four-year graduation rate and admissions rate of colleges. 
+
+In the code chunk below, construct a visualization comparing graduation rate (our outcome variable) and admissions rate (our predictor of interest). Remember that your outcome variable should be on the y-axis, in general!
+
+```{r}
+# Scatterplot of graduation rate vs. admissions rate
+
+```
+
+a. Describe the relationship you observe between the two quantitative variables, in terms of correlation (weak/strong, positive/negative). Does the relationship appear to be roughly linear?
+
+b. Write a linear regression model formula of the form E[Y | X] = ... (filling in Y and X appropriately).
+
+c. Fit this model in R, and report (don't interpret yet!) the slope coefficient and intercept coefficient estimates.
+
+```{r}
+# Linear regression model with GradRate as the outcome, AdmisRate as predictor of interest
+
+```
+
+
+> Intercept Estimate: **Your response here**
+
+> Slope Estimate: **Your response here**
+
+c. Considering the units of `AdmisRate`, what does it mean for `AdmisRate` to change by one unit? What **are** the units for `AdmisRate` (and `GradRate`, for that matter!)?
+
+d. Suppose I want the interpretation of my slope coefficient for `AdmisRate` in my linear model to be in terms a "1% increase in admissions rate." To achieve this, we could **mutate** our `AdmisRate` variable to range from 0 to 100. Let's do that for `GradRate` too (just because!):
+
+```{r}
+# Mutate
+college <- college %>%
+  mutate(AdmisRate = AdmisRate * ___,
+         GradRate = ___ * ___)
+```
+
+e. Fit a *new* linear regression model with the updated `AdmisRate` and `GradRate` variables as your predictor of interest and outcome, respectively. Again, report the intercept and slope estimate from your model.
+
+```{r}
+# Linear regression model with updated GradRate as the outcome, updated AdmisRate as predictor of interest
+
+```
+
+
+> Intercept Estimate: **Your response here**
+
+> Slope Estimate: **Your response here**
+
+How have your intercept and slope estimates changed from the previous model, if at all?
+
+f. Interpret the regression coefficient that corresponds to the estimated linear relationship between admissions and graduation rates, in the context of the problem. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.*
+
+
+
+## Exercise 3: Log transformations 
+
+The Big Mac Index has been published by The Economist since 1986 as a metric for comparing purchasing power between countries, giving rise to the phrase **Burgernomics**. It was developed (sort of jokingly) as a way to explain exchange rates in digestible terms. 
+
+As an example, suppose a Big Mac in Switzerland costs 6.70 Swiss franc, and in the U.S. a Big Mac costs 5.58 USD. Then the Big Mac Index is 6.70/5.58 = 1.20, and is the implied exchange rate between Swiss franc and USD.
+
+If you'd like to read more about the Big Mac index, here’s an [article](https://www.economist.com/big-mac-index) in The Economist (this may be behind a pay-wall for you, you can read up to 5 free articles in the Economist per month).
+
+
+For this exercise, we'll explore the relationship between average teaching salary in a country and the amount of time someone needs to work to be able to afford a Big Mac. The variables we'll consider are:
+
+- `bigmac_mins`: average minutes to earn 1 Big Mac 
+- `gross_annual_teacher_income`: average gross teacher salary in 1 year (USD) 
+
+a. Create an appropriate visualization that displays the relationship between average minutes to earn a Big Mac and gross annual, average teaching salary, and describe what you observe. 
+
+```{r}
+# Visualization: Big Mac minutes vs. gross annual teacher income
+```
+
+
+b. Explain why correlation might not be an appropriate numerical summary for the relationship between the two variables you plotted above.
+
+
+c. Fit a linear regression model with `bigmac_mins` as the outcome and `gross_annual_teacher_income` as the predictor of interest, and interpret the coefficient for `gross_annual_teacher_income`, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.* 
+
+```{r}
+# Linear regression code
+
+```
+
+
+d. Plot residuals vs. fitted values for the model you fit, and describe what you observe. Are there any noticeable patterns in the residuals? Describe them!
+
+```{r}
+# Residuals vs. fitted values plot
+
+```
+
+e. For which observations do the residuals from the linear regression model appear to be relatively large (i.e. for which observations would predictions fall farthest from observed outcomes)? What possible consequences would this have for people using this model to predict the amount of time it takes for them to earn enough money to afford a Big Mac?
+
+
+
+
+We'll now consider a log transformation of teaching salary. In the code chunk below, create a new variable called `log_sal` that contains the logged values of `gross_annual_teacher_income`.
+
+```{r}
+# Creating new variable log_sal
+bigmac <- bigmac %>%
+  mutate(log_sal = log(___))
+```
+
+f. Create an appropriate visualization that displays the relationship between average minutes to earn a Big Mac and *logged* gross annual, average teaching salary, and describe what you observe. Does correlation seem like it may be an appropriate numerical summary for the relationship between these two variables? Explain why or why not.
+
+
+g. Fit a linear regression model with `bigmac_mins` as the outcome and `log_sal` as the predictor of interest, and interpret the coefficient for `log_sal`, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.* 
+
+
+h. Plot residuals vs. fitted values for the model you fit, and describe what you observe. Are there any noticeable patterns in the residuals? Describe them!
+
+```{r}
+# Residuals vs. fitted values plot
+
+```
+
+
+
+## Reflection
+
+Two of the main motivations for transforming variables in our regression models is to (1) intentionally change the interpretation of regression coefficients, and (2) to better satisfy linear regression assumptions (e.g. remove "patterns" from our residual plots). The first is nearly always justified by the scientific context of the research questions you are trying to answer, while the second is a bit more muddy.
+
+Think about the pros and cons of transforming your variables to satisfy linear regression assumptions. Is there a limit to how much you would be willing to transform your variables? Would transforming **too** much leave you with un-interpretable regression coefficients?
+
+> **Response:** Put your response here.
+
+

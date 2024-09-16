@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>STAT 155 - Simple linear regression: Transformations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 155</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Activities</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
+        <li>
+    <a class="dropdown-item" href="../activities/01_foundations_welcome.html">
+ <span class="dropdown-text">Data Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/02_foundations_univariate.html">
+ <span class="dropdown-text">Univariate visualization and summaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/03_slr_introduction.html">
+ <span class="dropdown-text">Simple linear regression: Visualization and Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/04_slr_formalization.html">
+ <span class="dropdown-text">Simple linear regression: formalizing concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/05_slr_model_eval.html">
+ <span class="dropdown-text">Simple linear regression: model evaluation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/06_slr_transformations.html">
+ <span class="dropdown-text">Simple linear regression: Transformations</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practice-problems" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practice Problems</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
+        <li>
+    <a class="dropdown-item" href="../assignments/pp1.html">
+ <span class="dropdown-text">Practice Problems 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp2.html">
+ <span class="dropdown-text">Practice Problems 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_resources.html"> 
+<span class="menu-text">R Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-location-transformations" id="toc-exercise-1-location-transformations" class="nav-link" data-scroll-target="#exercise-1-location-transformations">Exercise 1: Location transformations</a></li>
+  <li><a href="#exercise-2-scale-transformations" id="toc-exercise-2-scale-transformations" class="nav-link" data-scroll-target="#exercise-2-scale-transformations">Exercise 2: Scale transformations</a></li>
+  <li><a href="#exercise-3-log-transformations" id="toc-exercise-3-log-transformations" class="nav-link" data-scroll-target="#exercise-3-log-transformations">Exercise 3: Log transformations</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  </ul></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-location-transformations-1" id="toc-exercise-1-location-transformations-1" class="nav-link" data-scroll-target="#exercise-1-location-transformations-1">Exercise 1: Location transformations</a></li>
+  <li><a href="#exercise-2-scale-transformations-1" id="toc-exercise-2-scale-transformations-1" class="nav-link" data-scroll-target="#exercise-2-scale-transformations-1">Exercise 2: Scale transformations</a></li>
+  <li><a href="#exercise-3-log-transformations-1" id="toc-exercise-3-log-transformations-1" class="nav-link" data-scroll-target="#exercise-3-log-transformations-1">Exercise 3: Log transformations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Simple linear regression: Transformations</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="notes" class="level1">
+<h1>Notes</h1>
+<ul>
+<li>You can download a template file to work with <a href="../activity_templates/06_slr_transformations.qmd">here</a>.</li>
+<li><strong>File organization:</strong> Save this file in the “Activities” subfolder of your “STAT155” folder.</li>
+</ul>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>Distinguish between the different motivations for transformations of variables (interpretation, regression assumptions, etc.)</li>
+<li>Determine when a particular transformation (center, scale, or log) may be appropriate</li>
+<li>Interpret regression coefficients after a transformation has taken place</li>
+</ul>
+</section>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>Please watch the following video <strong>before</strong> class.</p>
+<ul>
+<li>Video: <a href="https://youtu.be/HIcqQhn3vSM">Simple Linear Regression: Transformations</a></li>
+</ul>
+<p>The following reading is <strong>optional</strong>.</p>
+<ul>
+<li>Section 3.8.4 in the <a href="https://mac-stat.github.io/Stat155Notes/">STAT 155 Notes</a> covers log transformations, and the “ladder of power,” which we will not cover in class.</li>
+</ul>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<p><strong>Context:</strong> Today we’ll explore three different datasets that motivate center (location), scale, and log transformations of our predictor of interest. We’ll see why these transformations can change the interpretations of our regression coefficients in meaningful ways in certain contexts. Read in the data below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages and import data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>homes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/homes.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>bigmac <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/bigmac.csv"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/college.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="exercise-1-location-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-location-transformations">Exercise 1: Location transformations</h2>
+<p>Location transformations are ones that shift a predictor variable up or down by a fixed amount. Using a location transformation is sometimes also called <strong>centering</strong> a predictor.</p>
+<p>We’ll use the <code>homes</code> data in this exercise.</p>
+<ol type="a">
+<li>Fit a linear regression model of <code>Price</code> as a function of <code>Living.Area</code>, and call this model <code>home_mod</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display model summary output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li><p>Interpret the intercept and the coefficient for <code>Living.Area</code>. Is the interpretation of the intercept meaningful?</p></li>
+<li><p>We can use a location transformation on <code>Living.Area</code> to “start” it at a more reasonable value. We can see from the <code>summarize()</code> code below that the smallest house is 616 square feet, so let’s center this predictor at 600 square feet. There is no code to fill in here, but make note of the <code>mutate()</code> syntax.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>homes <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">min</span>(Living.Area))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># What is mutate() doing???</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>homes <span class="ot">&lt;-</span> homes <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Living.Area.Shifted =</span> Living.Area<span class="dv">-600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="a">
+<li>We can actually determine the coefficients of the <code>Price ~ Living.Area.Shifted</code> model by hand.
+<ul>
+<li>First, write out in general terms (without specific numbers) how we would interpret the intercept and slope in this model.</li>
+<li>Use these general interpretations as well as the summary output of <code>home_mod</code> to determine what these new coefficients should be.</li>
+</ul></li>
+<li>Now check your answer to part d by fitting the model.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a model of Price vs. Living.Area.Shifted</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display model summary output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-2-scale-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-scale-transformations">Exercise 2: Scale transformations</h2>
+<p>In this exercise, we’ll explore the relationship between four-year graduation rate and admissions rate of colleges.</p>
+<p>In the code chunk below, construct a visualization comparing graduation rate (our outcome variable) and admissions rate (our predictor of interest). Remember that your outcome variable should be on the y-axis, in general!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of graduation rate vs. admissions rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><p>Describe the relationship you observe between the two quantitative variables, in terms of correlation (weak/strong, positive/negative). Does the relationship appear to be roughly linear?</p></li>
+<li><p>Write a linear regression model formula of the form E[Y | X] = … (filling in Y and X appropriately).</p></li>
+<li><p>Fit this model in R, and report (don’t interpret yet!) the slope coefficient and intercept coefficient estimates.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression model with GradRate as the outcome, AdmisRate as predictor of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Intercept Estimate: <strong>Your response here</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Slope Estimate: <strong>Your response here</strong></p>
+</blockquote>
+<ol start="3" type="a">
+<li><p>Considering the units of <code>AdmisRate</code>, what does it mean for <code>AdmisRate</code> to change by one unit? What <strong>are</strong> the units for <code>AdmisRate</code> (and <code>GradRate</code>, for that matter!)?</p></li>
+<li><p>Suppose I want the interpretation of my slope coefficient for <code>AdmisRate</code> in my linear model to be in terms a “1% increase in admissions rate.” To achieve this, we could <strong>mutate</strong> our <code>AdmisRate</code> variable to range from 0 to 100. Let’s do that for <code>GradRate</code> too (just because!):</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mutate</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AdmisRate =</span> AdmisRate <span class="sc">*</span> ___,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">GradRate =</span> ___ <span class="sc">*</span> ___)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="a">
+<li>Fit a <em>new</em> linear regression model with the updated <code>AdmisRate</code> and <code>GradRate</code> variables as your predictor of interest and outcome, respectively. Again, report the intercept and slope estimate from your model.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression model with updated GradRate as the outcome, updated AdmisRate as predictor of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Intercept Estimate: <strong>Your response here</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Slope Estimate: <strong>Your response here</strong></p>
+</blockquote>
+<p>How have your intercept and slope estimates changed from the previous model, if at all?</p>
+<ol start="6" type="a">
+<li>Interpret the regression coefficient that corresponds to the estimated linear relationship between admissions and graduation rates, in the context of the problem. <em>Make sure to use non-causal language, include units, and talk about averages rather than individual cases.</em></li>
+</ol>
+</section>
+<section id="exercise-3-log-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-log-transformations">Exercise 3: Log transformations</h2>
+<p>The Big Mac Index has been published by The Economist since 1986 as a metric for comparing purchasing power between countries, giving rise to the phrase <strong>Burgernomics</strong>. It was developed (sort of jokingly) as a way to explain exchange rates in digestible terms.</p>
+<p>As an example, suppose a Big Mac in Switzerland costs 6.70 Swiss franc, and in the U.S. a Big Mac costs 5.58 USD. Then the Big Mac Index is 6.70/5.58 = 1.20, and is the implied exchange rate between Swiss franc and USD.</p>
+<p>If you’d like to read more about the Big Mac index, here’s an <a href="https://www.economist.com/big-mac-index">article</a> in The Economist (this may be behind a pay-wall for you, you can read up to 5 free articles in the Economist per month).</p>
+<p>For this exercise, we’ll explore the relationship between average teaching salary in a country and the amount of time someone needs to work to be able to afford a Big Mac. The variables we’ll consider are:</p>
+<ul>
+<li><code>bigmac_mins</code>: average minutes to earn 1 Big Mac</li>
+<li><code>gross_annual_teacher_income</code>: average gross teacher salary in 1 year (USD)</li>
+</ul>
+<ol type="a">
+<li>Create an appropriate visualization that displays the relationship between average minutes to earn a Big Mac and gross annual, average teaching salary, and describe what you observe.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: Big Mac minutes vs. gross annual teacher income</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li><p>Explain why correlation might not be an appropriate numerical summary for the relationship between the two variables you plotted above.</p></li>
+<li><p>Fit a linear regression model with <code>bigmac_mins</code> as the outcome and <code>gross_annual_teacher_income</code> as the predictor of interest, and interpret the coefficient for <code>gross_annual_teacher_income</code>, in context. <em>Make sure to use non-causal language, include units, and talk about averages rather than individual cases.</em></p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="a">
+<li>Plot residuals vs.&nbsp;fitted values for the model you fit, and describe what you observe. Are there any noticeable patterns in the residuals? Describe them!</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs. fitted values plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="a">
+<li>For which observations do the residuals from the linear regression model appear to be relatively large (i.e.&nbsp;for which observations would predictions fall farthest from observed outcomes)? What possible consequences would this have for people using this model to predict the amount of time it takes for them to earn enough money to afford a Big Mac?</li>
+</ol>
+<p>We’ll now consider a log transformation of teaching salary. In the code chunk below, create a new variable called <code>log_sal</code> that contains the logged values of <code>gross_annual_teacher_income</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating new variable log_sal</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bigmac <span class="ot">&lt;-</span> bigmac <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_sal =</span> <span class="fu">log</span>(___))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="6" type="a">
+<li><p>Create an appropriate visualization that displays the relationship between average minutes to earn a Big Mac and <em>logged</em> gross annual, average teaching salary, and describe what you observe. Does correlation seem like it may be an appropriate numerical summary for the relationship between these two variables? Explain why or why not.</p></li>
+<li><p>Fit a linear regression model with <code>bigmac_mins</code> as the outcome and <code>log_sal</code> as the predictor of interest, and interpret the coefficient for <code>log_sal</code>, in context. <em>Make sure to use non-causal language, include units, and talk about averages rather than individual cases.</em></p></li>
+<li><p>Plot residuals vs.&nbsp;fitted values for the model you fit, and describe what you observe. Are there any noticeable patterns in the residuals? Describe them!</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs. fitted values plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>Two of the main motivations for transforming variables in our regression models is to (1) intentionally change the interpretation of regression coefficients, and (2) to better satisfy linear regression assumptions (e.g.&nbsp;remove “patterns” from our residual plots). The first is nearly always justified by the scientific context of the research questions you are trying to answer, while the second is a bit more muddy.</p>
+<p>Think about the pros and cons of transforming your variables to satisfy linear regression assumptions. Is there a limit to how much you would be willing to transform your variables? Would transforming <strong>too</strong> much leave you with un-interpretable regression coefficients?</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Put your response here.</p>
+</blockquote>
+<p><br><br><br><br><br><br></p>
+</section>
+</section>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-location-transformations-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-location-transformations-1">Exercise 1: Location transformations</h2>
+<p>Location transformations are ones that shift a predictor variable up or down by a fixed amount. Using a location transformation is sometimes also called <strong>centering</strong> a predictor.</p>
+<p>We’ll use the <code>homes</code> data in this exercise.</p>
+<ol type="a">
+<li>Fit a linear regression model of <code>Price</code> as a function of <code>Living.Area</code>, and call this model <code>home_mod</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>home_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Living.Area, <span class="at">data =</span> homes)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display model summary output</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(home_mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate  Std. Error   t value      Pr(&gt;|t|)
+(Intercept) 13439.3940 4992.352849  2.691996  7.171207e-03
+Living.Area   113.1225    2.682341 42.173065 9.486240e-268</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li><ul>
+<li>Interpretation of slope: Every 1 square foot increase in living area is associated with an expected / average increase in house price of $113.12.</li>
+<li>Interpretation of intercept: The average/expected house price for a house with zero square feet is $13,439.39. Can a house ever be zero square feet??? Nope! The intercept is meaningless in this case.</li>
+</ul></li>
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>homes <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">min</span>(Living.Area))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `min(Living.Area)`
+               &lt;dbl&gt;
+1                616</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate() creates a new variable called Living.Area.Shifted that is equal to Living.Area - 600</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>homes <span class="ot">&lt;-</span> homes <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Living.Area.Shifted =</span> Living.Area<span class="dv">-600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="a">
+<li><ul>
+<li>In general terms, the intercept in this model should represent the average house price when <code>Living.Area.Shifted</code> is 0—in other words when <code>Living.Area</code> is 600 square feet. From the coefficient estimates in <code>home_mod</code>, we can calculate the expected / predicted house price for 600 square foot homes: 13439.394 + (113.123*600) = 81312.89. So we’re expecting the new intercept to be $81312.89.</li>
+<li>The slope in this model represents the average price change for each unit change in <code>Living.Area.Shifted</code> (which is the same as a unit change in <code>Living.Area</code>). Based on this, the slope should be the same as in <code>home_mod</code> ($113.12 per square foot).</li>
+</ul></li>
+<li>Lines up with work in part d!</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a model of Price vs. Living.Area.Shifted</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>home_mod_centered <span class="ot">&lt;-</span> <span class="fu">lm</span>(Price <span class="sc">~</span> Living.Area.Shifted, <span class="at">data =</span> homes)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display model summary output</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(home_mod_centered))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Estimate  Std. Error  t value      Pr(&gt;|t|)
+(Intercept)         81312.9191 3515.879467 23.12733 2.638371e-103
+Living.Area.Shifted   113.1225    2.682341 42.17307 9.486240e-268</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-2-scale-transformations-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-scale-transformations-1">Exercise 2: Scale transformations</h2>
+<p>In the code chunk below, construct a visualization comparing graduation rate (our outcome variable) and admissions rate (our predictor of interest). Remember that your outcome variable should be on the y-axis, in general!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of graduation rate vs. admissions rate</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(college, <span class="fu">aes</span>(<span class="at">x =</span> AdmisRate, <span class="at">y =</span> GradRate)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol type="a">
+<li><p>The correlation between admissions and graduation rates appears to be weakly negative. Notably, there are hard boundaries to admissions and graduation rates, since both must fall between 0 and 100%! A few colleges hit up against these boundaries. I would say that, with the exception of the observations that have either 0% graduation rates or 0% admission rates, the relationship does appear to be roughly linear.</p></li>
+<li><p>E[GradRate | AdmisRate] = <span class="math inline">\(\beta_0\)</span> + <span class="math inline">\(\beta_1\)</span> AdmisRate</p></li>
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression model with GradRate as the outcome, AdmisRate as predictor of interest</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(GradRate <span class="sc">~</span> AdmisRate, <span class="at">data =</span> college)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = GradRate ~ AdmisRate, data = college)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.68409 -0.13681  0.01296  0.15550  0.66204 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.68409    0.01759   38.89   &lt;2e-16 ***
+AdmisRate   -0.34613    0.02330  -14.85   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2088 on 1649 degrees of freedom
+Multiple R-squared:  0.118, Adjusted R-squared:  0.1175 
+F-statistic: 220.6 on 1 and 1649 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Intercept Estimate: 0.68409</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Slope Estimate: -0.34613</p>
+</blockquote>
+<ol start="3" type="a">
+<li><p>One unit of <code>AdmisRate</code> corresponds to a 100% change in admissions rates! The same goes for graduation rate. This is a huge change (in fact, the largest change possible).</p></li>
+<li><p>Suppose I want the interpretation of my slope coefficient for <code>AdmisRate</code> in my linear model to be in terms a “1% increase in admissions rate.” To achieve this, we could <strong>mutate</strong> our <code>AdmisRate</code> variable to range from 0 to 100. Let’s do that for <code>GradRate</code> too (just because!):</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mutate</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AdmisRate =</span> AdmisRate <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">GradRate =</span> GradRate <span class="sc">*</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="a">
+<li>Fit a <em>new</em> linear regression model with the updated <code>AdmisRate</code> and <code>GradRate</code> variables as your predictor of interest and outcome, respectively. Again, report the intercept and slope estimate from your model.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression model with updated GradRate as the outcome, updated AdmisRate as predictor of interest</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mod_new <span class="ot">&lt;-</span> <span class="fu">lm</span>(GradRate <span class="sc">~</span> AdmisRate, <span class="at">data =</span> college)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = GradRate ~ AdmisRate, data = college)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-68.409 -13.681   1.296  15.550  66.204 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  68.4088     1.7592   38.89   &lt;2e-16 ***
+AdmisRate    -0.3461     0.0233  -14.85   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 20.88 on 1649 degrees of freedom
+Multiple R-squared:  0.118, Adjusted R-squared:  0.1175 
+F-statistic: 220.6 on 1 and 1649 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Intercept Estimate: 68.4088</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Slope Estimate: -0.3461</p>
+</blockquote>
+<p>Our intercept estimate is now 100x larger, and our slope estimate has remained the same! The slope remained the same because we multiplied our outcome and our predictor of interest by the same value, and the intercept is 100x larger because we multiplied our outcome by 100 (recall that the intercept is the average expected outcome when “x” is zero).</p>
+<ol start="6" type="a">
+<li>On average, we expect colleges that differ in admissions rate by 1% to have 0.35% different graduation rates, with colleges with higher admissions rates having lower graduation rates.</li>
+</ol>
+</section>
+<section id="exercise-3-log-transformations-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-log-transformations-1">Exercise 3: Log transformations</h2>
+<ol type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization: Big Mac minutes vs. gross annual teacher income</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>bigmac <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gross_annual_teacher_income, <span class="at">y =</span> bigmac_mins)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As annual teacher income gets higher, time it takes in minutes to earn a Big Mac decreases, though the relationship does not appear linear. The amount of time it takes to earn a Big Mac is very high when income is below about 10,000 where it sharply decreases, and then decreases at a much lower rate when income is above around 20,000.</p>
+<ol start="2" type="a">
+<li><p>Correlation is a summary of the <em>linear</em> relationship between two quantitative variables, and this relationship does not appear to be linear!</p></li>
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression code</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(bigmac_mins <span class="sc">~</span> gross_annual_teacher_income, <span class="at">data =</span> bigmac)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = bigmac_mins ~ gross_annual_teacher_income, data = bigmac)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-29.649  -9.556  -1.784   4.512  43.715 
+
+Coefficients:
+                              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  5.801e+01  3.104e+00   18.69  &lt; 2e-16 ***
+gross_annual_teacher_income -9.092e-04  9.591e-05   -9.48 6.16e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.4 on 66 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.5766,    Adjusted R-squared:  0.5701 
+F-statistic: 89.86 on 1 and 66 DF,  p-value: 6.164e-14</code></pre>
+</div>
+</div>
+<p>On average, we expect a one dollar increase in gross annual teacher income to be associated with a decrease in the number of minutes it takes to earn a Big Mac by 9 x 10^(-4) minutes. Stated differently, we expect a <em>ten-thousand</em> dollar increase in gross annual teacher income to be associated with a decrease in the number of minutes it takes to earn a Big Mac by 9 minutes (note that here I did a <em>scale</em> transformation of gross annual teacher income to get this interpretation, which might make more sense when looking at the scale of salary!).</p>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs. fitted values plot</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mod, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residuals vs.&nbsp;fitted values plot shows a very clear, nonlinear pattern! As fitted values increase, residuals decrease for a while, and then sharply increase once fitted values are higher than around 40 minutes. The spread of residuals around zero also varies, with greater spread for higher fitted values.</p>
+<ol start="5" type="a">
+<li>The residuals appear to be large for people with negative fitted values and those with very high fitted values. Recall that a linear model does not “know” that number of minutes to earn a Big Mac can’t be negative, in context. If we look at the fitted line from our linear model on a scatterplot (see below)…</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bigmac <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gross_annual_teacher_income, <span class="at">y =</span> bigmac_mins)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We observe that negative fitted values and very large fitted values occur when annual teacher income is greater than around 70,000 and less than 10,000, respectively. This implies that the model does a worse job at predicting the number of minutes to earn a Big Mac in countries where annual teacher income is either very high or very low.</p>
+<p>We’ll now consider a log transformation of teaching salary. In the code chunk below, create a new variable called <code>log_sal</code> that contains the logged values of <code>gross_annual_teacher_income</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating new variable log_sal</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>bigmac <span class="ot">&lt;-</span> bigmac <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">log_sal =</span> <span class="fu">log</span>(gross_annual_teacher_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="6" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>bigmac <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(log_sal, bigmac_mins)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The relationship between logged annual teaching salary and minutes to earn a Big Mac appears roughly linear, with a weakly negative relationship. Correlation is likely an appropriate numerical summary for the relationship between these two quantitative variables, as the relationship is roughly linear!</p>
+<ol start="7" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mod_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(bigmac_mins <span class="sc">~</span> log_sal, <span class="at">data =</span> bigmac)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = bigmac_mins ~ log_sal, data = bigmac)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-36.817  -6.951  -1.241   6.032  41.357 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  210.875     14.687   14.36   &lt;2e-16 ***
+log_sal      -18.142      1.502  -12.08   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.21 on 66 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.6886,    Adjusted R-squared:  0.6838 
+F-statistic: 145.9 on 1 and 66 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Each 1 unit increase in logged salary is associated with a 18.14 minute decrease in time to earn a Big Mac on average.</p>
+<p>We can also use a property of logarithms to interpret the slope of -18.14 in a different way. Suppose we have two salaries: Salary1 and Salary2. If Salary2 is 10% higher than Salary1, then Salary2/Salary1 = 1.1. It is a property of logarithms that log(Salary2/Salary1) = log(Salary2) - log(Salary1). In this case log(Salary2/Salary1) = log(Salary2) - log(Salary1) = log(1.1) = 0.09531018. So a 10% increase in salary is a 0.09 unit increase in the log scale:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplicative difference of 1.1, or 10% between salaries gives us the </span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fl">1.1</span>) <span class="sc">*</span> <span class="sc">-</span><span class="fl">18.142</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.729117</code></pre>
+</div>
+</div>
+<p>While a 1 unit increase in log salary is associated with an average decrease of 18 Big Mac minutes, a 0.0953 unit increase in log salary (which corresponds to a 10% multiplicative increase), is associated with a 1.7 minute decrease in Big Mac minutes.</p>
+<pre><code>Underlying math:
+Case 1: Salary = x
+   E[bigmacmin_1] = beta0 + beta1 log(x)
+Case 2: Salary = m*x
+   E[bigmacmin_2] = beta0 + beta1 log(m*x)
+
+E[bigmacmin_2] - E[bigmacmin_1] = beta1 log(m)</code></pre>
+<ol start="8" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs. fitted values plot</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mod_log, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span> </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_slr_transformations_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residuals seem to lie roughly around zero for all possible fitted values, though the spread is still noticably larger for larger fitted values compared to smaller ones. This implies that the linearity assumption is likely satisfied for this model, but equal variance may be a concern.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Leslie Myint, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Site built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
