@@ -92,7 +92,7 @@ Before class:
     - Due 30 minutes before class today (11:30am on 9/6)
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
+::: {.callout-tip icon=false collapse="true" title="Week 2: 9/9 - 9/13 (Simple linear regression)"}
 #### Announcements
 
 - [Practice Problems #1 (PP1)](assignments/pp1.qmd) due Friday 9/13 at 5pm
@@ -127,6 +127,7 @@ Before class:
 - [Practice Problems #2 (PP2)](assignments/pp2.qmd) due Friday 9/20 at 5pm
 - [Project Group Preferences Survey](https://docs.google.com/forms/d/e/1FAIpQLSeqclT9Eb7yQZs-_N7Qn1b-NQYJ7pB0PktPKkRIwa3w1s0Ldw/viewform?usp=sf_link) due Friday 9/20 at 5pm
     - This is a short survey to help me determine groups for the course project.
+- Quiz 1 is next Friday 9/27 and covers Activities 1-7 (Data Fundamentals to Simple Linear Regression: Categorical Predictors, which we'll talk about next Monday.)
 
 #### Monday (9/16)
 
