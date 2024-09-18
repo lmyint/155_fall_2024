@@ -157,15 +157,25 @@ Before class
 ::: {.callout-tip icon=false collapse="true" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
 #### Announcements
 
-#### Monday
+- No Practice Problems due this week to allow time to study for Quiz 1 this Friday 9/27.
+- For a reminder about quiz format, see [this part](syllabus.qmd#quizzes) of the syllabus.
+
+#### Monday (9/23)
 
 Before class:
 
-#### Wednesday
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=137074) (CP5) on Moodle. 
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
+
+#### Wednesday (9/25)
 
 Before class:
 
-#### Friday
+- Review material as needed
+- No checkpoint today!
+
+#### Friday (9/27)
 
 Quiz 1 (1 hour in class)
 
@@ -177,6 +187,12 @@ Quiz 1 (1 hour in class)
 #### Monday
 
 Before class:
+
+Before class:
+
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=137214) (CP6) on Moodle.
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
 
 #### Wednesday
 
