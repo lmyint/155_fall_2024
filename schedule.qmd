@@ -59,7 +59,7 @@ html-table-processing: none
         <b>Checkpoint 5 due 11:30am<b>
     </td>
     <td class="topleft">Multiple predictors in linear regression</td>
-    <td class="topleft"><b>Quiz 1</b></td>
+    <td class="topleft"><b>Quiz 1</b> (1 hour in class)</td>
     <td class="topleft">No Practice Problems this week</td>
   </tr>
 </tbody>
@@ -157,7 +157,7 @@ Before class
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
+::: {.callout-tip icon=false collapse="false" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
 #### Announcements
 
 - No Practice Problems due this week to allow time to study for Quiz 1 this Friday 9/27.
@@ -188,8 +188,6 @@ Quiz 1 (1 hour in class)
 #### Announcements
 
 #### Monday
-
-Before class:
 
 Before class:
 
