@@ -54,10 +54,13 @@ html-table-processing: none
   </tr>
   <tr>
     <td class="topleft">4 (9/23 - 9/27)</td>
-    <td class="topleft"></td>
-    <td class="topleft"></td>
+    <td class="topleft">
+        Categorical predictors<br>
+        <b>Checkpoint 5 due 11:30am<b>
+    </td>
+    <td class="topleft">Multiple predictors in linear regression</td>
     <td class="topleft"><b>Quiz 1</b></td>
-    <td class="topleft"></td>
+    <td class="topleft">No Practice Problems this week</td>
   </tr>
 </tbody>
 </table>
