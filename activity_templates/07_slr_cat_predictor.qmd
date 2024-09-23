@@ -1,0 +1,254 @@
+---
+title: "Simple linear regression: categorical predictor"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+**Context:** Today we'll explore data on thousands of diamonds to understand how physical characteristics relate to price. Read in the data below.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(ggplot2)
+library(dplyr)
+
+data(diamonds)
+
+# A little bit of data wrangling code - let's not focus on this for now
+diamonds <- diamonds %>% 
+    mutate(
+        cut = factor(cut, ordered = FALSE),
+        color = factor(color, ordered = FALSE),
+        clarity = factor(clarity, ordered = FALSE)
+    )
+```
+
+For the first several exercises, our focus will be on the relationship between diamond price and cut.
+
+## Exercise 1: Get to know the data
+
+Write R code to answer the following:
+
+- How many cases and variables do we have? What does a case represent?
+- What do the first few rows of the data look like?
+- Construct and interpret two different visualizations of the `price` variable.
+- Construct and interpret a visualization of the `cut` variable.
+
+
+
+## Exercise 2: Visualizations
+
+Start by visualizing this relationship of interest, that between `price` and `cut`.
+
+a. The appropriate plot depends upon the type of variables we're plotting. When exploring the relationship between a quantitative response (ridership) and a quantitative predictor (temperature), a scatterplot was an effective choice. After running the code below, explain why a scatterplot is not effective for exploring the relationship between ridership and our *categorical* `cut` predictor.
+
+```{r}
+# Try a scatterplot
+ggplot(diamonds, aes(y = price, x = cut)) + 
+    geom_point()
+```
+
+b. Separately run each chunk below, with two plots. Comment (`#`) on what changes in the code / output.
+
+```{r}
+# Univariate boxplot
+ggplot(diamonds, aes(y = price)) + 
+    geom_boxplot()
+```
+
+```{r}
+# ???
+ggplot(diamonds, aes(y = price, x = cut)) + 
+    geom_boxplot()
+```
+
+```{r}
+# Univariate density plot
+ggplot(diamonds, aes(x = price)) + 
+    geom_density()
+```
+
+```{r}
+# ???
+ggplot(diamonds, aes(x = price, color = cut)) + 
+    geom_density()
+```
+
+```{r}
+# Univariate histogram
+ggplot(diamonds, aes(x = price)) + 
+    geom_histogram()
+```
+
+```{r}
+# ???
+ggplot(diamonds, aes(x = price)) + 
+    geom_histogram() + 
+    facet_wrap(~ cut)
+```
+
+c. Do you notice anything interesting about the relationship between price and cut? What do you think might be happening here?
+
+
+
+## Exercise 3: Numerical summaries
+
+Let's follow up our plots with some numerical summaries.
+
+a. To warm up, first calculate the mean `price` across all diamonds.
+
+```{r eval=FALSE}
+diamonds %>% 
+    ___(mean(___))
+```
+
+b. To summarize the trends we observed in the grouped plots above, we can calculate the mean `price` for each type of `cut`. This requires the inclusion of the `group_by()` function:
+
+```{r eval=FALSE}
+# Calculate mean price by cut
+diamonds %>% 
+    group_by(cut) %>% 
+    ___(mean(___))
+```
+
+c. Examine the group mean measurements, and make sure that you can match these numbers up with what you see in the plots.
+
+d. Based on the results above, we can see that, on average, diamonds with a "Fair" cut tend to cost more than higher-quality cuts. Let's construct a new variable named `cutFair`, using on the following criteria:
+
+- `cutFair` = 1 if the diamond is of Fair cut
+- `cutFair` = 0 otherwise (any other value of cut (Good, Very Good, Premium, Ideal))
+
+```{r eval=FALSE}
+diamonds <- diamonds %>%
+  mutate(cutFair=ifelse(___ == "Fair", __, __))
+```
+
+Variables like `cutFair` that are coded as 0/1 to numerically indicate if a categorical variable is at a particular state are known as an **indicator variable**. You will sometimes see these referred to as a "binary variable" or "dichotomous variable"; you may also encounter the term "dummy variable" in older statistical literature.
+
+e. Now, let's calculate the group means based on the new `cutFair` indicator variable:
+
+```{r}
+diamonds %>% 
+    group_by(cutFair) %>% 
+    summarize(mean(price))
+```
+
+## Exercise 4: Modeling trend using a categorical predictor with exactly 2 categories 
+
+Next, let's *model* the trend in the relationship between the `cutFair` and `price` variables using a simple linear regression model:
+
+```{r}
+# Construct the model
+diamond_mod0 <- lm(price ~ cutFair, data = diamonds)
+
+# Summarize the model
+coef(summary(diamond_mod0))
+```
+
+
+Compare these results to the output of exercise 3e. What do you notice? How do you interpret the intercept and `cutFair` coefficient terms from this model?
+
+> your answer here
+
+## Exercise 5: Modeling trend using a categorical predictor with >2 categories
+
+Using a single binary predictor like the `cutFair` indicator variable is useful when there are two clearly delineated categories. However, the `cut` variable actually contains 5 categories! Because we've collapsed all non-Fair classifications into a single category (i.e. `cutFair = 0`), the model above can't tell us anything about the difference in expected price between, say, *Premium* and *Ideal* cuts. The good news is that it is very straightforward to model categorical predictors with >2 categories. We can do this by using the `cut` variable as our predictor: 
+
+```{r}
+# Construct the model
+diamond_mod <- lm(price ~ cut, data = diamonds)
+
+# Summarize the model
+coef(summary(diamond_mod))
+```
+
+a. Even though we specified a single predictor variable in the model, we are seeing 4 coefficient estimates--why do you think this is the case?
+
+> your answer here
+
+---
+
+NOTE: We see 4 indicator variables (for Good, Very Good, Premium, and Ideal), but we do not see `cutFair` in the model output. This is because `Fair` is the **reference level** of the `cut` variable (it's first alphabetically). You'll see below that it is, indeed, still in the model. You'll also see why the term "reference level" makes sense!
+  
+---
+
+b. After examining the summary table output from the code chunk above, complete the model formula:
+
+\
+
+E[price | cut] = ___ +/- ___ cutGood +/- ___ cutVery Good +/- ___ cutPremium +/- ___ cutIdeal
+
+\   
+
+
+## Exercise 6: Making sense of the model
+
+Recall our model:  E[price | cut] = 4358.7578 - 429.8933 cutGood - 376.9979 cutVery Good + 225.4999 cutPremium - 901.2158 cutIdeal
+
+a. Use the model formula to calculate the expected/typical price for diamonds of *Good* cut.
+
+b. Similarly, calculate the expected/typical price for diamonds of *Fair* cut.
+
+c. Re-examine these 2 calculations. Where have you seen these numbers before?!
+
+
+## Exercise 7: Interpreting coefficients
+
+Recall that our model formula is *not a formula for a line*. Thus we can't interpret the coefficients as "slopes" as we have before. Taking this into account and reflecting upon your calculations above...   
+
+a. Interpret the intercept coefficient (`4358.7578`) in terms of the data context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.*
+
+b. Interpret the `cutGood` and `cutVery Good` coefficients (`-429.8933` and `-376.9979`) in terms of the data context. Hint: where did you use these value in the prediction calculations above?
+
+
+
+## Exercise 8: Modeling choices (CHALLENGE)
+
+Why do we fit this model in this way (using 4 indicator variables `cutGood`,  `cutVery Good`, `cutPremium`, `cutIdeal`)? Instead, suppose that we created a single variable `cutCat` that gave each category a numerical value: 0 for Fair, 1 for Good, 2 for Very Good, 3 for Premium, and 4 for Ideal.
+
+How would this change things? What are the pros and cons of each approach?
+
+
+
+## Reflection
+
+Through the exercises above, you learned how to build and interpret models that incorporate a categorical predictor variable. For the benefit of your future self, summarize how one can interpret the coefficients for a categorical predictor.
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
+
+# Additional Practice
+
+## Exercise 9: Diamond color
+
+Consider modeling `price` by `color`.
+
+- Before creating a visualization that shows the relationship between price and color, write down what you expect the plot to look like. Then construct and interpret an apporpriate plot.
+- Compute the average price for each color.
+- Fit an appropriate linear model with `lm()` and display a short summary of the model.
+- Write out the model formula from the above summary.
+- Which color is the reference level? How can you tell from the model summary?
+- Interpret the intercept and two other coefficients from the model in terms of the data context.
+
+
+
+## Exercise 10: Diamond clarity
+
+If you want more practice, repeat the steps from Exercise 8 for the `clarity` variable.
+
+
