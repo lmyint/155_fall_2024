@@ -124,7 +124,7 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 3: 9/16 - 9/20 (Simple linear regression: model evaluation and variable transformations)"}
+::: {.callout-tip icon=false collapse="true" title="Week 3: 9/16 - 9/20 (Simple linear regression: model evaluation and variable transformations)"}
 #### Announcements
 
 - [Practice Problems #2 (PP2)](assignments/pp2.qmd) due Friday 9/20 at 5pm

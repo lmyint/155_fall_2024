@@ -1,0 +1,105 @@
+---
+title: "Practice Problems 3"
+sidebar: false
+eval: false
+---
+
+<center>
+**Due Friday, 10/4 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=138302).**
+</center>
+
+# Purpose
+
+The goal of this set of practice problems is to practice the following skills:
+
+- Building appropriate multiple linear regression models to address research questions
+- Interpreting linear regression model results with a mix of quantitative and categorical predictors
+
+**You can download a template to start from [here](../activity_templates/pp3.qmd).**
+
+
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, and `readr` packages. Include the following command in the code chunk to read in the data: `lifts <- read_csv("https://mac-stat.github.io/data/powerlifting.csv")`
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+# Exercises
+
+## Context
+
+Powerlifting is a sport in which athletes compete to lift as much as possible in 3 events: bench press, squat, and deadlift.
+
+[Open Powerlifting](https://www.openpowerlifting.org/) maintains a database of competition results for powerlifters across the world. We have information on 100,000 lifters from this database. Take a look at the codebook [here](https://github.com/Mac-STAT/data/blob/main/powerlifting_codebook.md).
+
+Research question: Are lighter or heavier lifters proportionately stronger?
+
+
+## Exercise 1: Define outcome variable
+
+Use the `mutate()` function from the `dplyr` to define an outcome variable called `SWR` that stands for strength-to-weight ratio. It should be computed as `TotalKg` divided by `BodyweightKg`. `SWR` measures how many times their bodyweight an athlete can lift in total. Higher numbers indicate higher relative strength.
+
+
+
+## Exercise 2: Exploratory visualizations
+
+**Guiding question:** How are age, sex, bodyweight, and equipment usage related to strength?
+
+Construct one visualization for each of these 4 explanatory variables and `SWR`. For each, write 1-2 sentences summarizing what you learn from the plot. Be sure to discuss trend, variability/dispersion about the trend, and any notable outliers.
+
+
+
+## Exercise 3: Causal diagram
+
+We are interested in the relationship between `BodyweightKg` and `SWR` but are concerned about `Age`, `Sex`, and `Equipment` as potential confounders.
+
+### Part a
+
+Draw a causal diagram that shows how these 5 variables might be related. Draw this by hand or software and save the file as `pp3_dag.jpg` or `pp3_dag.png` in the same folder as this `.qmd` file. You can then insert the diagram as below:
+
+```
+![](pp3_dag.jpg)
+```
+
+```
+![](pp3_dag.png)
+```
+
+### Part b
+
+Use visualizations to explore if `Age`, `Sex`, and `Equipment` have a relationship with `BodyweightKg`. Explain how these explorations relate to your causal diagram. Do you think that there are other confounders that would be important to consider but are missing from our data?
+
+
+
+## Exercise 4: Linear regression modeling
+
+Research question: Are lighter or heavier lifters proportionately stronger?
+
+Put another way, this question is getting at the causal effect of bodyweight on SWR.
+
+### Part a
+
+Fit an appropriate linear regression model that answers our research question.
+
+### Part b
+
+Interpret the coefficient that answers our research question. *Make sure to use appropriate causation vs. association language, include units, and talk about averages rather than individual cases.*
+
+### Part c
+
+Interpret the remainder of the coefficients (including the intercept). Is it meaningful to interpret the intercept in this context?
+
+
