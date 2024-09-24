@@ -1,0 +1,556 @@
+---
+title: "Introduction to multiple regression"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/08_mlr_intro.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this lesson, you should be familiar with:
+
+- some limitations of **simple linear regression**
+- the general goals behind **multiple linear regression**
+- strategies for *visualizing* and *interpreting* multiple linear regression models of $y$ vs 2 predictors, 1 quantitative and 1 categorical
+
+## Readings and videos
+
+Today is a day to discover ideas, so no readings or videos to go through before class.
+
+
+
+
+
+## Motivation
+
+**EXAMPLE 1**
+
+Let's explore some data on penguins.
+
+First, enter `install.packages("palmerpenguins")` in the *console* (not Rmd).
+
+Then load the `penguins` data.
+
+You can find a **codebook** for these data by typing `?penguins` in your *console* (not Rmd).
+
+
+```{r warning=FALSE, message=FALSE}
+# Load packages
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+# Load data
+library(palmerpenguins)
+data(penguins)
+penguins <- penguins %>% 
+    filter(species != "Adelie", bill_length_mm < 57)
+
+# Check it out
+head(penguins)
+```
+
+Our goal is to build a model that we can use to get good predictions of penguins' flipper ("arm") lengths.
+
+Consider 2 simple linear regression models of `flipper_length_mm` by penguin `sex` and `species`: 
+
+```{r}
+summary(lm(flipper_length_mm ~ sex, penguins))$r.squared
+summary(lm(flipper_length_mm ~ species, penguins))$r.squared
+```
+
+How might we improve our predictions of `flipper_length_mm` using only these 2 predictors?
+
+What do you think our new R-squared would be?
+
+
+
+
+
+
+**EXAMPLE 2**
+
+Consider a simple linear regression model of `flipper_length_mm` by `bill_length_mm`:
+
+```{r}
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm)) + 
+    geom_point() + 
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+Thoughts? What's going on here?
+
+How does this highlight the limitations of a simple linear regression model?
+
+
+
+
+
+**EXAMPLE 3**
+
+The `cps` dataset contains employment information collected by the U.S. Current Population Survey (CPS) in 2018.
+
+We can use these data to explore wages among 18-34 year olds.
+
+The original codebook is [here](https://cps.ipums.org/cps/resources/codebooks/cpsmar18.pdf).
+
+```{r}
+# Import data
+cps <- read_csv("https://mac-stat.github.io/data/cps_2018.csv") %>% 
+    select(-education, -hours) %>% 
+    filter(age >= 18, age <= 34) %>% 
+    filter(wage < 250000)
+```
+
+```{r}
+# Check it out
+head(cps)
+```
+
+We can use a simple linear regression model to summarize the relationship of `wage` with `marital` status:
+
+```{r}
+# Build the model
+wage_mod <- lm(wage ~ marital, data = cps)
+
+# Summarize the model
+coef(summary(wage_mod))
+```
+
+What do you / don't you conclude from this model?
+
+How does it highlight the limitations of a simple linear regression model?
+
+
+
+
+
+
+
+
+
+
+**Reflection: Why are multiple regression models so useful?**
+
+We can put more than 1 predictor into a regression model!
+Adding predictors to models...
+
+- Predictive viewpoint: Helps us better predict the response
+- Descriptive viewpoint: Helps us better understand the isolated (causal) effect of a variable by holding constant confounders
+
+
+
+
+
+
+
+**Multiple linear regression model formula**
+
+In general, a **multiple linear regression model** of $y$ with multiple predictors $(x_1, x_2, ..., x_p)$ is represented by the following formula:
+
+$$E[y \mid x_1, x_2, ..., x_p] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p$$
+
+
+<br><br><br><br>
+
+
+# Exercises
+
+In the coming weeks, we'll explore how to visualize, interpret, build, and evaluate multiple linear regression models.
+
+First, we'll explore some foundations using a model of penguin `flipper_length_mm` by just 2 predictors: `bill_length_mm` (quantitative) and `species` (categorical).
+
+
+## Exercise 1: Visualizing the relationship
+
+We've learned how to visualize the relationship of `flipper_length_mm` by `bill_length_mm` alone:
+
+```{r eval=FALSE}
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm)) + 
+    geom_point()
+```
+
+a. THINK: How might we change the scatterplot points to *also* indicate information about penguin `species`? (There's more than 1 approach!)
+
+b. Try out your idea by modifying the code below. If you get stuck, talk with the tables around you!
+
+```{r eval=FALSE}
+penguins %>%
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, ___ = ___)) +
+    geom_point()
+```
+
+
+
+
+
+## Exercise 2: Visualizing the model
+
+We've also learned that a simple linear regression model of `flipper_length_mm` by `bill_length_mm` alone can be represented by a line:
+
+```{r eval=FALSE}
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm)) + 
+    geom_point() + 
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+a. THINK: Reflecting on your plot of `flipper_length_mm` by `bill_length_mm` and `species` in Exercise 1, how do you think a *multiple* regression model of `flipper_length_mm` using *both* of these predictors would be represented?
+
+b. Check your intuition below by modifying the code below to include `species` in this plot, as you did in Exercise 1.
+
+```{r eval=FALSE}
+penguins %>%
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, ___ = ___)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+
+
+## Exercise 3: Intuition
+
+Your plot in Exercise 2 demonstrated that the **multiple linear regression model** of `flipper_length_mm` by `bill_length_mm` and `species` is represented by 2 lines. 
+
+Let's interpret those lines!
+
+For each question, provide an answer along with evidence from the model lines that supports your answer.
+
+a. What's the relationship between `flipper_length_mm` and `species`, no matter a penguin's `bill_length_mm`? 
+
+
+b. What's the relationship between `flipper_length_mm` and `bill_length_mm`, no matter a penguin's `species`?
+
+
+c. Does the rate of increase in `flipper_length_mm` with `bill_length_mm` differ between the two `species`?
+
+
+
+
+
+
+
+
+
+## Exercise 4: Model formula
+
+Of course, there's a formula behind the multiple regression model.
+
+We can obtain this using the usual `lm()` function.
+
+```{r eval=FALSE}
+# Build the model
+penguin_mod <- lm(flipper_length_mm ~ bill_length_mm + species, data = penguins)
+
+# Summarize the model
+coef(summary(penguin_mod))
+```
+
+
+a. In the `lm()` function, how did we communicate that we wanted to model `flipper_length_mm` by both `bill_length_mm` and `species`?
+
+
+b. Complete the following model formula:    
+    
+    E[flipper_length_mm | bill_length_mm, speciesGentoo] = ___ + ___ * bill_length_mm + ___ * speciesGentoo
+
+
+
+
+
+
+## Exercise 5: Sub-model formulas
+
+Ok. We now have a single *formula* for the model.
+
+And we observed earlier that this formula is represented by two lines: one describing the relationship between `flipper_length_mm` and `bill_length_mm` for `Chinstrap` penguins and the other for `Gentoo` penguins.
+
+Let's bring these ideas together.
+
+Utilize the model formula to obtain the equations of these two lines, i.e. to obtain the *sub-model formulas* for the 2 species. Hint: Plug speciesGentoo = 0 and speciesGentoo = 1.        
+    
+Chinstrap: flipper_length_mm = ___ + ___ bill_length_mm
+
+Gentoo:    flipper_length_mm = ___ + ___ bill_length_mm
+
+
+
+
+
+## Exercise 6: coefficients -- physical interpretation
+
+Reflecting on Exercise 5, let's interpret what the model coefficients tell us about the *physical* properties of the two 2 sub-model lines.
+Choose the correct option given in parentheses:        
+
+a. The intercept coefficient, 127.75, is the intercept of the line for (Chinstrap / Gentoo) penguins.
+
+b. The `bill_length_mm` coefficient, 1.40, is the (intercept / slope) of both lines.
+
+c. The `speciesGentoo` coefficient, 22.85, indicates that the (intercept / slope) of the line for Gentoo is 22.85mm higher than the (intercept / slope) of the line for Chinstrap. Similarly, since the lines are parallel, the line for Gentoo is 22.85mm higher than the line for Chinstrap at any `bill_length_mm`.
+    
+    
+
+
+
+## Exercise 7: coefficients -- contextual interpretation
+
+Next, interpret each coefficient in a *contextually* meaningful way.
+What do they tell us about penguin flipper lengths?!
+
+a. Interpret 127.75 (intercept of the Chinstrap line).
+
+b. Interpret 1.40 (slope of both lines). For both Chinstrap and Gentoo penguins, we expect...
+
+c. Interpret 22.85. At any `bill_length_mm`, we expect...
+    
+    
+
+
+
+
+## Exercise 8: Prediction
+
+Now that we better understand the model, let's use it to predict flipper lengths!
+
+Recall the model summary and visualization:
+
+```{r eval=FALSE}
+coef(summary(penguin_mod))
+
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + 
+    geom_point() + 
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+a. Predict the flipper length of a Chinstrap penguin with a 50mm long bill. Make sure your calculation is consistent with the plot.       
+
+```{r eval=FALSE}
+127.75 + 1.40*___ + 22.85*___
+```    
+
+
+b. Predict the flipper length of a Gentoo penguin with a 50mm long bill. Make sure your calculation is consistent with the plot.       
+
+```{r eval=FALSE}
+127.75 + 1.40*___ + 22.85*___
+```    
+
+c. Use the `predict()` function to confirm your predictions in parts a and b.
+
+```{r eval=FALSE}
+# Confirm the calculation in part a
+predict(penguin_mod,
+        newdata = data.frame(bill_length_mm = ___, species = "___"))
+
+# Confirm the calculation in part b
+predict(penguin_mod,
+        newdata = data.frame(bill_length_mm = ___, species = "___"))
+```
+
+
+
+
+
+
+## Exercise 9: R-squared
+
+Finally, recall that improving our predictions was one motivation for multiple linear regression (using 2 predictors instead of 1).
+
+To this end, consider the R-squared values of the simple linear regression models that use just *one* predictor at a time:
+
+```{r eval=FALSE}
+summary(lm(flipper_length_mm ~ bill_length_mm, data = penguins))$r.squared
+
+summary(lm(flipper_length_mm ~ species, data = penguins))$r.squared
+```
+
+
+a. If you had to use only *1* of our 2 predictors, which would give the better predictions of `flipper_length_mm`?
+
+b. What do you *guess* is the R-squared of our multiple regression model that uses *both* of these predictors? Why?
+
+c. Check your intuition. How does the R-squared of our multiple regression model compare to that of the 2 separate simple linear regression models? 
+
+```{r eval=FALSE}
+summary(penguin_mod)$r.squared
+```
+
+
+
+
+
+
+
+
+
+## Reflection
+
+You've now explored your first multiple regression model!
+Thus you likely have a lot of questions about what's to come.
+What are they?
+
+> **Response:** Put your response here.
+
+
+
+
+<br><br><br><br><br><br>
+
+
+
+
+# Solutions
+
+
+## Exercise 1: Visualizing the relationship
+
+a. no wrong answer
+
+b. There are multiple options!
+
+```{r}
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + 
+    geom_point()
+
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, shape = species)) + 
+    geom_point()
+```
+
+
+
+
+
+
+
+
+
+
+## Exercise 2: Visualizing the model
+
+a. no wrong answer
+
+b. 
+
+```{r}
+penguins %>% 
+    ggplot(aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + 
+    geom_point() + 
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+
+
+
+## Exercise 3: Intuition
+
+a. Gentoo tend to have longer flippers.
+b. Flipper length is positively associated with bill length.
+c. No. the lines are parallel / have the same slopes.
+
+
+
+
+
+
+
+
+
+## Exercise 4: Model formula
+
+```{r}
+# Build the model
+penguin_mod <- lm(flipper_length_mm ~ bill_length_mm + species, data = penguins)
+
+# Summarize the model
+coef(summary(penguin_mod))
+```
+
+
+a.  `bill_length_mm + species`
+b. E[flipper_length_mm | bill_length_mm, speciesGentoo] = 127.75 + 1.40 * bill_length_mm + 22.85 * speciesGentoo
+
+
+
+
+
+
+## Exercise 5: Sub-model formulas
+
+Chinstrap: flipper_length_mm = 127.75 + 1.40 bill_length_mm
+
+Gentoo:    flipper_length_mm = (127.75 + 22.85) + 1.40 bill_length_mm = 150.6 + 1.40 bill_length_mm
+
+
+
+
+
+## Exercise 6: coefficients -- physical interpretation
+
+a. The intercept coefficient, 127.75, is the intercept of the line for **Chinstrap** penguins.
+
+b. The `bill_length_mm` coefficient, 1.40, is the **slope** of both lines.
+
+c. The `speciesGentoo` coefficient, 22.85, indicates that the **intercept** of the line for Gentoo is 22.85mm higher than the **intercept** of the line for Chinstrap. Similarly, since the lines are parallel, the line for Gentoo is 22.85mm higher than the line for Chinstrap at any `bill_length_mm`.
+    
+    
+
+
+
+## Exercise 7: coefficients -- contextual interpretation
+
+a. For Chinstrap penguins with 0mm bills (silly), we expect a flipper length of 127.75mm.
+
+b. For both Chinstrap and Gentoo penguins, flipper lengths increase by 1.40mm on average for every additional mm in bill length.
+
+c. At any `bill_length_mm`, we expect the a Gentoo penguin to have 22.85mm longer flippers than a Chinstrap, on average.
+
+
+
+
+
+## Exercise 8: Prediction
+
+```{r}
+# a
+127.75 + 1.40*50 + 22.85*0
+
+# b
+127.75 + 1.40*50 + 22.85*1
+
+# c
+predict(penguin_mod,
+        newdata = data.frame(bill_length_mm = 50, 
+                             species = "Chinstrap"))
+predict(penguin_mod,
+        newdata = data.frame(bill_length_mm = 50, 
+                             species = "Gentoo"))
+```
+
+
+
+
+
+
+## Exercise 9: R-squared
+
+```{r}
+summary(lm(flipper_length_mm ~ bill_length_mm, data = penguins))$r.squared
+
+summary(lm(flipper_length_mm ~ species, data = penguins))$r.squared
+```
+
+a. species
+b. no wrong answer
+c. It's higher than the R-squared when we use either predictor alone!
+
