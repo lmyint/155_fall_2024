@@ -545,12 +545,17 @@ predict(penguin_mod,
 ## Exercise 9: R-squared
 
 ```{r}
+# Single predictor: bill length
 summary(lm(flipper_length_mm ~ bill_length_mm, data = penguins))$r.squared
 
+# Single predictor: species
 summary(lm(flipper_length_mm ~ species, data = penguins))$r.squared
+
+# Both predictors
+summary(penguin_mod)$r.squared
 ```
 
 a. species
 b. no wrong answer
-c. It's higher than the R-squared when we use either predictor alone!
+c. It's higher than the R-squared when we use either predictor alone! We can interpret the R-squared of the model with both predictors (0.8219244): 82% of the variation in flipper length is explained by our model with bill length and species as predictors.
 

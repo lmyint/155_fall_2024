@@ -413,7 +413,7 @@
     "href": "activities/08_mlr_intro.html#exercise-9-r-squared-1",
     "title": "Introduction to multiple regression",
     "section": "Exercise 9: R-squared",
-    "text": "Exercise 9: R-squared\n\nsummary(lm(flipper_length_mm ~ bill_length_mm, data = penguins))$r.squared\n\n[1] 0.02881163\n\nsummary(lm(flipper_length_mm ~ species, data = penguins))$r.squared\n\n[1] 0.7013577\n\n\n\nspecies\nno wrong answer\nIt’s higher than the R-squared when we use either predictor alone!",
+    "text": "Exercise 9: R-squared\n\n# Single predictor: bill length\nsummary(lm(flipper_length_mm ~ bill_length_mm, data = penguins))$r.squared\n\n[1] 0.02881163\n\n# Single predictor: species\nsummary(lm(flipper_length_mm ~ species, data = penguins))$r.squared\n\n[1] 0.7013577\n\n# Both predictors\nsummary(penguin_mod)$r.squared\n\n[1] 0.8219244\n\n\n\nspecies\nno wrong answer\nIt’s higher than the R-squared when we use either predictor alone! We can interpret the R-squared of the model with both predictors (0.8219244): 82% of the variation in flipper length is explained by our model with bill length and species as predictors.",
     "crumbs": [
       "Introduction to multiple regression"
     ]
