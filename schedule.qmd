@@ -170,7 +170,7 @@ Before class
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
+::: {.callout-tip icon=false collapse="true" title="Week 4: 9/23 - 9/27 (Simple linear regression: categorical predictors)"}
 #### Announcements
 
 - No Practice Problems due this week to allow time to study for Quiz 1 this Friday 9/27.

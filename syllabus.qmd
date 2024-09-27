@@ -61,6 +61,10 @@ Ryan will be the preceptor dedicated to our section and will sometimes come to c
 
 In addition, the Macalester Academic Excellence (MAX) Center provides tutoring for STAT 155. Check out their [website](https://www.macalester.edu/max/science-quantitative-support/stats/) for more information and their tutoring schedule.
 
+::: {.callout-note title="The role of preceptors"}
+The role of an MSCS preceptor is to help students with content questions, assist in the navigation of available resources, advise on studying approaches for classes, and assist with concepts, tools, and skills needed for problem sets. Students are accountable for their own learning; as such, preceptors are not allowed to share answers to assignments (unless specifically directed by the instructor), are not expected to immediately know the right approach, or provide assistance outside of office hours. Additional guidelines and expectations on how to interact with preceptors can be [here](https://docs.google.com/document/d/1USu-3R1NsGDVm0yU0HTzHuTpzCD3onBjNI5n8w9VBik/edit?usp=sharing).
+:::
+
 ## Contacting the instructor
 
 I love getting to talk to students outside of class time---whether about class-related topics or anything else. Come chat with me!
