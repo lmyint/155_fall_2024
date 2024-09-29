@@ -36,6 +36,7 @@ website:
         - activities/06_slr_transformations.qmd
         - activities/07_slr_cat_predictor.qmd
         - activities/08_mlr_intro.qmd
+        - activities/09_mlr_principles.qmd
 
     - id: homework
       title: "Practice Problems"
