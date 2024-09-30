@@ -7,7 +7,7 @@ A detailed description of the group project can be found [here](https://docs.goo
 
 # Important dates
 
-- Friday, October 11: Project Checkpoint 1 due
+- Wednesday, October 16: Project Checkpoint 1 due (ignore the Friday, October 11 mentioned in the Google Doc above)
 - Tuesday, November 26: Project Checkpoint 2 due
 - Wednesday, December 11: Project paper due, presentations in class
 

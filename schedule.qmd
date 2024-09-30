@@ -201,6 +201,9 @@ Quiz 1 (1 hour in class)
 #### Announcements
 
 - [Practice Problems #3 (PP3)](assignments/pp3.qmd) due Friday 10/4 at 5pm
+- Take a look at [project group assignments](https://moodle.macalester.edu/mod/url/view.php?id=138952) posted on Moodle.
+    - Work on connecting with your team, finding a dataset, and working on Project Checkpoint 1.
+    - Wednesday, October 16: Project Checkpoint 1 due (ignore the Friday, October 11 mentioned in the Google Doc description of the project at the top of the [project page](project.qmd))
 
 #### Monday (9/30)
 
