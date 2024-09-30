@@ -466,11 +466,15 @@ weekends: rides = 4738.38 - 63.97 windspeed - 925.16 = 3813.22 - 63.97 windspeed
 
 ## Exercise 3: Review coefficient interpretation
 
-a. We expect roughly 4738 riders on **weekdays with 0 windspeed**.
+a. On average, there are roughly 4738 riders on **weekdays with 0 windspeed**.
 
-b. On both weekends and weekdays, we expect 64 fewer riders for every 1mph increase in windspeed.
+b.
+    - On both weekends and weekdays, every 1 mph increase in windspeed is associated with 64 fewer riders on average.
+    - Holding day type fixed (weekend or weekday), every 1 mph increase in windspeed is associated with 64 fewer riders on average.
 
-c. At any windspeed, we expect 925 *fewer* riders on weekend days than on weekdays.
+c. 
+    - At any windspeed, weekend days have an average of 925 *fewer* riders than weekdays.
+    - Holding windspeed fixed, weekend days have an average of 925 *fewer* riders than weekdays.
 
 
 
@@ -505,16 +509,16 @@ coef(summary(bike_model_2))
 a.
 
 ```{r}
-#fall weekday:    
+# fall weekday:    
 4260.45 - 912.33*0 - 116.38*0 + 438.44*0 - 1719.06*0
 
-#winter weekday:
+# winter weekday:
 4260.45 - 912.33*0 - 116.38*0 + 438.44*0 - 1719.06*1
 
-#fall weekend:    
+# fall weekend:    
 4260.45 - 912.33*1 - 116.38*0 + 438.44*0 - 1719.06*0
 
-#winter weekend:
+# winter weekend:
 4260.45 - 912.33*1 - 116.38*0 + 438.44*0 - 1719.06*1
 ```
 
@@ -524,9 +528,14 @@ b. 8: 2 weekend categories * 4 season categories
 ## Exercise 7: 2 categorical predictors – interpret the model
 
 
-a. We expect there to be 4260 riders on **weekdays** during the **fall**.
-b. *In any season*, we expect there to be 912 **fewer** riders on weekends than on **weekdays**.
-c. *On both weekdays and weekends*, we expect there to be 1719 **fewer** riders in winter than in **fall**.
+a. On average there are 4260 riders on **weekdays** during the **fall**.
+b. 
+    - *In any season*, there are on oaverage 912 **fewer** riders on weekends than on weekdays.
+    - Holding season constant (for a fixed season), there are on average 912 **fewer** riders on weekends than on weekdays.
+
+c.
+    - *On both weekdays and weekends*, there are on average 1719 **fewer** riders in winter than in **fall**.
+    - Holding day type constant (weekday vs. weekend), there are on average 1719 **fewer** riders in winter than in **fall**.
 
 
 
@@ -569,9 +578,14 @@ coef(summary(bike_model_3))
 
 a. -24.06 = typical ridership on days with 0 windspeed and a 0 degree temperature. (This doesn't make contextual sense, but indicates where the plane "lives" in space!)
 
-b. No matter the temperature, we expect 37 fewer riders for every 1mph increase in windspeed.
+b.
+    - No matter the temperature, every 1 mph increase in windspeed is associated with an average of 37 fewer riders.
+    - Holding temperature constant, every 1 mph increase in windspeed is associated with an average of 37 fewer riders.
 
-c. No matter the windspeed, we expect 56 more riders for every 1 degree increase in temperature.
+c.
+    - No matter the windspeed, every 1 degree Fahrenheit increase in temperature is associated with an average of 56 more riders.
+    - Holding windspeed constant, every 1 degree Fahrenheit increase in temperature is associated with an average of 56 more riders.
+    
 
 
 
@@ -582,10 +596,7 @@ a. model 2
 b. temperature
 c. R-squared increases (our model is stronger when we include another predictor)
 d. nope. model 1 (with windspeed and weekend) has a lower R-squared than model 5 (with only temperature)
-    
 
-\
-\
 
 
 ## Exercise 13: Practice 1    
@@ -601,17 +612,11 @@ coef(summary(new_model_1))
 
 
 
-- The typical ridership on a *weekday* with *nice* weather (categ1) is 4212 rides.    
+- The average ridership on a *weekday* with *nice* weather (categ1) is 4212 rides.    
 
-- On days with similar weather, the typical ridership on a *weekend* is 982 rides less than on weekdays.    
+- On days with the same weather (holding weather category constant), the average ridership on a *weekend* is 982 rides less than on weekdays.    
 
-- On similar days of the week, the typical ridership when the weather is "dreary" (categ2) is 609 rides less than when the weather is nice.    
-
-
-
-\
-\
-
+- On days of the same type (weekend vs weekday) (holding day type constant), the average ridership when the weather is "dreary" (categ2) is 609 rides less than when the weather is nice.
 
 
 
@@ -627,14 +632,9 @@ coef(summary(new_model_2))
 
 - It doesn't really make sense to interpret the intercept -- we didn't see any days that were 0 degrees with 0 humidity.    
 
-- On days with similar humidity, the typical ridership increases by 60 rides for each 1 degree increase in temperature.    
+- On days with the same humidity (holding humidity constant), each 1 degree increase in temperature is associated with a decrease in 60 rides on average.
 
-- On days with similar temperature, the typical ridership decreases by 1867 * 0.1 = 187 rides for each 0.1 increase in humidity levels.    
-
-
-
-\
-\
+- On days with the same temperature (holding temperature constant), each 1 unit increase in humidity (which corresponds to a change from 0 to 100 percent!) is associated with a decrease of 1867 rides on average. On a more sensible scale, a 10% increase in humidity is linked with an average of 1867 * 0.1 = 187 fewer rides.
 
 
 
@@ -648,14 +648,14 @@ coef(summary(new_model_3))
 bikes %>% 
     ggplot(aes(y = rides, x = temp_feel, color = weather_cat)) + 
     geom_point() + 
-    geom_line(aes(y = new_model_3$fitted.values), size = 1.5)
+    geom_line(aes(y = new_model_3$fitted.values), linewidth = 1.5)
 ```
 
-- It doesn't really make sense to interpret the intercept -- we didn't see any days that were 0 degrees.    
+- It doesn't really make sense to interpret the intercept -- we didn't see any days that were 0 degrees.
 
-- On days with similar weather, the typical ridership increases by 55 rides for each 1 degree increase in temperature.    
+- On days with the same weather (holding weather category constant), every 1 degree increase in temperature is associated with an average increase of 55 rides.
 
-- On days with similar temperature, the typical ridership is 386 rides lower on a dreary weather day (categ2) than a nice weather day (categ1).  
+- On days with the same temperature (holding temperature constant), average ridership is 386 rides lower on a dreary weather day (categ2) than a nice weather day (categ1).
 
 
 ## Exercise 16: CHALLENGE
@@ -670,10 +670,13 @@ new_model_4 <- lm(rides ~ temp_feel + humidity + weekend, bikes)
 coef(summary(new_model_4))
 ```
 
-- It doesn't really make sense to interpret the intercept -- we didn't see any days that were 0 degrees.    
-- On days with similar humidity and time of week, the typical ridership increases by 59 rides for each 1 degree increase in temperature.    
-- On days with similar temperature and time of week, the typical ridership decreases by 1906*0.1 = 190.6 rides for each 0.1 point increase in humidity levels.         
-- On days with similar temperature and humidity, the typical ridership is 869 rides lower on weekends vs weekdays. 
+- It doesn't really make sense to interpret the intercept -- we didn't see any days that were 0 degrees.
+
+- On days with the same humidity and time of week (holding humidity and day type constant), each 1 degree increase in temperature is associated with an increase of 59 rides on average.
+
+- On days with the same temperature and time of week (holding temperature and day type constant), each 0.1 point increase (10%) in humidity levels is associated with 1906*0.1 = 190.6 rides fewer rides on average.
+
+- On days with the same temperature and humidity (holding temperature and humidity constant), average ridership is 869 rides lower on weekends than on weekdays.
 
 
 This model would look like 2 parallel planes, one for weekends and one for weekdays! Why?  `rides` vs `temp_feel` (quant) would be a line. Adding in `humidity` (quant) would turn the model into a plane. Adding in `weekend` (cat) would split this one plane into two unique planes, one for each weekend category!
