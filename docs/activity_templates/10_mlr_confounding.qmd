@@ -1,7 +1,10 @@
 ---
 title: "Confounding variables"
 subtitle: "Notes and in-class exercises"
-sidebar: false
+format: 
+  html:
+    embed-resources: true
+    toc: true
 ---
 
 # Notes
@@ -52,7 +55,7 @@ head(peaks)
 
 Below is a model of the `time` (in hours) that it takes to complete a hike by the hike's `length` (in miles), vertical `ascent`(in 1000s of feet), and `rating` (easy, moderate, or difficult):
 
-```{r eval=FALSE}
+```{r}
 peaks_model <- lm(time ~ length + ascent + rating, data = peaks)
 coef(summary(peaks_model))
 ```
@@ -101,7 +104,7 @@ head(cps)
 
 Recall that a **simple linear regression model** of `wage` by `marital` suggests that single workers make $17,052 *less* than married workers:
 
-```{r eval=FALSE}
+```{r}
 wage_model_1 <- lm(wage ~ marital, data = cps)
 coef(summary(wage_model_1))
 ```
@@ -171,7 +174,7 @@ That's one of the superpowers of **multiple linear regression**.
 
 Let's start simple, by *controlling for* age in our model of wages by marital status:
 
-```{r eval=FALSE}
+```{r}
 # Construct the model
 wage_model_2 <- lm(wage ~ marital + age, cps)
 coef(summary(wage_model_2))
@@ -180,7 +183,7 @@ coef(summary(wage_model_2))
 
 a. Visualize this model by modifying the code below. Note: The last line makes sure that the `geom_smooth` matches our model assumptions.
 
-```{r eval=FALSE}
+```{r}
 ggplot(cps, aes(y = ___, x = ___, color = ___)) +
     geom____(size = 0.1, alpha = 0.5) +
     geom_line(aes(y = wage_model_2$fitted.values), linewidth = 1.25)
@@ -202,7 +205,7 @@ Let's control for even more potential confounders!
 
 Model wages by marital status while controlling for `age` *and* years of `education`:   
 
-```{r eval=FALSE}
+```{r}
 wage_model_3 <- lm(wage ~ marital + age + education, cps)
 coef(summary(wage_model_3))
 ```
@@ -220,7 +223,7 @@ c. Interpret the two other coefficients in this model.
 
 Let's control for *another* potential confounder, the job `industry` in which one works (categorical):
 
-```{r eval=FALSE}
+```{r}
 wage_model_4 <- lm(wage ~ marital + age + education + industry, cps)
 coef(summary(wage_model_4))
 ```
@@ -235,7 +238,7 @@ a. Interpret the main coefficient of interest for our research question.
 
 b. When controlling for a worker's age, marital status, and education level, which industry tends to have the highest wages? The lowest? Note: the following table shows the 6 industries:
 
-```{r eval=FALSE}
+```{r}
 cps %>% count(industry)
 ```
 
@@ -251,6 +254,10 @@ cps %>% count(industry)
 Build a model that helps us explore `wage` by `marital` status while controlling for: `age`, `education`, job `industry`, typical number of work `hours`, and `health` status.
 
 Store this model as `wage_model_5`.
+
+```{r}
+
+```
 
 
 
@@ -328,7 +335,7 @@ I1       imperfect
 
 a. Check out a model of `price` by `clarity`. What clarity has the highest average price? The lowest? (This is surprising!)       
 
-```{r eval=FALSE}
+```{r}
 diamond_model_1 <- lm(price ~ clarity, data = diamonds)
 
 # Get a model summary
@@ -349,7 +356,7 @@ It turns out that `carat`, the *size* of a diamond, is an important confounding 
 
 Let's explore what happens when we control for this in our model:
 
-```{r eval=FALSE}
+```{r}
 diamond_model_2 <- lm(price ~ clarity + carat, data = diamonds)
 
 # Get a model summary
@@ -418,226 +425,4 @@ Which diamonds are more expensive: flawed ones or flawless ones?
 Write a one-sentence warning label for what might happen if we do *not* control for confounding variables in our model.
 
 > **Response:** Put your response here.
-
-
-
-
-
-
-
-
-# Solutions
-
-
-
-## Exercise 1: Review
-
-```{r}
-peaks_model <- lm(time ~ length + ascent + rating, data = peaks)
-coef(summary(peaks_model))
-```
-
-- `length` coefficient:
-    - Among hikes with the same vertical ascent and challenge rating, each additional mile of the hike is associated with a 0.46 hour increase in completion time on average.
-    - Holding vertical ascent and challenge rating constant (fixed), each additional mile of the hike is associated with a 0.46 hour increase in completion time on average.
-
-- `ratingeasy` coefficient:
-    - Among hikes with the same length and vertical ascent, the average completion time of easy hikes is 3.2 hours less than that of difficult hikes (reference category).
-    - Holding constant hike length and vertical ascent, the average completion time of easy hikes is 3.2 hours less than that of difficult hikes.
-
-
-
-
-## Exercise 2: Confounders
-
-age, education, job industry, ...
-
-
-
-
-## Exercise 3: Controlling for confounders
-
-a. create 2 separate groups that are as similar as possible with respect to these variables. give the groups different remedies.
-
-b. we'd have to get 2 groups that are similar with respect to age, and assign 1 group to get married and 1 group to be single. that would be weird (and unethical).
-
-
-
-## Exercise 4: Age
-
-```{r}
-# Construct the model
-wage_model_2 <- lm(wage ~ marital + age, cps)
-coef(summary(wage_model_2))
-```
-
-a. .
-
-```{r}
-cps %>%
-ggplot(aes(y = wage, x = age, color = marital)) +
-    geom_point(size = 0.1, alpha = 0.5) +
-    geom_line(aes(y = wage_model_2$fitted.values), size = 1.25)
-```    
-
-b. -$7500
-
-
-c. 
-    - When controlling for ("holding constant") age, single workers make $7500 less than married workers on average.
-    - Among workers of the same age, single workers make $7500 less than married workers on average.
-    
-
-    
-    
-
-
-
-## Exercise 5: More confounders
-
-```{r}
-wage_model_3 <- lm(wage ~ marital + age + education, cps)
-coef(summary(wage_model_3))
-```
-
-a. 2 planes: There are 2 quantitative predictors which form the dimensions of the plane. The marital status categorical predictor creates 2 planes.
-
-b. The `maritalsingle` coefficient is of main interest:
-    - Among workers of the same age and years of education, single workers earn $6478 less than married workers.
-
-c.
-    - `age` coefficient: Among workers of the same marital status and years of education, each additional year of age is associated with a $1677 increase in salary on average.
-    - `education` coefficient: Among workers of the same marital status and age, each additional year of education is associated with a $4285 increase in salary on average.
-
-
-
-
-
-## Exercise 6: Even more
-
-```{r}
-wage_model_4 <- lm(wage ~ marital + age + education + industry, cps)
-coef(summary(wage_model_4))
-```
-
-a. Among workers of the same job industry, education, and age, single workers make $5893 less than a married worker on average.
-
-b. highest = construction (because it has the highest positive coefficient), lowest = service (because it has the most negative coefficient)
-
-
-
-
-
-## Exercise 7: Biggest model yet
-
-```{r}
-wage_model_5 <- lm(wage ~ marital + age + education + industry + hours + health, cps)
-coef(summary(wage_model_5))
-```
-
-
-
-
-
-## Exercise 8: Reflection
-
-a. These confounders explained away more and more of the wage gap between single and married workers.
-b. Answers will vary. A potential factor that we haven't considered is a worker's role within a given industry.
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Exercise 9: A new (extreme) example
-
-clarity  description
--------- ------------------------------------------------
-IF       flawless (no internal imperfections) 
-VVS1     very very slightly imperfect
-VVS2     " "
-VS1      very slightly imperfect
-VS2      " "
-SI1      slightly imperfect
-SI2      " "
-I1       imperfect
-
-```{r}
-diamond_model_1 <- lm(price ~ clarity, data = diamonds)
-
-# Get a model summary
-coef(summary(diamond_model_1))
-```
-
-a. highest = SI2, lowest = VVS1
-
-b. will vary.
-    
-    
-
-
-
-
-
-## Exercise 10: Size
-
-```{r}
-diamond_model_2 <- lm(price ~ clarity + carat, data = diamonds)
-
-# Get a model summary
-coef(summary(diamond_model_2))
-
-# Plot the model
-diamonds %>% 
-    ggplot(aes(y = price, x = carat, color = clarity)) + 
-    geom_line(aes(y = diamond_model_2$fitted.values))
-```
-
-highest = IF, lowest = I1 (reference category)
-
-This is what we would have expected!
-
-
-
-
-
-
-
-
-## Exercise 11: Simpson's Paradox
-
-The bigger the diamond the bigger the price:
-
-```{r}
-diamonds %>% 
-    ggplot(aes(y = price, x = carat)) + 
-    geom_point()
-```
-
-
-BUT the bigger the diamond, the more flawed it tends to be:
-
-```{r}
-diamonds %>% 
-    ggplot(aes(y = carat, x = clarity)) + 
-    geom_boxplot()
-```
-
-
-Thus flawed diamonds looked more expensive, but only because they also tend to be bigger (and size is a bigger driver of price).
-
-
-
-
-## Exercise 12: Final conclusion
-
-Flawless diamonds are more expensive.
-    
 
