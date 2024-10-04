@@ -239,7 +239,7 @@ Time to work on practice problems, project in class
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 6: 10/7 - 10/11 (Multiple linear regression: interaction)"}
+::: {.callout-tip icon=false collapse="false" title="Week 6: 10/7 - 10/11 (Multiple linear regression: interaction)"}
 #### Announcements
 
 - Intro to R/RStudio Workshop, Thursday, Oct 10, noon-1pm, Library 250
@@ -259,6 +259,7 @@ Before class:
 #### Wednesday (10/9)
 
 Before class:
+
 - Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=138985) (CP8) on Moodle.
     - See checkpoint description for links to the readings/videos.
     - Due 30 minutes before class today (11:30am).
