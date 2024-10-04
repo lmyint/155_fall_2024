@@ -1,0 +1,137 @@
+---
+title: "Practice Problems 4"
+sidebar: false
+eval: false
+---
+
+<center>
+**Due Friday, 10/11 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=140137).**
+</center>
+
+# Purpose
+
+The goal of this set of practice problems is to practice the following skills:
+
+- Visualize interactions between categorical and quantitative predictors
+- Write a model formula with an interaction term
+- Interpret coefficients in an interaction model in context
+- Critically determine whether interaction terms should be included in multiple linear regression models
+
+**You can download a template to start from [here](../activity_templates/pp4.qmd).**
+
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, and `readr` packages. Include the following commands in the code chunk to read in *two* data sets: 
+
+- `enroll <- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")`
+- `bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")`
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+# Exercises
+
+## Context
+
+### School Enrollment
+
+For Exercises 1-4, we'll revisit the data from the World Bank on secondary school enrollment that we worked with in Practice Problems #2. As a reminder, the context from that assignment is pasted below.
+
+We have access to the following information:
+
+- `Country`: country name
+- `Year`: year enrollment was measured (ranges from 2004 - 2019)
+- `GER`: gross enrollment rate in secondary school (%)
+- `NER`: net enrollment rate in secondary school (%)
+
+Net enrollment rate (NER) is the ratio of children who are *of secondary school age* who are enrolled in secondary school, out of the total number of children of secondary school age. In contrast, gross enrollment rate (GER) is the ratio of children who are enrolled in secondary school *regardless of age*, out of the total number of children of secondary school age. NER ranges from 0 to 100%, since it is a true proportion, while GER can exceed 100% (some children who are *not* of secondary school age may in fact be enrolled).
+
+Historically, NER is more difficult to measure than GER (particularly in low- and middle-income countries), since it requires knowledge of the age of the children enrolled in school. 
+
+A relevant research question is: If we know GER, can we accurately predict NER? In order to answer this question, we first want to better understand the relationship between GER and NER.
+
+### Bikes
+
+For Exercises 5-7, we'll revisit the data on bike ridership. We've looked at many of the variables included in this dataset so far in this course, but suppose we are now interested in how season impacts the relationship between actual temperature and number of total riders. This is the question we'll explore in this assignment.
+
+## Exercise 1: Define a new variable and visualize
+
+### Part a
+
+Just as in Practice Problems #2, construct an appropriate visualization of the `GER` and `NER` variables (`NER` should be the dependent variable in your visualization). You may copy your code from the previous assignment.
+
+At roughly what value of GER does the relationship between GER and NER appear to change?
+
+### Part b
+
+Define a binary (indicator) variable called `GER_binary`, that has value 0 when `GER` is less than 100, and 1 when `GER` is greater than or equal to 100. 
+
+## Exercise 2: Compare models with and without interaction
+
+In Practice Problems #2, we noted that a linear regression model did not accurately reflect the relationship between GER and NER. We'll now compare that same simple linear regression model to a multiple linear regression model with an interaction term between `GER` and `GER_binary`.
+
+Fit both of these models.
+
+## Exercise 3: Assess 
+
+### Part a
+
+For each of the two models you fit in Exercise 2, plot residuals vs. fitted values. Does the model with the interaction term appear to better predict `NER` than the simple linear regression model? Explain why or why not.
+
+### Part b
+
+Compare the multiple $R^2$ values from each model. Based on these values, which model is stronger?
+
+## Exercise 4: Visualize Interaction Term - School Enrollment
+
+It may seem strange to include an interaction term between `GER` and another variable that was created from `GER` itself, but this is actually a special type of interaction term that creates what is called a *piecewise linear regression model*. It allows both the slope and intercept of the regression line to change at specific values of a predictor. Fill in the code below to visualize this model.
+
+```{r}
+# Generate predictions from model with interaction term
+newdat <- data.frame(GER = seq(from = min(enroll$GER), 
+                               to = max(enroll$GER), by = 0.01)) %>%
+  mutate(GER_binary = ifelse(GER < 100, 0, 1))
+
+# Fill in your interaction model object below for ___
+newdat$NER <- predict(___, newdata = newdat)
+
+ggplot() +
+  geom_point(data = enroll, aes(GER, NER)) +
+  geom_line(data = newdat, aes(GER, NER), col = "red", size = 1)
+```
+
+## Exercise 6: Visualize Interaction Term - Bikes
+
+Recall that we are now interested in how season impacts the relationship between actual temperature and number of total riders. Make an appropriate visualization (consider number of total riders as your outcome variable) to display this impact. Comment on what you notice from the visual.
+
+## Exercise 5: Model statement and fitting
+
+Write a model statement in the form $E[Y | X, Z] = ...$ in context, that would allow us to answer the research question we're interested in. Additionally, note which regression coefficient will be the relevant one to interpret that will directly address our research question.
+
+Fit this multiple linear regression model.
+
+## Exercise 6: Interpretation and Conclusions
+
+Interpret the regression coefficient you noted would directly address the research question we're interested in. *Make sure to use appropriate causation vs. association language, include units, and talk about averages rather than individual cases.*
+
+Write a paragraph conclusion about the results of your analysis, fit for a news article. Does season appear to meaningfully impact the relationship between actual temperature and number of total riders? What impact would this have on cities looking to start bikeshare programs? Should more bikes be provided or expected in certain seasons based on temperature conditions? Explain why or why not.
+
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STAT 155 - Practice Problems 2</title>
+<title>STAT 155 - Practice Problems 4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -227,24 +261,26 @@ window.Quarto = {
   <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
-  <li><a href="#exercise-1-visual-and-numerical-summaries" id="toc-exercise-1-visual-and-numerical-summaries" class="nav-link" data-scroll-target="#exercise-1-visual-and-numerical-summaries">Exercise 1: Visual and numerical summaries</a>
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
+  <li><a href="#school-enrollment" id="toc-school-enrollment" class="nav-link" data-scroll-target="#school-enrollment">School Enrollment</a></li>
+  <li><a href="#bikes" id="toc-bikes" class="nav-link" data-scroll-target="#bikes">Bikes</a></li>
+  </ul></li>
+  <li><a href="#exercise-1-define-a-new-variable-and-visualize" id="toc-exercise-1-define-a-new-variable-and-visualize" class="nav-link" data-scroll-target="#exercise-1-define-a-new-variable-and-visualize">Exercise 1: Define a new variable and visualize</a>
   <ul class="collapse">
   <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
   <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
   </ul></li>
-  <li><a href="#exercise-2-fitting-a-simple-linear-regression-model" id="toc-exercise-2-fitting-a-simple-linear-regression-model" class="nav-link" data-scroll-target="#exercise-2-fitting-a-simple-linear-regression-model">Exercise 2: Fitting a simple linear regression model</a></li>
-  <li><a href="#exercise-3-model-eval-correct-and-fair" id="toc-exercise-3-model-eval-correct-and-fair" class="nav-link" data-scroll-target="#exercise-3-model-eval-correct-and-fair">Exercise 3: Model Eval: “Correct” and “Fair”</a>
+  <li><a href="#exercise-2-compare-models-with-and-without-interaction" id="toc-exercise-2-compare-models-with-and-without-interaction" class="nav-link" data-scroll-target="#exercise-2-compare-models-with-and-without-interaction">Exercise 2: Compare models with and without interaction</a></li>
+  <li><a href="#exercise-3-assess" id="toc-exercise-3-assess" class="nav-link" data-scroll-target="#exercise-3-assess">Exercise 3: Assess</a>
   <ul class="collapse">
   <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
   <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
   </ul></li>
-  <li><a href="#exercise-4-model-eval-strong" id="toc-exercise-4-model-eval-strong" class="nav-link" data-scroll-target="#exercise-4-model-eval-strong">Exercise 4: Model Eval: “Strong”</a></li>
-  <li><a href="#exercise-5-thinking-about-transformations" id="toc-exercise-5-thinking-about-transformations" class="nav-link" data-scroll-target="#exercise-5-thinking-about-transformations">Exercise 5: Thinking about transformations</a>
-  <ul class="collapse">
-  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part a</a></li>
-  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part b</a></li>
-  </ul></li>
+  <li><a href="#exercise-4-visualize-interaction-term---school-enrollment" id="toc-exercise-4-visualize-interaction-term---school-enrollment" class="nav-link" data-scroll-target="#exercise-4-visualize-interaction-term---school-enrollment">Exercise 4: Visualize Interaction Term - School Enrollment</a></li>
+  <li><a href="#exercise-6-visualize-interaction-term---bikes" id="toc-exercise-6-visualize-interaction-term---bikes" class="nav-link" data-scroll-target="#exercise-6-visualize-interaction-term---bikes">Exercise 6: Visualize Interaction Term - Bikes</a></li>
+  <li><a href="#exercise-5-model-statement-and-fitting" id="toc-exercise-5-model-statement-and-fitting" class="nav-link" data-scroll-target="#exercise-5-model-statement-and-fitting">Exercise 5: Model statement and fitting</a></li>
+  <li><a href="#exercise-6-interpretation-and-conclusions" id="toc-exercise-6-interpretation-and-conclusions" class="nav-link" data-scroll-target="#exercise-6-interpretation-and-conclusions">Exercise 6: Interpretation and Conclusions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -254,7 +290,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Problems 2</h1>
+<h1 class="title">Practice Problems 4</h1>
 </div>
 
 
@@ -272,23 +308,30 @@ window.Quarto = {
 
 
 <center>
-<strong>Due Friday, 9/20 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=135801">Moodle</a>.</strong>
+<strong>Due Friday, 10/11 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=140137">Moodle</a>.</strong>
 </center>
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
 <p>The goal of this set of practice problems is to practice the following skills:</p>
 <ul>
-<li>Model evaluation: Is the model “correct”? Is the model “strong”? Is the model “fair”?</li>
-<li>Transformations of variables: center, scale, and log</li>
-<li>Making and interpreting residual plots</li>
+<li>Visualize interactions between categorical and quantitative predictors</li>
+<li>Write a model formula with an interaction term</li>
+<li>Interpret coefficients in an interaction model in context</li>
+<li>Critically determine whether interaction terms should be included in multiple linear regression models</li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp2.qmd">here</a>.</strong></p>
+<p><strong>You can download a template to start from <a href="../activity_templates/pp4.qmd">here</a>.</strong></p>
 </section>
 <section id="directions" class="level1">
 <h1>Directions</h1>
 <ol type="1">
-<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following command in the code chunk to read in the data: <code>enroll &lt;- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")</code></p></li>
-<li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
+<li>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following commands in the code chunk to read in <em>two</em> data sets:</li>
+</ol>
+<ul>
+<li><code>enroll &lt;- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")</code></li>
+<li><code>bikes &lt;- read_csv("https://mac-stat.github.io/data/bikeshare.csv")</code></li>
+</ul>
+<ol start="2" type="1">
+<li>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</li>
 </ol>
 <blockquote class="blockquote">
 <p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
@@ -308,7 +351,9 @@ window.Quarto = {
 <h1>Exercises</h1>
 <section id="context" class="level2">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>In the following exercises, we’ll work with data from the World Bank on secondary school enrollment.</p>
+<section id="school-enrollment" class="level3">
+<h3 class="anchored" data-anchor-id="school-enrollment">School Enrollment</h3>
+<p>For Exercises 1-4, we’ll revisit the data from the World Bank on secondary school enrollment that we worked with in Practice Problems #2. As a reminder, the context from that assignment is pasted below.</p>
 <p>We have access to the following information:</p>
 <ul>
 <li><code>Country</code>: country name</li>
@@ -319,54 +364,72 @@ window.Quarto = {
 <p>Net enrollment rate (NER) is the ratio of children who are <em>of secondary school age</em> who are enrolled in secondary school, out of the total number of children of secondary school age. In contrast, gross enrollment rate (GER) is the ratio of children who are enrolled in secondary school <em>regardless of age</em>, out of the total number of children of secondary school age. NER ranges from 0 to 100%, since it is a true proportion, while GER can exceed 100% (some children who are <em>not</em> of secondary school age may in fact be enrolled).</p>
 <p>Historically, NER is more difficult to measure than GER (particularly in low- and middle-income countries), since it requires knowledge of the age of the children enrolled in school.</p>
 <p>A relevant research question is: If we know GER, can we accurately predict NER? In order to answer this question, we first want to better understand the relationship between GER and NER.</p>
-<p>These practice problems are inspired by a <a href="https://arxiv.org/pdf/2401.01872">recent paper</a> that aims to develop statistical methods for analyzing this problem. The methods described in this paper are beyond the scope of this course, but we link it here in case you are interested in learning more!</p>
 </section>
-<section id="exercise-1-visual-and-numerical-summaries" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-visual-and-numerical-summaries">Exercise 1: Visual and numerical summaries</h2>
+<section id="bikes" class="level3">
+<h3 class="anchored" data-anchor-id="bikes">Bikes</h3>
+<p>For Exercises 5-7, we’ll revisit the data on bike ridership. We’ve looked at many of the variables included in this dataset so far in this course, but suppose we are now interested in how season impacts the relationship between actual temperature and number of total riders. This is the question we’ll explore in this assignment.</p>
+</section>
+</section>
+<section id="exercise-1-define-a-new-variable-and-visualize" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-define-a-new-variable-and-visualize">Exercise 1: Define a new variable and visualize</h2>
 <section id="part-a" class="level3">
 <h3 class="anchored" data-anchor-id="part-a">Part a</h3>
-<p>Construct an appropriate visualization of the <code>GER</code> and <code>NER</code> variables (<code>NER</code> should be the dependent variable in your visualization). Add both a curved and linear trend line to your plot. Based on this visualization, do you think a linear regression model would correctly explain the relationship between NER and GER? Explain why or why not.</p>
+<p>Just as in Practice Problems #2, construct an appropriate visualization of the <code>GER</code> and <code>NER</code> variables (<code>NER</code> should be the dependent variable in your visualization). You may copy your code from the previous assignment.</p>
+<p>At roughly what value of GER does the relationship between GER and NER appear to change?</p>
 </section>
 <section id="part-b" class="level3">
 <h3 class="anchored" data-anchor-id="part-b">Part b</h3>
-<p>Calculate and report the correlation between GER and NER. Do you think correlation is an appropriate numerical summary for the relationship between GER and NER? Explain why or why not (you may make reference to your answer to Part a, if relevant).</p>
+<p>Define a binary (indicator) variable called <code>GER_binary</code>, that has value 0 when <code>GER</code> is less than 100, and 1 when <code>GER</code> is greater than or equal to 100.</p>
 </section>
 </section>
-<section id="exercise-2-fitting-a-simple-linear-regression-model" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-fitting-a-simple-linear-regression-model">Exercise 2: Fitting a simple linear regression model</h2>
-<p>Suppose we decide to go ahead and fit a linear regression model, with GER as our predictor and NER as our outcome. Fill in the model statement below (using proper notation) that corresponds to this regression:</p>
-<p><span class="math display">\[
-E[___ | ___] = ...
-\]</span></p>
-<p>Fit the linear regression model that you wrote above.</p>
+<section id="exercise-2-compare-models-with-and-without-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-compare-models-with-and-without-interaction">Exercise 2: Compare models with and without interaction</h2>
+<p>In Practice Problems #2, we noted that a linear regression model did not accurately reflect the relationship between GER and NER. We’ll now compare that same simple linear regression model to a multiple linear regression model with an interaction term between <code>GER</code> and <code>GER_binary</code>.</p>
+<p>Fit both of these models.</p>
 </section>
-<section id="exercise-3-model-eval-correct-and-fair" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-model-eval-correct-and-fair">Exercise 3: Model Eval: “Correct” and “Fair”</h2>
+<section id="exercise-3-assess" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-assess">Exercise 3: Assess</h2>
 <section id="part-a-1" class="level3">
 <h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
-<p>Make a plot of residuals vs.&nbsp;fitted values for the model you fit in Exercise 2. Does this diagnostic plot suggest that your model is <em>wrong</em>? Explain why or why not.</p>
+<p>For each of the two models you fit in Exercise 2, plot residuals vs.&nbsp;fitted values. Does the model with the interaction term appear to better predict <code>NER</code> than the simple linear regression model? Explain why or why not.</p>
 </section>
 <section id="part-b-1" class="level3">
 <h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
-<p>Does the diagnostic plot in part a suggest that your model is <em>fair</em>? If the model seems fair, explain what about the plot suggests that. If the model does <em>not</em> seem fair, note which observations your model does a <em>worse</em> job at predicting NER for (high values of GER? low values of GER?).</p>
+<p>Compare the multiple <span class="math inline">\(R^2\)</span> values from each model. Based on these values, which model is stronger?</p>
 </section>
 </section>
-<section id="exercise-4-model-eval-strong" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-model-eval-strong">Exercise 4: Model Eval: “Strong”</h2>
-<p>Report and interpret the multiple <span class="math inline">\(R^2\)</span> value from the linear regression model you fit in Exercise 2. Does this value suggest the model is strong or weak?</p>
+<section id="exercise-4-visualize-interaction-term---school-enrollment" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-visualize-interaction-term---school-enrollment">Exercise 4: Visualize Interaction Term - School Enrollment</h2>
+<p>It may seem strange to include an interaction term between <code>GER</code> and another variable that was created from <code>GER</code> itself, but this is actually a special type of interaction term that creates what is called a <em>piecewise linear regression model</em>. It allows both the slope and intercept of the regression line to change at specific values of a predictor. Fill in the code below to visualize this model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions from model with interaction term</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>newdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">GER =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(enroll<span class="sc">$</span>GER), </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">to =</span> <span class="fu">max</span>(enroll<span class="sc">$</span>GER), <span class="at">by =</span> <span class="fl">0.01</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">GER_binary =</span> <span class="fu">ifelse</span>(GER <span class="sc">&lt;</span> <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in your interaction model object below for ___</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>newdat<span class="sc">$</span>NER <span class="ot">&lt;-</span> <span class="fu">predict</span>(___, <span class="at">newdata =</span> newdat)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> enroll, <span class="fu">aes</span>(GER, NER)) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> newdat, <span class="fu">aes</span>(GER, NER), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="exercise-5-thinking-about-transformations" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-thinking-about-transformations">Exercise 5: Thinking about transformations</h2>
-<section id="part-a-2" class="level3">
-<h3 class="anchored" data-anchor-id="part-a-2">Part a</h3>
-<p>Currently in the data, NER is reported on a scale from 0 - 100. How would the slope in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? How would the intercept in your model change (if at all) from Exercise 2 if NER were transformed to be on a scale from 0-1? <strong>If it helps you think it through, mutate NER and fit this model!</strong></p>
+<section id="exercise-6-visualize-interaction-term---bikes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-visualize-interaction-term---bikes">Exercise 6: Visualize Interaction Term - Bikes</h2>
+<p>Recall that we are now interested in how season impacts the relationship between actual temperature and number of total riders. Make an appropriate visualization (consider number of total riders as your outcome variable) to display this impact. Comment on what you notice from the visual.</p>
 </section>
-<section id="part-b-2" class="level3">
-<h3 class="anchored" data-anchor-id="part-b-2">Part b</h3>
-<p>Suppose I want the intercept of my model of NER by GER to have the interpretation of the expected average NER for a GER of 80%. Suggest a transformation I could make to one or both of these variables that would give the intercept of my linear regression model this interpretation.</p>
+<section id="exercise-5-model-statement-and-fitting" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-model-statement-and-fitting">Exercise 5: Model statement and fitting</h2>
+<p>Write a model statement in the form <span class="math inline">\(E[Y | X, Z] = ...\)</span> in context, that would allow us to answer the research question we’re interested in. Additionally, note which regression coefficient will be the relevant one to interpret that will directly address our research question.</p>
+<p>Fit this multiple linear regression model.</p>
+</section>
+<section id="exercise-6-interpretation-and-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-interpretation-and-conclusions">Exercise 6: Interpretation and Conclusions</h2>
+<p>Interpret the regression coefficient you noted would directly address the research question we’re interested in. <em>Make sure to use appropriate causation vs.&nbsp;association language, include units, and talk about averages rather than individual cases.</em></p>
+<p>Write a paragraph conclusion about the results of your analysis, fit for a news article. Does season appear to meaningfully impact the relationship between actual temperature and number of total riders? What impact would this have on cities looking to start bikeshare programs? Should more bikes be provided or expected in certain seasons based on temperature conditions? Explain why or why not.</p>
 
 
-</section>
 </section>
 </section>
 
