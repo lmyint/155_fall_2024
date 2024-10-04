@@ -244,6 +244,7 @@ Time to work on practice problems, project in class
 
 - Intro to R/RStudio Workshop, Thursday, Oct 10, noon-1pm, Library 250
     - Hosted by our MSCS department R preceptor!
+- Quiz 1, PP1, PP2 corrections due Wednesday 10/9 on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=139742)
 - [Practice Problems #4 (PP4)](assignments/pp4.qmd) due Friday 10/11 at 5pm
 - Take a look at [project group assignments](https://moodle.macalester.edu/mod/url/view.php?id=138952) posted on Moodle.
     - Work on connecting with your team, finding a dataset, and working on Project Checkpoint 1.
