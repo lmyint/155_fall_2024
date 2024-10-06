@@ -38,6 +38,7 @@ website:
         - activities/08_mlr_intro.qmd
         - activities/09_mlr_principles.qmd
         - activities/10_mlr_confounding.qmd
+        - activities/11_mlr_interaction_explore.qmd
 
     - id: homework
       title: "Practice Problems"
