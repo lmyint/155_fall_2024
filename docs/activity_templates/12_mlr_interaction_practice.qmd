@@ -1,0 +1,240 @@
+---
+title: "Multiple linear regression: interaction terms practice"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+**Context:** Today we'll explore data on incumbency and campaign spending, revisit the bikes data we've looked at previously in this course, and explore data on characteristics of used cars. Read in the data below.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(stringr)
+library(tidyr)
+
+bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")
+
+# A little bit of data wrangling code - let's not focus on this for now
+campaigns <- read_csv("https://mac-stat.github.io/data/campaign_spending.csv") %>% 
+  dplyr::select(wholename, district, votes, incumbent, spending) %>% 
+  mutate(spending = spending / 1000) %>% 
+  filter(!is.na(spending))
+
+# A little bit of data wrangling code - let's not focus on this for now
+cars <- read_csv("https://mac-stat.github.io/data/used_cars.csv") %>%
+  mutate(milage = milage %>% str_replace(",","") %>% str_replace(" mi.","") %>% as.numeric(),
+         price = price %>% str_replace(",","") %>% str_replace("\\$","") %>% as.numeric(),
+         age = 2025 - model_year) # 2025 so that yr. 2024 cars are one year old
+```
+
+For the first several exercises, we'll consider the following research questions:
+
+1. What role does campaign spending play in elections? 
+
+2. (a) Do candidates that spend more money tend to get more votes? 
+
+2. (b) How might this depend upon whether a candidate is an incumbent (they are running for RE-election) or a challenger (they are challenging the incumbent)? 
+
+We'll use data collected by [Benoit and Marsh (2008)](http://www.kenbenoit.net/pdfs/ajps_348.pdf) on the campaign spending of 464 candidates in the 2002 Irish Dail elections (Ireland's version of the U.S. House of Representatives) to explore these questions. The units of `spending` are 1,000 Euros.
+
+
+
+## Exercise 1: Translating scientific questions into statistical questions
+
+a. Look at the variables we have access to in the cleaned version of the data we read into R, and consider our first research question. How might we translate this question into a statistical one, that we could answer using the data we have available? 
+
+There is no one *right* answer to this! Brainstorm with your group.
+
+```{r}
+head(campaigns)
+```
+
+b. Question 2 (a) is a bit more specific than Question 1. Translate this question into a statistical one that can be answered using a simple linear regression model. Write out the model statement in $E[Y | X] = ...$ notation that would answer this question, and note which regression coefficient you would interpret to provide you with an answer.
+
+$$
+E[___ | ___] = ...
+$$
+
+c. Question 2 (b) is also specific, and builds on Question 2 (a). Translate this question into a statistical one that can be answered using a *multiple* linear regression model. Write out the model statement in $E[Y | X] = ...$ notation that would answer this question, and note which regression coefficient you would interpret to provide you with an answer.
+
+$$
+E[___ | ___] = ...
+$$
+
+## Exercise 2: Visualizing Interaction
+
+a. Write R code to visualize the relationship between campaign spending and number of votes a candidate received. Include an aesthetic to distinguish this relationship between incumbents and challengers. Do *not* include lines of best fit from any statistical model on your plot at this point!
+
+```{r}
+# Visualization
+
+```
+
+b. Based on your visualization from part (a), what are your answers to research questions 2 (a) and 2 (b)? Write your answer in 2-3 sentences, describing general trends you notice, suitable for a general audience.
+
+c. Add lines of best fit from a statistical model that includes an interaction term between incumbent status and spending to your plot from part (a), using `geom_smooth`. Based on your updated plot, do you think including an interaction between incumbent status and spending in a multiple linear regression model would be meaningful in this context? Why or why not?
+
+```{r}
+# Visualization with lines of best fit
+
+```
+
+## Exercise 3: Fitting and interpreting models with interaction terms
+
+a. Fit the regression model you wrote out in Exercise 1 (c). *Report* (do not interpret yet!) the regression coefficients below.
+
+```{r}
+# Model with interaction term
+
+```
+
+> (Intercept):
+
+> incumbentYes:
+
+> spending:
+
+> incumbentYes:spending:
+
+b. Using the coefficient estimates from part (a), write out *two separate model statements*, one for incumbents and one for challengers. Combine terms (using algebra) when you can! *Hint*: remember the indicator variables video!
+
+* For incumbents:
+
+$$
+E[votes | spending] = 
+$$
+
+* For challengers:
+
+$$
+E[votes | spending] = 
+$$
+
+c. Interpret the coefficient for `incumbent` in your interaction model, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.* Is this coefficient scientifically meaningful?
+
+d. When interpreting an interaction coefficient where one of the variables interacting is quantitative and one is categorical, it is often convenient to do so in separate sentences: interpret the slope for each category separately! 
+
+Interpret the coefficient for the interaction term in your model, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.*
+
+e. Based on your interpretation in part (d), and the visualization you made including lines of best fit, do you think that including an interaction term for incumbent status and spending is meaningful, when predicting number of votes? Explain why or why not.
+
+## Exercise 4: Interactions between two categorical variables
+
+Let's return to our data on bike ridership. Suppose we are interested in the relationship between daily ridership (our response variable) and whether a user is a casual or registered rider **and** whether the day falls on a weekend. First, we need to create a binary variable indicating whether a user is a casual or registered rider.
+
+```{r}
+# Creating user variable, don't worry about syntax!
+new_bikes <- bikes %>%
+  dplyr::select(riders_casual, riders_registered, weekend, temp_actual) %>%
+  pivot_longer(cols = riders_casual:riders_registered, names_to = "user",
+               names_prefix = "riders_", values_to = "rides") %>%
+  mutate(weekend = factor(weekend))
+```
+
+a. For each of our three relevant variables, `weekend`, `user`, and `rides`, classify them as quantitative or categorical.
+
+> `weekend`:
+
+> `user`:
+
+> `rides`:
+
+b. Make an appropriate visualization to explore the relationship between these three variables.
+
+```{r}
+# Visualization
+
+```
+
+c. Is the relationship between ridership and weekend status the same for both registered and casual users? Explain why or why not, referencing the visualization you made in part (b).
+
+d. To reflect what you observed in your visualization, fit a multiple linear regression model with an interaction term between `weekend` and `user` in our model of ridership.
+
+```{r}
+# Multiple linear regression model
+
+```
+
+e. Interpret the interaction term from your model, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.* Just as in Exercise 3, you may find it useful to first write out multiple model statements for different categories defined by one of your categorical variables, and proceed from there! 
+
+## Exercise 5: Interactions between two quantitative variables
+
+Here we'll explore the relationship between `price`, `milage`, and `age` of a used car. Below is a scatterplot of mileage vs. price, colored by age:
+
+```{r}
+cars %>% 
+  ggplot(aes(x = milage, y = price, col = age)) +
+  geom_point(alpha = 0.5) + # make the points less opaque
+  scale_color_viridis_c(option = "H") + # a fun, colorblind-friendly palette!
+  theme_classic() # removes the gray background and grid
+```
+
+It's a little difficult to tell what exactly is going on here. In particular, does the relationship between mileage and price vary with age of a used car? Let's try adding some fitted lines for cars of different ages.
+
+```{r}
+# Ignore where the numbers in geom_abline() came from for now... we'll get there
+cars %>% 
+  ggplot(aes(x = milage, y = price, col = age)) +
+  geom_point(alpha = 0.5) + 
+  scale_color_viridis_c(option = "H") + 
+  theme_classic() +
+  geom_abline(slope = -6.558e-01 + 2.431e-02, intercept = 9.096e+04 -2.665e+03, col = "black") +
+  geom_abline(slope = -6.558e-01 + 10 * 2.431e-02, intercept = 9.096e+04 - 10 * 2.665e+03, col = "blue") +
+  geom_abline(slope = -6.558e-01 + 30 * 2.431e-02, intercept = 9.096e+04 - 30 * 2.665e+03, col = "green") +
+  ggtitle("Black: Age = 1yr, Blue: Age = 10yr, Green: Age = 30yr")
+```
+
+a. **Challenge question**: Based on the fitted lines in the plot above, anticipate what the *signs* (positive or negative) of the coefficients in the following interaction model will be:
+
+$$
+E[price | age, milage] = \beta_0 + \beta_1 milage + \beta_2 age + \beta_3 milage:age
+$$
+* $\beta_0$:  Put your response here...
+
+* $\beta_1$:  Put your response here...
+
+* $\beta_2$:  Put your response here...
+
+* $\beta_3$:  Put your response here...
+
+b. Fit a multiple linear regression model with an interaction term between `milage` and `age` in our model of used car `price`.
+
+
+```{r}
+# Multiple linear regression model
+
+
+
+# ... now do you see where the numbers in geom_abline() came from?
+```
+
+
+As before, we could choose distinct ages, and interpret the relationship between mileage and price for each of those groups separately. However, since age is *quantitative* and not *categorical*, this doesn't quite give us the whole picture. Instead, we want to know how the relationship between mileage and price changes **for each additional year old** a car is. This is what the interaction coefficient estimates, when the interaction term is between two quantitative variables!
+
+c. Interpret the interaction term, in context. *Make sure to use non-causal language, include units, and talk about averages rather than individual cases.*
+
+
+
+## Reflection
+
+Through the exercises above, you practiced visualizing, fitting, and interpreting multiple linear regression models with interaction terms between combinations of categorical and quantitative variables. Think about how the fitted lines looked in situations where you think there was a *meaningful* interaction taking place. How do you think the fitted lines would look if there was *no* meaningful interaction present? Explain your reasoning.
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
