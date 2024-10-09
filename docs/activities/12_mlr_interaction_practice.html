@@ -573,19 +573,20 @@ E[price | age, milage] = \beta_0 + \beta_1 milage + \beta_2 age + \beta_3 milage
 <section id="exercise-1-translating-scientific-questions-into-statistical-questions-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1-translating-scientific-questions-into-statistical-questions-1">Exercise 1: Translating scientific questions into statistical questions</h2>
 <ol type="a">
-<li><p>From this question, the only clear variable that should be involved in our analysis/exploration is spending. We could first begin by providing numerical and visual summaries of campaign spending. We could also look at whether spending varies by district, number of votes, or incumbency status. This would give us a broad idea of how campagin spending may vary across the variables we access to in our data.</p></li>
+<li><p>From this question, the only clear variable that should be involved in our analysis/exploration is spending. We could first begin by providing numerical and visual summaries of campaign spending. We could also look at whether spending varies by district, number of votes, or incumbency status. This would give us a broad idea of how campaign spending may vary across the variables we access to in our data.</p></li>
 <li><p>We can estimate the average associated increase in number of votes per additional 1,000 Euros spent, via a simple linear regression model. The model statement that allows us to answer this question is given by</p></li>
 </ol>
 <p><span class="math display">\[
 E[votes | spending] = \beta_0 + \beta_1 spending
-\]</span> The regression coefficient we would interpret to answer this question is the coefficient fpr <code>spending</code>, which in this case is <span class="math inline">\(\beta_1\)</span>.</p>
+\]</span></p>
+<p>The regression coefficient we would interpret to answer this question is the coefficient for <code>spending</code>, which in this case is <span class="math inline">\(\beta_1\)</span>.</p>
 <ol start="3" type="a">
 <li>We are interested in the how the association between average number of votes and campaign spending varies by incumbency status. The model statement that allows us to answer this question is given by</li>
 </ol>
 <p><span class="math display">\[
 E[votes | spending, incumbent] = \beta_0 + \beta_1 spending + \beta_2 incumbent + \beta_3 spending:incumbent
 \]</span></p>
-<p>(note that the order in which you put spending and incumbent status does not matter!)</p>
+<p>(Note: the order in which you put spending and incumbent status does not matter!)</p>
 <p>The regression coefficient we would interpret to answer this question is the interaction coefficient, which in this case is <span class="math inline">\(\beta_3\)</span>.</p>
 </section>
 <section id="exercise-2-visualizing-interaction-1" class="level2">
@@ -596,8 +597,8 @@ E[votes | spending, incumbent] = \beta_0 + \beta_1 spending + \beta_2 incumbent 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>campaigns <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(spending, votes, <span class="at">col =</span> incumbent)) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(spending, votes, <span class="at">col =</span> incumbent)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -608,14 +609,14 @@ E[votes | spending, incumbent] = \beta_0 + \beta_1 spending + \beta_2 incumbent 
 </div>
 <ol start="2" type="a">
 <li><p>In general, the more a candidate spends on their campaign, the more votes they receive. Incumbents appear to spend less than challengers on their campaigns, typically. The impact of spending on votes appears to be greater for challengers than for incumbents, in that more spending may lead to <em>even</em> more votes for challengers, than it would for incumbents.</p></li>
-<li><p>I think including an interaction term between incumbent status and spending would be meaningful, since the relationship between spending and votes does seem to vary by incumbent status. In particular, note that the lines on the visualization are <em>not parallel</em>. Parallel lines imply that there is no interaction present, so the further the lines are from parallel, the more intense (in some sense) the interaction term.</p></li>
+<li><p>I think including an interaction term between incumbent status and spending would be meaningful, since the relationship between spending and votes does seem to vary by incumbent status. In particular, note that the lines on the visualization are <em>not parallel</em>. Parallel lines imply that there is no interaction present, so the further the lines are from parallel, the greater the degree of interaction between the two variables.</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization with lines of best fit</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>campaigns <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(spending, votes, <span class="at">col =</span> incumbent)) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(spending, votes, <span class="at">col =</span> incumbent)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -677,7 +678,10 @@ E[votes | spending] = 690.5 + 209.7 * spending
 \]</span></p>
 <ol start="3" type="a">
 <li><p>On average, we expect the difference in number of votes between incumbents and challengers to be 4813.9, for campaigns where no money is spent. This is likely not a scientifically meaningful estimate since there are very few campaigns where no money is spent. However, such campaigns <em>do</em> exist, so I would say this one could be meaningful in certain contexts, if not broadly!</p></li>
-<li><p>On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 210, for challengers. On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 84, for incumbents.</p></li>
+<li><ul>
+<li>On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 210, for challengers. On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 84, for incumbents.</li>
+<li>The average increase in votes per 1,000 Euros spent is 125.9 votes/1000 Euros lower for incumbents than for challengers. In other words, spending 1,000 Euros is associated with 125.9 fewer votes for incumbents than for challengers.</li>
+</ul></li>
 <li><p>I think the interaction term is meaningful when predicting number of votes, since 84 and 210 are relatively different numbers! The interaction term gives us the additional information that spending has less of an effect on number of votes for incumbents than it does for challengers, which is particularly meaningful if you are a campaign manager!</p></li>
 </ol>
 </section>
@@ -739,7 +743,10 @@ Coefficients:
 </div>
 </div>
 <ol start="5" type="a">
+<li><ul>
 <li>On average, we expect there to be 777 more rides on weekends compared to non-weekends, for casual riders. On average, we expect there to be 938 (776.7 - 1714.4, rounded) <em>less</em> rides on weekends compared to non-weekends, for registered riders.</li>
+<li>The average difference between weekend and weekday ridership is 1714.4 rides lower for registered riders than for casual riders.</li>
+</ul></li>
 </ol>
 <p><strong>Note</strong>: There are lots of ways you could correctly interpret the interaction term here! You could do it one sentence, you could do it in four (one for each unique group defined by the two categorical variables), or you could compare users and registered riders for weekends, and then separately for non-weekends! All are valid options.</p>
 </section>

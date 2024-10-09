@@ -270,14 +270,15 @@ Through the exercises above, you practiced visualizing, fitting, and interpretin
 
 ## Exercise 1: Translating scientific questions into statistical questions
 
-a. From this question, the only clear variable that should be involved in our analysis/exploration is spending. We could first begin by providing numerical and visual summaries of campaign spending. We could also look at whether spending varies by district, number of votes, or incumbency status. This would give us a broad idea of how campagin spending may vary across the variables we access to in our data.
+a. From this question, the only clear variable that should be involved in our analysis/exploration is spending. We could first begin by providing numerical and visual summaries of campaign spending. We could also look at whether spending varies by district, number of votes, or incumbency status. This would give us a broad idea of how campaign spending may vary across the variables we access to in our data.
 
 b.  We can estimate the average associated increase in number of votes per additional 1,000 Euros spent, via a simple linear regression model. The model statement that allows us to answer this question is given by
 
 $$
 E[votes | spending] = \beta_0 + \beta_1 spending
 $$
-The regression coefficient we would interpret to answer this question is the coefficient fpr `spending`, which in this case is $\beta_1$.
+
+The regression coefficient we would interpret to answer this question is the coefficient for `spending`, which in this case is $\beta_1$.
 
 c. We are interested in the how the association between average number of votes and campaign spending varies by incumbency status. The model statement that allows us to answer this question is given by
 
@@ -285,7 +286,7 @@ $$
 E[votes | spending, incumbent] = \beta_0 + \beta_1 spending + \beta_2 incumbent + \beta_3 spending:incumbent
 $$
 
-(note that the order in which you put spending and incumbent status does not matter!)
+(Note: the order in which you put spending and incumbent status does not matter!)
 
 The regression coefficient we would interpret to answer this question is the interaction coefficient, which in this case is $\beta_3$.
 
@@ -297,20 +298,20 @@ a.
 ```{r}
 # Visualization
 campaigns %>%
-  ggplot(aes(spending, votes, col = incumbent)) +
-  geom_point()
+    ggplot(aes(spending, votes, col = incumbent)) +
+    geom_point()
 ```
 
 b. In general, the more a candidate spends on their campaign, the more votes they receive. Incumbents appear to spend less than challengers on their campaigns, typically. The impact of spending on votes appears to be greater for challengers than for incumbents, in that more spending may lead to *even* more votes for challengers, than it would for incumbents.
 
-c. I think including an interaction term between incumbent status and spending would be meaningful, since the relationship between spending and votes does seem to vary by incumbent status. In particular, note that the lines on the visualization are *not parallel*. Parallel lines imply that there is no interaction present, so the further the lines are from parallel, the more intense (in some sense) the interaction term.
+c. I think including an interaction term between incumbent status and spending would be meaningful, since the relationship between spending and votes does seem to vary by incumbent status. In particular, note that the lines on the visualization are *not parallel*. Parallel lines imply that there is no interaction present, so the further the lines are from parallel, the greater the degree of interaction between the two variables.
 
 ```{r}
 # Visualization with lines of best fit
 campaigns %>%
-  ggplot(aes(spending, votes, col = incumbent)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
+    ggplot(aes(spending, votes, col = incumbent)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE)
 ```
 
 ## Exercise 3: Fitting and interpreting models with interaction terms
@@ -347,7 +348,9 @@ $$
 c. On average, we expect the difference in number of votes between incumbents and challengers to be 4813.9, for campaigns where no money is spent. This is likely not a scientifically meaningful estimate since there are very few campaigns where no money is spent. However, such campaigns *do* exist, so I would say this one could be meaningful in certain contexts, if not broadly!
 
 
-d. On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 210, for challengers. On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 84, for incumbents.
+d.
+    - On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 210, for challengers. On average, we expect an increase in spending by 1,000 euros to be associated with an increase in number of votes by 84, for incumbents.
+    - The average increase in votes per 1,000 Euros spent is 125.9 votes/1000 Euros lower for incumbents than for challengers. In other words, spending 1,000 Euros is associated with 125.9 fewer votes for incumbents than for challengers.
 
 e. I think the interaction term is meaningful when predicting number of votes, since 84 and 210 are relatively different numbers! The interaction term gives us the additional information that spending has less of an effect on number of votes for incumbents than it does for challengers, which is particularly meaningful if you are a campaign manager!
 
@@ -388,7 +391,9 @@ d.
 lm(data = new_bikes, rides ~ user * weekend)
 ```
 
-e. On average, we expect there to be 777 more rides on weekends compared to non-weekends, for casual riders. On average, we expect there to be 938 (776.7 - 1714.4, rounded) *less* rides on weekends compared to non-weekends, for registered riders.
+e. 
+    - On average, we expect there to be 777 more rides on weekends compared to non-weekends, for casual riders. On average, we expect there to be 938 (776.7 - 1714.4, rounded) *less* rides on weekends compared to non-weekends, for registered riders.
+    - The average difference between weekend and weekday ridership is 1714.4 rides lower for registered riders than for casual riders.
 
 **Note**: There are lots of ways you could correctly interpret the interaction term here! You could do it one sentence, you could do it in four (one for each unique group defined by the two categorical variables), or you could compare users and registered riders for weekends, and then separately for non-weekends! All are valid options.
 
