@@ -112,26 +112,18 @@ ggplot() +
   geom_line(data = newdat, aes(GER, NER), col = "red", size = 1)
 ```
 
-## Exercise 6: Visualize Interaction Term - Bikes
+## Exercise 5: Visualize Interaction Term - Bikes
 
 Recall that we are now interested in how season impacts the relationship between actual temperature and number of total riders. Make an appropriate visualization (consider number of total riders as your outcome variable) to display this impact. Comment on what you notice from the visual.
 
-## Exercise 5: Model statement and fitting
+## Exercise 6: Model statement and fitting
 
 Write a model statement in the form $E[Y | X, Z] = ...$ in context, that would allow us to answer the research question we're interested in. Additionally, note which regression coefficient will be the relevant one to interpret that will directly address our research question.
 
 Fit this multiple linear regression model.
 
-## Exercise 6: Interpretation and Conclusions
+## Exercise 7: Interpretation and Conclusions
 
 Interpret the regression coefficient you noted would directly address the research question we're interested in. *Make sure to use appropriate causation vs. association language, include units, and talk about averages rather than individual cases.*
 
 Write a paragraph conclusion about the results of your analysis, fit for a news article. Does season appear to meaningfully impact the relationship between actual temperature and number of total riders? What impact would this have on cities looking to start bikeshare programs? Should more bikes be provided or expected in certain seasons based on temperature conditions? Explain why or why not.
-
-
-
-
-
-
-
-
