@@ -76,7 +76,7 @@ html-table-processing: none
     <td class="topleft"><b>PP3 due Friday 10/4 at 5pm</b></td>
   </tr>
   <tr>
-    <td class="topleft">6 (9/30 - 10/4)</td>
+    <td class="topleft">6 (10/4 - 10/11)</td>
     <td class="topleft">
         Introduction to interaction models
     </td>
@@ -86,6 +86,18 @@ html-table-processing: none
     </td>
     <td>No class today (Leslie will be at a workshop) but feel free to use the classroom to work with your project groups</td>
     <td class="topleft"><b>PP4 due Friday 10/11 at 5pm</b></td>
+  </tr>
+  <tr>
+    <td class="topleft">7 (10/14 - 10/18)</td>
+    <td class="topleft">
+        Model building (Part 1)<br>
+        <b>Checkpoint 9 due 11:30am<b>
+    </td>
+    <td class="topleft">
+        Model building (Part 2)
+    </td>
+    <td>Fall Break!</td>
+    <td class="topleft"><b>Project Checkpoint 1 due Wednesday 10/16 at 5pm</b></td>
   </tr>
 </tbody>
 </table>
@@ -239,7 +251,7 @@ Time to work on practice problems, project in class
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 6: 10/7 - 10/11 (Multiple linear regression: interaction)"}
+::: {.callout-tip icon=false collapse="true" title="Week 6: 10/7 - 10/11 (Multiple linear regression: interaction)"}
 #### Announcements
 
 - Intro to R/RStudio Workshop, Thursday, Oct 10, noon-1pm, Library 250
@@ -271,20 +283,30 @@ No class today - Leslie will be at a workshop. Feel free to use the classroom to
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 7: 10/14 - 10/18 (Multiple linear regression: model building) (Fall Break)"}
+::: {.callout-tip icon=false collapse="false" title="Week 7: 10/14 - 10/18 (Multiple linear regression: model building) (Fall Break)"}
 #### Announcements
 
-#### Monday
+- Wednesday, October 16: [Project Checkpoint 1](https://moodle.macalester.edu/mod/assign/view.php?id=140986) due on Moodle (only one team member per group needs to submit) ([Group assignments]([project group assignments](https://moodle.macalester.edu/mod/url/view.php?id=138952)))
+- [Practice Problems #5 (PP5)](assignments/pp5.qmd) due Friday 10/25 at 5pm (1 week AFTER Fall Break)
+
+#### Monday (10/14)
 
 Before class:
 
-#### Wednesday
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=140962) (CP9) on Moodle.
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
+
+#### Wednesday (10/16)
 
 Before class:
 
-#### Friday
+- Review material as needed
+- No checkpoint today!
 
-Before class:
+#### Friday (10/18)
+
+Fall Break!
 
 :::
 

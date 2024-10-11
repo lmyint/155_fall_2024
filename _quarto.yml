@@ -48,6 +48,7 @@ website:
         - assignments/pp2.qmd
         - assignments/pp3.qmd
         - assignments/pp4.qmd
+        - assignments/pp5.qmd
   
   page-footer:
     left: |

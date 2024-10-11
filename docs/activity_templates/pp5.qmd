@@ -1,0 +1,125 @@
+---
+title: "Practice Problems 5"
+author: "STUDENT NAME"
+date: now
+date-format: "YYYY-MM-DDTHH:mm:ssZ"
+format:
+  html:
+    embed-resources: true
+    code-tools: true    
+---
+
+<center>
+**Due Friday, 10/25 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=141073).**
+</center>
+
+# Purpose
+
+The goal of this set of practice problems is to practice the following skills:
+
+- Formulate descriptive, predictive, and causal research questions
+- Connect the concepts of redundancy and multicollinearity to multiple $R^2$ and adjusted $R^2$
+- Construct, interpret, and evaluate logistic regression models
+
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, and `readr` packages. Include the following command in the code chunk to read in the data: `games <- read_csv("https://mac-stat.github.io/data/boardgamegeeks.csv")`
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+# Exercises
+
+## Context
+
+We will be looking at data on the play characteristics and popularity of board games from the [Board Game Geek](https://boardgamegeek.com/) database. More information about the data and a codebook are available [here](https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md). The dataset contains many measures of game popularity (summaries of user ratings) and game attributes (categories, themes, and gameplay mechanics).
+
+We will be exploring a range of research questions related to this data.
+
+
+
+## Exercise 1: Descriptive, predictive, and causal questions
+
+Suppose that you are an analyst helping out a local board game convention. Your job is to help convention attendees have a great time.
+
+After exploring the [codebook](https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md), consider the following:
+
+- Would investigating descriptive research questions help you do your job? If so, list some relevant descriptive questions that you came up with. If not, explain why descriptive research questions are not useful here.
+- Repeat the above questions for predictive and causal research questions.
+
+
+
+## Exercise 2: Addressing your questions
+
+Pick two of your research questions from the previous exercise, and create visualizations and models to address those questions. Make sure to:
+
+- Include helpful labels on your visualizations
+- Explain why your plots and models address your research questions
+- Interpret only the relevant coefficients from your models
+- If relevant, comment on model quality metrics.
+
+
+
+## Exercise 3: Communicating your findings
+
+Write a paragraph addressed to the convention organizers detailing how your findings in the previous exercise can help attendees have more fun at the convention.
+
+
+
+## Exercise 4: Family and children's categories
+
+**Question:** Does a game being in the family category (`cat_family`) provide meaningfully different information from a game being in the children's category (`cat_childrens`) in terms of explaining average ratings?
+
+Fit 2 models that will allow you to address this question. Report and compare the multiple and adjusted R-squared measures in these 2 models. Use this comparison to answer our question.
+
+
+
+## Exercise 5: Define binary outcome
+
+Use the `mutate()` function from `dplyr` to create a binary outcome variable called `popular` that is TRUE if the `mean_rating` is over 8 AND the `p25_rating` is over 6.5. In R, you can use `&` to combine logical statements. For example, `x1 < 1 & x2 < 2` results in TRUE if both `x1` is less than 1 AND `x2` is less than 2.
+
+
+
+## Exercise 6: Visual explorations
+
+We want to investigate how a game's complexity and whether or not it was kickstarted relate to its popularity.
+
+### Part a
+
+Construct and interpret a visualization that shows how popularity is related to a game's complexity (`game_weight`).
+
+### Part b
+
+Construct and interpret a visualization that shows how popularity is related to whether or not a game was kickstarted (`kickstarted`). (Note: you will want to use `factor(kickstarted)` in your code to ensure that it is treated as a categorical variable.)
+
+
+
+## Exercise 7: Logistic regression modeling
+
+### Part a
+
+Fit a simple logistic regression model called that models popularity as a function of complexity (`game_weight`). Display the exponentiated coefficients.
+
+### Part b
+
+Interpret each coefficient from Part a in a contextually meaningful way. Is the intercept meaningful in this context?
+
+### Part c
+
+Fit a simple logistic regression model called that models popularity as a function of whether or not a game was kickstarted (`kickstarted`). Display the exponentiated coefficients.
+
+### Part d
+
+Interpret each coefficient from Part c in a contextually meaningful way. Is the intercept meaningful in this context?
