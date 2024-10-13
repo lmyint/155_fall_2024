@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Practice Problems 1 – STAT 155</title>
+<title>Multiple linear regression: model building (part 1) – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -244,18 +210,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
-  <li><a href="#exercise-1-define-two-new-variables" id="toc-exercise-1-define-two-new-variables" class="nav-link" data-scroll-target="#exercise-1-define-two-new-variables">Exercise 1: Define two new variables</a></li>
-  <li><a href="#exercise-2-get-to-know-the-data" id="toc-exercise-2-get-to-know-the-data" class="nav-link" data-scroll-target="#exercise-2-get-to-know-the-data">Exercise 2: Get to know the data</a></li>
-  <li><a href="#exercise-3-does-it-pass-the-bechdel" id="toc-exercise-3-does-it-pass-the-bechdel" class="nav-link" data-scroll-target="#exercise-3-does-it-pass-the-bechdel">Exercise 3: Does it pass the Bechdel?</a></li>
-  <li><a href="#exercise-4-how-much-money-did-it-make" id="toc-exercise-4-how-much-money-did-it-make" class="nav-link" data-scroll-target="#exercise-4-how-much-money-did-it-make">Exercise 4: How much money did it make?</a></li>
-  <li><a href="#exercise-5-explaining-intgross_mil" id="toc-exercise-5-explaining-intgross_mil" class="nav-link" data-scroll-target="#exercise-5-explaining-intgross_mil">Exercise 5: Explaining <code>intgross_mil</code></a></li>
-  <li><a href="#exercise-6-modeling-intgross_mil" id="toc-exercise-6-modeling-intgross_mil" class="nav-link" data-scroll-target="#exercise-6-modeling-intgross_mil">Exercise 6: Modeling <code>intgross_mil</code></a></li>
-  <li><a href="#exercise-7-predictions-and-residuals" id="toc-exercise-7-predictions-and-residuals" class="nav-link" data-scroll-target="#exercise-7-predictions-and-residuals">Exercise 7: Predictions and residuals</a></li>
+  <li><a href="#exercise-1-descriptive-research-questions" id="toc-exercise-1-descriptive-research-questions" class="nav-link" data-scroll-target="#exercise-1-descriptive-research-questions">Exercise 1: Descriptive research questions</a></li>
+  <li><a href="#exercise-2-predictive-research-questions" id="toc-exercise-2-predictive-research-questions" class="nav-link" data-scroll-target="#exercise-2-predictive-research-questions">Exercise 2: Predictive research questions</a></li>
+  <li><a href="#exercise-3-causal-research-questions" id="toc-exercise-3-causal-research-questions" class="nav-link" data-scroll-target="#exercise-3-causal-research-questions">Exercise 3: Causal research questions</a></li>
+  <li><a href="#exercise-4-cultivating-curiosity" id="toc-exercise-4-cultivating-curiosity" class="nav-link" data-scroll-target="#exercise-4-cultivating-curiosity">Exercise 4: Cultivating curiosity</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  <li><a href="#render-your-work" id="toc-render-your-work" class="nav-link" data-scroll-target="#render-your-work">Render your work</a></li>
+  </ul></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-descriptive-research-questions-1" id="toc-exercise-1-descriptive-research-questions-1" class="nav-link" data-scroll-target="#exercise-1-descriptive-research-questions-1">Exercise 1: Descriptive research questions</a></li>
+  <li><a href="#exercise-2-predictive-research-questions-1" id="toc-exercise-2-predictive-research-questions-1" class="nav-link" data-scroll-target="#exercise-2-predictive-research-questions-1">Exercise 2: Predictive research questions</a></li>
+  <li><a href="#exercise-3-causal-research-questions-1" id="toc-exercise-3-causal-research-questions-1" class="nav-link" data-scroll-target="#exercise-3-causal-research-questions-1">Exercise 3: Causal research questions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -265,7 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Problems 1</h1>
+<h1 class="title">Multiple linear regression: model building (part 1)</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
 </div>
 
 
@@ -282,158 +256,150 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<center>
-<strong>Due Friday, 9/13 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=128876">Moodle</a>.</strong>
-</center>
-<section id="purpose" class="level1">
-<h1>Purpose</h1>
-<p>The goal of this set of practice problems is to practice the following skills:</p>
+<section id="notes" class="level1">
+<h1>Notes</h1>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
 <ul>
-<li>Constructing and interpreting visualizations that inform research questions of interest</li>
-<li>Data wrangling</li>
-<li>Constructing and interpreting simple linear regression models</li>
+<li>Iterate on a broad research question to make it more precise and answerable</li>
+<li>Choose appropriate models for addressing a research question</li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp1.qmd">here</a>.</strong></p>
 </section>
-<section id="directions" class="level1">
-<h1>Directions</h1>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>Please watch the following video <strong>before</strong> class.</p>
+<ul>
+<li>Video: <a href="https://voicethread.com/share/15362352/">Causal Diagrams and Confounding Variables</a></li>
+</ul>
+<!--
+DISCUSSION SECTION
+
+Review the ideas of confounder, effect modifier, precision, collider variables from the video. 
+
+Have them work on Exercises 1 and 2 for about 15 minutes, then recap together.
+
+Have them work on Exercises 3 and 4 for about 15 minutes, then recap together.
+
+-->
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="exercise-1-descriptive-research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-descriptive-research-questions">Exercise 1: Descriptive research questions</h2>
+<p>Consider the following 2 research questions:</p>
 <ol type="1">
-<li><p>We will be using data from the <code>fivethirtyeight</code> package. Install this package by entering the <code>install.packages()</code> command in the <strong>Console</strong>. (Do not include the installation command in this file–your document won’t render to the required HTML file!)</p></li>
-<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>fivethirtyeight</code> packages.</p></li>
-<li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
+<li>What are the average home prices in different neighborhoods of St.&nbsp;Paul, MN in 2023?</li>
+<li>How have rental prices in St.&nbsp;Paul changed over the past five years?</li>
 </ol>
+<p>For each question, answer the following:</p>
+<ul>
+<li>Who would be interested in the answer to this question?</li>
+<li>What variables would we need in a dataset to address this question?</li>
+<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+<ul>
+<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
+<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
+<li>For data summaries, describe the summary statistics and groupings you would use.</li>
+</ul></li>
+</ul>
+<p>Why do you think the questions here are often called <strong>descriptive</strong> research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
+</section>
+<section id="exercise-2-predictive-research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-predictive-research-questions">Exercise 2: Predictive research questions</h2>
+<p>Consider the following 2 research questions:</p>
+<ol type="1">
+<li>Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?</li>
+<li>Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?</li>
+</ol>
+<p>For each question, answer the following:</p>
+<ul>
+<li>Who would be interested in the answer to this question?</li>
+<li>What variables would we need in a dataset to address this question?</li>
+<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+<ul>
+<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
+<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
+<li>For data summaries, describe the summary statistics and groupings you would use.</li>
+</ul></li>
+</ul>
+<p>How do predictive research questions differ from descriptive research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
+</section>
+<section id="exercise-3-causal-research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-causal-research-questions">Exercise 3: Causal research questions</h2>
+<p>Consider the following 2 research questions:</p>
+<ol type="1">
+<li>Does proximity to highly-rated schools raise home prices?</li>
+<li>How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?</li>
+</ol>
+<p>For each question, answer the following:</p>
+<ul>
+<li>Who would be interested in the answer to this question?</li>
+<li>What variables would we need in a dataset to address this question?</li>
+<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+<ul>
+<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
+<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
+<li>For data summaries, describe the summary statistics and groupings you would use.</li>
+</ul></li>
+</ul>
+<p>How do causal research questions differ from predictive and descriptive questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
+</section>
+<section id="exercise-4-cultivating-curiosity" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-cultivating-curiosity">Exercise 4: Cultivating curiosity</h2>
+<p>Think about the role that housing plays in your life right now or may play in the future. What other questions might you have about housing data that haven’t come up in the previous exercises? Do these questions seem descriptive, predictive, or causal in nature?</p>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>Today was all about letting good questions lead the way and using questions to guide the way we explore data. How confident do you feel about running with questions that come up in your daily life and thinking about what data would answer them and how they would be answered? What might help you feel more confident?</p>
 <blockquote class="blockquote">
-<p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
+<p><strong>Response:</strong> Put your response here.</p>
 </blockquote>
-<ol start="4" type="1">
-<li>Render your work for submission:
+</section>
+<section id="render-your-work" class="level2">
+<h2 class="anchored" data-anchor-id="render-your-work">Render your work</h2>
 <ul>
 <li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
 <li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
 <li>Close the browser tab.</li>
 <li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
-<li>Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.</li>
-</ul></li>
-</ol>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="context" class="level2">
-<h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>This cartoon by Alison Bechdel inspired the “Bechdel test” (<a href="https://en.wikipedia.org/wiki/Bechdel_test#/media/File:Dykes_to_Watch_Out_For_(Bechdel_test_origin).jpg">image source</a>):</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Dykes_to_Watch_Out_For_%28Bechdel_test_origin%29.jpg" class="img-fluid"></p>
-<p>A movie passes the test if it meets the following criteria:</p>
-<ul>
-<li>there are at least 2 women-identifying characters;<br>
-</li>
-<li>these characters talk to each other at least 1 time; and<br>
-</li>
-<li>they talk about something other than a male-identifying character</li>
+<li>Navigate to your “Activities” subfolder within your “STAT155” folder and locate the HTML file. You can open it again in your browser to double check.</li>
 </ul>
-<p>We’ll work with the <code>bechdel</code> data within the <code>fivethirtyeight</code> package. You can enter <code>?bechdel</code> in the Console to view the codebook.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bechdel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><br><br><br><br><br><br></p>
 </section>
-<section id="exercise-1-define-two-new-variables" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-define-two-new-variables">Exercise 1: Define two new variables</h2>
-<p>We can use the <code>mutate()</code> function from <code>dplyr</code> to define new variables. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new variable which measures years_since_1900</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>bechdel <span class="ot">&lt;-</span> bechdel <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">years_since_1900 =</span> year <span class="sc">-</span> <span class="dv">1900</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check it out / confirm it's right</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, years_since_1900) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Your turn. Define a new variable <code>budget_mil</code> which measures budget in MILLIONS of dollars (on the 2013 scale). Similarly, define a new variable <code>intgross_mil</code> which measures international gross in MILLIONS of dollars (on the 2013 scale). Store these in <code>bechdel</code> and confirm your results match those here:</p>
-<pre><code>## # A tibble: 3 x 2
-##   budget_mil intgross_mil
-##        &lt;dbl&gt;        &lt;dbl&gt;
-## 1       13           42.2
-## 2       45.7         41.5
-## 3       20          159.</code></pre>
 </section>
-<section id="exercise-2-get-to-know-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-get-to-know-the-data">Exercise 2: Get to know the data</h2>
-<p>Complete each task below using <code>dim()</code>, <code>nrow()</code>, <code>head()</code>, or one of the <code>dplyr</code> functions: <code>filter()</code>, <code>summarize()</code>, <code>select()</code>. For any questions about movie budget and gross earnings, use <code>budget_mil</code> and <code>gross_mil</code>. NOTE: You don’t need to write out any discussion for this exercise, just include your code and output.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many films are in the dataset?</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># When was the oldest film in the dataset made?</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># When was the most recent film in the dataset made?</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the median film budget in 2013 dollars?</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># What films had budgets that exceeded 300 million in 2013 dollars?</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the films and budgets, not all variables)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># What films were made in 1971?</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the films and year, not all variables)</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># What were the budget_mil and intgross_mil values for "Titanic"?</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the budget_mil and intgross_mil values)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-3-does-it-pass-the-bechdel" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-does-it-pass-the-bechdel">Exercise 3: Does it pass the Bechdel?</h2>
-<p>The <code>clean_test</code> variable records the Bechdel category into which each movie falls. From worst to best (if you care about the representation of women in film):</p>
-<ul>
-<li><code>nowomen</code> = there are no significant women characters in the film</li>
-<li><code>notalk</code> = there are women characters but they don’t talk to one another</li>
-<li><code>men</code> = there are women characters that talk to one another but they only talk about men</li>
-<li><code>dubious</code> = barely passes the Bechdel test</li>
-<li><code>ok</code> = passes the Bechdel test</li>
-</ul>
-<p>Construct a visualization of the <code>clean_test</code> variable, and construct a corresponding table of counts. In one sentence, summarize your findings about <code>clean_test</code> as if you were writing a newspaper article about movies.</p>
-</section>
-<section id="exercise-4-how-much-money-did-it-make" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-how-much-money-did-it-make">Exercise 4: How much money did it make?</h2>
-<p>The <code>intgross_mil</code> variable records each movie’s total international gross, in millions of dollars (and adjusted to 2013).</p>
-<ol type="a">
-<li><p>Construct a visualization of the <code>intgross_mil</code> variable. Summarize your findings as if you were writing a newspaper article about movies.</p></li>
-<li><p>Calculate the mean and median values of <code>intgross_mil</code>. Explain why the mean exceeds the median by quite a bit <em>and</em> which is the more appropriate measure of trend here.</p>
-<ul>
-<li>NOTE: Since some films are missing information on <code>intgross_mil</code>, you’ll need to use <code>mean(___, na.rm = TRUE)</code> where <code>na.rm = TRUE</code> says to remove the NA (missing) values from the calculation. Similarly for the median.</li>
-</ul></li>
-<li><p>Calculate the standard deviations for the <code>intgross_mil</code> and <code>budget_mil</code> variables. Comment on whether there’s more variability among how much money is spent <em>making</em> movies (budgets) or how much money a movie makes (grosses)?</p></li>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-descriptive-research-questions-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-descriptive-research-questions-1">Exercise 1: Descriptive research questions</h2>
+<p>Our 2 research questions:</p>
+<ol type="1">
+<li>What are the average home prices in different neighborhoods of St.&nbsp;Paul, MN in 2023?</li>
+<li>How have rental prices in St.&nbsp;Paul changed over the past five years?</li>
 </ol>
+<p>For descriptive research questions, visualizations and data summaries that show the primary variable of interest along (e.g., house price) along with grouping variables (e.g., neighborhoods) can go a long way because the purpose is to get a sense of what the data looks like. For this reason, simple linear regression models rather than multiple linear regression models will generally suffice to answer descriptive research questions. Confounders, precision variables, effect modififers, mediators, and colliders aren’t very relevant here because these types of variables come into play when we have to think multiple variables.</p>
+<p>There can be a subtle transition from descriptive to causal questions when trying to describe differences in a variable of interest along a grouping variable. For example, house price might be our main variable of interest, and we might summarize house price among houses built before and after the COVID-19 pandemic. We can use grouped summaries to describe this information, but there is likely another question lurking—did the pandemic cause a change in house prices (perhaps by fundamentally changing the way builders operate, supply and demand, etc.)?</p>
 </section>
-<section id="exercise-5-explaining-intgross_mil" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-explaining-intgross_mil">Exercise 5: Explaining <code>intgross_mil</code></h2>
-<p>Next, let’s try to <em>explain</em> some of the variability in how much money films gross. To this end, we’ll focus on modeling <code>intgross_mil</code> by <code>budget_mil</code>. That is, to what extent is the money a film makes related to its budget?</p>
-<ol type="a">
-<li><p>In the relationship between <code>intgross_mil</code> and <code>budget_mil</code>, which is the <em>response</em> variable?</p></li>
-<li><p>Construct a visualization of the relationship between <code>intgross_mil</code> and <code>budget_mil</code>. Include a regression line that represents the <em>trend</em> in this relationship.</p></li>
-<li><p>In 1-3 sentences, summarize your findings about this relationship as if you were writing a newspaper article about movies. Be sure to comment on both the <em>trend</em> and <em>variability</em> in this relationship.</p></li>
+<section id="exercise-2-predictive-research-questions-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-predictive-research-questions-1">Exercise 2: Predictive research questions</h2>
+<p>Our 2 research questions:</p>
+<ol type="1">
+<li>Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?</li>
+<li>Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?</li>
 </ol>
+<p>For predictive research questions, we have an outcome variable of interest, and we want as much information as possible on variables that relate to that outcome to explain as much as possible about why that outcome variable takes different values. (Explaining variation—does that remind us of the R-squared metric? It should!) Precision variables are relevant here because these variables cause the outcome and are things that help explain variation. Confounders can also be relevant because these variables affect our outcome of interest–as confounders, they are also related to another variable in our data. Effect modifiers can be relevant to if the variables we’re including in our modeling have different relationships with the outcome depending on another variable.</p>
+<p>Predictive research questions truly require the use of many variables in modeling, which is a notable difference from descriptive research questions.</p>
 </section>
-<section id="exercise-6-modeling-intgross_mil" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6-modeling-intgross_mil">Exercise 6: Modeling <code>intgross_mil</code></h2>
-<p>Let’s examine the relationship between <code>intgross_mil</code> and <code>budget_mil</code> in more detail.</p>
-<ol type="a">
-<li><p>Use <code>lm()</code> to construct a linear regression model of the <em>trend</em> in the relationship between <code>intgross_mil</code> and <code>budget_mil</code>. Store this as <code>movie_model</code> and report a model summary table.</p></li>
-<li><p>Write out a formula for the trend.</p></li>
-<li><p>Provide a newspaper appropriate interpretation of the <code>budget_mil</code> coefficient. <em>Make sure to use non-causal language, include units, and talk about averages rather than individual cases.</em></p></li>
-<li><p>Does it make sense to interpret the intercept in this model? Explain.</p></li>
+<section id="exercise-3-causal-research-questions-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-causal-research-questions-1">Exercise 3: Causal research questions</h2>
+<p>Our 2 research questions:</p>
+<ol type="1">
+<li>Does proximity to highly-rated schools raise home prices?</li>
+<li>How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?</li>
 </ol>
-</section>
-<section id="exercise-7-predictions-and-residuals" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7-predictions-and-residuals">Exercise 7: Predictions and residuals</h2>
-<ol type="a">
-<li>In exercise 2 you identified the budget (<code>budget_mil</code>) for the movie <em>Titanic</em>. Use the model formula above to predict its international gross. You can check your work using the <code>predict()</code> function. This provides a more accurate prediction (it doesn’t round the model coefficients) so don’t worry if your calculation doesn’t exactly match.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(___, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">budget_mil =</span> ___))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="a">
-<li><p>Calculate the Titanic <em>residual</em>. HINT: You’ll need to use the observed <code>intgross_mil</code> value from exercise 2.</p></li>
-<li><p>Based on your calculation in part b, did the model over- or under-estimate <em>Titanic</em>’s gross?</p></li>
-</ol>
+<p>Causal research questions really focus in on the effect of a particular variable on an outcome—the idea being that if we can answer causal research questions, we have some information to potentially make changes in the world to make things better for ourselves and others. For example, knowing that proximity to highly-rated schools raises home prices affects how a buyer buys and how a developer decides to construct a new home.</p>
+<p>Confounders, precision variables, effect modififers, mediators, and colliders are all relevant to answering causal research questions. Confounders need to be included in a regression model to answer causal questions. Whether mediators should be included depends on if we’re trying to understand the overall or the direct effect of a predictor of interest on the outcome. Including a collider in a regression model should be avoided because it creates an unfair comparison between the groups defined by the predictor of interest. Precision variables don’t hurt to include in a regression model when pursuing a causal question because they won’t introduce any unfair comparisons. Effect modifiers can be useful to include in a model in case the variable of interest has a different effect on the outcome depending on another variable.</p>
 
 
 </section>

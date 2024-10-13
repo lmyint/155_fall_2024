@@ -1,0 +1,165 @@
+---
+title: "Multiple linear regression: model building (part 1)"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Iterate on a broad research question to make it more precise and answerable
+- Choose appropriate models for addressing a research question
+
+## Readings and videos
+
+Please watch the following video **before** class.
+
+- Video: [Causal Diagrams and Confounding Variables](https://voicethread.com/share/15362352/)
+
+<!--
+DISCUSSION SECTION
+
+Review the ideas of confounder, effect modifier, precision, collider variables from the video. 
+
+Have them work on Exercises 1 and 2 for about 15 minutes, then recap together.
+
+Have them work on Exercises 3 and 4 for about 15 minutes, then recap together.
+
+-->
+
+# Exercises
+
+## Exercise 1: Descriptive research questions
+
+Consider the following 2 research questions:
+
+1. What are the average home prices in different neighborhoods of St. Paul, MN in 2023?
+2. How have rental prices in St. Paul changed over the past five years?
+
+For each question, answer the following:
+
+- Who would be interested in the answer to this question?
+- What variables would we need in a dataset to address this question?
+- What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+    - For models, write the model formula, and indicate which coefficient(s) is/are of interest.
+    - For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).
+    - For data summaries, describe the summary statistics and groupings you would use.
+
+Why do you think the questions here are often called **descriptive** research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?
+
+
+
+## Exercise 2: Predictive research questions
+
+Consider the following 2 research questions:
+
+1. Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?
+2. Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?
+
+For each question, answer the following:
+
+- Who would be interested in the answer to this question?
+- What variables would we need in a dataset to address this question?
+- What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+    - For models, write the model formula, and indicate which coefficient(s) is/are of interest.
+    - For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).
+    - For data summaries, describe the summary statistics and groupings you would use.
+
+How do predictive research questions differ from descriptive research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?
+
+
+
+## Exercise 3: Causal research questions
+
+Consider the following 2 research questions:
+
+1. Does proximity to highly-rated schools raise home prices?
+2. How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?
+
+For each question, answer the following:
+
+- Who would be interested in the answer to this question?
+- What variables would we need in a dataset to address this question?
+- What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
+    - For models, write the model formula, and indicate which coefficient(s) is/are of interest.
+    - For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).
+    - For data summaries, describe the summary statistics and groupings you would use.
+
+How do causal research questions differ from predictive and descriptive questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?
+
+
+
+## Exercise 4: Cultivating curiosity
+
+Think about the role that housing plays in your life right now or may play in the future. What other questions might you have about housing data that haven't come up in the previous exercises? Do these questions seem descriptive, predictive, or causal in nature?
+
+
+
+
+
+## Reflection
+
+Today was all about letting good questions lead the way and using questions to guide the way we explore data. How confident do you feel about running with questions that come up in your daily life and thinking about what data would answer them and how they would be answered? What might help you feel more confident?
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
+
+<br><br><br><br><br><br>
+
+
+
+# Solutions
+
+## Exercise 1: Descriptive research questions
+
+Our 2 research questions:
+
+1. What are the average home prices in different neighborhoods of St. Paul, MN in 2023?
+2. How have rental prices in St. Paul changed over the past five years?
+
+For descriptive research questions, visualizations and data summaries that show the primary variable of interest along (e.g., house price) along with grouping variables (e.g., neighborhoods) can go a long way because the purpose is to get a sense of what the data looks like. For this reason, simple linear regression models rather than multiple linear regression models will generally suffice to answer descriptive research questions. Confounders, precision variables, effect modififers, mediators, and colliders aren't very relevant here because these types of variables come into play when we have to think multiple variables.
+
+There can be a subtle transition from descriptive to causal questions when trying to describe differences in a variable of interest along a grouping variable. For example, house price might be our main variable of interest, and we might summarize house price among houses built before and after the COVID-19 pandemic. We can use grouped summaries to describe this information, but there is likely another question lurking---did the pandemic cause a change in house prices (perhaps by fundamentally changing the way builders operate, supply and demand, etc.)?
+
+
+
+## Exercise 2: Predictive research questions
+
+Our 2 research questions:
+
+1. Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?
+2. Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?
+
+For predictive research questions, we have an outcome variable of interest, and we want as much information as possible on variables that relate to that outcome to explain as much as possible about why that outcome variable takes different values. (Explaining variation---does that remind us of the R-squared metric? It should!) Precision variables are relevant here because these variables cause the outcome and are things that help explain variation. Confounders can also be relevant because these variables affect our outcome of interest--as confounders, they are also related to another variable in our data. Effect modifiers can be relevant to if the variables we're including in our modeling have different relationships with the outcome depending on another variable.
+
+Predictive research questions truly require the use of many variables in modeling, which is a notable difference from descriptive research questions.
+
+
+
+## Exercise 3: Causal research questions
+
+Our 2 research questions:
+
+1. Does proximity to highly-rated schools raise home prices?
+2. How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?
+
+Causal research questions really focus in on the effect of a particular variable on an outcome---the idea being that if we can answer causal research questions, we have some information to potentially make changes in the world to make things better for ourselves and others. For example, knowing that proximity to highly-rated schools raises home prices affects how a buyer buys and how a developer decides to construct a new home.
+
+Confounders, precision variables, effect modififers, mediators, and colliders are all relevant to answering causal research questions. Confounders need to be included in a regression model to answer causal questions. Whether mediators should be included depends on if we're trying to understand the overall or the direct effect of a predictor of interest on the outcome. Including a collider in a regression model should be avoided because it creates an unfair comparison between the groups defined by the predictor of interest. Precision variables don't hurt to include in a regression model when pursuing a causal question because they won't introduce any unfair comparisons. Effect modifiers can be useful to include in a model in case the variable of interest has a different effect on the outcome depending on another variable.
+
+
+

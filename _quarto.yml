@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!activity_templates/"
+    - "!activities/14_mlr_model_building_2.qmd"
 
 website:
   title: "STAT 155"
@@ -40,6 +41,7 @@ website:
         - activities/10_mlr_confounding.qmd
         - activities/11_mlr_interaction_explore.qmd
         - activities/12_mlr_interaction_practice.qmd
+        - activities/13_mlr_model_building_1.qmd
 
     - id: homework
       title: "Practice Problems"
