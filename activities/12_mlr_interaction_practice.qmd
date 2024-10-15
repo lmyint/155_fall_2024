@@ -450,6 +450,6 @@ lm(data = cars, price ~ milage * age)
 
 As before, we could choose distinct ages, and interpret the relationship between mileage and price for each of those groups separately. However, since age is *quantitative* and not *categorical*, this doesn't quite give us the whole picture. Instead, we want to know how the relationship between mileage and price changes **for each additional year old** a car is. This is what the interaction coefficient estimates, when the interaction term is between two quantitative variables!
 
-c. On average, we expect that an increase in mileage by 1 mile is associated with an additional decrease in price by $0.0243 for each additional year old the car is.
+c. On average, we expect that an increase in mileage by 1 mile is associated with an additional increase in price by $0.0243 for each additional year old the car is.
 
 

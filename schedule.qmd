@@ -99,6 +99,22 @@ html-table-processing: none
     <td>Fall Break!</td>
     <td class="topleft"><b>Project Checkpoint 1 due Wednesday 10/16 at 5pm</b></td>
   </tr>
+  <tr>
+    <td class="topleft">8 (10/21 - 10/25)</td>
+    <td class="topleft">
+        Probability and Odds<br>
+        <b>Checkpoint 10 due 11:30am<b>
+    </td>
+    <td class="topleft">
+        Simple logistic regression<br>
+        <b>Checkpoint 11 due 11:30am<b>
+    </td>
+    <td class="topleft">
+        Multiple logistic regression and evaluation<br>
+        <b>Checkpoint 12 due 11:30am<b>
+    </td>
+    <td class="topleft"><b>PP5 due Friday 10/25 at 5pm</b></td>
+  </tr>
 </tbody>
 </table>
 ```
@@ -316,6 +332,10 @@ Fall Break!
 #### Monday
 
 Before class:
+
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=141468) (CP10) on Moodle.
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
 
 #### Wednesday
 
