@@ -604,9 +604,9 @@ Attaching package: 'dplyr'</code></pre>
 </section>
 <section id="exercise-8-adjusted-r-squared" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-8-adjusted-r-squared">Exercise 8: Adjusted R-squared</h2>
-<p>We’ve seen that, unless a predictor is redundant with another, R-squared will increase. Even if that predictor is strongly multicollinear with another. Even if that predictor isn’t a good predictor! Thus if we only look at R-squared we might get overly greedy. We can check our greedy impulses a few ways. We take a more in depth approach in STAT 253, but one quick alternative is reported right in our model <code>summary()</code> tables. <strong>Adjusted R-squared</strong> includes a <em>penalty</em> for incorporating more and more predictors. Mathematically:</p>
+<p>We’ve seen that, unless a predictor is redundant with another, R-squared will increase. Even if that predictor is strongly multicollinear with another. Even if that predictor isn’t a good predictor! Thus if we only look at R-squared we might get overly greedy. We can check our greedy impulses a few ways. We take a more in depth approach in STAT 253, but one quick alternative is reported right in our model <code>summary()</code> tables. <strong>Adjusted R-squared</strong> includes a <em>penalty</em> for incorporating more and more predictors. Mathematically (where <span class="math inline">\(n\)</span> is the sample size and <span class="math inline">\(p\)</span> is the number of non-intercept coefficients):</p>
 <p><span class="math display">\[
-\text{Adjusted}\,\, R^2 = R^2 - (1-R^2)\frac{\text{# of non-intercept coefficients}}{\text{sample size}} = R^2 - \text{ penalty}
+\text{Adjusted } R^2 = 1 - (1 - R^2) \left( \frac{n-1}{n-p-1} \right)
 \]</span></p>
 <p>Thus unlike R-squared, Adjusted R-squared can <em>decrease</em> when the information that a predictor contributes to a model isn’t enough to offset the complexity it adds to that model. Consider two models:</p>
 <div class="cell">

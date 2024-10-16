@@ -235,9 +235,11 @@ Zooming out, explain some limitations of relying on R-squared to measure the str
 
 ## Exercise 8: Adjusted R-squared
 
-We've seen that, unless a predictor is redundant with another, R-squared will increase. Even if that predictor is strongly multicollinear with another. Even if that predictor isn't a good predictor! Thus if we only look at R-squared we might get overly greedy. We can check our greedy impulses a few ways. We take a more in depth approach in STAT 253, but one quick alternative is reported right in our model `summary()` tables. **Adjusted R-squared** includes a *penalty* for incorporating more and more predictors. Mathematically: 
+We've seen that, unless a predictor is redundant with another, R-squared will increase. Even if that predictor is strongly multicollinear with another. Even if that predictor isn't a good predictor! Thus if we only look at R-squared we might get overly greedy. We can check our greedy impulses a few ways. We take a more in depth approach in STAT 253, but one quick alternative is reported right in our model `summary()` tables. **Adjusted R-squared** includes a *penalty* for incorporating more and more predictors. Mathematically (where $n$ is the sample size and $p$ is the number of non-intercept coefficients):
 
-$$\text{Adjusted}\,\, R^2 = R^2 - (1-R^2)\frac{\text{# of non-intercept coefficients}}{\text{sample size}} = R^2 - \text{ penalty}$$
+$$
+\text{Adjusted } R^2 = 1 - (1 - R^2) \left( \frac{n-1}{n-p-1} \right)
+$$
 
 Thus unlike R-squared, Adjusted R-squared can *decrease* when the information that a predictor contributes to a model isn't enough to offset the complexity it adds to that model. Consider two models:
 
