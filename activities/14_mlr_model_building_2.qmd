@@ -6,6 +6,7 @@ sidebar: false
 
 # Notes
 
+- Slides to review our last topic are [here](https://docs.google.com/presentation/d/13ko_LAeOJdQ2EejJC1DMtJhdzw0Wu2CuoNvnlbBbEBc/edit?usp=sharing).
 - You can download a template file to work with [here](../activity_templates/14_mlr_model_building_2.qmd).
 - **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
 
