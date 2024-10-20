@@ -61,7 +61,7 @@ A baby born prior to 37 weeks is considered premature. In figuring out whether w
 
 Below, we make a 2x2 table in R:
 
-```{r}
+```{r eval=FALSE}
 # 2x2 Table: preterm vs. First Steps
 firststeps %>% 
     count(preterm, firstep)
@@ -69,7 +69,7 @@ firststeps %>%
 
 You may be wondering why this is called a 2x2 table, when it looks as though the table has four rows and three columns. The data can be re-arranged (and usually is, in a formal report) as follows...
 
-```{r}
+```{r eval=FALSE}
 table(firststeps$preterm, firststeps$firstep)
 ```
 
