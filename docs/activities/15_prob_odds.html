@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Probability and Odds – STAT 155</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 155</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Activities</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
+        <li>
+    <a class="dropdown-item" href="../activities/01_foundations_welcome.html">
+ <span class="dropdown-text">Data Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/02_foundations_univariate.html">
+ <span class="dropdown-text">Univariate visualization and summaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/03_slr_introduction.html">
+ <span class="dropdown-text">Simple linear regression: Visualization and Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/04_slr_formalization.html">
+ <span class="dropdown-text">Simple linear regression: formalizing concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/05_slr_model_eval.html">
+ <span class="dropdown-text">Simple linear regression: model evaluation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/06_slr_transformations.html">
+ <span class="dropdown-text">Simple linear regression: Transformations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/07_slr_cat_predictor.html">
+ <span class="dropdown-text">Simple linear regression: categorical predictor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/08_mlr_intro.html">
+ <span class="dropdown-text">Introduction to multiple regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/09_mlr_principles.html">
+ <span class="dropdown-text">Multiple regression principles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/10_mlr_confounding.html">
+ <span class="dropdown-text">Confounding variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/11_mlr_interaction_explore.html">
+ <span class="dropdown-text">Multiple linear regression: exploring interaction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/12_mlr_interaction_practice.html">
+ <span class="dropdown-text">Multiple linear regression: interaction terms practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/13_mlr_model_building_1.html">
+ <span class="dropdown-text">Multiple linear regression: model building (part 1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/14_mlr_model_building_2.html">
+ <span class="dropdown-text">Multiple linear regression: model building (part 2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/15_prob_odds.html">
+ <span class="dropdown-text">Probability and Odds</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practice-problems" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practice Problems</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
+        <li>
+    <a class="dropdown-item" href="../assignments/pp1.html">
+ <span class="dropdown-text">Practice Problems 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp2.html">
+ <span class="dropdown-text">Practice Problems 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp3.html">
+ <span class="dropdown-text">Practice Problems 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp4.html">
+ <span class="dropdown-text">Practice Problems 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp5.html">
+ <span class="dropdown-text">Practice Problems 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_resources.html"> 
+<span class="menu-text">R Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-exploring-first-steps-enrollment-and-gestational-age" id="toc-exercise-1-exploring-first-steps-enrollment-and-gestational-age" class="nav-link" data-scroll-target="#exercise-1-exploring-first-steps-enrollment-and-gestational-age">Exercise 1: Exploring First Steps enrollment and Gestational Age</a></li>
+  <li><a href="#exercise-2-exploring-first-steps-enrollment-and-low-birthweights" id="toc-exercise-2-exploring-first-steps-enrollment-and-low-birthweights" class="nav-link" data-scroll-target="#exercise-2-exploring-first-steps-enrollment-and-low-birthweights">Exercise 2: Exploring First Steps enrollment and Low birthweights</a></li>
+  <li><a href="#exercise-3-conditional-vs.-marginal-probabilities" id="toc-exercise-3-conditional-vs.-marginal-probabilities" class="nav-link" data-scroll-target="#exercise-3-conditional-vs.-marginal-probabilities">Exercise 3: Conditional vs.&nbsp;Marginal probabilities</a></li>
+  <li><a href="#exercise-4-probability-practice" id="toc-exercise-4-probability-practice" class="nav-link" data-scroll-target="#exercise-4-probability-practice">Exercise 4: Probability practice</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  <li><a href="#render-your-work" id="toc-render-your-work" class="nav-link" data-scroll-target="#render-your-work">Render your work</a></li>
+  </ul></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-exploring-first-steps-enrollment-and-gestational-age-1" id="toc-exercise-1-exploring-first-steps-enrollment-and-gestational-age-1" class="nav-link" data-scroll-target="#exercise-1-exploring-first-steps-enrollment-and-gestational-age-1">Exercise 1: Exploring First Steps enrollment and Gestational Age</a></li>
+  <li><a href="#exercise-2-exploring-first-steps-enrollment-and-low-birthweights-1" id="toc-exercise-2-exploring-first-steps-enrollment-and-low-birthweights-1" class="nav-link" data-scroll-target="#exercise-2-exploring-first-steps-enrollment-and-low-birthweights-1">Exercise 2: Exploring First Steps enrollment and Low birthweights</a></li>
+  <li><a href="#exercise-3-conditional-vs.-marginal-probabilities-1" id="toc-exercise-3-conditional-vs.-marginal-probabilities-1" class="nav-link" data-scroll-target="#exercise-3-conditional-vs.-marginal-probabilities-1">Exercise 3: Conditional vs.&nbsp;Marginal probabilities</a></li>
+  <li><a href="#exercise-4-probability-practice-1" id="toc-exercise-4-probability-practice-1" class="nav-link" data-scroll-target="#exercise-4-probability-practice-1">Exercise 4: Probability practice</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Probability and Odds</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="notes" class="level1">
+<h1>Notes</h1>
+<ul>
+<li>You can download a template file to work with <a href="../activity_templates/15_prob_odds.qmd">here</a>.</li>
+<li><strong>File organization:</strong> Save this file in the “Activities” subfolder of your “STAT155” folder.</li>
+</ul>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>Distinguish between probabilities and odds, and convert one to the other</li>
+<li>Make appropriate visualizations for displaying relationships between multiple categorical variables (mosaic plots, stacked bar plots, etc.)</li>
+</ul>
+</section>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>Before class you should have read:</p>
+<ul>
+<li>Reading: Sections 2.5, and the Section 6.2 introduction in the <a href="https://mac-stat.github.io/Stat155Notes/">STAT 155 Notes</a></li>
+</ul>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<p><strong>Context:</strong> To begin formally learning about probabilities and odds, we’ll be exploring a dataset containing information on 2,500 singleton (i.e.&nbsp;not twins) births in King County, Washington in 2001. Each row contains information from one birth parent, and there are no birth parents included in the dataset more than once.</p>
+<p>The main research question this study aimed to answer was whether the <a href="https://kingcounty.gov/en/dept/dph/health-safety/health-centers-programs-services/maternity-support-wic/maternity-support-services-infant-case-management">First Steps</a> program in King County improved birth outcomes for women from socioeconomically disadvantaged backgrounds. We’ll attempt to answer this research question using the information available to us as we go!</p>
+<p>The variables in this dataset we’ll look at more closely for each birth parent are:</p>
+<ul>
+<li><code>age</code>: age of birth parent at time of birth (years)</li>
+<li><code>parity</code>: number of children the birth parent has given birth to before</li>
+<li><code>married</code>: indicator for whether the birth parent is currently married (1 = yes, 0 = no)</li>
+<li><code>bwt</code>: birthweight of the child (in grams)</li>
+<li><code>smokeN</code>: number of cigarettes smoked per day during pregnancy</li>
+<li><code>drinkN</code>: number of alcoholic drinks consumed per day during pregnancy</li>
+<li><code>firstep</code>: indicator for whether the birth parent participated in the “First Steps” pregnancy program</li>
+<li><code>gestation</code>: number of weeks at which birth parent gave birth</li>
+</ul>
+<p>Run the code below to read in the <code>firststeps</code> data, and create a few new variables that we’ll explore as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>firststeps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/firststeps.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">firstchild =</span> <span class="fu">ifelse</span>(parity <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>), <span class="co"># Is this the first child this parent has had?</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">low_bwt =</span> <span class="fu">ifelse</span>(bwt <span class="sc">&lt;</span> <span class="dv">2500</span>, <span class="st">"low"</span>, <span class="st">"not low"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">preterm =</span> <span class="fu">ifelse</span>(gestation <span class="sc">&lt;</span> <span class="dv">37</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)) <span class="co"># short gestational period</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2500 Columns: 17</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): sex, race
+dbl (15): plural, age, parity, married, bwt, smokeN, drinkN, firstep, welfar...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<section id="exercise-1-exploring-first-steps-enrollment-and-gestational-age" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-exploring-first-steps-enrollment-and-gestational-age">Exercise 1: Exploring First Steps enrollment and Gestational Age</h2>
+<p>A baby born prior to 37 weeks is considered premature. In figuring out whether we have evidence that the First Steps program is associated with better birth outcomes than those not in the First Steps program, we can look at whether the individuals in the program are more likely to have preterm babies.</p>
+<p>Below, we make a 2x2 table in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2x2 Table: preterm vs. First Steps</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(preterm, firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  preterm firstep     n
+  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+1 No            0  1879
+2 No            1   343
+3 Yes           0   218
+4 Yes           1    60</code></pre>
+</div>
+</div>
+<p>You may be wondering why this is called a 2x2 table, when it looks as though the table has four rows and three columns. The data can be re-arranged (and usually is, in a formal report) as follows…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(firststeps<span class="sc">$</span>preterm, firststeps<span class="sc">$</span>firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+         0    1
+  No  1879  343
+  Yes  218   60</code></pre>
+</div>
+</div>
+<p>… but it’s much cleaner to code up the original way!</p>
+<ol type="a">
+<li><p>How many birth parents were enrolled in the First Steps program? Which rows did you use to calculate this number?</p></li>
+<li><p>What <em>percentage</em> of people in the study were enrolled in the First Steps program? <strong>Recall: there were 2500 participants! You can confirm this by adding up the entire third column of the table</strong></p></li>
+<li><p>How many birth parents <em>who were enrolled in First Steps</em> had a premature baby?</p></li>
+<li><p>What <em>percentage</em> of birth parents in First Steps had a premature baby? Think carefully about the numerator and denominator you use to calculate this!</p></li>
+<li><p>What <em>percentage</em> of birth parents who had a premature baby were enrolled in First Steps? Think carefully about the numerator and denominator you use to calculate this!</p></li>
+</ol>
+<p>Congratulations! If you’ve made it to this point, you already intuitively know what <em>marginal</em> and <em>conditional</em> probabilities are. Formally,</p>
+<ul>
+<li><p>a <em>marginal</em> probability, denoted <span class="math inline">\(P(A)\)</span> for an event <span class="math inline">\(A\)</span>, is the probability that <span class="math inline">\(A\)</span> occurs overall. You calculated the marginal probability that people were enrolled in First Steps in part (b)! In this case, the denominator used to calculate the probability was the total number of people in the study.</p></li>
+<li><p>a <em>conditional</em> probability, denoted <span class="math inline">\(P(A | B)\)</span> for events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, is the probability that <span class="math inline">\(A\)</span> occurs <strong>given</strong> that event <span class="math inline">\(B\)</span> occurs. You calculated the conditional probability that a premature baby was born <strong>given</strong> that a parent was in First Steps in part (d)! In this case, the denominator used to calculate the probability was the total number of birth parents in the First Steps program. You also calculated a conditional probability in part (e).</p></li>
+</ul>
+<p>Using formal probability notation, write the probabilities you calculated in parts (b), (d), and (e) as</p>
+<blockquote class="blockquote">
+<ol start="2" type="a">
+<li><span class="math inline">\(P(First Steps)\)</span> = ___</li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="4" type="a">
+<li><span class="math inline">\(P(Preterm | First Steps)\)</span> = ___</li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="5" type="a">
+<li><span class="math inline">\(P(___ | ___)\)</span> = ___</li>
+</ol>
+</blockquote>
+<p>Note that the conditional probabilities calculated in parts (d) and (e) are not the same! This is because which event you condition on alters the denominator, and the event you’re interested in alters the numerator.</p>
+<ol start="6" type="a">
+<li>To determine if gestational age differed by enrollment in First Steps, we’ll want to calculate the conditional probability that a baby is born prematurely given First Steps enrollment (done!), <em>and</em> given that a parent is <em>not</em> enrolled in First Steps. Use the 2x2 table to calculated this conditional probability.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Preterm | Not in First Steps)\)</span> = ___</p>
+</blockquote>
+<ol start="7" type="a">
+<li>A ratio of conditional probabilities, where the conditioning event is the same for both, tells us how many times <em>more likely</em> an event is to occur for one group compared to another. Calculate how many times more likely a birth parent enrolled in First Steps is to have a premature baby compared to birth parents not enrolled in First Steps.</li>
+</ol>
+<p><span class="math display">\[
+\frac{(Preterm | First Steps)}{P(Preterm | Not in First Steps)} =
+\]</span></p>
+<ol start="8" type="a">
+<li><p>Write a two-sentence summary, appropriate for a general audience, summarizing your results in terms of a <em>ratio of probabilities</em>. Does gestational age appear to differ greatly by First Steps enrollment? What does this imply about the effectiveness of the First Steps program, if anything?</p></li>
+<li><p>To go along with your summary, let’s make a visualization! There are three basic options for visualization two categorical variables. All are perfectly valid, but some may be more useful to read than others, and display different information.</p></li>
+</ol>
+<p>You’ll see one other fancier option (called a <code>mosaic</code> plot) in the next activity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Side-by-side bar chart</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked bar chart</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked relative frequency bar chart</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Bonus Question:</strong> Which of the above three plots allows you to directly see the conditional probabilities we calculated previously?</p>
+<blockquote class="blockquote">
+<p>Place your answer here</p>
+</blockquote>
+</section>
+<section id="exercise-2-exploring-first-steps-enrollment-and-low-birthweights" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-exploring-first-steps-enrollment-and-low-birthweights">Exercise 2: Exploring First Steps enrollment and Low birthweights</h2>
+<p>Another birth outcome we can consider when comparing those enrolled in the First Steps program to those not enrolled is birth weight. A baby is considered to have <em>low</em> birth weight when birth weight is less than 2500 grams.</p>
+<ol type="a">
+<li>Fill in the code below to make a table comparing <code>low_bwt</code> to <code>firsteps</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2x2 Table: low_bwt vs. First Steps</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Using the table from part (a), calculate the following conditional probabilities:</li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Low birth weight | First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Normal birth weight | First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Low birth weight | Not in First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Normal birth weight | Not in First Steps)\)</span> = ___</p>
+</blockquote>
+<p>An additional numerical summary that is often useful when working with indicator variables is <em>odds</em>. Odds are defined as</p>
+<p><span class="math display">\[
+Odds = \frac{p}{1 - p}
+\]</span></p>
+<p>where <span class="math inline">\(p\)</span> is the probability that an event occurs. Therefore, if we know <span class="math inline">\(p\)</span>, we can calculate the odds that an event happens! Similarly, if we know the odds, we can calculate <span class="math inline">\(p\)</span> using</p>
+<p><span class="math display">\[
+p = Odds / (1 + Odds)
+\]</span></p>
+<p>We can also calculate odds from our 2x2 (or 3x2, 4x2, …) tables. In colloquial terms, probabilities are “yes”’s over “total”’s, and odds are “yes”’s over “no’s”. In pseudo-math:</p>
+<p><span class="math display">\[
+p = \frac{Yes}{Total}, \quad Odds = \frac{Yes}{No}
+\]</span> We’ll see why odds are especially useful when we have binary outcome variables in a regression model in the next activity. For now, note that they’re also commonly used in lots of contexts: sports, gambling, case-control studies, etc.</p>
+<ol start="3" type="a">
+<li>Using your answer to part (b), calculate the following <em>odds</em></li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Low birth weight | First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Normal birth weight | First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Low birth weight | Not in First Steps)\)</span> = ___</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Normal birth weight | Not in First Steps)\)</span> = ___</p>
+</blockquote>
+<ol start="4" type="a">
+<li>A ratio of odds (called an <strong>odds ratio</strong>, unsurprisingly) tells us how many times <em>higher</em> or <em>greater</em> the odds are that an event occurs, comparing one group to another. This might sound irritatingly circular. The key here is that while odds ratios <em>do</em> allow us to compare binary/indicator outcomes from one group to one another, they <em>do not</em> tell us how much <em>more likely</em> an event is to occur comparing those same groups. This is distinct from ratios of probabilities!</li>
+</ol>
+<p>Calculate the ratio of the odds of having a low-birth-weight baby, comparing those in the First Steps program to those not in the First Steps program (i.e., how many times higher/lower is the odds of having a low-birth-weight baby among those in First Steps as compared to those not in First Steps?)</p>
+<ol start="5" type="a">
+<li><p>Write a two-sentence summary, appropriate for a general audience, summarizing your results in terms of an <em>odds ratio</em>. Does birth weight appear to differ greatly by First Steps enrollment? What does this imply about the effectiveness of the First Steps program, if anything?</p></li>
+<li><p>To go along with your summary, add code below to make one of the three visualization options we tried out in Exercise 1.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert code here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-3-conditional-vs.-marginal-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-conditional-vs.-marginal-probabilities">Exercise 3: Conditional vs.&nbsp;Marginal probabilities</h2>
+<p>Suppose we select a person at random from the entire global population. For each of the following probabilities, which do you think is bigger? Explain your reasoning.</p>
+<ol type="a">
+<li>P(lung cancer) or P(lung cancer | smoker)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your response here</p>
+</blockquote>
+<ol start="2" type="a">
+<li>P(likes McDonald’s) or P(likes McDonald’s | vegetarian)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your response here</p>
+</blockquote>
+<ol start="3" type="a">
+<li>P(smart | Mac grad) or P(Mac grad | smart)</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your response here</p>
+</blockquote>
+</section>
+<section id="exercise-4-probability-practice" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-probability-practice">Exercise 4: Probability practice</h2>
+<p>Let’s explore whether birthweight of a baby varies by whether or not it was the <em>first</em> child that a mother had, <em>and</em> whether this relationship differs by First Steps enrollment. We make a table below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(firstchild, low_bwt, firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li>What is the probability that a mother enrolled in First steps who is having their first child, has a baby who is born at a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(___ | ___) = ?</p>
+</blockquote>
+<ol start="2" type="a">
+<li>What is the probability that a mother <em>not</em> enrolled in First steps who is having their first child, has a baby who is born at a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(___ | ___) = ?</p>
+</blockquote>
+<ol start="3" type="a">
+<li>What is the probability that a mother’s first child has a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(___ | ___) = ?</p>
+</blockquote>
+<ol start="4" type="a">
+<li>How many times <em>more likely</em> is a child to be born at a low birthweight, comparing children who are the first born to those not first born?</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(___ | <strong><em>) / P(</em></strong> | ___) = ?</p>
+</blockquote>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>Summarize key concepts from today. What ideas were challenging? What do you want to be sure to practice more?</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Put your response here.</p>
+</blockquote>
+</section>
+<section id="render-your-work" class="level2">
+<h2 class="anchored" data-anchor-id="render-your-work">Render your work</h2>
+<ul>
+<li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
+<li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
+<li>Close the browser tab.</li>
+<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
+<li>Navigate to your “Activities” subfolder within your “STAT155” folder and locate the HTML file. You can open it again in your browser to double check.</li>
+</ul>
+<p><br><br><br><br><br><br></p>
+</section>
+</section>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-exploring-first-steps-enrollment-and-gestational-age-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-exploring-first-steps-enrollment-and-gestational-age-1">Exercise 1: Exploring First Steps enrollment and Gestational Age</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2x2 Table: preterm vs. First Steps</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(preterm, firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  preterm firstep     n
+  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+1 No            0  1879
+2 No            1   343
+3 Yes           0   218
+4 Yes           1    60</code></pre>
+</div>
+</div>
+<ol type="a">
+<li><p>343 + 60 = 403 parents were enrolled in the First Steps program. I used both rows of the table where <code>firstep = 1</code>.</p></li>
+<li><p>16.12% of people in the study were enrolled in First Steps!</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">403</span> <span class="sc">/</span> <span class="dv">2500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1612</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li><p>60 birth parents</p></li>
+<li><p>14.89% of birth parents in First Steps had a premature baby.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">60</span> <span class="sc">/</span> <span class="dv">403</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1488834</code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>The total number of birth parents who had a premature baby was 218 + 60 = 278. Of those. 60 were enrolled in First Steps. Therefore, 21.58% of birth parents who had a premature baby were enrolled in First Steps.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">60</span><span class="sc">/</span><span class="dv">278</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2158273</code></pre>
+</div>
+</div>
+<p>Using formal probability notation, we can write</p>
+<blockquote class="blockquote">
+<ol start="2" type="a">
+<li><span class="math inline">\(P(First Steps)\)</span> = .1612</li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="4" type="a">
+<li><span class="math inline">\(P(Preterm | First Steps)\)</span> = .1488</li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="5" type="a">
+<li><span class="math inline">\(P(First Steps | Preterm)\)</span> = .2158</li>
+</ol>
+</blockquote>
+<ol start="6" type="a">
+<li></li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Preterm | Not in First Steps)\)</span> = 218 / (218 + 1879) = 0.103958</p>
+</blockquote>
+<ol start="7" type="a">
+<li></li>
+</ol>
+<p><span class="math display">\[
+\frac{(Preterm | First Steps)}{P(Preterm | Not in First Steps)} = .1488 / 0.103958 = 1.43
+\]</span></p>
+<ol start="8" type="a">
+<li>Parents in this study in the First Steps program are 1.43 times more likely to have a premature birth than those not enrolled in the First Steps program, indicating that gestational age does differ by First Steps enrollment. This implies that enrollment in the First Steps program may not be associated with better birth outcomes, as measured by gestational age.</li>
+</ol>
+<p><em>Note:</em> However, you may argue that this is not a fair comparison, or that this summary is not what researchers were actually interested in! Ideally, we would compare birth outcomes from mothers in the First Steps program to the birth outcomes from <em>those same mothers</em> not in the First Steps program, to determine if the program made a positive impact. This idea hints at a sub-field of statistics called <strong>causal inference</strong> and the idea of a <strong>counterfactual</strong> (“what would have happened if…”). Take more statistics classes to learn about other methods for approaching this question!</p>
+<ol type="i">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Side-by-side bar chart</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_prob_odds_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked bar chart</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_prob_odds_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked relative frequency bar chart</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> preterm)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_prob_odds_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Bonus Question:</strong> Which of the above three plots allows you to directly see the conditional probabilities we calculated previously?</p>
+<blockquote class="blockquote">
+<p>The stacked relative frequency bar chart!</p>
+</blockquote>
+</section>
+<section id="exercise-2-exploring-first-steps-enrollment-and-low-birthweights-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-exploring-first-steps-enrollment-and-low-birthweights-1">Exercise 2: Exploring First Steps enrollment and Low birthweights</h2>
+<ol type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2x2 Table: low_bwt vs. First Steps</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(low_bwt, firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  low_bwt firstep     n
+  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+1 low           0   102
+2 low           1    25
+3 not low       0  1995
+4 not low       1   378</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Low birth weight | First Steps)\)</span> = 25 / (25 + 378) = 0.062</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Normal birth weight | First Steps)\)</span> = 378 / (25 + 378) = 0.938</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Low birth weight | Not in First Steps)\)</span> = 102 / (102 + 1995) = 0.049</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(P(Normal birth weight | Not in First Steps)\)</span> = 1995 / (102 + 1995) = 0.951</p>
+</blockquote>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Low birth weight | First Steps)\)</span> = 0.062 / (1 - 0.062) = 0.06609808</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Normal birth weight | First Steps)\)</span> = 0.938 / (1 - 0.938) = 15.12903</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Low birth weight | Not in First Steps)\)</span> = 0.049 / (1 - 0.049) = 0.05152471</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(Odds(Normal birth weight | Not in First Steps)\)</span> = 0.951 / (1 - 0.951) = 19.40816</p>
+</blockquote>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.06609808</span> <span class="sc">/</span> <span class="fl">0.05152471</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.282842</code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li><p>The odds of having a low birth weight baby are 1.28 times higher for those enrollment in First Steps compared to those not in First Steps. Just as in Exercise 1, this implies that the First Steps program may not be associated with improved birth outcomes (with the same caveats as given in the answer to 1 (h)).</p></li>
+<li><p>To go along with your summary, add code below to make one of the three visualization options we tried out in Exercise 1.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked relative frequency bar chart (with some fancy aesthetics)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Birthweight =</span> low_bwt <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_to_title</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(firstep, <span class="at">fill =</span> Birthweight)) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"First Steps"</span>, <span class="at">title =</span> <span class="st">"Birthweight by First Steps Enrollment"</span>) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Not Enrolled"</span>, <span class="st">"Enrolled"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_prob_odds_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3-conditional-vs.-marginal-probabilities-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-conditional-vs.-marginal-probabilities-1">Exercise 3: Conditional vs.&nbsp;Marginal probabilities</h2>
+<p>Suppose we select a person at random from the entire global population. For each of the following probabilities, which do you think is bigger? Explain your reasoning.</p>
+<ol type="a">
+<li><p>P(lung cancer | smoker) is likely bigger, since lung cancer is more rare in the general population than it is among smokers.</p></li>
+<li><p>P(likes McDonald’s) is likely bigger, since vegetarians don’t likely like McDonald’s very much (few options that they can eat).</p></li>
+<li><p>P(smart | Mac grad) is likely bigger, because there are <em>very</em> few Mac grads relative to the global population. Lots of people are smart, few are Mac grads.</p></li>
+</ol>
+</section>
+<section id="exercise-4-probability-practice-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-probability-practice-1">Exercise 4: Probability practice</h2>
+<p>Let’s explore whether birth weight of a baby varies by whether or not it was the <em>first</em> child that a mother had, <em>and</em> whether this relationship differs by First Steps enrollment. We make a table below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>firststeps <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(firstchild, low_bwt, firstep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 4
+  firstchild low_bwt firstep     n
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+1 No         low           0    43
+2 No         low           1    13
+3 No         not low       0  1080
+4 No         not low       1   198
+5 Yes        low           0    59
+6 Yes        low           1    12
+7 Yes        not low       0   915
+8 Yes        not low       1   180</code></pre>
+</div>
+</div>
+<ol type="a">
+<li>What is the probability that a mother enrolled in First steps who is having their first child, has a baby who is born at a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(Low Birthweight | First Steps, First Child) = 12 / (12 + 180) = 0.0625</p>
+</blockquote>
+<ol start="2" type="a">
+<li>What is the probability that a mother <em>not</em> enrolled in First steps who is having their first child, has a baby who is born at a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(Low Birthweight | Not in First Steps, First Child) = 59 / (59 + 915) = 0.06057495</p>
+</blockquote>
+<ol start="3" type="a">
+<li>What is the probability that a mother’s first child has a low birthweight? Calculate your answer, and write it using formal probability notation.</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(Low Birthweight | First Child) = (59 + 12) / (59 + 12 + 915 + 180) = 0.06089194</p>
+</blockquote>
+<ol start="4" type="a">
+<li>How many times <em>more likey</em> is a child to be born at a low birthweight, comparing children who are the first born to those not first born?</li>
+</ol>
+<blockquote class="blockquote">
+<p>P(Low Birthweight | First Child) / P(Low Birthweight | Not First Child) = ((59 + 12) / (59 + 12 + 915 + 180)) / ((43 + 13) / (43 + 13 + 1080 + 198)) = 1.450533</p>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Leslie Myint, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Site built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

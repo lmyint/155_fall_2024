@@ -42,6 +42,7 @@ website:
         - activities/12_mlr_interaction_practice.qmd
         - activities/13_mlr_model_building_1.qmd
         - activities/14_mlr_model_building_2.qmd
+        - activities/15_prob_odds.qmd
 
     - id: homework
       title: "Practice Problems"
