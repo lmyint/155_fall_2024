@@ -1,0 +1,188 @@
+---
+title: "Simple logistic regression"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+**Context:** The *Titanic* was a British passenger ship that famously sank in 1912 after hitting an iceberg in the North Atlantic Ocean. Approximately 2200 passengers were on board the Titanic, and it's estimated that 1500 of them did not survive the crash. Historians have worked diligently to collect data on the passengers that were aboard the Titanic. 
+
+We have data for 1313 passengers, where the following information is available for each passenger:
+
+- `Name`: name
+- `PClass`: ticket class (1st, 2nd, 3rd)
+- `Age`: age (years)
+- `Sex`: binary sex (female, male)
+- `Survived`: indicator that the passenger survived (1 = survived, 0 = died)
+
+Our question of interest is: *how do different factors relate to survival?*
+
+In the Console, run `install.packages("ggmosaic")` to install the `ggmosaic` package that we'll be using to make a specialized type of plot.
+
+```{r}
+library(readr)
+library(ggplot2)
+library(ggmosaic)
+library(dplyr)
+
+titanic <- read_csv("https://mac-stat.github.io/data/titanic.csv")
+```
+
+## Exercise 1: Exploring age
+
+Did younger passengers tend to have higher survival rates than older passengers?
+
+Visualizing the relationship between a binary response and a quantitative predictor can be tricky. We will take a few approaches here.
+
+1. Create a boxplot where one box corresponds to the age distribution of survivors and the second to that of non-survivors.
+2. Create density plots with separate colors for the survivors and non-survivors.
+3. The remainder of the code below creates a plot of the fraction who survived at each age. (Since we have a large data set and multiple (though sometimes not many) observations at most ages, we can manually calculate the survival fraction.
+
+After inspecting the plots, summarize what you learn.
+
+```{r}
+# Create a boxplot
+# Note that you'll need to force R to view Survived as a binary categorical variable by using x = factor(Survived) instead of just x = Survived in the aes() part of your plot
+
+
+# Create a density plot (you'll need to use factor(Survived) again)
+
+
+# Use the code below to create a plot of the fraction who survived at each age
+titanic_summ <- titanic %>% 
+    group_by(Age) %>%
+    summarize(frac_survived = mean(Survived))
+
+ggplot(titanic_summ, aes(x = Age, y = frac_survived)) +
+    geom_point() +
+    geom_smooth(se = FALSE)
+```
+
+
+
+## Exercise 2: Exploring sex and ticket class
+
+Were males or females more likely to survive? Did 1st class passengers tend to survive more than 2nd and 3rd class passengers?
+
+The code below creates plots that allow us to explore how `Sex` and `PClass` relate to survival. The first two plots are standard bar plots that use color to indicate what fraction of each group survived. The last two plots are mosaic plots that are much like the standard bar plots, but the width of the bars reflects the distribution of the x-axis variable. (The widest bar is the most prevalent category.)
+
+Summarize what you learn about the relationship between sex, ticket class, and survival.
+
+```{r}
+# Standard bar plots
+ggplot(titanic, aes(x = Sex, fill = factor(Survived))) +
+    geom_bar(position = "fill")
+
+ggplot(titanic, aes(x = PClass, fill = factor(Survived))) +
+    geom_bar(position = "fill")
+
+# Mosaic plots
+ggplot(data = titanic %>% mutate(Survived = as.factor(Survived))) +
+    geom_mosaic(aes(x = product(Sex), fill = Survived))
+
+ggplot(data = titanic %>% mutate(Survived = as.factor(Survived))) +
+    geom_mosaic(aes(x = product(PClass), fill = Survived))
+```
+
+
+
+## Exercise 3: Linear regression model
+
+For now we will focus on exploring the relationship between (ticket) class and survival. 
+
+Let's tabulate survival across classes. We can tabulate across two variables by providing both variables to `count()`:
+
+```{r}
+titanic %>% 
+    count(PClass, Survived)
+```
+
+a. Use the `count()` output to fill in the following contingency table:
+
+Class     | Died     | Survived | Total 
+----------|----------|----------|-------
+1st Class | ___      |  ___     | ___
+2nd Class | ___      |  ___     | ___
+3rd Class | ___      |  ___     | ___
+Total     | ___      |  ___     | ___
+
+b. Using your table, estimate the following:
+    - the probability of surviving among 1st class passengers
+    - the probability of surviving among 2nd class passengers
+    - the probability of surviving among 3rd class passengers
+    - the difference in the probability of surviving, comparing 2nd class passengers to 1st class passengers (i.e., how much lower is the probability of 2nd class passengers as compared to 1st class passengers?)
+    - the difference in the probability of surviving, comparing 3rd class passengers to 1st class passengers  (i.e., how much lower is the probability of 3rd class passengers as compared to 1st class passengers?)
+
+c. After fitting the linear regression model below, write out the model formula using correct notation. Explain carefully what it means to talk about the expected/average value of a binary variable.
+
+```{r}
+lin_mod <- lm(Survived ~ PClass, data = titanic)
+summary(lin_mod)
+```
+
+d. Write an interpretation of each of the coefficients in your linear regression model. How do your coefficient estimates compare to your answers in part b?
+
+
+
+## Exercise 4: Logistic regression model
+
+a. Refer back to your contingency table from Exercise 3a. Using your table, estimate the following:
+    - the odds of surviving among 1st class passengers
+    - the odds of surviving among 2nd class passengers
+    - the odds of surviving among 3rd class passengers
+    - the ratio of the odds of surviving, comparing 2nd class passengers to 1st class passengers (i.e., how many times higher/lower is the odds of survival among 2nd class passengers as compared to 1st class passengers?)
+    - the ratio of the odds of surviving, comparing 3rd class passengers to 1st class passengers
+
+b. After fitting the logistic regression model below, write out the model formula using correct notation.
+
+```{r}
+log_mod <- glm(Survived ~ PClass, data = titanic, family = "binomial")
+coef(summary(log_mod))
+```
+
+d. Write an interpretation of each of the *exponentiated* coefficients in your logistic regression model. Think carefully about what we are modeling when we fit a logistic regression model. How do these exponentiated coefficient estimates compare to your answers in part a?
+
+
+
+## Exercise 5: Linear vs. logistic modeling
+
+To highlight a key difference between linear vs. logistic modeling, consider the following linear and logistic regression models of survival with sex and age as predictors in addition to ticket class.
+
+```{r}
+lin_mod2 <- lm(Survived ~ PClass + Sex + Age, data = titanic)
+coef(summary(lin_mod2))
+
+log_mod2 <- glm(Survived ~ PClass + Sex + Age, data = titanic, family = "binomial")
+coef(summary(log_mod2))
+```
+
+a. Use the linear regression model to predict the probability of survival for Rose (a 17 year old female in 1st class) and Jack (a 20 year old male in 3rd class). Show your work.
+
+b. Now use the logistic regression model to predict the survival probability for Rose and Jack. Show your work. (Hint: use the logistic regression model to obtain the predicted log odds, exponentiate to get the odds, and then convert to probability.)
+
+c. Comment on differences that you notice in the predictions from parts a and b.
+
+
+
+
+## Reflection
+
+What binary outcomes might be relevant in your project? What predictor(s) could be relevant in a logistic regression model for that outcome?
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
+
+
