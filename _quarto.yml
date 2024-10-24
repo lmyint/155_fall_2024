@@ -44,6 +44,7 @@ website:
         - activities/14_mlr_model_building_2.qmd
         - activities/15_prob_odds.qmd
         - activities/16_logistic_univariate.qmd
+        - activities/17_logistic_multivariate_evaluation.qmd
 
     - id: homework
       title: "Practice Problems"

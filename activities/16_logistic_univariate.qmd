@@ -319,7 +319,16 @@ b. $\log(Odds[Survived = 1 | PClass]) = \beta_0 + \beta_1 PClass2nd + \beta_2 PC
 
 ```{r}
 log_mod <- glm(Survived ~ PClass, data = titanic, family = "binomial")
+
+# These logistic coefficient estimates are NOT exponentiated
 coef(summary(log_mod))
+```
+
+```{r}
+# Calculations for exponentiating coefficients
+exp(0.4028778)
+exp(-0.6989281)
+exp(-1.8265098)
 ```
 
 d. These exponentiated coefficient estimates compare to your the odds and odds ratios in part a!

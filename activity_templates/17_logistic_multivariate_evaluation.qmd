@@ -1,0 +1,289 @@
+---
+title: "Multiple logistic regression"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+**Context:** In this activity, we'll look at data from an experiment conducted in 2001-2002 that investigated the influence of race and gender on job applications. The researchers created realistic-looking resumes and then randomly assigned a name to the resume that "would communicate the applicant's gender and race" (e.g., they they assumed the name Emily would generally be interpreted as a white woman, whereas the name  Jamal would generally be interpreted as a black man).  They then submitted these resumes to job postings in Boston and Chicago and waited to see if the  applicant got a call back from the job posting.
+
+You can find a full description of the variables in this dataset [here](https://www.openintro.org/data/index.php?data=resume). Today, we'll focus on the following variables:
+
+- `received_callback`: indicator that the resume got a call back from the job posting
+- `gender`: inferred binary gender associated with the first name on the resume
+- `race`: inferred race associated with the first name on the resume
+
+Our research question is: **does an applicant's inferred gender and race have an effect on the chance that they receive a callback after submitting their resume for an open job posting?**
+
+You'll need to run `install.packages("broom")` in the Console first.
+
+```{r}
+library(readr)
+library(ggplot2)
+library(ggmosaic)
+library(dplyr)
+library(broom)
+
+resume <- read_csv("https://mac-stat.github.io/data/resume.csv")
+```
+
+## Exercise 1: Graphical and numerical summaries
+
+Our research question involves three categorical variables: `received_callback` (1 = yes, 0 = no), `gender` (f = female, m = male), and `race` (Black, White). Let's start by creating a mosaic plot to visually compare inferred binary gender and callbacks:
+
+```{r graphical-summary-two-categorical-variables}
+# create mosaic plot of callback vs gender
+ggplot(resume) + 
+    geom_mosaic(aes(x = product(gender), fill = received_callback)) +
+    scale_fill_manual("Received Callback? \n(1 = yes, 0 = no)", values = c("lightblue", "steelblue")) + 
+    labs(x = "Inferred Binary Gender (f = female, m = male)", y = "Received Callback? (1 = yes, 0 = no)")
+```
+
+
+In this activity, we're also interested in looking at the relationship between inferred race and callbacks. One way we can add a third variable to a plot is to use the `facet_grid` function, particularly when that third variable is categorical. Let's try that now:
+
+```{r graphical-summary-three-variables}
+# create mosaic plot of callback vs gender and race
+ggplot(resume) + 
+    geom_mosaic(aes(x = product(gender), fill = received_callback)) +
+    facet_grid(. ~ race) +
+    scale_fill_manual("Received Callback? \n(1 = yes, 0 = no)", values = c("lightblue", "steelblue")) + 
+    labs(x = "Inferred Binary Gender (f = female, m = male)", y = "Received Callback? (1 = yes, 0 = no)")
+```
+
+
+Here's another way of looking at the relationship between these three variables, switching the placement of `gender` and `race` in the mosaic plot:
+
+```{r graphical-summary-three-variables-version2}
+# create mosaic plot of callback vs gender and race
+ggplot(resume) + 
+    geom_mosaic(aes(x = product(received_callback, race), fill = received_callback)) +
+    facet_grid(. ~ gender) +
+    scale_fill_manual("Received Callback? \n(1 = yes, 0 = no)", values = c("lightblue", "steelblue")) + 
+    labs(x = "Inferred Race", y = "Received Callback? (1 = yes, 0 = no)")
+```
+
+When we are comparing three categorical variables, a useful numerical summary is to calculate relative frequencies/proportions of cases falling into each category of the outcome variable, conditional on which categories of the explanatory variables they fall into. Run this code chunk to calculate the conditional proportion of resumes that did nor did not receive a callback, given the inferred gender and race of the applicant:
+
+```{r numerical-summaries}
+# corresponding numerical summaries
+resume %>%
+    group_by(race, gender) %>%
+    count(received_callback) %>%
+    group_by(race, gender) %>%
+    mutate(condprop = n/sum(n))
+```
+
+Write a short description that summarizes the information you gain from these visualizations and numerical summaries. Write this summary using good sentences that tell a story and do not resemble a checklist. Don't forget to consider the context of the data, and make sure that your summary addresses our research question: *does an applicant's inferred gender or race have an effect on the chance that they receive a callback?*
+
+
+
+## Exercise 2: Logistic regression modeling
+
+Next, we'll fit a logistic regression model to these data, modeling the *log odds* of receiving a callback as a function of the applicant's inferred gender and race:
+
+$$\log(Odds[ReceivedCallback = 1 \mid gender, race]) = \beta_0 + \beta_1 genderm + \beta_2 racewhite$$
+
+Fill in the blanks in the code below to fit this logistic regression model. 
+
+```{r logistic-model}
+# fit logistic model and save it as object called "mod1"
+mod1 <- glm(received_callback ~ gender + race, data = ___, family = ___)
+```
+
+Then, run the code chunk below to get the coefficient estimates and exponentiated estimates, presented in a nicely formatted table:
+
+```{r get-coefficient-estimates-mod1}
+# print out tidy summary of mod, focusing on estimates & exponentiated estimates
+tidy(mod1) %>%
+    select(term, estimate) %>%
+    mutate(estimate_exp = exp(estimate))
+```
+
+Write an interpretation of each of the exponentiated coefficients in your logistic regression model.
+
+
+
+## Exercise 3: Interaction terms
+
+a. Do you think it would make sense to add an interaction term (between gender and race) to our logistic regression model? Why/why not?
+
+b. Let's try adding an interaction between gender and race. Update the code below to fit this new interaction model.
+
+```{r logistic-model-with-interaction}
+# fit logistic model and save it as object called "mod2"
+mod2 <- glm(received_callback ~ ___, data = resume, family = ___)
+```
+
+Then, run the code chunk below to get the coefficient estimates and exponentiated estimates for this interaction model, presented in a nicely formatted table:
+
+```{r get-coefficient-estimates-mod2}
+# print out tidy summary of mod, focusing on estimates & exponentiated estimates
+tidy(mod2) %>%
+    select(term, estimate) %>%
+    mutate(estimate_exp = exp(estimate))
+```
+
+c. (CHALLENGE) Write out the logistic regression model formula separately for males and for females. Based on this how would we interpret the exponentiated coefficients in this model?
+
+
+
+## Exercise 4: Prediction
+
+We can use our models to predict whether or not a resume will receive a call back based on the inferred gender and race of the applicant. Run the code below to use the `predict()` function to predict the probability of getting a call back for four job applicants: a person inferred to be a black female, a person inferred to be black male, a person inferred to be a white female, and a person inferred to be a white male. 
+
+```{r predict}
+# set up data frame with people we want to predict for
+predict_data <- data.frame(
+    gender = c("f", "m", "f", "m"),
+    race = c("black", "black", "white", "white")
+)
+print(predict_data)
+
+# prediction based on model without interaction
+mod1 %>%
+    predict(newdata = predict_data, type = "response")
+
+# prediction based on model with interaction
+mod2 %>%
+    predict(newdata = predict_data, type = "response")
+```
+
+Report and compare the predictions we get from `predict()`. Do they make sense to you based on your understanding of the data? Combine insights from visualizations and modeling to write a few sentences summarizing findings for our research question: *does an applicant's inferred gender and race have an effect on the chance that they receive a callback after submitting their resume for an open job posting?*
+
+
+
+## Exercise 5: Evaluating logistic models with plots
+
+We'll fit one more model that adds on to the interaction model to also include years of college, years of work experience, and resume quality. The `augment()` code takes our fitted models and stores the predicted probabilities in a variable called `.fitted`. Then we use boxplots to show the predicted probabilities of receiving a callback in those who actually did and did not receive a callback.
+
+```{r}
+mod3 <- glm(received_callback ~ gender*race + years_college + years_experience + resume_quality, data = resume, family = "binomial")
+
+mod1_output <- augment(mod1, type.predict = "response") # Store predicted probabilities in a variable called .fitted
+mod2_output <- augment(mod2, type.predict = "response")
+mod3_output <- augment(mod3, type.predict = "response")
+
+ggplot(mod1_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot()
+ggplot(mod2_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot()
+ggplot(mod3_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot()
+```
+
+a. Summarize what you learn about the ability of the 3 models to differentiate those who actually did and did not receive a callback. What model seems best, and why?
+
+b. If you had to draw a horizontal line across each of the boxplots that vertically separates the left and right boxplots well, where would you place them?
+
+
+
+
+
+## Exercise 6: Evaluating logistic models with evaluation metrics
+
+Sometimes we may need to go beyond the predicted probabilities from our model and try to classify individuals into one of the two binary outcomes (received or did not receive a callback). How high of a predicted probability would we need from our model in order to be convinced that the person actually got a callback? This is the idea behind the horizontal lines that we drew in the previous exercise.
+
+Let's explore using a probability threshold of 0.08 (8%) to make a binary prediction for each case:
+
+- If a model's predicted probability of getting a callback is greater than or equal to 8.5%, we'll predict they got a callback.
+- If the predicted probability is below 8%, we'll predict they didn't get a callback.
+
+We can visualize this threshold on our predicted probability boxplots:
+
+```{r}
+ggplot(mod1_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot() +
+    geom_hline(yintercept = 0.08, color = "red")
+ggplot(mod2_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot() +
+    geom_hline(yintercept = 0.08, color = "red")
+ggplot(mod3_output, aes(x = factor(received_callback), y = .fitted)) +
+    geom_boxplot() +
+    geom_hline(yintercept = 0.08, color = "red")
+```
+
+
+Next, we can use our threshold to classify each person in our dataset based on their predicted probability of getting a callback: we'll predict that everyone with a predicted probability higher than our threshold got a callback, and otherwise they did not. Then, we'll compare our model's prediction to the true outcome (whether or not they actually did get a callback).
+
+```{r}
+# get binary predictions for mod1 and compare to truth
+threshold <- 0.08
+mod1_output %>%
+    mutate(predictCallback = .fitted >= threshold) %>% ## predict callback if probability greater than or equal to threshold
+    count(received_callback, predictCallback) ## compare actual and predicted callbacks
+
+mod2_output %>%
+    mutate(predictCallback = .fitted >= threshold) %>%
+    count(received_callback, predictCallback)
+
+mod3_output %>%
+    mutate(predictCallback = .fitted >= threshold) %>%
+    count(received_callback, predictCallback)
+```
+
+We can use the `count()` output to fill create contingency tables of the results. (These tables are also called **confusion matrices**.)
+
+a. Fill in the confusion matrix for Model 3.
+
+> Models 1 and 2: (Both models result in the same confusion matrix.)
+
+                        Predict callback   Predict no callback    Total
+---------------------- ------------------ ---------------------- -------
+Actually got callback       235               157                  392
+Actually did not           2200              2278                 4478
+Total                      2435              2435                 4870
+
+> Model 3: 
+
+                        Predict callback   Predict no callback    Total
+---------------------- ------------------ ---------------------- -------
+Actually got callback      ____               ____                ____
+Actually did not           ____               ____                ____
+Total                      ____               ____                ____
+
+b. Now compute the following evaluation metrics for the models:
+
+Models 1 and 2:
+
+- Accuracy: P(Predict Y Correctly)
+- Sensitivity: P(Predict Y = 1 | Actual Y = 1)
+- Specificity: P(Predict Y = 0 | Actual Y = 0)
+- False negative rate: P(Predict Y = 0 | Actual Y = 1)
+- False positive rate: P(Predict Y = 1 | Actual Y = 0)
+
+Model 3: 
+
+- Accuracy: P(Predict Y Correctly)
+- Sensitivity: P(Predict Y = 1 | Actual Y = 1)
+- Specificity: P(Predict Y = 0 | Actual Y = 0)
+- False negative rate: P(Predict Y = 0 | Actual Y = 1)
+- False positive rate: P(Predict Y = 1 | Actual Y = 0)
+
+c. Imagine that we are a career center on a college campus and we want to use this model to help students that are looking for jobs. Consider the consequences of incorrectly predicting whether or not an individual will get a callback. What are the consequences of a false negative? What about a false positive? Which one is worse?
+
+
+
+
+
+
+
+## Reflection
+
+What are some similarities and differences between how we interpret and evaluate linear and logistic regression models?
+
+> **Response:** Put your response here.
+
+
+
+## Render your work
+
+- Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+- Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+- Close the browser tab.
+- Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+- Navigate to your "Activities" subfolder within your "STAT155" folder and locate the HTML file. You can open it again in your browser to double check.
