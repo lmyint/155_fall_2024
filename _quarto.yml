@@ -45,6 +45,7 @@ website:
         - activities/15_prob_odds.qmd
         - activities/16_logistic_univariate.qmd
         - activities/17_logistic_multivariate_evaluation.qmd
+        - activities/18_sampling_normal.qmd
 
     - id: homework
       title: "Practice Problems"
