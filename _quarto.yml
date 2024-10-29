@@ -46,6 +46,7 @@ website:
         - activities/16_logistic_univariate.qmd
         - activities/17_logistic_multivariate_evaluation.qmd
         - activities/18_sampling_normal.qmd
+        - activities/19_sampling_dist_clt.qmd
 
     - id: homework
       title: "Practice Problems"
@@ -55,6 +56,7 @@ website:
         - assignments/pp3.qmd
         - assignments/pp4.qmd
         - assignments/pp5.qmd
+        - assignments/pp6.qmd
   
   page-footer:
     left: |

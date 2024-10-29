@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Practice Problems 1 – STAT 155</title>
+<title>Practice Problems 6 – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -276,14 +276,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
-  <li><a href="#exercise-1-define-two-new-variables" id="toc-exercise-1-define-two-new-variables" class="nav-link" data-scroll-target="#exercise-1-define-two-new-variables">Exercise 1: Define two new variables</a></li>
-  <li><a href="#exercise-2-get-to-know-the-data" id="toc-exercise-2-get-to-know-the-data" class="nav-link" data-scroll-target="#exercise-2-get-to-know-the-data">Exercise 2: Get to know the data</a></li>
-  <li><a href="#exercise-3-does-it-pass-the-bechdel" id="toc-exercise-3-does-it-pass-the-bechdel" class="nav-link" data-scroll-target="#exercise-3-does-it-pass-the-bechdel">Exercise 3: Does it pass the Bechdel?</a></li>
-  <li><a href="#exercise-4-how-much-money-did-it-make" id="toc-exercise-4-how-much-money-did-it-make" class="nav-link" data-scroll-target="#exercise-4-how-much-money-did-it-make">Exercise 4: How much money did it make?</a></li>
-  <li><a href="#exercise-5-explaining-intgross_mil" id="toc-exercise-5-explaining-intgross_mil" class="nav-link" data-scroll-target="#exercise-5-explaining-intgross_mil">Exercise 5: Explaining <code>intgross_mil</code></a></li>
-  <li><a href="#exercise-6-modeling-intgross_mil" id="toc-exercise-6-modeling-intgross_mil" class="nav-link" data-scroll-target="#exercise-6-modeling-intgross_mil">Exercise 6: Modeling <code>intgross_mil</code></a></li>
-  <li><a href="#exercise-7-predictions-and-residuals" id="toc-exercise-7-predictions-and-residuals" class="nav-link" data-scroll-target="#exercise-7-predictions-and-residuals">Exercise 7: Predictions and residuals</a></li>
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context:</a></li>
+  <li><a href="#exercise-1-parameter-vs.-estimate" id="toc-exercise-1-parameter-vs.-estimate" class="nav-link" data-scroll-target="#exercise-1-parameter-vs.-estimate">Exercise 1: Parameter vs.&nbsp;Estimate</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part c</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-resampling" id="toc-exercise-2-resampling" class="nav-link" data-scroll-target="#exercise-2-resampling">Exercise 2: Resampling</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
+  </ul></li>
+  <li><a href="#exercise-3-sampling-distributions" id="toc-exercise-3-sampling-distributions" class="nav-link" data-scroll-target="#exercise-3-sampling-distributions">Exercise 3: Sampling distributions</a>
+  <ul class="collapse">
+  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part a</a></li>
+  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part b</a></li>
+  <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part c</a></li>
+  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part d</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-properties-of-normal-distributions-and-standard-errors" id="toc-exercise-4-properties-of-normal-distributions-and-standard-errors" class="nav-link" data-scroll-target="#exercise-4-properties-of-normal-distributions-and-standard-errors">Exercise 4: Properties of Normal distributions and Standard Errors</a>
+  <ul class="collapse">
+  <li><a href="#part-a-3" id="toc-part-a-3" class="nav-link" data-scroll-target="#part-a-3">Part a</a></li>
+  <li><a href="#part-b-3" id="toc-part-b-3" class="nav-link" data-scroll-target="#part-b-3">Part b</a></li>
+  </ul></li>
+  <li><a href="#exercise-5-evaluating-logistic-regression-models" id="toc-exercise-5-evaluating-logistic-regression-models" class="nav-link" data-scroll-target="#exercise-5-evaluating-logistic-regression-models">Exercise 5: Evaluating logistic regression models</a>
+  <ul class="collapse">
+  <li><a href="#part-a-4" id="toc-part-a-4" class="nav-link" data-scroll-target="#part-a-4">Part a</a></li>
+  <li><a href="#part-b-4" id="toc-part-b-4" class="nav-link" data-scroll-target="#part-b-4">Part b</a></li>
+  <li><a href="#part-c-2" id="toc-part-c-2" class="nav-link" data-scroll-target="#part-c-2">Part c</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -293,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Problems 1</h1>
+<h1 class="title">Practice Problems 6</h1>
 </div>
 
 
@@ -311,29 +333,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <center>
-<strong>Due Friday, 9/13 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=128876">Moodle</a>.</strong>
+<strong>Due Friday, 11/8 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=143603">Moodle</a>.</strong>
 </center>
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
 <p>The goal of this set of practice problems is to practice the following skills:</p>
 <ul>
-<li>Constructing and interpreting visualizations that inform research questions of interest</li>
-<li>Data wrangling</li>
-<li>Constructing and interpreting simple linear regression models</li>
+<li>Recognize the difference between a <strong>population parameter</strong> and a <strong>sample estimate</strong>.</li>
+<li>Demonstrate understanding of properties of the Normal probability model</li>
+<li>Connect the <em>ideas</em> of randomness, sampling distributions, bootstrapping, the Central Limit Theorem, sample size, and standard error</li>
+<li>Identify the difference between <em>sampling</em> and <em>resampling</em></li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp1.qmd">here</a>.</strong></p>
+<p><strong>You can download a template to start from <a href="../activity_templates/pp6.qmd">here</a>.</strong></p>
 </section>
 <section id="directions" class="level1">
 <h1>Directions</h1>
 <ol type="1">
-<li><p>We will be using data from the <code>fivethirtyeight</code> package. Install this package by entering the <code>install.packages()</code> command in the <strong>Console</strong>. (Do not include the installation command in this file–your document won’t render to the required HTML file!)</p></li>
-<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>fivethirtyeight</code> packages.</p></li>
+<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, <code>broom</code>, <code>mosaicData</code>, and <code>readr</code> packages. The data for this assignment comes from the <code>mosaicData</code> package in R. To read it in, you will need to run the code <code>data(Whickham)</code>.</p></li>
 <li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
 </ol>
 <blockquote class="blockquote">
 <p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
 </blockquote>
-<ol start="4" type="1">
+<ol start="3" type="1">
 <li>Render your work for submission:
 <ul>
 <li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
@@ -347,123 +369,146 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
 <section id="context" class="level2">
-<h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>This cartoon by Alison Bechdel inspired the “Bechdel test” (<a href="https://en.wikipedia.org/wiki/Bechdel_test#/media/File:Dykes_to_Watch_Out_For_(Bechdel_test_origin).jpg">image source</a>):</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Dykes_to_Watch_Out_For_%28Bechdel_test_origin%29.jpg" class="img-fluid"></p>
-<p>A movie passes the test if it meets the following criteria:</p>
+<h2 class="anchored" data-anchor-id="context">Context:</h2>
+<p>In the following exercises, we’ll work with data from a one-in-six survey of the electoral roll in Whickham, a mixed urban and rural district near Newcastle upon Tyne, in the UK. The survey was conducted in 1972-1974 to study heart disease and thyroid disease. A follow-up on those in the survey was conducted twenty years later.</p>
+<p>We have access to the following information, for 1314 women:</p>
 <ul>
-<li>there are at least 2 women-identifying characters;<br>
-</li>
-<li>these characters talk to each other at least 1 time; and<br>
-</li>
-<li>they talk about something other than a male-identifying character</li>
+<li><code>outcome</code>: survival status after twenty years (Alive or Dead)</li>
+<li><code>smoker</code>: smoking status at baseline (No or Yes)</li>
+<li><code>age</code>: age (in years) at the time of the first survey</li>
 </ul>
-<p>We’ll work with the <code>bechdel</code> data within the <code>fivethirtyeight</code> package. You can enter <code>?bechdel</code> in the Console to view the codebook.</p>
+<p>We’ll use this data to explore sampling distributions, properties of Normal distributions, and more. The main research question we’ll explore is whether the odds of mortality in 20 years varies between smokers and non-smokers.</p>
+</section>
+<section id="exercise-1-parameter-vs.-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-parameter-vs.-estimate">Exercise 1: Parameter vs.&nbsp;Estimate</h2>
+<section id="part-a" class="level3">
+<h3 class="anchored" data-anchor-id="part-a">Part a</h3>
+<p>Before digging into the data, think about the context of our research question. In one sentence, describe what the population parameter of interest is.</p>
+<blockquote class="blockquote">
+<p>Population parameter:</p>
+</blockquote>
+</section>
+<section id="part-b" class="level3">
+<h3 class="anchored" data-anchor-id="part-b">Part b</h3>
+<p>In two-to-three sentences, describe how we could use the data we have access to to obtain a <strong>sample estimate</strong> of this population parameter <strong>without</strong> fitting a linear or logistic regression model (just using algebra!)</p>
+</section>
+<section id="part-c" class="level3">
+<h3 class="anchored" data-anchor-id="part-c">Part c</h3>
+<p>Do what you described in part b! What is the sample estimate from the data we have? Include any code you need to answer this question in the code chunk below (remember, R is a calculator!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bechdel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your R code here!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-1-define-two-new-variables" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-define-two-new-variables">Exercise 1: Define two new variables</h2>
-<p>We can use the <code>mutate()</code> function from <code>dplyr</code> to define new variables. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new variable which measures years_since_1900</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>bechdel <span class="ot">&lt;-</span> bechdel <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">years_since_1900 =</span> year <span class="sc">-</span> <span class="dv">1900</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check it out / confirm it's right</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, years_since_1900) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Your turn. Define a new variable <code>budget_mil</code> which measures budget in MILLIONS of dollars (on the 2013 scale). Similarly, define a new variable <code>intgross_mil</code> which measures international gross in MILLIONS of dollars (on the 2013 scale). Store these in <code>bechdel</code> and confirm your results match those here:</p>
-<pre><code>## # A tibble: 3 x 2
-##   budget_mil intgross_mil
-##        &lt;dbl&gt;        &lt;dbl&gt;
-## 1       13           42.2
-## 2       45.7         41.5
-## 3       20          159.</code></pre>
 </section>
-<section id="exercise-2-get-to-know-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-get-to-know-the-data">Exercise 2: Get to know the data</h2>
-<p>Complete each task below using <code>dim()</code>, <code>nrow()</code>, <code>head()</code>, or one of the <code>dplyr</code> functions: <code>filter()</code>, <code>summarize()</code>, <code>select()</code>. For any questions about movie budget and gross earnings, use <code>budget_mil</code> and <code>gross_mil</code>. NOTE: You don’t need to write out any discussion for this exercise, just include your code and output.</p>
+<section id="exercise-2-resampling" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-resampling">Exercise 2: Resampling</h2>
+<section id="part-a-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
+<p>Rather than calculate the observed odds ratio by hand, we could have instead fit a simple logistic regression model with <code>outcome</code> as the outcome (hah!) amd <code>smoker</code> as our predictor of interest. The exponentiated slope coefficient is then our odds ratio comparing smokers to non-smokers.</p>
+<p>R output from regression models automatically provides us with standard errors, but <strong>suppose</strong> we instead wanted to obtain the standard error for our odds ratio without <code>glm</code>’s (direct) assistance, and instead estimate it via bootstrapping!</p>
+<p>Fill in the code below to draw 500 re-samples from the <code>Whickham</code> dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many films are in the dataset?</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># When was the oldest film in the dataset made?</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># When was the most recent film in the dataset made?</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the median film budget in 2013 dollars?</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># What films had budgets that exceeded 300 million in 2013 dollars?</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the films and budgets, not all variables)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># What films were made in 1971?</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the films and year, not all variables)</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># What were the budget_mil and intgross_mil values for "Titanic"?</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># (Just show the budget_mil and intgross_mil values)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed so that we all get the same results</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">155</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Store the sample models</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sample_coefs <span class="ot">&lt;-</span> mosaic<span class="sc">::</span><span class="fu">do</span>(___)<span class="sc">*</span>( <span class="co"># What number should go here?</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  Whickham <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> ___, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># What number should go here?</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">with</span>(<span class="fu">glm</span>(___ <span class="sc">~</span> ___, <span class="at">family =</span> binomial)) <span class="co"># What variables should go here?</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Exponential our slope coefficient samples to get odds ratios</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>sample_coefs <span class="ot">&lt;-</span> sample_coefs <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OR =</span> <span class="fu">exp</span>(smokerYes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-3-does-it-pass-the-bechdel" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-does-it-pass-the-bechdel">Exercise 3: Does it pass the Bechdel?</h2>
-<p>The <code>clean_test</code> variable records the Bechdel category into which each movie falls. From worst to best (if you care about the representation of women in film):</p>
+<section id="part-b-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
+<p>Explain in one-to-two sentences, why we need to sample from our data <strong>with replacement</strong> when doing bootstrapping (recall Exercise 4 on activity 20 if you need a hint!).</p>
+<blockquote class="blockquote">
+<p>Your response here</p>
+</blockquote>
+</section>
+</section>
+<section id="exercise-3-sampling-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-sampling-distributions">Exercise 3: Sampling distributions</h2>
+<section id="part-a-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-2">Part a</h3>
+<p>If we were to make a histogram of the 500 re-sampled odds ratio estimates, what shape do you anticipate the histogram to take? What value do you expect it to be centered around?</p>
+</section>
+<section id="part-b-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-2">Part b</h3>
+<p>Make the plot you described in part a! What do you observe? Were your “hypotheses” correct?</p>
+</section>
+<section id="part-c-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-1">Part c</h3>
+<p>Estimate where roughly the middle 50% of the 500, re-sampled odds ratios fall. Add vertical lines to your histogram using <code>geom_vline</code> to indicate the values that contain the middle 50% of your estimates.</p>
+</section>
+<section id="part-d" class="level3">
+<h3 class="anchored" data-anchor-id="part-d">Part d</h3>
+<p>Estimate where roughly the middle 80% of the 500, re-sampled odds ratios fall, and report this range of values. Explain why the range that contains the middle 80% is <strong>necessarily</strong> larger than the range that contains the middle 50%.</p>
+</section>
+</section>
+<section id="exercise-4-properties-of-normal-distributions-and-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-properties-of-normal-distributions-and-standard-errors">Exercise 4: Properties of Normal distributions and Standard Errors</h2>
+<section id="part-a-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-3">Part a</h3>
+<p>Using your re-sampled odds ratios, calculate and report your estimated standard error.</p>
+</section>
+<section id="part-b-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-3">Part b</h3>
+<p>Now use <code>glm</code> to fit one, simple logistic regression model to our original dataset. What is the standard error provided by <code>glm</code> for the slope coefficient, and how does it compare to your answer from part a?</p>
+</section>
+</section>
+<section id="exercise-5-evaluating-logistic-regression-models" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-evaluating-logistic-regression-models">Exercise 5: Evaluating logistic regression models</h2>
+<section id="part-a-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-4">Part a</h3>
 <ul>
-<li><code>nowomen</code> = there are no significant women characters in the film</li>
-<li><code>notalk</code> = there are women characters but they don’t talk to one another</li>
-<li><code>men</code> = there are women characters that talk to one another but they only talk about men</li>
-<li><code>dubious</code> = barely passes the Bechdel test</li>
-<li><code>ok</code> = passes the Bechdel test</li>
+<li>Fit a multiple logistic regression model that models mortality (<code>outcome</code>) as a function of both smoking status and age. (Don’t include an interaction term between the 2 predictors.)</li>
+<li>Interpret all 3 exponentiated coefficients. Explain if the intercept is meaningful in this context.</li>
 </ul>
-<p>Construct a visualization of the <code>clean_test</code> variable, and construct a corresponding table of counts. In one sentence, summarize your findings about <code>clean_test</code> as if you were writing a newspaper article about movies.</p>
 </section>
-<section id="exercise-4-how-much-money-did-it-make" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-how-much-money-did-it-make">Exercise 4: How much money did it make?</h2>
-<p>The <code>intgross_mil</code> variable records each movie’s total international gross, in millions of dollars (and adjusted to 2013).</p>
-<ol type="a">
-<li><p>Construct a visualization of the <code>intgross_mil</code> variable. Summarize your findings as if you were writing a newspaper article about movies.</p></li>
-<li><p>Calculate the mean and median values of <code>intgross_mil</code>. Explain why the mean exceeds the median by quite a bit <em>and</em> which is the more appropriate measure of trend here.</p>
+<section id="part-b-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-4">Part b</h3>
 <ul>
-<li>NOTE: Since some films are missing information on <code>intgross_mil</code>, you’ll need to use <code>mean(___, na.rm = TRUE)</code> where <code>na.rm = TRUE</code> says to remove the NA (missing) values from the calculation. Similarly for the median.</li>
-</ul></li>
-<li><p>Calculate the standard deviations for the <code>intgross_mil</code> and <code>budget_mil</code> variables. Comment on whether there’s more variability among how much money is spent <em>making</em> movies (budgets) or how much money a movie makes (grosses)?</p></li>
-</ol>
-</section>
-<section id="exercise-5-explaining-intgross_mil" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-explaining-intgross_mil">Exercise 5: Explaining <code>intgross_mil</code></h2>
-<p>Next, let’s try to <em>explain</em> some of the variability in how much money films gross. To this end, we’ll focus on modeling <code>intgross_mil</code> by <code>budget_mil</code>. That is, to what extent is the money a film makes related to its budget?</p>
-<ol type="a">
-<li><p>In the relationship between <code>intgross_mil</code> and <code>budget_mil</code>, which is the <em>response</em> variable?</p></li>
-<li><p>Construct a visualization of the relationship between <code>intgross_mil</code> and <code>budget_mil</code>. Include a regression line that represents the <em>trend</em> in this relationship.</p></li>
-<li><p>In 1-3 sentences, summarize your findings about this relationship as if you were writing a newspaper article about movies. Be sure to comment on both the <em>trend</em> and <em>variability</em> in this relationship.</p></li>
-</ol>
-</section>
-<section id="exercise-6-modeling-intgross_mil" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6-modeling-intgross_mil">Exercise 6: Modeling <code>intgross_mil</code></h2>
-<p>Let’s examine the relationship between <code>intgross_mil</code> and <code>budget_mil</code> in more detail.</p>
-<ol type="a">
-<li><p>Use <code>lm()</code> to construct a linear regression model of the <em>trend</em> in the relationship between <code>intgross_mil</code> and <code>budget_mil</code>. Store this as <code>movie_model</code> and report a model summary table.</p></li>
-<li><p>Write out a formula for the trend.</p></li>
-<li><p>Provide a newspaper appropriate interpretation of the <code>budget_mil</code> coefficient. <em>Make sure to use non-causal language, include units, and talk about averages rather than individual cases.</em></p></li>
-<li><p>Does it make sense to interpret the intercept in this model? Explain.</p></li>
-</ol>
-</section>
-<section id="exercise-7-predictions-and-residuals" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7-predictions-and-residuals">Exercise 7: Predictions and residuals</h2>
-<ol type="a">
-<li>In exercise 2 you identified the budget (<code>budget_mil</code>) for the movie <em>Titanic</em>. Use the model formula above to predict its international gross. You can check your work using the <code>predict()</code> function. This provides a more accurate prediction (it doesn’t round the model coefficients) so don’t worry if your calculation doesn’t exactly match.</li>
-</ol>
+<li>Construct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span.</li>
+<li>If the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?</li>
+</ul>
+<blockquote class="blockquote">
+<p>If the model did a worse job of predicting 20-year mortality, the boxplots would be less separated and overlap more. Greater overlap would mean that the predicted probabilities are worse at distinguishing between the two outcomes.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Feedback guide:</strong> They only need to have something like the first sentence in the example response above.</p>
+</blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(___, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">budget_mil =</span> ___))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>log_mod_output <span class="ot">&lt;-</span> <span class="fu">augment</span>(___)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(log_mod_output, <span class="fu">aes</span>(___)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    geom_???()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="2" type="a">
-<li><p>Calculate the Titanic <em>residual</em>. HINT: You’ll need to use the observed <code>intgross_mil</code> value from exercise 2.</p></li>
-<li><p>Based on your calculation in part b, did the model over- or under-estimate <em>Titanic</em>’s gross?</p></li>
-</ol>
+</section>
+<section id="part-c-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-2">Part c</h3>
+<p>Compute the (overall) accuracy, sensitivity, and specificity of the logistic regression model from Part a using a probability threshold of 0.375. Show your work for the calculations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>log_mod_output <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">predictDead =</span> .fitted <span class="sc">&gt;=</span> ___) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(outcome, predictDead)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall accuracy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sensitivity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specificity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 </section>
 

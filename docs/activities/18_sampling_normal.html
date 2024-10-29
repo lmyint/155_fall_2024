@@ -240,6 +240,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../activities/18_sampling_normal.html">
  <span class="dropdown-text">The Normal model &amp; sampling variation</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/19_sampling_dist_clt.html">
+ <span class="dropdown-text">Sampling distributions &amp; the CLT</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -266,6 +270,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../assignments/pp5.html">
  <span class="dropdown-text">Practice Problems 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp6.html">
+ <span class="dropdown-text">Practice Problems 6</span></a>
   </li>  
     </ul>
   </li>
@@ -779,9 +787,9 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observe that the 2 counties change every time &amp; differ from your neighbors' samples</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(county_clean, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  state            name  fips pci_2019 pci_2017
-1 Texas Sterling County 48431   28.757 25.12353
-2  Iowa   Greene County 19073   28.451 28.62018</code></pre>
+<pre><code>     state                  name  fips pci_2019 pci_2017
+1 Virginia Northumberland County 51133   36.261 34.34623
+2     Iowa          Floyd County 19067   29.622 28.76533</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -829,7 +837,7 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 </section>
 <section id="exercise-7-sample-intercepts-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-7-sample-intercepts-1">Exercise 7: Sample intercepts</h2>
-<p>The intercepts are roughly normal, centered around the population intercept (1.294), and range from roughly 0.254 to 6.016:</p>
+<p>The intercepts are roughly normal, centered around the population intercept (1.294), and range from roughly -6.92 to 7.395:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_intercept)) <span class="sc">+</span> </span>
@@ -865,7 +873,7 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 </div>
 </div>
 <ol start="4" type="a">
-<li>Will vary, but should roughly be 0.14.</li>
+<li>Will vary, but should roughly be 0.16.</li>
 </ol>
 </section>
 <section id="exercise-9-standard-error-1" class="level2">
@@ -880,7 +888,7 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 </div>
 </div>
 <ol start="2" type="a">
-<li><p>For example, suppose my estimate were 1.1. Then my Z-score is (1.1 - 1.027) / 0.14 = 0.5214286</p></li>
+<li><p>For example, suppose my estimate were 1.1. Then my Z-score is (1.1 - 1.027) / 0.16 = 0.45625</p></li>
 <li><p>This is somewhat subjective. But we’ll learn that if your estimate is within 2 sd of the actual slope, i.e.&nbsp;your Z-score is between -2 and 2, you’re pretty “lucky”.</p></li>
 </ol>
 

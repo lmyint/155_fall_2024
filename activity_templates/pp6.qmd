@@ -1,0 +1,189 @@
+---
+title: "Practice Problems 6"
+author: "STUDENT NAME"
+date: now
+date-format: "YYYY-MM-DDTHH:mm:ssZ"
+format:
+  html:
+    embed-resources: true
+    code-tools: true    
+---
+
+<center>
+**Due Friday, 11/8 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=143603).**
+</center>
+
+# Purpose
+
+The goal of this set of practice problems is to practice the following skills:
+
+- Recognize the difference between a **population parameter** and a **sample estimate**.
+- Demonstrate understanding of properties of the Normal probability model
+- Connect the *ideas* of randomness, sampling distributions, bootstrapping, the Central Limit Theorem, sample size, and standard error 
+- Identify the difference between *sampling* and *resampling*
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, `broom`, `mosaicData`, and `readr` packages. The data for this assignment comes from the `mosaicData` package in R. To read it in, you will need to run the code `data(Whickham)`.
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+# Exercises
+
+## Context:
+
+In the following exercises, we'll work with data from a one-in-six survey of the electoral roll in Whickham, a mixed urban and rural district near Newcastle upon Tyne, in the UK. The survey was conducted in 1972-1974 to study heart disease and thyroid disease. A follow-up on those in the survey was conducted twenty years later.
+
+We have access to the following information, for 1314 women:
+
+- `outcome`: survival status after twenty years (Alive or Dead)
+- `smoker`: smoking status at baseline (No or Yes)
+- `age`: age (in years) at the time of the first survey
+
+We'll use this data to explore sampling distributions, properties of Normal distributions, and more. The main research question we'll explore is whether the odds of mortality in 20 years varies between smokers and non-smokers.
+
+## Exercise 1: Parameter vs. Estimate
+
+### Part a
+
+Before digging into the data, think about the context of our research question. In one sentence, describe what the population parameter of interest is.
+
+> Population parameter:
+
+### Part b
+
+In two-to-three sentences, describe how we could use the data we have access to to obtain a **sample estimate** of this population parameter **without** fitting a linear or logistic regression model (just using algebra!)
+
+### Part c
+
+Do what you described in part b! What is the sample estimate from the data we have? Include any code you need to answer this question in the code chunk below (remember, R is a calculator!)
+
+```{r}
+# Add your R code here!
+```
+
+## Exercise 2: Resampling
+
+### Part a
+
+Rather than calculate the observed odds ratio by hand, we could have instead fit a simple logistic regression model with `outcome` as the outcome (hah!) amd `smoker` as our predictor of interest. The exponentiated slope coefficient is then our odds ratio comparing smokers to non-smokers. 
+
+R output from regression models automatically provides us with standard errors, but **suppose** we instead wanted to obtain the standard error for our odds ratio without `glm`'s (direct) assistance, and instead estimate it via bootstrapping!
+
+Fill in the code below to draw 500 re-samples from the `Whickham` dataset.
+
+```{r}
+# Set the seed so that we all get the same results
+set.seed(155)
+
+# Store the sample models
+sample_coefs <- mosaic::do(___)*( # What number should go here?
+  Whickham %>%
+    sample_n(size = ___, replace = TRUE) %>% # What number should go here?
+    with(glm(___ ~ ___, family = binomial)) # What variables should go here?
+)
+
+# Exponential our slope coefficient samples to get odds ratios
+sample_coefs <- sample_coefs %>%
+  mutate(OR = exp(smokerYes))
+```
+
+### Part b
+
+Explain in one-to-two sentences, why we need to sample from our data **with replacement** when doing bootstrapping (recall Exercise 4 on activity 20 if you need a hint!).
+
+> Your response here
+
+## Exercise 3: Sampling distributions
+
+### Part a
+
+If we were to make a histogram of the 500 re-sampled odds ratio estimates, what shape do you anticipate the histogram to take? What value do you expect it to be centered around?
+
+### Part b
+
+Make the plot you described in part a! What do you observe? Were your "hypotheses" correct?
+
+### Part c
+
+Estimate where roughly the middle 50% of the 500, re-sampled odds ratios fall. Add vertical lines to your histogram using `geom_vline` to indicate the values that contain the middle 50% of your estimates.
+
+### Part d
+
+Estimate where roughly the middle 80% of the 500, re-sampled odds ratios fall, and report this range of values. Explain why the range that contains the middle 80% is **necessarily** larger than the range that contains the middle 50%.
+
+## Exercise 4: Properties of Normal distributions and Standard Errors
+
+### Part a
+
+Using your re-sampled odds ratios, calculate and report your estimated standard error.
+
+### Part b
+
+Now use `glm` to fit one, simple logistic regression model to our original dataset. What is the standard error provided by `glm` for the slope coefficient, and how does it compare to your answer from part a?
+
+
+
+
+## Exercise 5: Evaluating logistic regression models
+
+### Part a
+
+- Fit a multiple logistic regression model that models mortality (`outcome`) as a function of both smoking status and age. (Don't include an interaction term between the 2 predictors.)
+- Interpret all 3 exponentiated coefficients. Explain if the intercept is meaningful in this context.
+
+
+### Part b
+
+- Construct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span. 
+- If the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?
+
+> If the model did a worse job of predicting 20-year mortality, the boxplots would be less separated and overlap more. Greater overlap would mean that the predicted probabilities are worse at distinguishing between the two outcomes.
+
+> **Feedback guide:** They only need to have something like the first sentence in the example response above.
+
+```{r}
+log_mod_output <- augment(___)
+
+ggplot(log_mod_output, aes(___)) +
+    geom_???()
+```
+
+### Part c
+
+Compute the (overall) accuracy, sensitivity, and specificity of the logistic regression model from Part a using a probability threshold of 0.375. Show your work for the calculations.
+
+```{r}
+log_mod_output %>%
+    mutate(predictDead = .fitted >= ___) %>%
+    count(outcome, predictDead)
+```
+
+```{r}
+# Overall accuracy
+
+```
+
+```{r}
+# Sensitivity
+
+```
+
+```{r}
+# Specificity
+
+```
+
+
