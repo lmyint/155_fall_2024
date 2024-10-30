@@ -563,6 +563,36 @@ head(sample_models_200)
 
 ## Exercise 9: Impact of sample size (part I)
 
+
+```{r}
+# 500 sample models using samples of size 10
+county_clean %>% 
+  ggplot(aes(x = pci_2017, y = pci_2019)) + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_abline(data = sample_models_10, 
+              aes(intercept = Intercept, slope = pci_2017), 
+              color = "gray", size = 0.25) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE)
+
+# 500 sample models using samples of size 50
+county_clean %>% 
+  ggplot(aes(x = pci_2017, y = pci_2019)) + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_abline(data = sample_models_50, 
+              aes(intercept = Intercept, slope = pci_2017), 
+              color = "gray", size = 0.25) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE)
+
+# 500 sample models using samples of size 200
+county_clean %>% 
+  ggplot(aes(x = pci_2017, y = pci_2019)) + 
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_abline(data = sample_models_200, 
+              aes(intercept = Intercept, slope = pci_2017), 
+              color = "gray", size = 0.25) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE)
+```
+
 The sample model lines become less and less variable from sample to sample.
 
 
@@ -574,9 +604,18 @@ The sample model lines become less and less variable from sample to sample.
 
 No matter the sample size, the sample estimates are normally distributed around the population slope. But as sample size increases, the variability of the sample estimates decreases.
 
-
-
-
+```{r}
+# Don't think too hard about this code!
+# Combine the estimates & sample size into a new data set
+# Then plot it
+data.frame(estimates = c(sample_models_10$pci_2017, sample_models_50$pci_2017, sample_models_200$pci_2017),
+           sample_size = rep(c("10","50","200"), each = 500)) %>% 
+  mutate(sample_size = fct_relevel(sample_size, c("10", "50", "200"))) %>% 
+  ggplot(aes(x = estimates, color = sample_size)) + 
+  geom_density() + 
+  geom_vline(xintercept = 1.027, color = "red", linetype = "dashed") + 
+  labs(title = "Sampling distributions of the sample slope")
+```
 
 
 
@@ -592,15 +631,6 @@ b. As sample size increases:
     The standard error of the sample slopes DECREASES / IS FAIRLY STABLE.
     
 c. Thus, as sample size increases, our sample slopes become MORE RELIABLE.
-  
-  
-  
-  
-
-
-
-
-
 
 
 
