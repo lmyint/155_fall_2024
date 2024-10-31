@@ -787,9 +787,9 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observe that the 2 counties change every time &amp; differ from your neighbors' samples</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(county_clean, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     state                  name  fips pci_2019 pci_2017
-1 Virginia Northumberland County 51133   36.261 34.34623
-2     Iowa          Floyd County 19067   29.622 28.76533</code></pre>
+<pre><code>           state           name  fips pci_2019 pci_2017
+1           Iowa   Story County 19169   29.539 30.08276
+2 North Carolina Jackson County 37099   25.347 24.23064</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -837,7 +837,7 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 </section>
 <section id="exercise-7-sample-intercepts-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-7-sample-intercepts-1">Exercise 7: Sample intercepts</h2>
-<p>The intercepts are roughly normal, centered around the population intercept (1.294), and range from roughly -6.92 to 7.395:</p>
+<p>The intercepts are roughly normal, centered around the population intercept (1.294), and range from roughly -7.258 to 7.367:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_intercept)) <span class="sc">+</span> </span>

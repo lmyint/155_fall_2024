@@ -118,17 +118,31 @@ html-table-processing: none
   <tr>
     <td class="topleft">9 (10/28 - 11/1)</td>
     <td class="topleft">
-        Tools for inference (part 1)<br>
+        Sampling variation, normal distribution<br>
         <b>Checkpoint 13 due 11:30am<b>
     </td>
     <td class="topleft">
-        Tools for inference (part 2)<br>
+        Sampling distributions and the CLT<br>
         <b>Checkpoint 14 due 11:30am<b>
     </td>
     <td class="topleft">
         <b>Quiz 2</b> (1 hour in class)
     </td>
     <td class="topleft"></td>
+  </tr>
+  <tr>
+    <td class="topleft">10 (11/4 - 11/8)</td>
+    <td class="topleft">
+        Bootstrapping
+    </td>
+    <td class="topleft">
+        Day after Election Day. No new content today.
+    </td>
+    <td class="topleft">
+        Confidence intervals<br>
+        <b>Checkpoint 15 due 11:30am<b>
+    </td>
+    <td class="topleft"><b>PP6 due Friday 10/25 at 5pm</b></td>
   </tr>
 </tbody>
 </table>
@@ -341,7 +355,7 @@ Fall Break!
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 8: 10/21 - 10/25 (Logistic regression)"}
+::: {.callout-tip icon=false collapse="true" title="Week 8: 10/21 - 10/25 (Logistic regression)"}
 #### Announcements
 
 - [Practice Problems #5 (PP5)](assignments/pp5.qmd) due Friday 10/25 at 5pm
@@ -406,9 +420,14 @@ Quiz 2 (1 hour in class)
 ::: {.callout-tip icon=false collapse="true" title="Week 10: 11/4 - 11/8 (Confidence intervals)"}
 #### Announcements
 
+- [Practice Problems #6 (PP6)](assignments/pp6.qmd) due Friday 11/8 at 5pm
+
 #### Monday
 
 Before class:
+
+- Review material as needed
+- No checkpoint today!
 
 #### Wednesday
 
