@@ -389,7 +389,7 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 9: 10/28 - 11/1 (Tools for statistical inference)"}
+::: {.callout-tip icon=false collapse="true" title="Week 9: 10/28 - 11/1 (Tools for statistical inference)"}
 #### Announcements
 
 - Quiz 2 this Friday 11/1. Covers up through Activity 17 (Multiple Logistic Regression and Evaluation).
@@ -407,7 +407,7 @@ Before class:
 
 Before class:
 
-- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=143601) (CP13) on Moodle.
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=143601) (CP14) on Moodle.
     - See checkpoint description for links to the readings/videos.
     - Due 30 minutes before class today (11:30am).
 
@@ -417,12 +417,12 @@ Quiz 2 (1 hour in class)
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 10: 11/4 - 11/8 (Confidence intervals)"}
+::: {.callout-tip icon=false collapse="false" title="Week 10: 11/4 - 11/8 (Confidence intervals)"}
 #### Announcements
 
 - [Practice Problems #6 (PP6)](assignments/pp6.qmd) due Friday 11/8 at 5pm
 
-#### Monday
+#### Monday (11/4)
 
 Before class:
 
@@ -431,11 +431,15 @@ Before class:
 
 #### Wednesday
 
-Before class:
+No new material today
 
 #### Friday
 
 Before class:
+
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=144416) (CP15) on Moodle.
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
 
 :::
 
