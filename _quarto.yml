@@ -47,6 +47,7 @@ website:
         - activities/17_logistic_multivariate_evaluation.qmd
         - activities/18_sampling_normal.qmd
         - activities/19_sampling_dist_clt.qmd
+        - activities/20_bootstrapping.qmd
 
     - id: homework
       title: "Practice Problems"
