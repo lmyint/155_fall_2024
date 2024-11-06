@@ -291,7 +291,8 @@ Here, use your intuition to apply our bootstrapping results:
 ```{r}
 fish %>% 
     ggplot(aes(y = Concen, x = Length)) +
-    geom_abline(data = fish_models_bootstrap, aes(intercept = Intercept, slope = Length), color = "gray")
+    geom_abline(data = fish_models_bootstrap, aes(intercept = Intercept, slope = Length), color = "gray") + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
 ```
 
 ```{r}
@@ -325,7 +326,8 @@ a. Based on only the *plot* below of our bootstrap models, do you think our samp
 ```{r}
 fish %>% 
     ggplot(aes(y = Concen, x = Length)) +
-    geom_abline(data = fish_models_bootstrap, aes(intercept = Intercept, slope = Length), color = "gray")
+    geom_abline(data = fish_models_bootstrap, aes(intercept = Intercept, slope = Length), color = "gray") + 
+    geom_smooth(method = "lm", color = "red", se = FALSE)
 ```
 
 

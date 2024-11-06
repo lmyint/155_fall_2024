@@ -219,6 +219,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../activities/20_bootstrapping.html">
  <span class="dropdown-text">Bootstrapping</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/21_confidence_intervals.html">
+ <span class="dropdown-text">Confidence intervals</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -480,12 +484,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Construct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span.</li>
 <li>If the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?</li>
 </ul>
-<blockquote class="blockquote">
-<p>If the model did a worse job of predicting 20-year mortality, the boxplots would be less separated and overlap more. Greater overlap would mean that the predicted probabilities are worse at distinguishing between the two outcomes.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Feedback guide:</strong> They only need to have something like the first sentence in the example response above.</p>
-</blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>log_mod_output <span class="ot">&lt;-</span> <span class="fu">augment</span>(___)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>

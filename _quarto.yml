@@ -48,6 +48,7 @@ website:
         - activities/18_sampling_normal.qmd
         - activities/19_sampling_dist_clt.qmd
         - activities/20_bootstrapping.qmd
+        - activities/21_confidence_intervals.qmd
 
     - id: homework
       title: "Practice Problems"

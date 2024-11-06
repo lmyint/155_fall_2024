@@ -248,6 +248,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../activities/20_bootstrapping.html">
  <span class="dropdown-text">Bootstrapping</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/21_confidence_intervals.html">
+ <span class="dropdown-text">Confidence intervals</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -781,11 +785,11 @@ Length       0.05812749 0.005227593 11.119359 6.641225e-22</code></pre>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sample_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id Length
-1  2     43
-2  1     44
-3  3     54
-4  5     40
-5  4     52</code></pre>
+1  1     44
+2  5     40
+3  4     52
+4  3     54
+5  2     43</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sample_1 <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(Length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -802,17 +806,17 @@ Length       0.05812749 0.005227593 11.119359 6.641225e-22</code></pre>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sample_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id Length
-1  5     40
+1  4     52
 2  1     44
 3  3     54
-4  5     40
-5  1     44</code></pre>
+4  4     52
+5  5     40</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sample_2 <span class="sc">%&gt;%</span> </span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(Length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean(Length)
-1         44.4</code></pre>
+1         48.4</code></pre>
 </div>
 </div>
 <ol start="3" type="a">

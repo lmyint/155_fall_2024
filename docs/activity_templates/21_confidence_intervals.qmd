@@ -1,0 +1,171 @@
+---
+title: "Confidence intervals"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Exercises
+
+For the first 2 exercises, we'll revisit the bikeshare dataset.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(stringr)
+library(tidyr)
+library(broom)
+
+bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")
+```
+
+## Exercise 1
+
+**Research question:** Is the relationship between wind speed (`windspeed`) (in miles per hour) and number of riders (`riders_total`) different across weekdays and weekends?
+
+### Part a
+
+Construct and interpret a visualization that would address this question.
+
+
+### Part b
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+```{r}
+mod_bikes <- ___
+```
+
+
+### Part c
+
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest by hand using the 68-95-99.7 rule.
+- Compare your confidence interval to the one given by `confint()` which gives an exact confidence interval. (The columns give the lower and upper ends of the CI for each coefficient.)
+- Interpret the exact confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays?
+
+```{r}
+# By hand (you fill in)
+
+
+# Using confint()
+confint(mod_bikes, level = 0.95)
+```
+
+
+### Part d
+
+Let's see if these results agree when looking at adjusted R-squared.
+
+Fit another regression model that does not have the coefficient of interest from your Part b model. Compare the adjusted R-squared values between this model and the Part b model. Explain your findings.
+
+
+
+
+
+## Exercise 2
+
+**Research question:** How different is holiday ridership from non-holidays, after accounting for confounding factors?
+
+### Part a
+
+We believe that weather category (`weather_cat`), temperature (`temp_actual`), and wind speed (`windspeed`) confound the relationship of interest.
+
+- Draw a causal graph that shows the 5 variables of interest. Based on your graph do you believe that the 3 potential confounders are indeed confounders (and not mediators or colliders)?
+- Construct visualizations that allow you how each potential confounder relates to `riders_total` and to `holiday`.
+
+### Part b
+
+Based on your Part a explorations, fit an appropriate regression model to answer our research question. Interpret only the coefficient of interest.
+
+**A note about scientific notation in R:** Sometimes you may see numbers with the letter `e` in the middle. This is R's way of expressing scientific notation. Whenever you see `e`, replace that with `10 to the power of ...`. So:
+
+- 1.234e+02 is 1.234 x 10^2 = 123.4
+- 1.234e-02 is 1.234 x 10^(-2) = 0.01234
+
+### Part c
+
+- Use `confint()` to construct a 95% confidence interval for the coefficient of interest.
+- Interpret this confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real holiday effect on ridership?
+
+
+
+
+
+## Exercise 3
+
+The Western Collaborative Group Study (WCGS) was designed in order to investigate a possible link between Type A behavior and coronary heart disease (CHD), and to develop a framework to select patients for intervention in order to decrease risk of CHD. The study contained 3154 cis men between the ages of 39 and 59 in California who had no history of CHD. They were enrolled in the study in 1960 and 1961, underwent a medical examination and covered their medical history, and they were re-examined annually for interim cardiovascular history.
+
+A full codebook is available [here](https://github.com/Mac-STAT/data/blob/main/wcgs_codebook.md). We will focus on the following variables:
+
+- `chd`: Presence (1) or absence (0) of CHD over followup (outcome)
+- `tabp`: Presence (1) or absence (0) of Type A behavior (main variable of interest)
+- `age`: Age at time of enrollment in the study (years)
+- `sbp`: Systolic blood pressure
+- `dbp`: Diastolic blood pressure
+- `chol`: Cholesterol (mg/dL)
+- `ncigs`: Number of cigarettes smoked per day
+- `arcus`: Presence (1) or absence (0) of arcus senilis (a colored ring around the cornea made up of lipids like cholesterol and believed to be a risk factor for CHD)
+- `bmi`: BMI = weight * 703 / height^2
+
+**Research question:** Is there a causal effect of Type A/B personality on developing coronary heart disease?
+
+```{r}
+wcgs <- read_csv("https://mac-stat.github.io/data/wcgs.csv")
+```
+
+### Part a
+
+We believe that the following variables are confounders of the relationship between Type A/B personality `tabp` and coronary heart disease (`CHD`): `age + sbp + dbp + chol + ncigs + arcus + bmi`.
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+```{r}
+typea_mod <- ___
+```
+
+### Part b
+
+- Construct a 95% confidence interval for the odds ratio of interest using the following code.
+- Interpret the confidence interval in context.
+- Is 1 contained in the interval? Why is 1 a relevant value to look for here?
+
+### Part c
+
+(On your own time)
+
+The data context in this exercise has a fraught history with the smoking industry. Read [this article](https://www.thecut.com/2016/08/the-tobacco-industry-helped-create-the-type-a-personality.html) for some context about how the Type A personality came to be defined and studied. (One big takeaway: The smoking industry had a large incentive to find something to blame health problems on other than smoking!)
+
+
+
+
+
+## Exercise 4
+
+For each of the following **MISINTERPRETATIONS** of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.
+
+- Misinterpretation 1: "There is a 95% probability that the population parameter is within (a,b)."
+    - **Response:** The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter---"95% confidence" is describing confidence in the interval construction process.
+
+- Misinterpretation 2: "There is a 5% probability that the population parameter is not within (a,b)."
+    - **Response:** This is incorrect for the same reason as the first misinterpretation.
+
+- Misinterpretation 3: "There is a 95% chance that the sample estimate in (a,b)."
+    - **Response:** The sample estimate is always in the interval by construction.
+
+
+
+
+
+## Reflection
+
+How are you feeling about your ability to translate research questions into appropriate statistical investigations and addressing those questions using output from those investigations? What has gotten easier? What remains challenging?
+
+> **Response:** 
+
+

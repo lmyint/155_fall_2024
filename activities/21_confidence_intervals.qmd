@@ -1,0 +1,468 @@
+---
+title: "Confidence intervals"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/21_confidence_intervals.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Construct (approximate) confidence intervals by hand using the 68-95-99.7 rule
+- Construct exact confidence intervals in R
+- Interpret confidence intervals in context by referring to the coefficient of interest
+- Use confidence intervals to make statements about whether there appear to be true population relationships, changes, and differences
+
+## Readings and videos
+
+Please complete the following reading **before** class.
+
+- Reading: Section 7 Introduction, Section 7.1, Section 7.2 (stop when you get to 7.2.4.3 Confidence Intervals for Prediction) in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
+
+Optionally you can use the following videos as a companion to the reading (not in place of the reading):
+
+- Video 1: [Introduction to Confidence Intervals](https://youtu.be/CCgpmFjENwA)
+- Video 2: [Confidence Intervals: Construction and Interpretation](https://youtu.be/QAbRYk5g8D8)
+
+
+
+
+
+# Exercises
+
+For the first 2 exercises, we'll revisit the bikeshare dataset.
+
+```{r warning=FALSE, message=FALSE}
+# Load packages and import data
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(stringr)
+library(tidyr)
+library(broom)
+
+bikes <- read_csv("https://mac-stat.github.io/data/bikeshare.csv")
+```
+
+## Exercise 1
+
+**Research question:** Is the relationship between wind speed (`windspeed`) (in miles per hour) and number of riders (`riders_total`) different across weekdays and weekends?
+
+### Part a
+
+Construct and interpret a visualization that would address this question.
+
+
+### Part b
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+```{r eval=FALSE}
+mod_bikes <- ___
+```
+
+
+### Part c
+
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest by hand using the 68-95-99.7 rule.
+- Compare your confidence interval to the one given by `confint()` which gives an exact confidence interval. (The columns give the lower and upper ends of the CI for each coefficient.)
+- Interpret the exact confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays?
+
+```{r eval=FALSE}
+# By hand (you fill in)
+
+
+# Using confint()
+confint(mod_bikes, level = 0.95)
+```
+
+
+### Part d
+
+Let's see if these results agree when looking at adjusted R-squared.
+
+Fit another regression model that does not have the coefficient of interest from your Part b model. Compare the adjusted R-squared values between this model and the Part b model. Explain your findings.
+
+
+
+
+
+## Exercise 2
+
+**Research question:** How different is holiday ridership from non-holidays, after accounting for confounding factors?
+
+### Part a
+
+We believe that weather category (`weather_cat`), temperature (`temp_actual`), and wind speed (`windspeed`) confound the relationship of interest.
+
+- Draw a causal graph that shows the 5 variables of interest. Based on your graph do you believe that the 3 potential confounders are indeed confounders (and not mediators or colliders)?
+- Construct visualizations that allow you how each potential confounder relates to `riders_total` and to `holiday`.
+
+### Part b
+
+Based on your Part a explorations, fit an appropriate regression model to answer our research question. Interpret only the coefficient of interest.
+
+**A note about scientific notation in R:** Sometimes you may see numbers with the letter `e` in the middle. This is R's way of expressing scientific notation. Whenever you see `e`, replace that with `10 to the power of ...`. So:
+
+- 1.234e+02 is 1.234 x 10^2 = 123.4
+- 1.234e-02 is 1.234 x 10^(-2) = 0.01234
+
+### Part c
+
+- Use `confint()` to construct a 95% confidence interval for the coefficient of interest.
+- Interpret this confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real holiday effect on ridership?
+
+
+
+
+
+## Exercise 3
+
+The Western Collaborative Group Study (WCGS) was designed in order to investigate a possible link between Type A behavior and coronary heart disease (CHD), and to develop a framework to select patients for intervention in order to decrease risk of CHD. The study contained 3154 cis men between the ages of 39 and 59 in California who had no history of CHD. They were enrolled in the study in 1960 and 1961, underwent a medical examination and covered their medical history, and they were re-examined annually for interim cardiovascular history.
+
+A full codebook is available [here](https://github.com/Mac-STAT/data/blob/main/wcgs_codebook.md). We will focus on the following variables:
+
+- `chd`: Presence (1) or absence (0) of CHD over followup (outcome)
+- `tabp`: Presence (1) or absence (0) of Type A behavior (main variable of interest)
+- `age`: Age at time of enrollment in the study (years)
+- `sbp`: Systolic blood pressure
+- `dbp`: Diastolic blood pressure
+- `chol`: Cholesterol (mg/dL)
+- `ncigs`: Number of cigarettes smoked per day
+- `arcus`: Presence (1) or absence (0) of arcus senilis (a colored ring around the cornea made up of lipids like cholesterol and believed to be a risk factor for CHD)
+- `bmi`: BMI = weight * 703 / height^2
+
+**Research question:** Is there a causal effect of Type A/B personality on developing coronary heart disease?
+
+```{r}
+wcgs <- read_csv("https://mac-stat.github.io/data/wcgs.csv")
+```
+
+### Part a
+
+We believe that the following variables are confounders of the relationship between Type A/B personality `tabp` and coronary heart disease (`CHD`): `age + sbp + dbp + chol + ncigs + arcus + bmi`.
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+```{r eval=FALSE}
+typea_mod <- ___
+```
+
+### Part b
+
+- Construct a 95% confidence interval for the odds ratio of interest using the following code.
+- Interpret the confidence interval in context.
+- Is 1 contained in the interval? Why is 1 a relevant value to look for here?
+
+### Part c
+
+(On your own time)
+
+The data context in this exercise has a fraught history with the smoking industry. Read [this article](https://www.thecut.com/2016/08/the-tobacco-industry-helped-create-the-type-a-personality.html) for some context about how the Type A personality came to be defined and studied. (One big takeaway: The smoking industry had a large incentive to find something to blame health problems on other than smoking!)
+
+
+
+
+
+## Exercise 4
+
+For each of the following **MISINTERPRETATIONS** of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.
+
+- Misinterpretation 1: "There is a 95% probability that the population parameter is within (a,b)."
+    - **Response:** The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter---"95% confidence" is describing confidence in the interval construction process.
+
+- Misinterpretation 2: "There is a 5% probability that the population parameter is not within (a,b)."
+    - **Response:** This is incorrect for the same reason as the first misinterpretation.
+
+- Misinterpretation 3: "There is a 95% chance that the sample estimate in (a,b)."
+    - **Response:** The sample estimate is always in the interval by construction.
+
+
+
+
+
+## Reflection
+
+How are you feeling about your ability to translate research questions into appropriate statistical investigations and addressing those questions using output from those investigations? What has gotten easier? What remains challenging?
+
+> **Response:** 
+
+
+
+
+
+
+<br><br><br><br><br><br>
+
+
+
+
+
+
+# Solutions
+
+## Exercise 1
+
+**Research question:** Is the relationship between wind speed (`windspeed`) (in miles per hour) and number of riders (`riders_total`) different across weekdays and weekends?
+
+### Part a
+
+Construct and interpret a visualization that would address this question.
+
+> **Response:** Overall, windier days seem to have less riders (negative slope). The slope for weekends seems slightly steeper than for weekdays, but overall weekdays and weekends have similar slopes.
+
+```{r}
+ggplot(bikes, aes(x = windspeed, y = riders_total, col = weekend)) + 
+    geom_point(alpha = 0.2) +
+    geom_smooth(method = "lm", se = FALSE) +
+    theme_classic() +
+    labs(x = "Windspeed (miles per hour)", y = "Total daily riders")
+```
+
+### Part b
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+> **Response:** We need to fit a linear regression model (because outcome is quantitative) with an interaction term to answer this question. The interaction coefficient is of interest. 
+>
+> Interpretation of interaction coefficient: The average decrease in ridership associated with a 1 mph increase in wind speed is 26.82 rides/mph lower on weekends than for weekdays. Put another way, on weekdays, a 1 mph increase in wind speed is associated with a decrease of 79.47 riders. On weekends, that decrease is 106.29 riders.
+
+```{r}
+mod_bikes <- lm(riders_total ~ windspeed*weekend, data = bikes)
+summary(mod_bikes)
+```
+
+### Part c
+
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest by hand using the 68-95-99.7 rule.
+- Compare your confidence interval to the one given by `confint()` which gives an exact confidence interval. (The columns give the lower and upper ends of the CI for each coefficient.)
+- Interpret the exact confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays?
+
+> **Response:**
+> 
+> - Our manual calculation is pretty close to the CI given by `confint()`.
+> - Interpretation in context:
+>   - Preferred interpretation: It is plausible that the true population difference in the relationship between riders and wind speed comparing weekends to weekdays ranges from an average decrease of 84 riders/mph to an average increase of 31.21 riders/mph.
+>   - Not as preferred interpretation (but you'll see this wording across disciplines): We are 95% confident that the difference in riders vs. wind speed slopes between weekends and weekdays is between -84 riders/mph to +31.21 riders/mph. (The instructors don't like this interpretation as much because saying "95% confident" is rather vague. We are confident about the interval construction *process* across random samples, and this interpretation doesn't make that clear.)
+>
+> - Zero is in the CI. This means that the difference in slopes could plausibly be zero. Therefore we do not have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays.
+
+```{r}
+# By hand
+-26.82 - 2*29.56
+-26.82 + 2*29.56
+
+# By hand using 1.96, which is closer to the exact normal distribution quantile to use
+-26.82 - 1.96*29.56
+-26.82 + 1.96*29.56
+
+# Using confint()
+confint(mod_bikes, level = 0.95)
+```
+
+
+### Part d
+
+Let's see if these results agree when looking at adjusted R-squared.
+
+Fit another regression model that does not have the coefficient of interest from your Part b model. Compare the adjusted R-squared values between this model and the Part b model. Explain your findings.
+
+> **Response:**
+> 
+> - The adjusted R-squared for the interaction model was 0.05332, compared to 0.05355 for the model without the interaction.
+> - Adding the interaction term actually **decreased** the adjusted R-squared, suggesting that it didn't really improve the model.
+> - This agrees with what our CI interpretation: zero was a plausible value for the difference in slopes. If zero is a plausible value for the difference in slopes, allowing the slopes to be different in our model might not be necessary.
+
+```{r}
+mod_bikes_noint <- lm(riders_total ~ windspeed+weekend, data = bikes)
+summary(mod_bikes)
+summary(mod_bikes_noint)
+```
+
+
+
+
+## Exercise 2
+
+**Research question:** How different is holiday ridership from non-holidays, after accounting for confounding factors?
+
+### Part a
+
+We believe that weather category (`weather_cat`), temperature (`temp_actual`), and wind speed (`windspeed`) confound the relationship of interest.
+
+- Draw a causal graph that shows the 5 variables of interest. Based on your graph do you believe that the 3 potential confounders are indeed confounders (and not mediators or colliders)?
+- Construct visualizations that allow you how each potential confounder relates to `riders_total` and to `holiday`.
+
+> **Response:** A causal graph might look like below (the double-headed arrows represent lines connecting the variables without a direction of causation). The variables that we're considering putting in the model aren't mediators or colliders. The visualizations support that `weather_cat`, `temp_actual`, and `windspeed` are causes of ridership, but only `weather_cat` and `temp_actual` seem to have noticeable differences between holidays and non-holidays.
+
+```{r}
+dag <- dagitty::dagitty('
+dag {
+bb="0,0,1,1"
+holiday [exposure,pos="0.123,0.550"]
+riders_total [outcome,pos="0.668,0.545"]
+temp_actual [pos="0.110,0.246"]
+weather_cat [pos="0.439,0.260"]
+windspeed [pos="0.276,0.157"]
+holiday -> riders_total
+holiday <-> temp_actual
+holiday <-> weather_cat
+holiday <-> windspeed
+temp_actual -> riders_total
+temp_actual -> weather_cat
+weather_cat -> riders_total
+windspeed -> riders_total
+windspeed -> weather_cat
+}
+')
+plot(dag)
+```
+
+
+```{r}
+ggplot(bikes, aes(x = weather_cat, y = riders_total)) +
+    geom_boxplot()
+
+ggplot(bikes, aes(x = temp_actual, y = riders_total)) +
+    geom_point() +
+    geom_smooth()
+
+ggplot(bikes, aes(x = windspeed, y = riders_total)) +
+    geom_point() +
+    geom_smooth()
+```
+
+```{r}
+ggplot(bikes, aes(x = holiday, fill = weather_cat)) +
+    geom_bar(position = "fill")
+
+ggplot(bikes, aes(x = holiday, y = temp_actual)) +
+    geom_boxplot()
+
+ggplot(bikes, aes(x = holiday, y = windspeed)) +
+    geom_boxplot()
+```
+
+
+### Part b
+
+Based on your Part a explorations, fit an appropriate regression model to answer our research question. Interpret only the coefficient of interest.
+
+**A note about scientific notation in R:** Sometimes you may see numbers with the letter `e` in the middle. This is R's way of expressing scientific notation. Whenever you see `e`, replace that with `10 to the power of ...`. So:
+
+- 1.234e+02 is 1.234 x 10^2 = 123.4
+- 1.234e-02 is 1.234 x 10^(-2) = 0.01234
+
+> **Response:** Clear confounders from Part a include `weather_cat` and `temp_actual`. `windspeed` might be a precision variable because it don't seem to be very different between holidays and non-holidays. We try models with just the confounders and with confounders+precision variable. Because temperature has a curved relationships with riders, we include a squared term.
+> 
+> The coefficient on `holiday` is of interest.
+> 
+> `mod_bikes_smaller` interpretation: Among days that have the same weather category and temperature, holidays have 731 fewer riders on average than non-holidays.
+> 
+> `mod_bikes_larger` interpretation: Among days that have the same weather category, temperature, and wind speed, holidays have 725 fewer riders on average than non-holidays.
+
+```{r}
+bikes_new <- bikes %>% 
+    mutate(
+        temp_actual_squared = temp_actual^2
+    )
+mod_bikes_smaller <- lm(riders_total ~ holiday + weather_cat + temp_actual_squared, data = bikes_new)
+mod_bikes_larger <- lm(riders_total ~ holiday + weather_cat + temp_actual_squared + windspeed, data = bikes_new)
+
+summary(mod_bikes_smaller)
+summary(mod_bikes_larger)
+```
+
+### Part c
+
+- Use `confint()` to construct a 95% confidence interval for the coefficient of interest.
+- Interpret this confidence interval in context.
+- Is zero in the interval? Do we have evidence for a real holiday effect on ridership?
+
+> **Response:** We'll focus on the CI from `mod_bikes_smaller` since the CI from `mod_bikes_larger` is pretty similar.
+> 
+> - Interpretation in context:
+>   - Preferred interpretation: It is plausible that the true population difference in average holiday ridership vs. average non-holiday ridership is from 1371.8 to 90.5 fewer rides on holidays (among days of the same weather category and temperature).
+>   - Not as preferred interpretation: We are 95% confident that the population difference in holiday vs non-holiday ridership is between -1371.8 to -90.4532521.
+>
+> - Zero is not in the CI which means that the difference between holidays and non-holidays (among days of the same weather category and temperature) is *not* plausibly zero. We do have evidence for a true holiday effect.
+
+```{r}
+confint(mod_bikes_smaller, level = 0.95)
+confint(mod_bikes_larger, level = 0.95)
+```
+
+
+
+
+
+
+## Exercise 3
+
+**Research question:** Is there a causal effect of Type A/B personality on developing coronary heart disease?
+
+### Part a
+
+We believe that the following variables are confounders of the relationship between Type A/B personality `tabp` and coronary heart disease (`CHD`): `age + sbp + dbp + chol + ncigs + arcus + bmi`.
+
+Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.
+
+> **Response:** We need to fit a logistic regression model because the `chd` outcome is binary. We include `tabp` as the main predictor of interest and all of the other confounding variables. We need to exponentiate the coefficient so that we're interpreting on the odds scale rather than the log odds scale.
+> 
+> Interpretation of `exp(tabp)`: Among men of the same age, systolic and diastolic blood pressure, cholesterol levels, smoking habits, history of arcus sinilis, and BMI, those with Type A personality have 1.95 times the odds of CHD than those without Type A personality.
+
+```{r}
+typea_mod <- glm(chd ~ tabp + age + sbp + dbp + chol + ncigs + arcus + bmi, data = wcgs, family = "binomial")
+summary(typea_mod)
+tidy(typea_mod) %>% 
+    mutate(exp_estimate = exp(estimate)) %>% 
+    select(term, estimate, exp_estimate)
+```
+
+### Part b
+
+- Construct a 95% confidence interval for the odds ratio of interest using the following code.
+- Interpret the confidence interval in context.
+- Is 1 contained in the interval? Why is 1 a relevant value to look for here?
+
+> **Response:**
+> 
+> - Interpretation in context:
+>   - Preferred interpretation:  Among men of the same age, systolic and diastolic blood pressure, cholesterol levels, smoking habits, history of arcus sinilis, and BMI, it is plausible that those with Type A personality have 1.47 to 2.60 times the odds of CHD than those without Type A personality.
+>
+> - 1 is not in the CI. 1 is a relevant value to consider for ratios because if the odds ratio is 1, then the (adjusted) odds of CHD is the same in those with Type A and Type B personality. There seems to be a positive relationship between Type A personality and CHD in this study.
+
+```{r}
+confint(typea_mod, level = 0.95) %>% exp()
+```
+
+### Part c
+
+(On your own time)
+
+The data context in this exercise has a fraught history with the smoking industry. Read [this article](https://www.thecut.com/2016/08/the-tobacco-industry-helped-create-the-type-a-personality.html) for some context about how the Type A personality came to be defined and studied. (One big takeaway: The smoking industry had a large incentive to find something to blame health problems on other than smoking!)
+
+
+
+
+
+## Exercise 4
+
+For each of the following **MISINTERPRETATIONS** of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.
+
+- Misinterpretation 1: "There is a 95% probability that the population parameter is within (a,b)."
+    - **Response:** The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter---"95% confidence" is describing confidence in the interval construction process.
+
+- Misinterpretation 2: "There is a 5% probability that the population parameter is not within (a,b)."
+    - **Response:** This is incorrect for the same reason as the first misinterpretation.
+
+- Misinterpretation 3: "There is a 95% chance that the sample estimate in (a,b)."
+    - **Response:** The sample estimate is always in the interval by construction.

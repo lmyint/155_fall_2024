@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Confidence intervals – STAT 155</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">STAT 155</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Activities</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
+        <li>
+    <a class="dropdown-item" href="../activities/01_foundations_welcome.html">
+ <span class="dropdown-text">Data Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/02_foundations_univariate.html">
+ <span class="dropdown-text">Univariate visualization and summaries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/03_slr_introduction.html">
+ <span class="dropdown-text">Simple linear regression: Visualization and Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/04_slr_formalization.html">
+ <span class="dropdown-text">Simple linear regression: formalizing concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/05_slr_model_eval.html">
+ <span class="dropdown-text">Simple linear regression: model evaluation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/06_slr_transformations.html">
+ <span class="dropdown-text">Simple linear regression: Transformations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/07_slr_cat_predictor.html">
+ <span class="dropdown-text">Simple linear regression: categorical predictor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/08_mlr_intro.html">
+ <span class="dropdown-text">Introduction to multiple regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/09_mlr_principles.html">
+ <span class="dropdown-text">Multiple regression principles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/10_mlr_confounding.html">
+ <span class="dropdown-text">Confounding variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/11_mlr_interaction_explore.html">
+ <span class="dropdown-text">Multiple linear regression: exploring interaction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/12_mlr_interaction_practice.html">
+ <span class="dropdown-text">Multiple linear regression: interaction terms practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/13_mlr_model_building_1.html">
+ <span class="dropdown-text">Multiple linear regression: model building (part 1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/14_mlr_model_building_2.html">
+ <span class="dropdown-text">Multiple linear regression: model building (part 2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/15_prob_odds.html">
+ <span class="dropdown-text">Probability and Odds</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/16_logistic_univariate.html">
+ <span class="dropdown-text">Simple logistic regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/17_logistic_multivariate_evaluation.html">
+ <span class="dropdown-text">Multiple logistic regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/18_sampling_normal.html">
+ <span class="dropdown-text">The Normal model &amp; sampling variation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/19_sampling_dist_clt.html">
+ <span class="dropdown-text">Sampling distributions &amp; the CLT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/20_bootstrapping.html">
+ <span class="dropdown-text">Bootstrapping</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/21_confidence_intervals.html">
+ <span class="dropdown-text">Confidence intervals</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practice-problems" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practice Problems</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
+        <li>
+    <a class="dropdown-item" href="../assignments/pp1.html">
+ <span class="dropdown-text">Practice Problems 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp2.html">
+ <span class="dropdown-text">Practice Problems 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp3.html">
+ <span class="dropdown-text">Practice Problems 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp4.html">
+ <span class="dropdown-text">Practice Problems 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp5.html">
+ <span class="dropdown-text">Practice Problems 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/pp6.html">
+ <span class="dropdown-text">Practice Problems 6</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../r_resources.html"> 
+<span class="menu-text">R Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part c</a></li>
+  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part d</a></li>
+  </ul></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
+  <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part c</a></li>
+  </ul></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a>
+  <ul class="collapse">
+  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part a</a></li>
+  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part b</a></li>
+  <li><a href="#part-c-2" id="toc-part-c-2" class="nav-link" data-scroll-target="#part-c-2">Part c</a></li>
+  </ul></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  </ul></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-1" id="toc-exercise-1-1" class="nav-link" data-scroll-target="#exercise-1-1">Exercise 1</a>
+  <ul class="collapse">
+  <li><a href="#part-a-3" id="toc-part-a-3" class="nav-link" data-scroll-target="#part-a-3">Part a</a></li>
+  <li><a href="#part-b-3" id="toc-part-b-3" class="nav-link" data-scroll-target="#part-b-3">Part b</a></li>
+  <li><a href="#part-c-3" id="toc-part-c-3" class="nav-link" data-scroll-target="#part-c-3">Part c</a></li>
+  <li><a href="#part-d-1" id="toc-part-d-1" class="nav-link" data-scroll-target="#part-d-1">Part d</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-1" id="toc-exercise-2-1" class="nav-link" data-scroll-target="#exercise-2-1">Exercise 2</a>
+  <ul class="collapse">
+  <li><a href="#part-a-4" id="toc-part-a-4" class="nav-link" data-scroll-target="#part-a-4">Part a</a></li>
+  <li><a href="#part-b-4" id="toc-part-b-4" class="nav-link" data-scroll-target="#part-b-4">Part b</a></li>
+  <li><a href="#part-c-4" id="toc-part-c-4" class="nav-link" data-scroll-target="#part-c-4">Part c</a></li>
+  </ul></li>
+  <li><a href="#exercise-3-1" id="toc-exercise-3-1" class="nav-link" data-scroll-target="#exercise-3-1">Exercise 3</a>
+  <ul class="collapse">
+  <li><a href="#part-a-5" id="toc-part-a-5" class="nav-link" data-scroll-target="#part-a-5">Part a</a></li>
+  <li><a href="#part-b-5" id="toc-part-b-5" class="nav-link" data-scroll-target="#part-b-5">Part b</a></li>
+  <li><a href="#part-c-5" id="toc-part-c-5" class="nav-link" data-scroll-target="#part-c-5">Part c</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-1" id="toc-exercise-4-1" class="nav-link" data-scroll-target="#exercise-4-1">Exercise 4</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Confidence intervals</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="notes" class="level1">
+<h1>Notes</h1>
+<ul>
+<li>You can download a template file to work with <a href="../activity_templates/21_confidence_intervals.qmd">here</a>.</li>
+<li><strong>File organization:</strong> Save this file in the “Activities” subfolder of your “STAT155” folder.</li>
+</ul>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>Construct (approximate) confidence intervals by hand using the 68-95-99.7 rule</li>
+<li>Construct exact confidence intervals in R</li>
+<li>Interpret confidence intervals in context by referring to the coefficient of interest</li>
+<li>Use confidence intervals to make statements about whether there appear to be true population relationships, changes, and differences</li>
+</ul>
+</section>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>Please complete the following reading <strong>before</strong> class.</p>
+<ul>
+<li>Reading: Section 7 Introduction, Section 7.1, Section 7.2 (stop when you get to 7.2.4.3 Confidence Intervals for Prediction) in the <a href="https://mac-stat.github.io/Stat155Notes/">STAT 155 Notes</a></li>
+</ul>
+<p>Optionally you can use the following videos as a companion to the reading (not in place of the reading):</p>
+<ul>
+<li>Video 1: <a href="https://youtu.be/CCgpmFjENwA">Introduction to Confidence Intervals</a></li>
+<li>Video 2: <a href="https://youtu.be/QAbRYk5g8D8">Confidence Intervals: Construction and Interpretation</a></li>
+</ul>
+</section>
+</section>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<p>For the first 2 exercises, we’ll revisit the bikeshare dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages and import data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>bikes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/bikeshare.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
+<p><strong>Research question:</strong> Is the relationship between wind speed (<code>windspeed</code>) (in miles per hour) and number of riders (<code>riders_total</code>) different across weekdays and weekends?</p>
+<section id="part-a" class="level3">
+<h3 class="anchored" data-anchor-id="part-a">Part a</h3>
+<p>Construct and interpret a visualization that would address this question.</p>
+</section>
+<section id="part-b" class="level3">
+<h3 class="anchored" data-anchor-id="part-b">Part b</h3>
+<p>Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mod_bikes <span class="ot">&lt;-</span> ___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-c" class="level3">
+<h3 class="anchored" data-anchor-id="part-c">Part c</h3>
+<ul>
+<li>Construct an approximate 95% confidence interval (CI) for the coefficient of interest by hand using the 68-95-99.7 rule.</li>
+<li>Compare your confidence interval to the one given by <code>confint()</code> which gives an exact confidence interval. (The columns give the lower and upper ends of the CI for each coefficient.)</li>
+<li>Interpret the exact confidence interval in context.</li>
+<li>Is zero in the interval? Do we have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By hand (you fill in)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Using confint()</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_bikes, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-d" class="level3">
+<h3 class="anchored" data-anchor-id="part-d">Part d</h3>
+<p>Let’s see if these results agree when looking at adjusted R-squared.</p>
+<p>Fit another regression model that does not have the coefficient of interest from your Part b model. Compare the adjusted R-squared values between this model and the Part b model. Explain your findings.</p>
+</section>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
+<p><strong>Research question:</strong> How different is holiday ridership from non-holidays, after accounting for confounding factors?</p>
+<section id="part-a-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
+<p>We believe that weather category (<code>weather_cat</code>), temperature (<code>temp_actual</code>), and wind speed (<code>windspeed</code>) confound the relationship of interest.</p>
+<ul>
+<li>Draw a causal graph that shows the 5 variables of interest. Based on your graph do you believe that the 3 potential confounders are indeed confounders (and not mediators or colliders)?</li>
+<li>Construct visualizations that allow you how each potential confounder relates to <code>riders_total</code> and to <code>holiday</code>.</li>
+</ul>
+</section>
+<section id="part-b-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
+<p>Based on your Part a explorations, fit an appropriate regression model to answer our research question. Interpret only the coefficient of interest.</p>
+<p><strong>A note about scientific notation in R:</strong> Sometimes you may see numbers with the letter <code>e</code> in the middle. This is R’s way of expressing scientific notation. Whenever you see <code>e</code>, replace that with <code>10 to the power of ...</code>. So:</p>
+<ul>
+<li>1.234e+02 is 1.234 x 10^2 = 123.4</li>
+<li>1.234e-02 is 1.234 x 10^(-2) = 0.01234</li>
+</ul>
+</section>
+<section id="part-c-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-1">Part c</h3>
+<ul>
+<li>Use <code>confint()</code> to construct a 95% confidence interval for the coefficient of interest.</li>
+<li>Interpret this confidence interval in context.</li>
+<li>Is zero in the interval? Do we have evidence for a real holiday effect on ridership?</li>
+</ul>
+</section>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3</h2>
+<p>The Western Collaborative Group Study (WCGS) was designed in order to investigate a possible link between Type A behavior and coronary heart disease (CHD), and to develop a framework to select patients for intervention in order to decrease risk of CHD. The study contained 3154 cis men between the ages of 39 and 59 in California who had no history of CHD. They were enrolled in the study in 1960 and 1961, underwent a medical examination and covered their medical history, and they were re-examined annually for interim cardiovascular history.</p>
+<p>A full codebook is available <a href="https://github.com/Mac-STAT/data/blob/main/wcgs_codebook.md">here</a>. We will focus on the following variables:</p>
+<ul>
+<li><code>chd</code>: Presence (1) or absence (0) of CHD over followup (outcome)</li>
+<li><code>tabp</code>: Presence (1) or absence (0) of Type A behavior (main variable of interest)</li>
+<li><code>age</code>: Age at time of enrollment in the study (years)</li>
+<li><code>sbp</code>: Systolic blood pressure</li>
+<li><code>dbp</code>: Diastolic blood pressure</li>
+<li><code>chol</code>: Cholesterol (mg/dL)</li>
+<li><code>ncigs</code>: Number of cigarettes smoked per day</li>
+<li><code>arcus</code>: Presence (1) or absence (0) of arcus senilis (a colored ring around the cornea made up of lipids like cholesterol and believed to be a risk factor for CHD)</li>
+<li><code>bmi</code>: BMI = weight * 703 / height^2</li>
+</ul>
+<p><strong>Research question:</strong> Is there a causal effect of Type A/B personality on developing coronary heart disease?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wcgs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/wcgs.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3154 Columns: 14
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (14): id, age, height, weight, sbp, dbp, chol, ncigs, tabp, chd, typchd,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<section id="part-a-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-2">Part a</h3>
+<p>We believe that the following variables are confounders of the relationship between Type A/B personality <code>tabp</code> and coronary heart disease (<code>CHD</code>): <code>age + sbp + dbp + chol + ncigs + arcus + bmi</code>.</p>
+<p>Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>typea_mod <span class="ot">&lt;-</span> ___</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-b-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-2">Part b</h3>
+<ul>
+<li>Construct a 95% confidence interval for the odds ratio of interest using the following code.</li>
+<li>Interpret the confidence interval in context.</li>
+<li>Is 1 contained in the interval? Why is 1 a relevant value to look for here?</li>
+</ul>
+</section>
+<section id="part-c-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-2">Part c</h3>
+<p>(On your own time)</p>
+<p>The data context in this exercise has a fraught history with the smoking industry. Read <a href="https://www.thecut.com/2016/08/the-tobacco-industry-helped-create-the-type-a-personality.html">this article</a> for some context about how the Type A personality came to be defined and studied. (One big takeaway: The smoking industry had a large incentive to find something to blame health problems on other than smoking!)</p>
+</section>
+</section>
+<section id="exercise-4" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4">Exercise 4</h2>
+<p>For each of the following <strong>MISINTERPRETATIONS</strong> of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.</p>
+<ul>
+<li>Misinterpretation 1: “There is a 95% probability that the population parameter is within (a,b).”
+<ul>
+<li><strong>Response:</strong> The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter—“95% confidence” is describing confidence in the interval construction process.</li>
+</ul></li>
+<li>Misinterpretation 2: “There is a 5% probability that the population parameter is not within (a,b).”
+<ul>
+<li><strong>Response:</strong> This is incorrect for the same reason as the first misinterpretation.</li>
+</ul></li>
+<li>Misinterpretation 3: “There is a 95% chance that the sample estimate in (a,b).”
+<ul>
+<li><strong>Response:</strong> The sample estimate is always in the interval by construction.</li>
+</ul></li>
+</ul>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>How are you feeling about your ability to translate research questions into appropriate statistical investigations and addressing those questions using output from those investigations? What has gotten easier? What remains challenging?</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong></p>
+</blockquote>
+<p><br><br><br><br><br><br></p>
+</section>
+</section>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-1">Exercise 1</h2>
+<p><strong>Research question:</strong> Is the relationship between wind speed (<code>windspeed</code>) (in miles per hour) and number of riders (<code>riders_total</code>) different across weekdays and weekends?</p>
+<section id="part-a-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-3">Part a</h3>
+<p>Construct and interpret a visualization that would address this question.</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Overall, windier days seem to have less riders (negative slope). The slope for weekends seems slightly steeper than for weekdays, but overall weekdays and weekends have similar slopes.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> windspeed, <span class="at">y =</span> riders_total, <span class="at">col =</span> weekend)) <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Windspeed (miles per hour)"</span>, <span class="at">y =</span> <span class="st">"Total daily riders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="part-b-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-3">Part b</h3>
+<p>Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> We need to fit a linear regression model (because outcome is quantitative) with an interaction term to answer this question. The interaction coefficient is of interest.</p>
+<p>Interpretation of interaction coefficient: The average decrease in ridership associated with a 1 mph increase in wind speed is 26.82 rides/mph lower on weekends than for weekdays. Put another way, on weekdays, a 1 mph increase in wind speed is associated with a decrease of 79.47 riders. On weekends, that decrease is 106.29 riders.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod_bikes <span class="ot">&lt;-</span> <span class="fu">lm</span>(riders_total <span class="sc">~</span> windspeed<span class="sc">*</span>weekend, <span class="at">data =</span> bikes)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_bikes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = riders_total ~ windspeed * weekend, data = bikes)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4523.2 -1317.9   -46.9  1443.3  4715.7 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            5560.31     219.07  25.382  &lt; 2e-16 ***
+windspeed               -79.47      15.97  -4.976 8.09e-07 ***
+weekendTRUE             200.56     409.72   0.489    0.625    
+windspeed:weekendTRUE   -26.82      29.56  -0.907    0.365    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1885 on 727 degrees of freedom
+Multiple R-squared:  0.05721,   Adjusted R-squared:  0.05332 
+F-statistic:  14.7 on 3 and 727 DF,  p-value: 2.638e-09</code></pre>
+</div>
+</div>
+</section>
+<section id="part-c-3" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-3">Part c</h3>
+<ul>
+<li>Construct an approximate 95% confidence interval (CI) for the coefficient of interest by hand using the 68-95-99.7 rule.</li>
+<li>Compare your confidence interval to the one given by <code>confint()</code> which gives an exact confidence interval. (The columns give the lower and upper ends of the CI for each coefficient.)</li>
+<li>Interpret the exact confidence interval in context.</li>
+<li>Is zero in the interval? Do we have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays?</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Response:</strong></p>
+<ul>
+<li>Our manual calculation is pretty close to the CI given by <code>confint()</code>.</li>
+<li>Interpretation in context:
+<ul>
+<li>Preferred interpretation: It is plausible that the true population difference in the relationship between riders and wind speed comparing weekends to weekdays ranges from an average decrease of 84 riders/mph to an average increase of 31.21 riders/mph.</li>
+<li>Not as preferred interpretation (but you’ll see this wording across disciplines): We are 95% confident that the difference in riders vs.&nbsp;wind speed slopes between weekends and weekdays is between -84 riders/mph to +31.21 riders/mph. (The instructors don’t like this interpretation as much because saying “95% confident” is rather vague. We are confident about the interval construction <em>process</em> across random samples, and this interpretation doesn’t make that clear.)</li>
+</ul></li>
+<li>Zero is in the CI. This means that the difference in slopes could plausibly be zero. Therefore we do not have evidence for a real difference in the windspeed-riders relationship across weekends and weekdays.</li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By hand</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">26.82</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span><span class="fl">29.56</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -85.94</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">26.82</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span><span class="fl">29.56</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By hand using 1.96, which is closer to the exact normal distribution quantile to use</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">26.82</span> <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fl">29.56</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -84.7576</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">26.82</span> <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span><span class="fl">29.56</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.1176</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using confint()</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_bikes, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           2.5 %     97.5 %
+(Intercept)           5130.23243 5990.38552
+windspeed             -110.81588  -48.11605
+weekendTRUE           -603.82472 1004.93649
+windspeed:weekendTRUE  -84.84192   31.21156</code></pre>
+</div>
+</div>
+</section>
+<section id="part-d-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-d-1">Part d</h3>
+<p>Let’s see if these results agree when looking at adjusted R-squared.</p>
+<p>Fit another regression model that does not have the coefficient of interest from your Part b model. Compare the adjusted R-squared values between this model and the Part b model. Explain your findings.</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong></p>
+<ul>
+<li>The adjusted R-squared for the interaction model was 0.05332, compared to 0.05355 for the model without the interaction.</li>
+<li>Adding the interaction term actually <strong>decreased</strong> the adjusted R-squared, suggesting that it didn’t really improve the model.</li>
+<li>This agrees with what our CI interpretation: zero was a plausible value for the difference in slopes. If zero is a plausible value for the difference in slopes, allowing the slopes to be different in our model might not be necessary.</li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mod_bikes_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(riders_total <span class="sc">~</span> windspeed<span class="sc">+</span>weekend, <span class="at">data =</span> bikes)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_bikes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = riders_total ~ windspeed * weekend, data = bikes)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4523.2 -1317.9   -46.9  1443.3  4715.7 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            5560.31     219.07  25.382  &lt; 2e-16 ***
+windspeed               -79.47      15.97  -4.976 8.09e-07 ***
+weekendTRUE             200.56     409.72   0.489    0.625    
+windspeed:weekendTRUE   -26.82      29.56  -0.907    0.365    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1885 on 727 degrees of freedom
+Multiple R-squared:  0.05721,   Adjusted R-squared:  0.05332 
+F-statistic:  14.7 on 3 and 727 DF,  p-value: 2.638e-09</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_bikes_noint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = riders_total ~ windspeed + weekend, data = bikes)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4563.0 -1323.1   -67.4  1445.2  4645.8 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  5659.76     189.64  29.845  &lt; 2e-16 ***
+windspeed     -87.29      13.44  -6.497 1.52e-10 ***
+weekendTRUE  -143.87     154.07  -0.934    0.351    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1885 on 728 degrees of freedom
+Multiple R-squared:  0.05614,   Adjusted R-squared:  0.05355 
+F-statistic: 21.65 on 2 and 728 DF,  p-value: 7.346e-10</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-1">Exercise 2</h2>
+<p><strong>Research question:</strong> How different is holiday ridership from non-holidays, after accounting for confounding factors?</p>
+<section id="part-a-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-4">Part a</h3>
+<p>We believe that weather category (<code>weather_cat</code>), temperature (<code>temp_actual</code>), and wind speed (<code>windspeed</code>) confound the relationship of interest.</p>
+<ul>
+<li>Draw a causal graph that shows the 5 variables of interest. Based on your graph do you believe that the 3 potential confounders are indeed confounders (and not mediators or colliders)?</li>
+<li>Construct visualizations that allow you how each potential confounder relates to <code>riders_total</code> and to <code>holiday</code>.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> A causal graph might look like below (the double-headed arrows represent lines connecting the variables without a direction of causation). The variables that we’re considering putting in the model aren’t mediators or colliders. The visualizations support that <code>weather_cat</code>, <code>temp_actual</code>, and <code>windspeed</code> are causes of ridership, but only <code>weather_cat</code> and <code>temp_actual</code> seem to have noticeable differences between holidays and non-holidays.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dag <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">'</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="st">dag {</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="st">bb="0,0,1,1"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="st">holiday [exposure,pos="0.123,0.550"]</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="st">riders_total [outcome,pos="0.668,0.545"]</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="st">temp_actual [pos="0.110,0.246"]</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="st">weather_cat [pos="0.439,0.260"]</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="st">windspeed [pos="0.276,0.157"]</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="st">holiday -&gt; riders_total</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="st">holiday &lt;-&gt; temp_actual</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="st">holiday &lt;-&gt; weather_cat</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="st">holiday &lt;-&gt; windspeed</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="st">temp_actual -&gt; riders_total</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="st">temp_actual -&gt; weather_cat</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="st">weather_cat -&gt; riders_total</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="st">windspeed -&gt; riders_total</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="st">windspeed -&gt; weather_cat</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> weather_cat, <span class="at">y =</span> riders_total)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> temp_actual, <span class="at">y =</span> riders_total)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> windspeed, <span class="at">y =</span> riders_total)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> holiday, <span class="at">fill =</span> weather_cat)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> holiday, <span class="at">y =</span> temp_actual)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bikes, <span class="fu">aes</span>(<span class="at">x =</span> holiday, <span class="at">y =</span> windspeed)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="21_confidence_intervals_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="part-b-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-4">Part b</h3>
+<p>Based on your Part a explorations, fit an appropriate regression model to answer our research question. Interpret only the coefficient of interest.</p>
+<p><strong>A note about scientific notation in R:</strong> Sometimes you may see numbers with the letter <code>e</code> in the middle. This is R’s way of expressing scientific notation. Whenever you see <code>e</code>, replace that with <code>10 to the power of ...</code>. So:</p>
+<ul>
+<li>1.234e+02 is 1.234 x 10^2 = 123.4</li>
+<li>1.234e-02 is 1.234 x 10^(-2) = 0.01234</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Clear confounders from Part a include <code>weather_cat</code> and <code>temp_actual</code>. <code>windspeed</code> might be a precision variable because it don’t seem to be very different between holidays and non-holidays. We try models with just the confounders and with confounders+precision variable. Because temperature has a curved relationships with riders, we include a squared term.</p>
+<p>The coefficient on <code>holiday</code> is of interest.</p>
+<p><code>mod_bikes_smaller</code> interpretation: Among days that have the same weather category and temperature, holidays have 731 fewer riders on average than non-holidays.</p>
+<p><code>mod_bikes_larger</code> interpretation: Among days that have the same weather category, temperature, and wind speed, holidays have 725 fewer riders on average than non-holidays.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bikes_new <span class="ot">&lt;-</span> bikes <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">temp_actual_squared =</span> temp_actual<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>mod_bikes_smaller <span class="ot">&lt;-</span> <span class="fu">lm</span>(riders_total <span class="sc">~</span> holiday <span class="sc">+</span> weather_cat <span class="sc">+</span> temp_actual_squared, <span class="at">data =</span> bikes_new)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>mod_bikes_larger <span class="ot">&lt;-</span> <span class="fu">lm</span>(riders_total <span class="sc">~</span> holiday <span class="sc">+</span> weather_cat <span class="sc">+</span> temp_actual_squared <span class="sc">+</span> windspeed, <span class="at">data =</span> bikes_new)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_bikes_smaller)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = riders_total ~ holiday + weather_cat + temp_actual_squared, 
+    data = bikes_new)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4225.5 -1200.7  -111.8  1057.8  3608.9 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          1.872e+03  1.660e+02  11.280  &lt; 2e-16 ***
+holidayyes          -7.311e+02  3.263e+02  -2.240   0.0254 *  
+weather_catcateg2   -5.708e+02  1.168e+02  -4.885 1.27e-06 ***
+weather_catcateg3   -2.571e+03  3.297e+02  -7.799 2.18e-14 ***
+temp_actual_squared  5.980e-01  2.973e-02  20.116  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1472 on 726 degrees of freedom
+Multiple R-squared:  0.4257,    Adjusted R-squared:  0.4225 
+F-statistic: 134.5 on 4 and 726 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_bikes_larger)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = riders_total ~ holiday + weather_cat + temp_actual_squared + 
+    windspeed, data = bikes_new)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4050.0 -1109.6  -120.6  1068.0  3699.8 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          2.577e+03  2.281e+02  11.294  &lt; 2e-16 ***
+holidayyes          -7.246e+02  3.222e+02  -2.249   0.0248 *  
+weather_catcateg2   -5.924e+02  1.155e+02  -5.131 3.71e-07 ***
+weather_catcateg3   -2.422e+03  3.272e+02  -7.403 3.70e-13 ***
+temp_actual_squared  5.770e-01  2.973e-02  19.405  &lt; 2e-16 ***
+windspeed           -4.692e+01  1.057e+01  -4.439 1.05e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1454 on 725 degrees of freedom
+Multiple R-squared:  0.4409,    Adjusted R-squared:  0.437 
+F-statistic: 114.3 on 5 and 725 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="part-c-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-4">Part c</h3>
+<ul>
+<li>Use <code>confint()</code> to construct a 95% confidence interval for the coefficient of interest.</li>
+<li>Interpret this confidence interval in context.</li>
+<li>Is zero in the interval? Do we have evidence for a real holiday effect on ridership?</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> We’ll focus on the CI from <code>mod_bikes_smaller</code> since the CI from <code>mod_bikes_larger</code> is pretty similar.</p>
+<ul>
+<li>Interpretation in context:
+<ul>
+<li>Preferred interpretation: It is plausible that the true population difference in average holiday ridership vs.&nbsp;average non-holiday ridership is from 1371.8 to 90.5 fewer rides on holidays (among days of the same weather category and temperature).</li>
+<li>Not as preferred interpretation: We are 95% confident that the population difference in holiday vs non-holiday ridership is between -1371.8 to -90.4532521.</li>
+</ul></li>
+<li>Zero is not in the CI which means that the difference between holidays and non-holidays (among days of the same weather category and temperature) is <em>not</em> plausibly zero. We do have evidence for a true holiday effect.</li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_bikes_smaller, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            2.5 %        97.5 %
+(Intercept)          1546.3798240  2198.1156306
+holidayyes          -1371.8105006   -90.4532521
+weather_catcateg2    -800.1540608  -341.3738083
+weather_catcateg3   -3218.3124545 -1923.8150951
+temp_actual_squared     0.5396379     0.6563642</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_bikes_larger, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           2.5 %        97.5 %
+(Intercept)          2128.817226  3024.6176444
+holidayyes          -1357.222742   -92.0407887
+weather_catcateg2    -819.136285  -365.7464372
+weather_catcateg3   -3064.923766 -1780.0402827
+temp_actual_squared     0.518586     0.6353312
+windspeed             -67.677428   -26.1684414</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-3-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-1">Exercise 3</h2>
+<p><strong>Research question:</strong> Is there a causal effect of Type A/B personality on developing coronary heart disease?</p>
+<section id="part-a-5" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-5">Part a</h3>
+<p>We believe that the following variables are confounders of the relationship between Type A/B personality <code>tabp</code> and coronary heart disease (<code>CHD</code>): <code>age + sbp + dbp + chol + ncigs + arcus + bmi</code>.</p>
+<p>Fit a regression model that would address our research question. (Should it be a linear or a logistic regression model?) Interpret only the coefficient of interest.</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> We need to fit a logistic regression model because the <code>chd</code> outcome is binary. We include <code>tabp</code> as the main predictor of interest and all of the other confounding variables. We need to exponentiate the coefficient so that we’re interpreting on the odds scale rather than the log odds scale.</p>
+<p>Interpretation of <code>exp(tabp)</code>: Among men of the same age, systolic and diastolic blood pressure, cholesterol levels, smoking habits, history of arcus sinilis, and BMI, those with Type A personality have 1.95 times the odds of CHD than those without Type A personality.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>typea_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> tabp <span class="sc">+</span> age <span class="sc">+</span> sbp <span class="sc">+</span> dbp <span class="sc">+</span> chol <span class="sc">+</span> ncigs <span class="sc">+</span> arcus <span class="sc">+</span> bmi, <span class="at">data =</span> wcgs, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(typea_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = chd ~ tabp + age + sbp + dbp + chol + ncigs + arcus + 
+    bmi, family = "binomial", data = wcgs)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -1.225e+01  9.898e-01 -12.378  &lt; 2e-16 ***
+tabp         6.670e-01  1.458e-01   4.576 4.74e-06 ***
+age          5.897e-02  1.230e-02   4.794 1.64e-06 ***
+sbp          1.824e-02  6.408e-03   2.846  0.00443 ** 
+dbp         -5.797e-04  1.086e-02  -0.053  0.95743    
+chol         1.045e-02  1.519e-03   6.879 6.04e-12 ***
+ncigs        2.131e-02  4.287e-03   4.971 6.67e-07 ***
+arcus        2.219e-01  1.436e-01   1.545  0.12238    
+bmi          5.841e-02  2.714e-02   2.152  0.03141 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1769.2  on 3139  degrees of freedom
+Residual deviance: 1572.6  on 3131  degrees of freedom
+  (14 observations deleted due to missingness)
+AIC: 1590.6
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(typea_mod) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">exp_estimate =</span> <span class="fu">exp</span>(estimate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(term, estimate, exp_estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  term          estimate exp_estimate
+  &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt;
+1 (Intercept) -12.3        0.00000477
+2 tabp          0.667      1.95      
+3 age           0.0590     1.06      
+4 sbp           0.0182     1.02      
+5 dbp          -0.000580   0.999     
+6 chol          0.0105     1.01      
+7 ncigs         0.0213     1.02      
+8 arcus         0.222      1.25      
+9 bmi           0.0584     1.06      </code></pre>
+</div>
+</div>
+</section>
+<section id="part-b-5" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-5">Part b</h3>
+<ul>
+<li>Construct a 95% confidence interval for the odds ratio of interest using the following code.</li>
+<li>Interpret the confidence interval in context.</li>
+<li>Is 1 contained in the interval? Why is 1 a relevant value to look for here?</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Response:</strong></p>
+<ul>
+<li>Interpretation in context:
+<ul>
+<li>Preferred interpretation: Among men of the same age, systolic and diastolic blood pressure, cholesterol levels, smoking habits, history of arcus sinilis, and BMI, it is plausible that those with Type A personality have 1.47 to 2.60 times the odds of CHD than those without Type A personality.</li>
+</ul></li>
+<li>1 is not in the CI. 1 is a relevant value to consider for ratios because if the odds ratio is 1, then the (adjusted) odds of CHD is the same in those with Type A and Type B personality. There seems to be a positive relationship between Type A personality and CHD in this study.</li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(typea_mod, <span class="at">level =</span> <span class="fl">0.95</span>) <span class="sc">%&gt;%</span> <span class="fu">exp</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %       97.5 %
+(Intercept) 6.706495e-07 3.257156e-05
+tabp        1.469222e+00 2.603660e+00
+age         1.035479e+00 1.086677e+00
+sbp         1.005561e+00 1.031169e+00
+dbp         9.783446e-01 1.020911e+00
+chol        1.007521e+00 1.013538e+00
+ncigs       1.012938e+00 1.030126e+00
+arcus       9.399791e-01 1.651412e+00
+bmi         1.004943e+00 1.117811e+00</code></pre>
+</div>
+</div>
+</section>
+<section id="part-c-5" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-5">Part c</h3>
+<p>(On your own time)</p>
+<p>The data context in this exercise has a fraught history with the smoking industry. Read <a href="https://www.thecut.com/2016/08/the-tobacco-industry-helped-create-the-type-a-personality.html">this article</a> for some context about how the Type A personality came to be defined and studied. (One big takeaway: The smoking industry had a large incentive to find something to blame health problems on other than smoking!)</p>
+</section>
+</section>
+<section id="exercise-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-1">Exercise 4</h2>
+<p>For each of the following <strong>MISINTERPRETATIONS</strong> of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.</p>
+<ul>
+<li>Misinterpretation 1: “There is a 95% probability that the population parameter is within (a,b).”
+<ul>
+<li><strong>Response:</strong> The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter—“95% confidence” is describing confidence in the interval construction process.</li>
+</ul></li>
+<li>Misinterpretation 2: “There is a 5% probability that the population parameter is not within (a,b).”
+<ul>
+<li><strong>Response:</strong> This is incorrect for the same reason as the first misinterpretation.</li>
+</ul></li>
+<li>Misinterpretation 3: “There is a 95% chance that the sample estimate in (a,b).”
+<ul>
+<li><strong>Response:</strong> The sample estimate is always in the interval by construction.</li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Leslie Myint, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Site built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

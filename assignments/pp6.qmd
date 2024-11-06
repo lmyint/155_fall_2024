@@ -147,10 +147,6 @@ Now use `glm` to fit one, simple logistic regression model to our original datas
 - Construct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span. 
 - If the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?
 
-> If the model did a worse job of predicting 20-year mortality, the boxplots would be less separated and overlap more. Greater overlap would mean that the predicted probabilities are worse at distinguishing between the two outcomes.
-
-> **Feedback guide:** They only need to have something like the first sentence in the example response above.
-
 ```{r}
 log_mod_output <- augment(___)
 
