@@ -325,6 +325,8 @@ B  A  A  A --> A-
 A  A  A  A --> A
 ```
 
+In order to demonstrate a passing degree of mastery in the course, you must have no more than one D in either the PP or Quiz components of the course grade. If you have D's in both of those components of your course grade, you will receive a D as your overall grade for the course. A course with a grade of a D will count towards credits earned but not towards a major.
+
 
 <br><br><br><br>
 
