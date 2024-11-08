@@ -6,6 +6,7 @@ sidebar: false
 
 # Notes
 
+- Slides for today are available [here](https://docs.google.com/presentation/d/1Rwhgl3L1O7npRO3-YXlmWDTWrLBRZr2ozKIAufFTf8k/edit?usp=sharing).
 - You can download a template file to work with [here](../activity_templates/21_confidence_intervals.qmd).
 - **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
 
