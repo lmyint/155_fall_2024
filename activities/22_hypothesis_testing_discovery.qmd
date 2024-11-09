@@ -1,0 +1,217 @@
+---
+title: "Hypothesis testing: discovery"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/22_hypothesis_testing_discovery.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Understand how standard errors and confidence intervals enable us to make statistical inferences
+- Articulate how we can formalize a research question as a testable, statistical hypothesis
+
+## Readings and videos
+
+This is a discovery activity, so no assigned readings/videos today.
+
+# Exercises
+
+Let's return to the `fish` dataset. Recall that rivers contain small concentrations of mercury which can accumulate in fish. Scientists studied this phenomenon among 171 largemouth bass in the Wacamaw and Lumber rivers of North Carolina, recording the following:
+
+
+| variable | meaning                                                  |
+|:---------|:---------------------------------------------------------|
+| River    | Lumber or Wacamaw                                        |
+| Station  | Station number where the fish was caught (0, 1, ..., 15) |
+| Length   | Fish's length (in centimeters)                           |
+| Weight   | Fish's weight (in grams)                                 |
+| Concen   | Fish's mercury concentration (in parts per million; ppm) |
+
+```{r warning=FALSE, message=FALSE}
+# Load the data & packages
+library(tidyverse)
+library(readr)
+fish <- read_csv("https://mac-stat.github.io/data/Mercury.csv")
+
+head(fish)
+```
+
+## Exercise 1
+
+**Research question:** Is there evidence that the mercury concentration in fish (`Concen`) differs according to the `River` they were sampled from?
+
+Fit a simple linear regression model that would address our research question
+
+```{r eval=FALSE}
+mod_fish <- ___
+summary(mod_fish)
+```
+
+Interpret the intercept from this model.
+
+> **Response**
+
+Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.
+
+> **Response**
+
+Let's get an exact 95% confidence interval for the model coefficients:
+
+```{r eval=FALSE}
+confint(mod_fish, level=0.95)
+```
+
+Suppose we take 200 different samples of fish from the Lumber River. Based on these results, in how many of those samples would you expect to observe mean mercury concentration **greater than** 1.25ppm?
+
+> **Response**
+
+Suppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?
+
+> **Response**
+
+Now suppose we sample a *single* fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the `Concen` variable in each river in our original sample)
+
+> **Response**
+
+## Exercise 2
+
+Let's look at the model summary output again:
+
+```{r eval=FALSE}
+summary(mod_fish)
+```
+
+Now, let's interpret the `RiverWacamaw` coefficient. Based *only* on the coefficient (don't think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?
+
+> **Response**
+
+Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the `RiverWacamaw` coefficient, and provide an appropriate interpretation.
+
+> **Response** 
+
+Suppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let's assume that the *true* mean mercury concentration *in the Lumber River fish population* is 1.08ppm). Are you surprised by this result? Why or why not?
+
+> **Response**
+
+Do you believe it *plausible* that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?
+
+> **Response**
+
+Suppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the `RiverWacamaw` coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?
+
+> **Response**
+
+Suppose the *true* population coefficient for the `RiverWacamaw`parameter is 0.02 (i.e. the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful? 
+
+> **Response**
+
+## Reflection
+
+Based on this activity and the inference tools you've learned about so far (sampling distributions, standard errors, confidence intervals), can you think of and describe a way that you can quantify evidence "for" or "against" a coefficient being equal to some particular value? (for example, we have evidence that the average mercury concentration in Lumber River fish is ~1.08ppm, and the standard error of this estimate suggests that observing a fish with 0ppm is very unlikely. How can we quantify that evidence?) 
+
+> **Response:** 
+
+
+<br><br><br><br><br><br>
+
+# Solutions
+
+## Exercise 1
+
+**Research question:** Is there evidence that the mercury concentration in fish (`Concen`) differs according to the `River` they were sampled from?
+
+Fit a simple linear regression model that would address our research question
+
+```{r}
+mod_fish <- lm(Concen ~ River, data=fish)
+summary(mod_fish)
+```
+
+Interpret the intercept from this model.
+
+> Our model estimates an average mercury concentration of 1.078ppm among fish in the Lumber River.
+
+Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.
+
+> 1.078 +/- 2*0.089 --> [0.90, 1.256]
+
+> Preferred interpretation: It is plausible that the true mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.
+
+> (technical addendum to this interpretation): ...specifically, we expect that if we take many different samples, 95% of the resulting intervals will contain the true mean mercury concentration of the entire Lumber River fish population. We hope that our interval is one of the lucky 95% and not one of the unlucky 5% that don't contain the true population parameter.
+
+> Not as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.
+
+
+
+Let's get an exact 95% confidence interval for the model coefficients:
+
+```{r}
+confint(mod_fish, level=0.95)
+```
+
+Suppose we take 200 different samples of fish from the Lumber River. In how many of those samples would you expect to observe an estimated mean mercury concentration **greater than** 1.25ppm?
+
+> We don't/can't actually know! This depends on the true population parameter and the accuracy of our sampling distribution.
+
+> What we *can* say is that if our sampling distribution model is accurate, then about 10 out of 200 samples will produce confidence intervals that *don't* contain the population parameter (and we can assume half of these--so 5 samples--are overestimates and the other half are underestimates)
+
+Suppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?
+
+> Yes, this is surprising, since a mean of 0ppm is *much* lower than the lower bound of our confidence interval estimate.
+
+> Observing an estimate of Beta_0 = 0ppm means that this is (0-1.07808)/0.08866 = -12.16 standard deviations away from the average mercury concentration estimated by our model using the original sample.
+
+Now suppose we sample a *single* fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the `Concen` variable in each river in our original sample)
+
+```{r}
+fish %>% 
+  group_by(River) %>% 
+  summarise(mean=mean(Concen), 
+            sd=sd(Concen), 
+            max=max(Concen))
+```
+
+> Observing a *single* fish with a mercury concentration of 2.5ppm is actually not that surprising! 2.5ppm is a little more than 2 standard deviations away from the mean mercury concentration in our sample of fish from the Lumber River (1.08+2*0.64=2.43), but there are certainly fish in the sample with even higher mercury concentrations (max=3.5ppm), so this isn't outside the bounds of what we'd expect.
+
+## Exercise 2
+
+Let's look at the model summary output again:
+
+```{r}
+summary(mod_fish)
+```
+
+Now, let's interpret the `RiverWacamaw` coefficient. Based *only* on the coefficient (don't think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?
+
+> The `RiverWacamaw` coefficient is 0.19835, meaning that the mean mercury concentration among fish in the Wacamaw River is, on average, about 0.20ppm *higher* than that of fish in the Lumber River.
+
+Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the `RiverWacamaw` coefficient, and provide an appropriate interpretation.
+
+> 0.20 +/- 2*0.11 --> [-0.02, 0.42]
+
+> Preferred interpretation: It is plausible that the true *difference* in mean mercury concentration among fish in the Wacamaw River compared to the Lumber River is between -0.02 ppm and 0.42ppm.
+
+> Not as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Wacamaw River somewhere between 0.02ppm *less* than that of fish in the Lumber River and 0.42ppm *more* than that of fish in the Lumber River. 
+
+Suppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let's assume that the *true* mean mercury concentration *in the Lumber River fish population* is 1.08ppm). Are you surprised by this result? Why or why not?
+
+> This should not be entirely surprising--based on our original model, the upper bound on our 95% confidence interval for the `RiverWacamaw` coefficient is 0.42ppm. If we know that the mean mercury concentration in the Lumber River fish population is 1.08ppm, then--assuming the sampling distribution model is accurate--we are 95% confident that the true mean mercury concentration in the Wacamaw River fish population is 1.08+0.42=1.5ppm
+
+Do you believe it *plausible* that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?
+
+> Answers may vary--this is certainly plausible, since our 95% CI contains 0 (i.e., there is no difference in means between the two rivers). However, we might also argue that there is SOME evidence of a difference, since most of the CI is > 0.
+
+Suppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the `RiverWacamaw` coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?
+
+> A larger sample should result in a smaller standard error of the `RiverWacamaw` coefficient. If the standard error is smaller than 0.1 (say 0.098), then a 95% confidence interval would be [0.004, 0.396]. Since this interval doesn't include 0, we could conclude that fish in the Wacamaw River, on average, have a higher mercury concentration than fish in the Lumber River. More importantly, the lower standard error of the coefficient allows us to say there is evidence *that this difference should be observable across new samples.*
+
+Suppose the *true* population coefficient for the `RiverWacamaw`parameter is 0.02 (i.e. the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful? 
+
+> This will depend on context--a priori, this difference appears to be negligible, and we could potentially chalk it up to uncontrolled confounders (e.g., perhaps fish in one river tend to be older/bigger and therefore have slightly higher mercury concentrations, even if there is no underlying difference in mercury pollution). We also might consider: what is considered a "harmful" mercury concentration, and are fish in either river near that threshold? Has this changed over time, and by how much?
+

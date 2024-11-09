@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Practice Problems 5 – STAT 155</title>
+<title>Hypothesis testing: discovery – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,35 +101,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -283,28 +288,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
-  <li><a href="#exercise-1-descriptive-predictive-and-causal-questions" id="toc-exercise-1-descriptive-predictive-and-causal-questions" class="nav-link" data-scroll-target="#exercise-1-descriptive-predictive-and-causal-questions">Exercise 1: Descriptive, predictive, and causal questions</a></li>
-  <li><a href="#exercise-2-addressing-your-questions" id="toc-exercise-2-addressing-your-questions" class="nav-link" data-scroll-target="#exercise-2-addressing-your-questions">Exercise 2: Addressing your questions</a></li>
-  <li><a href="#exercise-3-communicating-your-findings" id="toc-exercise-3-communicating-your-findings" class="nav-link" data-scroll-target="#exercise-3-communicating-your-findings">Exercise 3: Communicating your findings</a></li>
-  <li><a href="#exercise-4-family-and-childrens-categories" id="toc-exercise-4-family-and-childrens-categories" class="nav-link" data-scroll-target="#exercise-4-family-and-childrens-categories">Exercise 4: Family and children’s categories</a></li>
-  <li><a href="#exercise-5-define-binary-outcome" id="toc-exercise-5-define-binary-outcome" class="nav-link" data-scroll-target="#exercise-5-define-binary-outcome">Exercise 5: Define binary outcome</a></li>
-  <li><a href="#exercise-6-visual-explorations" id="toc-exercise-6-visual-explorations" class="nav-link" data-scroll-target="#exercise-6-visual-explorations">Exercise 6: Visual explorations</a>
-  <ul class="collapse">
-  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
-  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
   </ul></li>
-  <li><a href="#exercise-7-logistic-regression-modeling" id="toc-exercise-7-logistic-regression-modeling" class="nav-link" data-scroll-target="#exercise-7-logistic-regression-modeling">Exercise 7: Logistic regression modeling</a>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
   <ul class="collapse">
-  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
-  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
-  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part c</a></li>
-  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part d</a></li>
-  </ul></li>
+  <li><a href="#exercise-1-1" id="toc-exercise-1-1" class="nav-link" data-scroll-target="#exercise-1-1">Exercise 1</a></li>
+  <li><a href="#exercise-2-1" id="toc-exercise-2-1" class="nav-link" data-scroll-target="#exercise-2-1">Exercise 2</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -314,7 +312,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Problems 5</h1>
+<h1 class="title">Hypothesis testing: discovery</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
 </div>
 
 
@@ -331,110 +330,297 @@ window.Quarto = {
 </header>
 
 
-<center>
-<strong>Due Friday, 10/25 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=141073">Moodle</a>.</strong>
-</center>
-<section id="purpose" class="level1">
-<h1>Purpose</h1>
-<p>The goal of this set of practice problems is to practice the following skills:</p>
+<section id="notes" class="level1">
+<h1>Notes</h1>
 <ul>
-<li>Formulate descriptive, predictive, and causal research questions</li>
-<li>Connect the concepts of redundancy and multicollinearity to multiple <span class="math inline">\(R^2\)</span> and adjusted <span class="math inline">\(R^2\)</span></li>
-<li>Construct, interpret, and evaluate logistic regression models</li>
+<li>You can download a template file to work with <a href="../activity_templates/22_hypothesis_testing_discovery.qmd">here</a>.</li>
+<li><strong>File organization:</strong> Save this file in the “Activities” subfolder of your “STAT155” folder.</li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp5.qmd">here</a>.</strong></p>
-</section>
-<section id="directions" class="level1">
-<h1>Directions</h1>
-<ol type="1">
-<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following command in the code chunk to read in the data: <code>games &lt;- read_csv("https://mac-stat.github.io/data/boardgamegeeks.csv")</code></p></li>
-<li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
-</ol>
-<blockquote class="blockquote">
-<p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
-</blockquote>
-<ol start="3" type="1">
-<li>Render your work for submission:
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
 <ul>
-<li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
-<li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
-<li>Close the browser tab.</li>
-<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
-<li>Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.</li>
-</ul></li>
-</ol>
+<li>Understand how standard errors and confidence intervals enable us to make statistical inferences</li>
+<li>Articulate how we can formalize a research question as a testable, statistical hypothesis</li>
+</ul>
+</section>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>This is a discovery activity, so no assigned readings/videos today.</p>
+</section>
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<section id="context" class="level2">
-<h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>We will be looking at data on the play characteristics and popularity of board games from the <a href="https://boardgamegeek.com/">Board Game Geek</a> database. More information about the data and a codebook are available <a href="https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md">here</a>. The dataset contains many measures of game popularity (summaries of user ratings) and game attributes (categories, themes, and gameplay mechanics).</p>
-<p>We will be exploring a range of research questions related to this data.</p>
+<p>Let’s return to the <code>fish</code> dataset. Recall that rivers contain small concentrations of mercury which can accumulate in fish. Scientists studied this phenomenon among 171 largemouth bass in the Wacamaw and Lumber rivers of North Carolina, recording the following:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">River</td>
+<td style="text-align: left;">Lumber or Wacamaw</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Station</td>
+<td style="text-align: left;">Station number where the fish was caught (0, 1, …, 15)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Length</td>
+<td style="text-align: left;">Fish’s length (in centimeters)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Weight</td>
+<td style="text-align: left;">Fish’s weight (in grams)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Concen</td>
+<td style="text-align: left;">Fish’s mercury concentration (in parts per million; ppm)</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data &amp; packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/Mercury.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  River  Station Length Weight Concen
+  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Lumber       0   47     1616   1.6 
+2 Lumber       0   48.7   1862   1.5 
+3 Lumber       0   55.7   2855   1.7 
+4 Lumber       0   45.2   1199   0.73
+5 Lumber       0   44.7   1320   0.56
+6 Lumber       0   43.8   1225   0.51</code></pre>
+</div>
+</div>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
+<p><strong>Research question:</strong> Is there evidence that the mercury concentration in fish (<code>Concen</code>) differs according to the <code>River</code> they were sampled from?</p>
+<p>Fit a simple linear regression model that would address our research question</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_fish <span class="ot">&lt;-</span> ___</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Interpret the intercept from this model.</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Let’s get an exact 95% confidence interval for the model coefficients:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_fish, <span class="at">level=</span><span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Suppose we take 200 different samples of fish from the Lumber River. Based on these results, in how many of those samples would you expect to observe mean mercury concentration <strong>greater than</strong> 1.25ppm?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Suppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Now suppose we sample a <em>single</em> fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the <code>Concen</code> variable in each river in our original sample)</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
 </section>
-<section id="exercise-1-descriptive-predictive-and-causal-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-descriptive-predictive-and-causal-questions">Exercise 1: Descriptive, predictive, and causal questions</h2>
-<p>Suppose that you are an analyst helping out a local board game convention. Your job is to help convention attendees have a great time.</p>
-<p>After exploring the <a href="https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md">codebook</a>, consider the following:</p>
-<ul>
-<li>Would investigating descriptive research questions help you do your job? If so, list some relevant descriptive questions that you came up with. If not, explain why descriptive research questions are not useful here.</li>
-<li>Repeat the above questions for predictive and causal research questions.</li>
-</ul>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
+<p>Let’s look at the model summary output again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s interpret the <code>RiverWacamaw</code> coefficient. Based <em>only</em> on the coefficient (don’t think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the <code>RiverWacamaw</code> coefficient, and provide an appropriate interpretation.</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Suppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let’s assume that the <em>true</em> mean mercury concentration <em>in the Lumber River fish population</em> is 1.08ppm). Are you surprised by this result? Why or why not?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Do you believe it <em>plausible</em> that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Suppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the <code>RiverWacamaw</code> coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
+<p>Suppose the <em>true</em> population coefficient for the <code>RiverWacamaw</code>parameter is 0.02 (i.e.&nbsp;the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful?</p>
+<blockquote class="blockquote">
+<p><strong>Response</strong></p>
+</blockquote>
 </section>
-<section id="exercise-2-addressing-your-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-addressing-your-questions">Exercise 2: Addressing your questions</h2>
-<p>Pick two of your research questions from the previous exercise, and create visualizations and models to address those questions. Make sure to:</p>
-<ul>
-<li>Include helpful labels on your visualizations</li>
-<li>Explain why your plots and models address your research questions</li>
-<li>Interpret only the relevant coefficients from your models</li>
-<li>If relevant, comment on model quality metrics.</li>
-</ul>
-</section>
-<section id="exercise-3-communicating-your-findings" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-communicating-your-findings">Exercise 3: Communicating your findings</h2>
-<p>Write a paragraph addressed to the convention organizers detailing how your findings in the previous exercise can help attendees have more fun at the convention.</p>
-</section>
-<section id="exercise-4-family-and-childrens-categories" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-family-and-childrens-categories">Exercise 4: Family and children’s categories</h2>
-<p><strong>Question:</strong> Does a game being in the family category (<code>cat_family</code>) provide meaningfully different information from a game being in the children’s category (<code>cat_childrens</code>) in terms of explaining average ratings?</p>
-<p>Fit 2 models that will allow you to address this question. Report and compare the multiple and adjusted R-squared measures in these 2 models. Use this comparison to answer our question.</p>
-</section>
-<section id="exercise-5-define-binary-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-define-binary-outcome">Exercise 5: Define binary outcome</h2>
-<p>Use the <code>mutate()</code> function from <code>dplyr</code> to create a binary outcome variable called <code>popular</code> that is TRUE if the <code>mean_rating</code> is over 8 AND the <code>p25_rating</code> is over 6.5. In R, you can use <code>&amp;</code> to combine logical statements. For example, <code>x1 &lt; 1 &amp; x2 &lt; 2</code> results in TRUE if both <code>x1</code> is less than 1 AND <code>x2</code> is less than 2.</p>
-</section>
-<section id="exercise-6-visual-explorations" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6-visual-explorations">Exercise 6: Visual explorations</h2>
-<p>We want to investigate how a game’s complexity and whether or not it was kickstarted relate to its popularity.</p>
-<section id="part-a" class="level3">
-<h3 class="anchored" data-anchor-id="part-a">Part a</h3>
-<p>Construct and interpret a visualization that shows how popularity is related to a game’s complexity (<code>game_weight</code>).</p>
-</section>
-<section id="part-b" class="level3">
-<h3 class="anchored" data-anchor-id="part-b">Part b</h3>
-<p>Construct and interpret a visualization that shows how popularity is related to whether or not a game was kickstarted (<code>kickstarted</code>). (Note: you will want to use <code>factor(kickstarted)</code> in your code to ensure that it is treated as a categorical variable.)</p>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>Based on this activity and the inference tools you’ve learned about so far (sampling distributions, standard errors, confidence intervals), can you think of and describe a way that you can quantify evidence “for” or “against” a coefficient being equal to some particular value? (for example, we have evidence that the average mercury concentration in Lumber River fish is ~1.08ppm, and the standard error of this estimate suggests that observing a fish with 0ppm is very unlikely. How can we quantify that evidence?)</p>
+<blockquote class="blockquote">
+<p><strong>Response:</strong></p>
+</blockquote>
+<p><br><br><br><br><br><br></p>
 </section>
 </section>
-<section id="exercise-7-logistic-regression-modeling" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7-logistic-regression-modeling">Exercise 7: Logistic regression modeling</h2>
-<section id="part-a-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
-<p>Fit a simple logistic regression model called that models popularity as a function of complexity (<code>game_weight</code>). Display the exponentiated coefficients.</p>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-1">Exercise 1</h2>
+<p><strong>Research question:</strong> Is there evidence that the mercury concentration in fish (<code>Concen</code>) differs according to the <code>River</code> they were sampled from?</p>
+<p>Fit a simple linear regression model that would address our research question</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_fish <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> River, <span class="at">data=</span>fish)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Concen ~ River, data = fish)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1664 -0.5681 -0.1764  0.4219  2.4219 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.07808    0.08866  12.160   &lt;2e-16 ***
+RiverWacamaw  0.19835    0.11712   1.694   0.0922 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7575 on 169 degrees of freedom
+Multiple R-squared:  0.01669,   Adjusted R-squared:  0.01087 
+F-statistic: 2.868 on 1 and 169 DF,  p-value: 0.09218</code></pre>
+</div>
+</div>
+<p>Interpret the intercept from this model.</p>
+<blockquote class="blockquote">
+<p>Our model estimates an average mercury concentration of 1.078ppm among fish in the Lumber River.</p>
+</blockquote>
+<p>Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.</p>
+<blockquote class="blockquote">
+<p>1.078 +/- 2*0.089 –&gt; [0.90, 1.256]</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Preferred interpretation: It is plausible that the true mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>(technical addendum to this interpretation): …specifically, we expect that if we take many different samples, 95% of the resulting intervals will contain the true mean mercury concentration of the entire Lumber River fish population. We hope that our interval is one of the lucky 95% and not one of the unlucky 5% that don’t contain the true population parameter.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Not as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.</p>
+</blockquote>
+<p>Let’s get an exact 95% confidence interval for the model coefficients:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod_fish, <span class="at">level=</span><span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %    97.5 %
+(Intercept)   0.90305825 1.2531061
+RiverWacamaw -0.03285077 0.4295435</code></pre>
+</div>
+</div>
+<p>Suppose we take 200 different samples of fish from the Lumber River. In how many of those samples would you expect to observe an estimated mean mercury concentration <strong>greater than</strong> 1.25ppm?</p>
+<blockquote class="blockquote">
+<p>We don’t/can’t actually know! This depends on the true population parameter and the accuracy of our sampling distribution.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What we <em>can</em> say is that if our sampling distribution model is accurate, then about 10 out of 200 samples will produce confidence intervals that <em>don’t</em> contain the population parameter (and we can assume half of these–so 5 samples–are overestimates and the other half are underestimates)</p>
+</blockquote>
+<p>Suppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?</p>
+<blockquote class="blockquote">
+<p>Yes, this is surprising, since a mean of 0ppm is <em>much</em> lower than the lower bound of our confidence interval estimate.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Observing an estimate of Beta_0 = 0ppm means that this is (0-1.07808)/0.08866 = -12.16 standard deviations away from the average mercury concentration estimated by our model using the original sample.</p>
+</blockquote>
+<p>Now suppose we sample a <em>single</em> fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the <code>Concen</code> variable in each river in our original sample)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fish <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(River) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(Concen), </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd=</span><span class="fu">sd</span>(Concen), </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(Concen))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  River    mean    sd   max
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Lumber   1.08 0.649   3.5
+2 Wacamaw  1.28 0.829   3.6</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Observing a <em>single</em> fish with a mercury concentration of 2.5ppm is actually not that surprising! 2.5ppm is a little more than 2 standard deviations away from the mean mercury concentration in our sample of fish from the Lumber River (1.08+2*0.64=2.43), but there are certainly fish in the sample with even higher mercury concentrations (max=3.5ppm), so this isn’t outside the bounds of what we’d expect.</p>
+</blockquote>
 </section>
-<section id="part-b-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
-<p>Interpret each coefficient from Part a in a contextually meaningful way. Is the intercept meaningful in this context?</p>
-</section>
-<section id="part-c" class="level3">
-<h3 class="anchored" data-anchor-id="part-c">Part c</h3>
-<p>Fit a simple logistic regression model called that models popularity as a function of whether or not a game was kickstarted (<code>kickstarted</code>). Display the exponentiated coefficients.</p>
-</section>
-<section id="part-d" class="level3">
-<h3 class="anchored" data-anchor-id="part-d">Part d</h3>
-<p>Interpret each coefficient from Part c in a contextually meaningful way. Is the intercept meaningful in this context?</p>
+<section id="exercise-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-1">Exercise 2</h2>
+<p>Let’s look at the model summary output again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Concen ~ River, data = fish)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1664 -0.5681 -0.1764  0.4219  2.4219 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.07808    0.08866  12.160   &lt;2e-16 ***
+RiverWacamaw  0.19835    0.11712   1.694   0.0922 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7575 on 169 degrees of freedom
+Multiple R-squared:  0.01669,   Adjusted R-squared:  0.01087 
+F-statistic: 2.868 on 1 and 169 DF,  p-value: 0.09218</code></pre>
+</div>
+</div>
+<p>Now, let’s interpret the <code>RiverWacamaw</code> coefficient. Based <em>only</em> on the coefficient (don’t think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?</p>
+<blockquote class="blockquote">
+<p>The <code>RiverWacamaw</code> coefficient is 0.19835, meaning that the mean mercury concentration among fish in the Wacamaw River is, on average, about 0.20ppm <em>higher</em> than that of fish in the Lumber River.</p>
+</blockquote>
+<p>Using the 68-95-99.7 rule, construct an approximate 95% confidence interval for the <code>RiverWacamaw</code> coefficient, and provide an appropriate interpretation.</p>
+<blockquote class="blockquote">
+<p>0.20 +/- 2*0.11 –&gt; [-0.02, 0.42]</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Preferred interpretation: It is plausible that the true <em>difference</em> in mean mercury concentration among fish in the Wacamaw River compared to the Lumber River is between -0.02 ppm and 0.42ppm.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Not as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Wacamaw River somewhere between 0.02ppm <em>less</em> than that of fish in the Lumber River and 0.42ppm <em>more</em> than that of fish in the Lumber River.</p>
+</blockquote>
+<p>Suppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let’s assume that the <em>true</em> mean mercury concentration <em>in the Lumber River fish population</em> is 1.08ppm). Are you surprised by this result? Why or why not?</p>
+<blockquote class="blockquote">
+<p>This should not be entirely surprising–based on our original model, the upper bound on our 95% confidence interval for the <code>RiverWacamaw</code> coefficient is 0.42ppm. If we know that the mean mercury concentration in the Lumber River fish population is 1.08ppm, then–assuming the sampling distribution model is accurate–we are 95% confident that the true mean mercury concentration in the Wacamaw River fish population is 1.08+0.42=1.5ppm</p>
+</blockquote>
+<p>Do you believe it <em>plausible</em> that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?</p>
+<blockquote class="blockquote">
+<p>Answers may vary–this is certainly plausible, since our 95% CI contains 0 (i.e., there is no difference in means between the two rivers). However, we might also argue that there is SOME evidence of a difference, since most of the CI is &gt; 0.</p>
+</blockquote>
+<p>Suppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the <code>RiverWacamaw</code> coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?</p>
+<blockquote class="blockquote">
+<p>A larger sample should result in a smaller standard error of the <code>RiverWacamaw</code> coefficient. If the standard error is smaller than 0.1 (say 0.098), then a 95% confidence interval would be [0.004, 0.396]. Since this interval doesn’t include 0, we could conclude that fish in the Wacamaw River, on average, have a higher mercury concentration than fish in the Lumber River. More importantly, the lower standard error of the coefficient allows us to say there is evidence <em>that this difference should be observable across new samples.</em></p>
+</blockquote>
+<p>Suppose the <em>true</em> population coefficient for the <code>RiverWacamaw</code>parameter is 0.02 (i.e.&nbsp;the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful?</p>
+<blockquote class="blockquote">
+<p>This will depend on context–a priori, this difference appears to be negligible, and we could potentially chalk it up to uncontrolled confounders (e.g., perhaps fish in one river tend to be older/bigger and therefore have slightly higher mercury concentrations, even if there is no underlying difference in mercury pollution). We also might consider: what is considered a “harmful” mercury concentration, and are fish in either river near that threshold? Has this changed over time, and by how much?</p>
+</blockquote>
 
 
-</section>
 </section>
 </section>
 

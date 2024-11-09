@@ -1,0 +1,137 @@
+---
+title: "Practice Problems 7"
+sidebar: false
+eval: false
+---
+
+<center>
+**Due Friday, 11/15 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=145477).**
+</center>
+
+# Purpose
+
+The purpose of this assignment is to practice the following skills:
+
+- Translating research questions into statistical models
+- Constructing and interpreting confidence intervals for linear and logistic regression model coefficients
+- Using confidence intervals to test statistical hypotheses
+- Interpreting test statistics and p-values and using them to test statistical hypotheses
+
+**You can download a template to start from [here](../activity_templates/pp7.qmd).**
+
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, `broom`, and `readr` packages.
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+
+
+
+# Exercises
+
+## Exercise 1
+
+> **Research question:** What is the causal effect of adolescent marijuana smoking on adulthood cigarette smoking?
+
+To investigate this question, we will use data from the [Add Health Study](https://addhealth.cpc.unc.edu/). Read in the data below, and take a look at [this codebook](https://mac-stat.github.io/data/addhealth_codebook.html).
+
+```{r}
+addhealth <- read_csv("https://mac-stat.github.io/data/addhealth.csv")
+
+# Data cleaning
+addhealth <- addhealth %>% 
+    mutate(across(c(mathG, readG, parentED), factor))
+```
+
+### Part a
+
+Analysts have determined `white`, `mathG`, `readG`, `parentED` and `housesmoke` to be potential confounders of the relationship between adolescent marijuana smoking (`exposure`) on adulthood cigarette smoking (`smoke`).
+
+- Fit a logistic regression model that addresses our research question.
+- Interpret only the coefficient of interest on the odds (not log odds) scale.
+
+
+### Part b
+
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.
+- Compare your approximate 95% CI to an exact interval using `confint()`.
+
+### Part c
+
+- Interpret the exact CI from Part b in context.
+- What is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)
+
+### Part d
+
+Now let's consider hypothesis testing using test statistics and p-values.
+
+- State the null and alternative hypotheses for the coefficient of interest in context.
+- How do the null and alternative hypotheses differ for the exponentiated coefficient?
+
+### Part e
+
+Report and interpret the test statistic for the coefficient of interest.
+
+### Part f
+
+- Report and interpret the p-value for the coefficient of interest.
+- Based on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population?
+- Do your results here and from the CI in Part c agree?
+
+
+## Exercise 2
+
+> **Research question:** Does smoking decrease lung function in children?
+
+To investigate this question, we will use data from a pediatric clinic. Read in the data below, and look at [this codebook](https://mac-stat.github.io/data/fev_codebook.html).
+
+```{r}
+fev <- read_csv("https://mac-stat.github.io/data/fev.csv")
+```
+
+### Part a
+
+Analysts have determined `age`, `height`, and `sex` to be potential confounders of the relationship between smoking (`smoke`) and lung function as measured by forced expiratory volume (`fev`).
+
+- Fit a regression model that addresses our research question.
+- Interpret only the coefficient of interest.
+
+
+### Part b
+
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.
+- Compare your approximate 95% CI to an exact interval using `confint()`.
+
+### Part c
+
+- Interpret the exact CI from Part b in context.
+- What is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)
+
+### Part d
+
+Now let's consider hypothesis testing using test statistics and p-values.
+
+State the null and alternative hypotheses for the coefficient of interest in context.
+
+### Part e
+
+Report and interpret the test statistic for the coefficient of interest.
+
+### Part f
+
+- Report and interpret the p-value for the coefficient of interest.
+- Based on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children?
+- Do your results here and from the CI in Part c agree?

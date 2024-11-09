@@ -694,7 +694,7 @@
     "href": "activities/20_bootstrapping.html#exercise-5-resampling-1",
     "title": "Bootstrapping",
     "section": "Exercise 5: Resampling",
-    "text": "Exercise 5: Resampling\n\n# Define data\nsmall_sample &lt;- data.frame(\n    id = 1:5,\n    Length = c(44, 43, 54, 52, 40)\n)\n\nsmall_sample\n\n  id Length\n1  1     44\n2  2     43\n3  3     54\n4  4     52\n5  5     40\n\nsmall_sample %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         46.6\n\n\n\nWe always get the same sample (the original 5 fish), just in a different order. Thus the mean is always the sample.\n\n\nsample_1 &lt;- sample_n(small_sample, size = 5, replace = FALSE)\nsample_1\n\n  id Length\n1  1     44\n2  5     40\n3  4     52\n4  3     54\n5  2     43\n\nsample_1 %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         46.6\n\n\n\nThey differ.\n\n\nsample_2 &lt;- sample_n(small_sample, size = 5, replace = TRUE)\nsample_2\n\n  id Length\n1  4     52\n2  1     44\n3  3     54\n4  4     52\n5  5     40\n\nsample_2 %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         48.4\n\n\n\nSampling the same fish more than once is like observing different fish with similar characteristics.",
+    "text": "Exercise 5: Resampling\n\n# Define data\nsmall_sample &lt;- data.frame(\n    id = 1:5,\n    Length = c(44, 43, 54, 52, 40)\n)\n\nsmall_sample\n\n  id Length\n1  1     44\n2  2     43\n3  3     54\n4  4     52\n5  5     40\n\nsmall_sample %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         46.6\n\n\n\nWe always get the same sample (the original 5 fish), just in a different order. Thus the mean is always the sample.\n\n\nsample_1 &lt;- sample_n(small_sample, size = 5, replace = FALSE)\nsample_1\n\n  id Length\n1  3     54\n2  4     52\n3  5     40\n4  2     43\n5  1     44\n\nsample_1 %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         46.6\n\n\n\nThey differ.\n\n\nsample_2 &lt;- sample_n(small_sample, size = 5, replace = TRUE)\nsample_2\n\n  id Length\n1  2     43\n2  1     44\n3  2     43\n4  1     44\n5  3     54\n\nsample_2 %&gt;% \n    summarize(mean(Length))\n\n  mean(Length)\n1         45.6\n\n\n\nSampling the same fish more than once is like observing different fish with similar characteristics.",
     "crumbs": [
       "Bootstrapping"
     ]
@@ -2070,93 +2070,103 @@
     ]
   },
   {
-    "objectID": "assignments/pp1.html",
-    "href": "assignments/pp1.html",
-    "title": "Practice Problems 1",
+    "objectID": "assignments/pp6.html",
+    "href": "assignments/pp6.html",
+    "title": "Practice Problems 6",
     "section": "",
-    "text": "Due Friday, 9/13 at 5pm on Moodle.",
+    "text": "Due Friday, 11/8 at 5pm on Moodle.",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#context",
-    "href": "assignments/pp1.html#context",
-    "title": "Practice Problems 1",
-    "section": "Context",
-    "text": "Context\nThis cartoon by Alison Bechdel inspired the “Bechdel test” (image source):\n\nA movie passes the test if it meets the following criteria:\n\nthere are at least 2 women-identifying characters;\n\nthese characters talk to each other at least 1 time; and\n\nthey talk about something other than a male-identifying character\n\nWe’ll work with the bechdel data within the fivethirtyeight package. You can enter ?bechdel in the Console to view the codebook.\n\n# Load the data\ndata(bechdel)",
+    "objectID": "assignments/pp6.html#context",
+    "href": "assignments/pp6.html#context",
+    "title": "Practice Problems 6",
+    "section": "Context:",
+    "text": "Context:\nIn the following exercises, we’ll work with data from a one-in-six survey of the electoral roll in Whickham, a mixed urban and rural district near Newcastle upon Tyne, in the UK. The survey was conducted in 1972-1974 to study heart disease and thyroid disease. A follow-up on those in the survey was conducted twenty years later.\nWe have access to the following information, for 1314 women:\n\noutcome: survival status after twenty years (Alive or Dead)\nsmoker: smoking status at baseline (No or Yes)\nage: age (in years) at the time of the first survey\n\nWe’ll use this data to explore sampling distributions, properties of Normal distributions, and more. The main research question we’ll explore is whether the odds of mortality in 20 years varies between smokers and non-smokers.",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-1-define-two-new-variables",
-    "href": "assignments/pp1.html#exercise-1-define-two-new-variables",
-    "title": "Practice Problems 1",
-    "section": "Exercise 1: Define two new variables",
-    "text": "Exercise 1: Define two new variables\nWe can use the mutate() function from dplyr to define new variables. For example:\n\n# Define a new variable which measures years_since_1900\nbechdel &lt;- bechdel %&gt;% \n    mutate(years_since_1900 = year - 1900)\n\n# Check it out / confirm it's right\nbechdel %&gt;% \n    select(year, years_since_1900) %&gt;% \n    head(3)\n\nYour turn. Define a new variable budget_mil which measures budget in MILLIONS of dollars (on the 2013 scale). Similarly, define a new variable intgross_mil which measures international gross in MILLIONS of dollars (on the 2013 scale). Store these in bechdel and confirm your results match those here:\n## # A tibble: 3 x 2\n##   budget_mil intgross_mil\n##        &lt;dbl&gt;        &lt;dbl&gt;\n## 1       13           42.2\n## 2       45.7         41.5\n## 3       20          159.",
+    "objectID": "assignments/pp6.html#exercise-1-parameter-vs.-estimate",
+    "href": "assignments/pp6.html#exercise-1-parameter-vs.-estimate",
+    "title": "Practice Problems 6",
+    "section": "Exercise 1: Parameter vs. Estimate",
+    "text": "Exercise 1: Parameter vs. Estimate\n\nPart a\nBefore digging into the data, think about the context of our research question. In one sentence, describe what the population parameter of interest is.\n\nPopulation parameter:\n\n\n\nPart b\nIn two-to-three sentences, describe how we could use the data we have access to to obtain a sample estimate of this population parameter without fitting a linear or logistic regression model (just using algebra!)\n\n\nPart c\nDo what you described in part b! What is the sample estimate from the data we have? Include any code you need to answer this question in the code chunk below (remember, R is a calculator!)\n\n# Add your R code here!",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-2-get-to-know-the-data",
-    "href": "assignments/pp1.html#exercise-2-get-to-know-the-data",
-    "title": "Practice Problems 1",
-    "section": "Exercise 2: Get to know the data",
-    "text": "Exercise 2: Get to know the data\nComplete each task below using dim(), nrow(), head(), or one of the dplyr functions: filter(), summarize(), select(). For any questions about movie budget and gross earnings, use budget_mil and gross_mil. NOTE: You don’t need to write out any discussion for this exercise, just include your code and output.\n\n# How many films are in the dataset?\n\n# When was the oldest film in the dataset made?\n\n# When was the most recent film in the dataset made?\n\n# What is the median film budget in 2013 dollars?\n\n# What films had budgets that exceeded 300 million in 2013 dollars?\n# (Just show the films and budgets, not all variables)\n\n# What films were made in 1971?\n# (Just show the films and year, not all variables)\n\n# What were the budget_mil and intgross_mil values for \"Titanic\"?\n# (Just show the budget_mil and intgross_mil values)",
+    "objectID": "assignments/pp6.html#exercise-2-resampling",
+    "href": "assignments/pp6.html#exercise-2-resampling",
+    "title": "Practice Problems 6",
+    "section": "Exercise 2: Resampling",
+    "text": "Exercise 2: Resampling\n\nPart a\nRather than calculate the observed odds ratio by hand, we could have instead fit a simple logistic regression model with outcome as the outcome (hah!) amd smoker as our predictor of interest. The exponentiated slope coefficient is then our odds ratio comparing smokers to non-smokers.\nR output from regression models automatically provides us with standard errors, but suppose we instead wanted to obtain the standard error for our odds ratio without glm’s (direct) assistance, and instead estimate it via bootstrapping!\nFill in the code below to draw 500 re-samples from the Whickham dataset.\n\n# Set the seed so that we all get the same results\nset.seed(155)\n\n# Store the sample models\nsample_coefs &lt;- mosaic::do(___)*( # What number should go here?\n  Whickham %&gt;%\n    sample_n(size = ___, replace = TRUE) %&gt;% # What number should go here?\n    with(glm(___ ~ ___, family = binomial)) # What variables should go here?\n)\n\n# Exponential our slope coefficient samples to get odds ratios\nsample_coefs &lt;- sample_coefs %&gt;%\n  mutate(OR = exp(smokerYes))\n\n\n\nPart b\nExplain in one-to-two sentences, why we need to sample from our data with replacement when doing bootstrapping (recall Exercise 4 on activity 20 if you need a hint!).\n\nYour response here",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
-    "href": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
-    "title": "Practice Problems 1",
-    "section": "Exercise 3: Does it pass the Bechdel?",
-    "text": "Exercise 3: Does it pass the Bechdel?\nThe clean_test variable records the Bechdel category into which each movie falls. From worst to best (if you care about the representation of women in film):\n\nnowomen = there are no significant women characters in the film\nnotalk = there are women characters but they don’t talk to one another\nmen = there are women characters that talk to one another but they only talk about men\ndubious = barely passes the Bechdel test\nok = passes the Bechdel test\n\nConstruct a visualization of the clean_test variable, and construct a corresponding table of counts. In one sentence, summarize your findings about clean_test as if you were writing a newspaper article about movies.",
+    "objectID": "assignments/pp6.html#exercise-3-sampling-distributions",
+    "href": "assignments/pp6.html#exercise-3-sampling-distributions",
+    "title": "Practice Problems 6",
+    "section": "Exercise 3: Sampling distributions",
+    "text": "Exercise 3: Sampling distributions\n\nPart a\nIf we were to make a histogram of the 500 re-sampled odds ratio estimates, what shape do you anticipate the histogram to take? What value do you expect it to be centered around?\n\n\nPart b\nMake the plot you described in part a! What do you observe? Were your “hypotheses” correct?\n\n\nPart c\nEstimate where roughly the middle 50% of the 500, re-sampled odds ratios fall. Add vertical lines to your histogram using geom_vline to indicate the values that contain the middle 50% of your estimates.\n\n\nPart d\nEstimate where roughly the middle 80% of the 500, re-sampled odds ratios fall, and report this range of values. Explain why the range that contains the middle 80% is necessarily larger than the range that contains the middle 50%.",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
-    "href": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
-    "title": "Practice Problems 1",
-    "section": "Exercise 4: How much money did it make?",
-    "text": "Exercise 4: How much money did it make?\nThe intgross_mil variable records each movie’s total international gross, in millions of dollars (and adjusted to 2013).\n\nConstruct a visualization of the intgross_mil variable. Summarize your findings as if you were writing a newspaper article about movies.\nCalculate the mean and median values of intgross_mil. Explain why the mean exceeds the median by quite a bit and which is the more appropriate measure of trend here.\n\nNOTE: Since some films are missing information on intgross_mil, you’ll need to use mean(___, na.rm = TRUE) where na.rm = TRUE says to remove the NA (missing) values from the calculation. Similarly for the median.\n\nCalculate the standard deviations for the intgross_mil and budget_mil variables. Comment on whether there’s more variability among how much money is spent making movies (budgets) or how much money a movie makes (grosses)?",
+    "objectID": "assignments/pp6.html#exercise-4-properties-of-normal-distributions-and-standard-errors",
+    "href": "assignments/pp6.html#exercise-4-properties-of-normal-distributions-and-standard-errors",
+    "title": "Practice Problems 6",
+    "section": "Exercise 4: Properties of Normal distributions and Standard Errors",
+    "text": "Exercise 4: Properties of Normal distributions and Standard Errors\n\nPart a\nUsing your re-sampled odds ratios, calculate and report your estimated standard error.\n\n\nPart b\nNow use glm to fit one, simple logistic regression model to our original dataset. What is the standard error provided by glm for the slope coefficient, and how does it compare to your answer from part a?",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
-    "href": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
-    "title": "Practice Problems 1",
-    "section": "Exercise 5: Explaining intgross_mil",
-    "text": "Exercise 5: Explaining intgross_mil\nNext, let’s try to explain some of the variability in how much money films gross. To this end, we’ll focus on modeling intgross_mil by budget_mil. That is, to what extent is the money a film makes related to its budget?\n\nIn the relationship between intgross_mil and budget_mil, which is the response variable?\nConstruct a visualization of the relationship between intgross_mil and budget_mil. Include a regression line that represents the trend in this relationship.\nIn 1-3 sentences, summarize your findings about this relationship as if you were writing a newspaper article about movies. Be sure to comment on both the trend and variability in this relationship.",
+    "objectID": "assignments/pp6.html#exercise-5-evaluating-logistic-regression-models",
+    "href": "assignments/pp6.html#exercise-5-evaluating-logistic-regression-models",
+    "title": "Practice Problems 6",
+    "section": "Exercise 5: Evaluating logistic regression models",
+    "text": "Exercise 5: Evaluating logistic regression models\n\nPart a\n\nFit a multiple logistic regression model that models mortality (outcome) as a function of both smoking status and age. (Don’t include an interaction term between the 2 predictors.)\nInterpret all 3 exponentiated coefficients. Explain if the intercept is meaningful in this context.\n\n\n\nPart b\n\nConstruct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span.\nIf the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?\n\n\nlog_mod_output &lt;- augment(___)\n\nggplot(log_mod_output, aes(___)) +\n    geom_???()\n\n\n\nPart c\nCompute the (overall) accuracy, sensitivity, and specificity of the logistic regression model from Part a using a probability threshold of 0.375. Show your work for the calculations.\n\nlog_mod_output %&gt;%\n    mutate(predictDead = .fitted &gt;= ___) %&gt;%\n    count(outcome, predictDead)\n\n\n# Overall accuracy\n\n\n# Sensitivity\n\n\n# Specificity",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 6"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
-    "href": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
-    "title": "Practice Problems 1",
-    "section": "Exercise 6: Modeling intgross_mil",
-    "text": "Exercise 6: Modeling intgross_mil\nLet’s examine the relationship between intgross_mil and budget_mil in more detail.\n\nUse lm() to construct a linear regression model of the trend in the relationship between intgross_mil and budget_mil. Store this as movie_model and report a model summary table.\nWrite out a formula for the trend.\nProvide a newspaper appropriate interpretation of the budget_mil coefficient. Make sure to use non-causal language, include units, and talk about averages rather than individual cases.\nDoes it make sense to interpret the intercept in this model? Explain.",
+    "objectID": "assignments/pp7.html",
+    "href": "assignments/pp7.html",
+    "title": "Practice Problems 7",
+    "section": "",
+    "text": "Due Friday, 11/15 at 5pm on Moodle.",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 7"
     ]
   },
   {
-    "objectID": "assignments/pp1.html#exercise-7-predictions-and-residuals",
-    "href": "assignments/pp1.html#exercise-7-predictions-and-residuals",
-    "title": "Practice Problems 1",
-    "section": "Exercise 7: Predictions and residuals",
-    "text": "Exercise 7: Predictions and residuals\n\nIn exercise 2 you identified the budget (budget_mil) for the movie Titanic. Use the model formula above to predict its international gross. You can check your work using the predict() function. This provides a more accurate prediction (it doesn’t round the model coefficients) so don’t worry if your calculation doesn’t exactly match.\n\n\npredict(___, newdata = data.frame(budget_mil = ___))\n\n\nCalculate the Titanic residual. HINT: You’ll need to use the observed intgross_mil value from exercise 2.\nBased on your calculation in part b, did the model over- or under-estimate Titanic’s gross?",
+    "objectID": "assignments/pp7.html#exercise-1",
+    "href": "assignments/pp7.html#exercise-1",
+    "title": "Practice Problems 7",
+    "section": "Exercise 1",
+    "text": "Exercise 1\n\nResearch question: What is the causal effect of adolescent marijuana smoking on adulthood cigarette smoking?\n\nTo investigate this question, we will use data from the Add Health Study. Read in the data below, and take a look at this codebook.\n\naddhealth &lt;- read_csv(\"https://mac-stat.github.io/data/addhealth.csv\")\n\n# Data cleaning\naddhealth &lt;- addhealth %&gt;% \n    mutate(across(c(mathG, readG, parentED), factor))\n\n\nPart a\nAnalysts have determined white, mathG, readG, parentED and housesmoke to be potential confounders of the relationship between adolescent marijuana smoking (exposure) on adulthood cigarette smoking (smoke).\n\nFit a logistic regression model that addresses our research question.\nInterpret only the coefficient of interest on the odds (not log odds) scale.\n\n\n\nPart b\n\nConstruct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.\nCompare your approximate 95% CI to an exact interval using confint().\n\n\n\nPart c\n\nInterpret the exact CI from Part b in context.\nWhat is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)\n\n\n\nPart d\nNow let’s consider hypothesis testing using test statistics and p-values.\n\nState the null and alternative hypotheses for the coefficient of interest in context.\nHow do the null and alternative hypotheses differ for the exponentiated coefficient?\n\n\n\nPart e\nReport and interpret the test statistic for the coefficient of interest.\n\n\nPart f\n\nReport and interpret the p-value for the coefficient of interest.\nBased on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population?\nDo your results here and from the CI in Part c agree?",
     "crumbs": [
-      "Practice Problems 1"
+      "Practice Problems 7"
+    ]
+  },
+  {
+    "objectID": "assignments/pp7.html#exercise-2",
+    "href": "assignments/pp7.html#exercise-2",
+    "title": "Practice Problems 7",
+    "section": "Exercise 2",
+    "text": "Exercise 2\n\nResearch question: Does smoking decrease lung function in children?\n\nTo investigate this question, we will use data from a pediatric clinic. Read in the data below, and look at this codebook.\n\nfev &lt;- read_csv(\"https://mac-stat.github.io/data/fev.csv\")\n\n\nPart a\nAnalysts have determined age, height, and sex to be potential confounders of the relationship between smoking (smoke) and lung function as measured by forced expiratory volume (fev).\n\nFit a regression model that addresses our research question.\nInterpret only the coefficient of interest.\n\n\n\nPart b\n\nConstruct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.\nCompare your approximate 95% CI to an exact interval using confint().\n\n\n\nPart c\n\nInterpret the exact CI from Part b in context.\nWhat is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)\n\n\n\nPart d\nNow let’s consider hypothesis testing using test statistics and p-values.\nState the null and alternative hypotheses for the coefficient of interest in context.\n\n\nPart e\nReport and interpret the test statistic for the coefficient of interest.\n\n\nPart f\n\nReport and interpret the p-value for the coefficient of interest.\nBased on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children?\nDo your results here and from the CI in Part c agree?",
+    "crumbs": [
+      "Practice Problems 7"
     ]
   },
   {
@@ -2829,7 +2839,7 @@
     "href": "syllabus.html#course-grading-system",
     "title": "Syllabus",
     "section": "Course grading system",
-    "text": "Course grading system\nIn order to earn a given letter grade, all requirements listed under that column need to be met.\n\n\n\n\n\n\n\n\n\n\n\n\nGrade: A\nGrade: B\nGrade: C\n\n\n\n\nCheckpoint average\n≥ 80%\n≥ 70%\n≥ 60%\n\n\nPractice problems (PPs)\n14 out of 16 points across all 8 PPs.\nMust submit all 8 PPs.\n12 out of 16 points across all 8 PPs.\n10 out of 16 points across all 8 PPs.\n\n\nQuiz average\n≥ 90%\n≥ 80%\n≥ 70%\n\n\nProject\nEarn highest level (Excellent) on all 6 rubric categories\nEarn highest level (Excellent) on all but 1 rubric category\nEarn highest level (Excellent) on all but 2 rubric categories\n\n\n\nIf your work for different course components falls under different letter grades, your final letter grade will be an “average” of the letter grades for the different components.\nC  C  C  C --&gt; C\nC  C  C  B --&gt; C+\nC  C  C  A --&gt; C+\nC  C  B  B --&gt; B-\nC  C  B  A --&gt; B-\nC  C  A  A --&gt; B\nC  B  B  B --&gt; B-\nC  B  B  A --&gt; B\nC  B  A  A --&gt; B+\nC  A  A  A --&gt; B+\nB  B  B  B --&gt; B\nB  B  B  A --&gt; B+\nB  B  A  A --&gt; A-\nB  A  A  A --&gt; A-\nA  A  A  A --&gt; A"
+    "text": "Course grading system\nIn order to earn a given letter grade, all requirements listed under that column need to be met.\n\n\n\n\n\n\n\n\n\n\n\n\nGrade: A\nGrade: B\nGrade: C\n\n\n\n\nCheckpoint average\n≥ 80%\n≥ 70%\n≥ 60%\n\n\nPractice problems (PPs)\n14 out of 16 points across all 8 PPs.\nMust submit all 8 PPs.\n12 out of 16 points across all 8 PPs.\n10 out of 16 points across all 8 PPs.\n\n\nQuiz average\n≥ 90%\n≥ 80%\n≥ 70%\n\n\nProject\nEarn highest level (Excellent) on all 6 rubric categories\nEarn highest level (Excellent) on all but 1 rubric category\nEarn highest level (Excellent) on all but 2 rubric categories\n\n\n\nIf your work for different course components falls under different letter grades, your final letter grade will be an “average” of the letter grades for the different components.\nC  C  C  C --&gt; C\nC  C  C  B --&gt; C+\nC  C  C  A --&gt; C+\nC  C  B  B --&gt; B-\nC  C  B  A --&gt; B-\nC  C  A  A --&gt; B\nC  B  B  B --&gt; B-\nC  B  B  A --&gt; B\nC  B  A  A --&gt; B+\nC  A  A  A --&gt; B+\nB  B  B  B --&gt; B\nB  B  B  A --&gt; B+\nB  B  A  A --&gt; A-\nB  A  A  A --&gt; A-\nA  A  A  A --&gt; A\nIn order to demonstrate a passing degree of mastery in the course, you must have no more than one D in either the PP or Quiz components of the course grade. If you have D’s in both of those components of your course grade, you will receive a D as your overall grade for the course. A course with a grade of a D will count towards credits earned but not towards a major."
   },
   {
     "objectID": "syllabus.html#late-work",
@@ -2853,73 +2863,173 @@
     "text": "Artificial intelligence (AI) use\nAI can both interfere with and enhance our capacity to learn. We must be mindful of when it might hinder us and when it might provide us with new understanding and/or assistance.\nIn an introductory course like this one, we are learning the essentials of a new language and way of thinking. AI may be able to help you in this journey by providing explanations for concepts that are different from the ones provided by the course.\nHowever, in order to truly learn, AI should not be used to generate responses that replace your thinking, so even if you use AI to help explain concepts, please write responses in your own words on assignments.\nIn general, please be aware of the limits of AI:\n\nAI does not always generate accurate output. If it gives you a number, fact, or code, assume it is wrong unless you either know the answer or can check in with another source. AI works best for topics you already understand to a sufficient extent.\nIf you provide minimum effort prompts, you will get low quality results. You will need to refine your prompts in order to get good outcomes. This will take work.\nBe thoughtful about when this tool is useful. Don’t use it if it isn’t appropriate for the case or circumstance.\nThe environmental impact of AI should not be ignored. The building and usage of AI tools consume a lot of energy (see here and here). For this reason, let’s be thoughtful about when we use AI and think about other sustainability behaviors that we can incorporate into our lives to offset this usage.\n\nIf you have any questions about your use of AI tools, please contact me to discuss them."
   },
   {
-    "objectID": "assignments/pp6.html",
-    "href": "assignments/pp6.html",
-    "title": "Practice Problems 6",
+    "objectID": "assignments/pp1.html",
+    "href": "assignments/pp1.html",
+    "title": "Practice Problems 1",
     "section": "",
-    "text": "Due Friday, 11/8 at 5pm on Moodle.",
+    "text": "Due Friday, 9/13 at 5pm on Moodle.",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#context",
-    "href": "assignments/pp6.html#context",
-    "title": "Practice Problems 6",
-    "section": "Context:",
-    "text": "Context:\nIn the following exercises, we’ll work with data from a one-in-six survey of the electoral roll in Whickham, a mixed urban and rural district near Newcastle upon Tyne, in the UK. The survey was conducted in 1972-1974 to study heart disease and thyroid disease. A follow-up on those in the survey was conducted twenty years later.\nWe have access to the following information, for 1314 women:\n\noutcome: survival status after twenty years (Alive or Dead)\nsmoker: smoking status at baseline (No or Yes)\nage: age (in years) at the time of the first survey\n\nWe’ll use this data to explore sampling distributions, properties of Normal distributions, and more. The main research question we’ll explore is whether the odds of mortality in 20 years varies between smokers and non-smokers.",
+    "objectID": "assignments/pp1.html#context",
+    "href": "assignments/pp1.html#context",
+    "title": "Practice Problems 1",
+    "section": "Context",
+    "text": "Context\nThis cartoon by Alison Bechdel inspired the “Bechdel test” (image source):\n\nA movie passes the test if it meets the following criteria:\n\nthere are at least 2 women-identifying characters;\n\nthese characters talk to each other at least 1 time; and\n\nthey talk about something other than a male-identifying character\n\nWe’ll work with the bechdel data within the fivethirtyeight package. You can enter ?bechdel in the Console to view the codebook.\n\n# Load the data\ndata(bechdel)",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#exercise-1-parameter-vs.-estimate",
-    "href": "assignments/pp6.html#exercise-1-parameter-vs.-estimate",
-    "title": "Practice Problems 6",
-    "section": "Exercise 1: Parameter vs. Estimate",
-    "text": "Exercise 1: Parameter vs. Estimate\n\nPart a\nBefore digging into the data, think about the context of our research question. In one sentence, describe what the population parameter of interest is.\n\nPopulation parameter:\n\n\n\nPart b\nIn two-to-three sentences, describe how we could use the data we have access to to obtain a sample estimate of this population parameter without fitting a linear or logistic regression model (just using algebra!)\n\n\nPart c\nDo what you described in part b! What is the sample estimate from the data we have? Include any code you need to answer this question in the code chunk below (remember, R is a calculator!)\n\n# Add your R code here!",
+    "objectID": "assignments/pp1.html#exercise-1-define-two-new-variables",
+    "href": "assignments/pp1.html#exercise-1-define-two-new-variables",
+    "title": "Practice Problems 1",
+    "section": "Exercise 1: Define two new variables",
+    "text": "Exercise 1: Define two new variables\nWe can use the mutate() function from dplyr to define new variables. For example:\n\n# Define a new variable which measures years_since_1900\nbechdel &lt;- bechdel %&gt;% \n    mutate(years_since_1900 = year - 1900)\n\n# Check it out / confirm it's right\nbechdel %&gt;% \n    select(year, years_since_1900) %&gt;% \n    head(3)\n\nYour turn. Define a new variable budget_mil which measures budget in MILLIONS of dollars (on the 2013 scale). Similarly, define a new variable intgross_mil which measures international gross in MILLIONS of dollars (on the 2013 scale). Store these in bechdel and confirm your results match those here:\n## # A tibble: 3 x 2\n##   budget_mil intgross_mil\n##        &lt;dbl&gt;        &lt;dbl&gt;\n## 1       13           42.2\n## 2       45.7         41.5\n## 3       20          159.",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#exercise-2-resampling",
-    "href": "assignments/pp6.html#exercise-2-resampling",
-    "title": "Practice Problems 6",
-    "section": "Exercise 2: Resampling",
-    "text": "Exercise 2: Resampling\n\nPart a\nRather than calculate the observed odds ratio by hand, we could have instead fit a simple logistic regression model with outcome as the outcome (hah!) amd smoker as our predictor of interest. The exponentiated slope coefficient is then our odds ratio comparing smokers to non-smokers.\nR output from regression models automatically provides us with standard errors, but suppose we instead wanted to obtain the standard error for our odds ratio without glm’s (direct) assistance, and instead estimate it via bootstrapping!\nFill in the code below to draw 500 re-samples from the Whickham dataset.\n\n# Set the seed so that we all get the same results\nset.seed(155)\n\n# Store the sample models\nsample_coefs &lt;- mosaic::do(___)*( # What number should go here?\n  Whickham %&gt;%\n    sample_n(size = ___, replace = TRUE) %&gt;% # What number should go here?\n    with(glm(___ ~ ___, family = binomial)) # What variables should go here?\n)\n\n# Exponential our slope coefficient samples to get odds ratios\nsample_coefs &lt;- sample_coefs %&gt;%\n  mutate(OR = exp(smokerYes))\n\n\n\nPart b\nExplain in one-to-two sentences, why we need to sample from our data with replacement when doing bootstrapping (recall Exercise 4 on activity 20 if you need a hint!).\n\nYour response here",
+    "objectID": "assignments/pp1.html#exercise-2-get-to-know-the-data",
+    "href": "assignments/pp1.html#exercise-2-get-to-know-the-data",
+    "title": "Practice Problems 1",
+    "section": "Exercise 2: Get to know the data",
+    "text": "Exercise 2: Get to know the data\nComplete each task below using dim(), nrow(), head(), or one of the dplyr functions: filter(), summarize(), select(). For any questions about movie budget and gross earnings, use budget_mil and gross_mil. NOTE: You don’t need to write out any discussion for this exercise, just include your code and output.\n\n# How many films are in the dataset?\n\n# When was the oldest film in the dataset made?\n\n# When was the most recent film in the dataset made?\n\n# What is the median film budget in 2013 dollars?\n\n# What films had budgets that exceeded 300 million in 2013 dollars?\n# (Just show the films and budgets, not all variables)\n\n# What films were made in 1971?\n# (Just show the films and year, not all variables)\n\n# What were the budget_mil and intgross_mil values for \"Titanic\"?\n# (Just show the budget_mil and intgross_mil values)",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#exercise-3-sampling-distributions",
-    "href": "assignments/pp6.html#exercise-3-sampling-distributions",
-    "title": "Practice Problems 6",
-    "section": "Exercise 3: Sampling distributions",
-    "text": "Exercise 3: Sampling distributions\n\nPart a\nIf we were to make a histogram of the 500 re-sampled odds ratio estimates, what shape do you anticipate the histogram to take? What value do you expect it to be centered around?\n\n\nPart b\nMake the plot you described in part a! What do you observe? Were your “hypotheses” correct?\n\n\nPart c\nEstimate where roughly the middle 50% of the 500, re-sampled odds ratios fall. Add vertical lines to your histogram using geom_vline to indicate the values that contain the middle 50% of your estimates.\n\n\nPart d\nEstimate where roughly the middle 80% of the 500, re-sampled odds ratios fall, and report this range of values. Explain why the range that contains the middle 80% is necessarily larger than the range that contains the middle 50%.",
+    "objectID": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
+    "href": "assignments/pp1.html#exercise-3-does-it-pass-the-bechdel",
+    "title": "Practice Problems 1",
+    "section": "Exercise 3: Does it pass the Bechdel?",
+    "text": "Exercise 3: Does it pass the Bechdel?\nThe clean_test variable records the Bechdel category into which each movie falls. From worst to best (if you care about the representation of women in film):\n\nnowomen = there are no significant women characters in the film\nnotalk = there are women characters but they don’t talk to one another\nmen = there are women characters that talk to one another but they only talk about men\ndubious = barely passes the Bechdel test\nok = passes the Bechdel test\n\nConstruct a visualization of the clean_test variable, and construct a corresponding table of counts. In one sentence, summarize your findings about clean_test as if you were writing a newspaper article about movies.",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#exercise-4-properties-of-normal-distributions-and-standard-errors",
-    "href": "assignments/pp6.html#exercise-4-properties-of-normal-distributions-and-standard-errors",
-    "title": "Practice Problems 6",
-    "section": "Exercise 4: Properties of Normal distributions and Standard Errors",
-    "text": "Exercise 4: Properties of Normal distributions and Standard Errors\n\nPart a\nUsing your re-sampled odds ratios, calculate and report your estimated standard error.\n\n\nPart b\nNow use glm to fit one, simple logistic regression model to our original dataset. What is the standard error provided by glm for the slope coefficient, and how does it compare to your answer from part a?",
+    "objectID": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
+    "href": "assignments/pp1.html#exercise-4-how-much-money-did-it-make",
+    "title": "Practice Problems 1",
+    "section": "Exercise 4: How much money did it make?",
+    "text": "Exercise 4: How much money did it make?\nThe intgross_mil variable records each movie’s total international gross, in millions of dollars (and adjusted to 2013).\n\nConstruct a visualization of the intgross_mil variable. Summarize your findings as if you were writing a newspaper article about movies.\nCalculate the mean and median values of intgross_mil. Explain why the mean exceeds the median by quite a bit and which is the more appropriate measure of trend here.\n\nNOTE: Since some films are missing information on intgross_mil, you’ll need to use mean(___, na.rm = TRUE) where na.rm = TRUE says to remove the NA (missing) values from the calculation. Similarly for the median.\n\nCalculate the standard deviations for the intgross_mil and budget_mil variables. Comment on whether there’s more variability among how much money is spent making movies (budgets) or how much money a movie makes (grosses)?",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
     ]
   },
   {
-    "objectID": "assignments/pp6.html#exercise-5-evaluating-logistic-regression-models",
-    "href": "assignments/pp6.html#exercise-5-evaluating-logistic-regression-models",
-    "title": "Practice Problems 6",
-    "section": "Exercise 5: Evaluating logistic regression models",
-    "text": "Exercise 5: Evaluating logistic regression models\n\nPart a\n\nFit a multiple logistic regression model that models mortality (outcome) as a function of both smoking status and age. (Don’t include an interaction term between the 2 predictors.)\nInterpret all 3 exponentiated coefficients. Explain if the intercept is meaningful in this context.\n\n\n\nPart b\n\nConstruct a boxplot of predicted probabilities in those who were alive and in those who died in the 20 year time span.\nIf the model did a worse job of predicting 20-year mortality, how would you expect the boxplot to look different?\n\n\nlog_mod_output &lt;- augment(___)\n\nggplot(log_mod_output, aes(___)) +\n    geom_???()\n\n\n\nPart c\nCompute the (overall) accuracy, sensitivity, and specificity of the logistic regression model from Part a using a probability threshold of 0.375. Show your work for the calculations.\n\nlog_mod_output %&gt;%\n    mutate(predictDead = .fitted &gt;= ___) %&gt;%\n    count(outcome, predictDead)\n\n\n# Overall accuracy\n\n\n# Sensitivity\n\n\n# Specificity",
+    "objectID": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
+    "href": "assignments/pp1.html#exercise-5-explaining-intgross_mil",
+    "title": "Practice Problems 1",
+    "section": "Exercise 5: Explaining intgross_mil",
+    "text": "Exercise 5: Explaining intgross_mil\nNext, let’s try to explain some of the variability in how much money films gross. To this end, we’ll focus on modeling intgross_mil by budget_mil. That is, to what extent is the money a film makes related to its budget?\n\nIn the relationship between intgross_mil and budget_mil, which is the response variable?\nConstruct a visualization of the relationship between intgross_mil and budget_mil. Include a regression line that represents the trend in this relationship.\nIn 1-3 sentences, summarize your findings about this relationship as if you were writing a newspaper article about movies. Be sure to comment on both the trend and variability in this relationship.",
     "crumbs": [
-      "Practice Problems 6"
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
+    "href": "assignments/pp1.html#exercise-6-modeling-intgross_mil",
+    "title": "Practice Problems 1",
+    "section": "Exercise 6: Modeling intgross_mil",
+    "text": "Exercise 6: Modeling intgross_mil\nLet’s examine the relationship between intgross_mil and budget_mil in more detail.\n\nUse lm() to construct a linear regression model of the trend in the relationship between intgross_mil and budget_mil. Store this as movie_model and report a model summary table.\nWrite out a formula for the trend.\nProvide a newspaper appropriate interpretation of the budget_mil coefficient. Make sure to use non-causal language, include units, and talk about averages rather than individual cases.\nDoes it make sense to interpret the intercept in this model? Explain.",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "assignments/pp1.html#exercise-7-predictions-and-residuals",
+    "href": "assignments/pp1.html#exercise-7-predictions-and-residuals",
+    "title": "Practice Problems 1",
+    "section": "Exercise 7: Predictions and residuals",
+    "text": "Exercise 7: Predictions and residuals\n\nIn exercise 2 you identified the budget (budget_mil) for the movie Titanic. Use the model formula above to predict its international gross. You can check your work using the predict() function. This provides a more accurate prediction (it doesn’t round the model coefficients) so don’t worry if your calculation doesn’t exactly match.\n\n\npredict(___, newdata = data.frame(budget_mil = ___))\n\n\nCalculate the Titanic residual. HINT: You’ll need to use the observed intgross_mil value from exercise 2.\nBased on your calculation in part b, did the model over- or under-estimate Titanic’s gross?",
+    "crumbs": [
+      "Practice Problems 1"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html",
+    "href": "activities/22_hypothesis_testing_discovery.html",
+    "title": "Hypothesis testing: discovery",
+    "section": "",
+    "text": "You can download a template file to work with here.\nFile organization: Save this file in the “Activities” subfolder of your “STAT155” folder.\n\n\n\nBy the end of this lesson, you should be able to:\n\nUnderstand how standard errors and confidence intervals enable us to make statistical inferences\nArticulate how we can formalize a research question as a testable, statistical hypothesis\n\n\n\n\nThis is a discovery activity, so no assigned readings/videos today.",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#learning-goals",
+    "href": "activities/22_hypothesis_testing_discovery.html#learning-goals",
+    "title": "Hypothesis testing: discovery",
+    "section": "",
+    "text": "By the end of this lesson, you should be able to:\n\nUnderstand how standard errors and confidence intervals enable us to make statistical inferences\nArticulate how we can formalize a research question as a testable, statistical hypothesis",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#readings-and-videos",
+    "href": "activities/22_hypothesis_testing_discovery.html#readings-and-videos",
+    "title": "Hypothesis testing: discovery",
+    "section": "",
+    "text": "This is a discovery activity, so no assigned readings/videos today.",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#exercise-1",
+    "href": "activities/22_hypothesis_testing_discovery.html#exercise-1",
+    "title": "Hypothesis testing: discovery",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nResearch question: Is there evidence that the mercury concentration in fish (Concen) differs according to the River they were sampled from?\nFit a simple linear regression model that would address our research question\n\nmod_fish &lt;- ___\nsummary(mod_fish)\n\nInterpret the intercept from this model.\n\nResponse\n\nUsing the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.\n\nResponse\n\nLet’s get an exact 95% confidence interval for the model coefficients:\n\nconfint(mod_fish, level=0.95)\n\nSuppose we take 200 different samples of fish from the Lumber River. Based on these results, in how many of those samples would you expect to observe mean mercury concentration greater than 1.25ppm?\n\nResponse\n\nSuppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?\n\nResponse\n\nNow suppose we sample a single fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the Concen variable in each river in our original sample)\n\nResponse",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#exercise-2",
+    "href": "activities/22_hypothesis_testing_discovery.html#exercise-2",
+    "title": "Hypothesis testing: discovery",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nLet’s look at the model summary output again:\n\nsummary(mod_fish)\n\nNow, let’s interpret the RiverWacamaw coefficient. Based only on the coefficient (don’t think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?\n\nResponse\n\nUsing the 68-95-99.7 rule, construct an approximate 95% confidence interval for the RiverWacamaw coefficient, and provide an appropriate interpretation.\n\nResponse\n\nSuppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let’s assume that the true mean mercury concentration in the Lumber River fish population is 1.08ppm). Are you surprised by this result? Why or why not?\n\nResponse\n\nDo you believe it plausible that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?\n\nResponse\n\nSuppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the RiverWacamaw coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?\n\nResponse\n\nSuppose the true population coefficient for the RiverWacamawparameter is 0.02 (i.e. the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful?\n\nResponse",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#reflection",
+    "href": "activities/22_hypothesis_testing_discovery.html#reflection",
+    "title": "Hypothesis testing: discovery",
+    "section": "Reflection",
+    "text": "Reflection\nBased on this activity and the inference tools you’ve learned about so far (sampling distributions, standard errors, confidence intervals), can you think of and describe a way that you can quantify evidence “for” or “against” a coefficient being equal to some particular value? (for example, we have evidence that the average mercury concentration in Lumber River fish is ~1.08ppm, and the standard error of this estimate suggests that observing a fish with 0ppm is very unlikely. How can we quantify that evidence?)\n\nResponse:",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#exercise-1-1",
+    "href": "activities/22_hypothesis_testing_discovery.html#exercise-1-1",
+    "title": "Hypothesis testing: discovery",
+    "section": "Exercise 1",
+    "text": "Exercise 1\nResearch question: Is there evidence that the mercury concentration in fish (Concen) differs according to the River they were sampled from?\nFit a simple linear regression model that would address our research question\n\nmod_fish &lt;- lm(Concen ~ River, data=fish)\nsummary(mod_fish)\n\n\nCall:\nlm(formula = Concen ~ River, data = fish)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.1664 -0.5681 -0.1764  0.4219  2.4219 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   1.07808    0.08866  12.160   &lt;2e-16 ***\nRiverWacamaw  0.19835    0.11712   1.694   0.0922 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7575 on 169 degrees of freedom\nMultiple R-squared:  0.01669,   Adjusted R-squared:  0.01087 \nF-statistic: 2.868 on 1 and 169 DF,  p-value: 0.09218\n\n\nInterpret the intercept from this model.\n\nOur model estimates an average mercury concentration of 1.078ppm among fish in the Lumber River.\n\nUsing the 68-95-99.7 rule, construct an approximate 95% confidence interval for the intercept term, and provide an appropriate interpretation.\n\n1.078 +/- 2*0.089 –&gt; [0.90, 1.256]\n\n\nPreferred interpretation: It is plausible that the true mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.\n\n\n(technical addendum to this interpretation): …specifically, we expect that if we take many different samples, 95% of the resulting intervals will contain the true mean mercury concentration of the entire Lumber River fish population. We hope that our interval is one of the lucky 95% and not one of the unlucky 5% that don’t contain the true population parameter.\n\n\nNot as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Lumber River is between 0.90ppm and 1.25ppm.\n\nLet’s get an exact 95% confidence interval for the model coefficients:\n\nconfint(mod_fish, level=0.95)\n\n                   2.5 %    97.5 %\n(Intercept)   0.90305825 1.2531061\nRiverWacamaw -0.03285077 0.4295435\n\n\nSuppose we take 200 different samples of fish from the Lumber River. In how many of those samples would you expect to observe an estimated mean mercury concentration greater than 1.25ppm?\n\nWe don’t/can’t actually know! This depends on the true population parameter and the accuracy of our sampling distribution.\n\n\nWhat we can say is that if our sampling distribution model is accurate, then about 10 out of 200 samples will produce confidence intervals that don’t contain the population parameter (and we can assume half of these–so 5 samples–are overestimates and the other half are underestimates)\n\nSuppose we take a sample of fish from the Lumber river and find none of the fish in this sample had detectable levels of mercury (mean mercury concentration = 0ppm). Are you surprised by this result? How many standard deviations is this away from the expected mercury concentration for fish in this river (as estimated by our model)?\n\nYes, this is surprising, since a mean of 0ppm is much lower than the lower bound of our confidence interval estimate.\n\n\nObserving an estimate of Beta_0 = 0ppm means that this is (0-1.07808)/0.08866 = -12.16 standard deviations away from the average mercury concentration estimated by our model using the original sample.\n\nNow suppose we sample a single fish from the Lumber River and find it has a mercury concentration of 2.5ppm. Are you surprised by this result? Why or why not? (Hint: create a code chunk that calculates the mean, standard deviation, and maximum of the Concen variable in each river in our original sample)\n\nfish %&gt;% \n  group_by(River) %&gt;% \n  summarise(mean=mean(Concen), \n            sd=sd(Concen), \n            max=max(Concen))\n\n# A tibble: 2 × 4\n  River    mean    sd   max\n  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Lumber   1.08 0.649   3.5\n2 Wacamaw  1.28 0.829   3.6\n\n\n\nObserving a single fish with a mercury concentration of 2.5ppm is actually not that surprising! 2.5ppm is a little more than 2 standard deviations away from the mean mercury concentration in our sample of fish from the Lumber River (1.08+2*0.64=2.43), but there are certainly fish in the sample with even higher mercury concentrations (max=3.5ppm), so this isn’t outside the bounds of what we’d expect.",
+    "crumbs": [
+      "Hypothesis testing: discovery"
+    ]
+  },
+  {
+    "objectID": "activities/22_hypothesis_testing_discovery.html#exercise-2-1",
+    "href": "activities/22_hypothesis_testing_discovery.html#exercise-2-1",
+    "title": "Hypothesis testing: discovery",
+    "section": "Exercise 2",
+    "text": "Exercise 2\nLet’s look at the model summary output again:\n\nsummary(mod_fish)\n\n\nCall:\nlm(formula = Concen ~ River, data = fish)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.1664 -0.5681 -0.1764  0.4219  2.4219 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   1.07808    0.08866  12.160   &lt;2e-16 ***\nRiverWacamaw  0.19835    0.11712   1.694   0.0922 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7575 on 169 degrees of freedom\nMultiple R-squared:  0.01669,   Adjusted R-squared:  0.01087 \nF-statistic: 2.868 on 1 and 169 DF,  p-value: 0.09218\n\n\nNow, let’s interpret the RiverWacamaw coefficient. Based only on the coefficient (don’t think about the standard error yet), what can we say about the difference in mercury concentration among fish in the two rivers?\n\nThe RiverWacamaw coefficient is 0.19835, meaning that the mean mercury concentration among fish in the Wacamaw River is, on average, about 0.20ppm higher than that of fish in the Lumber River.\n\nUsing the 68-95-99.7 rule, construct an approximate 95% confidence interval for the RiverWacamaw coefficient, and provide an appropriate interpretation.\n\n0.20 +/- 2*0.11 –&gt; [-0.02, 0.42]\n\n\nPreferred interpretation: It is plausible that the true difference in mean mercury concentration among fish in the Wacamaw River compared to the Lumber River is between -0.02 ppm and 0.42ppm.\n\n\nNot as preferred interpretation: We are 95% confident that the mean mercury concentration among fish in the Wacamaw River somewhere between 0.02ppm less than that of fish in the Lumber River and 0.42ppm more than that of fish in the Lumber River.\n\nSuppose we take a new sample of fish from the Wacamaw River and found a mean mercury concentration of 1.5ppm in the sample (for simplicity, let’s assume that the true mean mercury concentration in the Lumber River fish population is 1.08ppm). Are you surprised by this result? Why or why not?\n\nThis should not be entirely surprising–based on our original model, the upper bound on our 95% confidence interval for the RiverWacamaw coefficient is 0.42ppm. If we know that the mean mercury concentration in the Lumber River fish population is 1.08ppm, then–assuming the sampling distribution model is accurate–we are 95% confident that the true mean mercury concentration in the Wacamaw River fish population is 1.08+0.42=1.5ppm\n\nDo you believe it plausible that the mean mercury concentration of the fish population in the Wacamaw River is approximately the same as that of the fish population in the Lumber River? How would you confirm this? What assumptions are you making?\n\nAnswers may vary–this is certainly plausible, since our 95% CI contains 0 (i.e., there is no difference in means between the two rivers). However, we might also argue that there is SOME evidence of a difference, since most of the CI is &gt; 0.\n\nSuppose we sample 10 times as many fish from the Wacamaw River, and get a similar coefficient estimate (0.2). Thinking back to the Central Limit Theorem, what should happen to the standard error of the RiverWacamaw coefficient? How small of a standard error would we need to more conclusively say that there is an actual difference in mean mercury concentrations of the Lumber River and Wacamaw River fish populations?\n\nA larger sample should result in a smaller standard error of the RiverWacamaw coefficient. If the standard error is smaller than 0.1 (say 0.098), then a 95% confidence interval would be [0.004, 0.396]. Since this interval doesn’t include 0, we could conclude that fish in the Wacamaw River, on average, have a higher mercury concentration than fish in the Lumber River. More importantly, the lower standard error of the coefficient allows us to say there is evidence that this difference should be observable across new samples.\n\nSuppose the true population coefficient for the RiverWacamawparameter is 0.02 (i.e. the average mercury concentration is 0.02ppm higher for the Wacamaw River fish population compared to that of the Lumber River). Is this meaningful?\n\nThis will depend on context–a priori, this difference appears to be negligible, and we could potentially chalk it up to uncontrolled confounders (e.g., perhaps fish in one river tend to be older/bigger and therefore have slightly higher mercury concentrations, even if there is no underlying difference in mercury pollution). We also might consider: what is considered a “harmful” mercury concentration, and are fish in either river near that threshold? Has this changed over time, and by how much?",
+    "crumbs": [
+      "Hypothesis testing: discovery"
     ]
   },
   {
@@ -3117,7 +3227,7 @@
     "href": "activities/21_confidence_intervals.html#exercise-4",
     "title": "Confidence intervals",
     "section": "Exercise 4",
-    "text": "Exercise 4\nFor each of the following MISINTERPRETATIONS of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.\n\nMisinterpretation 1: “There is a 95% probability that the population parameter is within (a,b).”\n\nResponse: The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter—“95% confidence” is describing confidence in the interval construction process.\n\nMisinterpretation 2: “There is a 5% probability that the population parameter is not within (a,b).”\n\nResponse: This is incorrect for the same reason as the first misinterpretation.\n\nMisinterpretation 3: “There is a 95% chance that the sample estimate in (a,b).”\n\nResponse: The sample estimate is always in the interval by construction.",
+    "text": "Exercise 4\nFor each of the following MISINTERPRETATIONS of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.\n\nMisinterpretation 1: “There is a 95% probability that the population parameter is within (a,b).”\nMisinterpretation 2: “There is a 5% probability that the population parameter is not within (a,b).”\nMisinterpretation 3: “There is a 95% chance that the sample estimate in (a,b).”",
     "crumbs": [
       "Confidence intervals"
     ]
@@ -4217,7 +4327,7 @@
     "href": "activities/18_sampling_normal.html#exercise-4-random-sampling-1",
     "title": "The Normal model & sampling variation",
     "section": "Exercise 4: Random sampling",
-    "text": "Exercise 4: Random sampling\n\n# Observe that the 2 counties change every time & differ from your neighbors' samples\nsample_n(county_clean, size = 2, replace = FALSE)\n\n     state          name  fips pci_2019 pci_2017\n1    Texas Motley County 48345   29.071 25.05126\n2 Arkansas Nevada County  5099   19.912 18.55826\n\n\n\n# Observe that the 2 counties are the same every time & are the same as your neighbors' samples\nset.seed(155)\nsample_n(county_clean, size = 2, replace = FALSE)\n\n      state             name  fips pci_2019 pci_2017\n1 Tennessee Robertson County 47147   29.524 26.29889\n2  Illinois    Shelby County 17173   27.029 24.84449",
+    "text": "Exercise 4: Random sampling\n\n# Observe that the 2 counties change every time & differ from your neighbors' samples\nsample_n(county_clean, size = 2, replace = FALSE)\n\n      state               name  fips pci_2019 pci_2017\n1  Illinois      Shelby County 17173   27.029 24.84449\n2 Minnesota Koochiching County 27071   29.834 26.81041\n\n\n\n# Observe that the 2 counties are the same every time & are the same as your neighbors' samples\nset.seed(155)\nsample_n(county_clean, size = 2, replace = FALSE)\n\n      state             name  fips pci_2019 pci_2017\n1 Tennessee Robertson County 47147   29.524 26.29889\n2  Illinois    Shelby County 17173   27.029 24.84449",
     "crumbs": [
       "The Normal model & sampling variation"
     ]

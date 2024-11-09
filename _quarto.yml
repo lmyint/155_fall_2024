@@ -49,6 +49,7 @@ website:
         - activities/19_sampling_dist_clt.qmd
         - activities/20_bootstrapping.qmd
         - activities/21_confidence_intervals.qmd
+        - activities/22_hypothesis_testing_discovery.qmd
 
     - id: homework
       title: "Practice Problems"
@@ -59,6 +60,7 @@ website:
         - assignments/pp4.qmd
         - assignments/pp5.qmd
         - assignments/pp6.qmd
+        - assignments/pp7.qmd
   
   page-footer:
     left: |

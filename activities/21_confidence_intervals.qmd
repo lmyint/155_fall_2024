@@ -177,13 +177,10 @@ The data context in this exercise has a fraught history with the smoking industr
 For each of the following **MISINTERPRETATIONS** of a 95% confidence interval (a,b), explain why the statement is a misinterpretation.
 
 - Misinterpretation 1: "There is a 95% probability that the population parameter is within (a,b)."
-    - **Response:** The population parameter is not random. It is either in the interval or not, so the probability is 1 or 0. The 95% means that 95% of random samples (that are representative of the population of interest) are expected to contain the true population parameter---"95% confidence" is describing confidence in the interval construction process.
 
 - Misinterpretation 2: "There is a 5% probability that the population parameter is not within (a,b)."
-    - **Response:** This is incorrect for the same reason as the first misinterpretation.
 
 - Misinterpretation 3: "There is a 95% chance that the sample estimate in (a,b)."
-    - **Response:** The sample estimate is always in the interval by construction.
 
 
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Practice Problems 5 – STAT 155</title>
+<title>Practice Problems 7 – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,35 +101,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -287,23 +292,23 @@ window.Quarto = {
   <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a></li>
-  <li><a href="#exercise-1-descriptive-predictive-and-causal-questions" id="toc-exercise-1-descriptive-predictive-and-causal-questions" class="nav-link" data-scroll-target="#exercise-1-descriptive-predictive-and-causal-questions">Exercise 1: Descriptive, predictive, and causal questions</a></li>
-  <li><a href="#exercise-2-addressing-your-questions" id="toc-exercise-2-addressing-your-questions" class="nav-link" data-scroll-target="#exercise-2-addressing-your-questions">Exercise 2: Addressing your questions</a></li>
-  <li><a href="#exercise-3-communicating-your-findings" id="toc-exercise-3-communicating-your-findings" class="nav-link" data-scroll-target="#exercise-3-communicating-your-findings">Exercise 3: Communicating your findings</a></li>
-  <li><a href="#exercise-4-family-and-childrens-categories" id="toc-exercise-4-family-and-childrens-categories" class="nav-link" data-scroll-target="#exercise-4-family-and-childrens-categories">Exercise 4: Family and children’s categories</a></li>
-  <li><a href="#exercise-5-define-binary-outcome" id="toc-exercise-5-define-binary-outcome" class="nav-link" data-scroll-target="#exercise-5-define-binary-outcome">Exercise 5: Define binary outcome</a></li>
-  <li><a href="#exercise-6-visual-explorations" id="toc-exercise-6-visual-explorations" class="nav-link" data-scroll-target="#exercise-6-visual-explorations">Exercise 6: Visual explorations</a>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a>
   <ul class="collapse">
   <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
   <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part c</a></li>
+  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part d</a></li>
+  <li><a href="#part-e" id="toc-part-e" class="nav-link" data-scroll-target="#part-e">Part e</a></li>
+  <li><a href="#part-f" id="toc-part-f" class="nav-link" data-scroll-target="#part-f">Part f</a></li>
   </ul></li>
-  <li><a href="#exercise-7-logistic-regression-modeling" id="toc-exercise-7-logistic-regression-modeling" class="nav-link" data-scroll-target="#exercise-7-logistic-regression-modeling">Exercise 7: Logistic regression modeling</a>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a>
   <ul class="collapse">
   <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
   <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
-  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part c</a></li>
-  <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part d</a></li>
+  <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part c</a></li>
+  <li><a href="#part-d-1" id="toc-part-d-1" class="nav-link" data-scroll-target="#part-d-1">Part d</a></li>
+  <li><a href="#part-e-1" id="toc-part-e-1" class="nav-link" data-scroll-target="#part-e-1">Part e</a></li>
+  <li><a href="#part-f-1" id="toc-part-f-1" class="nav-link" data-scroll-target="#part-f-1">Part f</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -314,7 +319,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Problems 5</h1>
+<h1 class="title">Practice Problems 7</h1>
 </div>
 
 
@@ -332,22 +337,23 @@ window.Quarto = {
 
 
 <center>
-<strong>Due Friday, 10/25 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=141073">Moodle</a>.</strong>
+<strong>Due Friday, 11/15 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=145477">Moodle</a>.</strong>
 </center>
 <section id="purpose" class="level1">
 <h1>Purpose</h1>
-<p>The goal of this set of practice problems is to practice the following skills:</p>
+<p>The purpose of this assignment is to practice the following skills:</p>
 <ul>
-<li>Formulate descriptive, predictive, and causal research questions</li>
-<li>Connect the concepts of redundancy and multicollinearity to multiple <span class="math inline">\(R^2\)</span> and adjusted <span class="math inline">\(R^2\)</span></li>
-<li>Construct, interpret, and evaluate logistic regression models</li>
+<li>Translating research questions into statistical models</li>
+<li>Constructing and interpreting confidence intervals for linear and logistic regression model coefficients</li>
+<li>Using confidence intervals to test statistical hypotheses</li>
+<li>Interpreting test statistics and p-values and using them to test statistical hypotheses</li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp5.qmd">here</a>.</strong></p>
+<p><strong>You can download a template to start from <a href="../activity_templates/pp7.qmd">here</a>.</strong></p>
 </section>
 <section id="directions" class="level1">
 <h1>Directions</h1>
 <ol type="1">
-<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following command in the code chunk to read in the data: <code>games &lt;- read_csv("https://mac-stat.github.io/data/boardgamegeeks.csv")</code></p></li>
+<li><p>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, <code>broom</code>, and <code>readr</code> packages.</p></li>
 <li><p>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</p></li>
 </ol>
 <blockquote class="blockquote">
@@ -366,72 +372,109 @@ window.Quarto = {
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<section id="context" class="level2">
-<h2 class="anchored" data-anchor-id="context">Context</h2>
-<p>We will be looking at data on the play characteristics and popularity of board games from the <a href="https://boardgamegeek.com/">Board Game Geek</a> database. More information about the data and a codebook are available <a href="https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md">here</a>. The dataset contains many measures of game popularity (summaries of user ratings) and game attributes (categories, themes, and gameplay mechanics).</p>
-<p>We will be exploring a range of research questions related to this data.</p>
-</section>
-<section id="exercise-1-descriptive-predictive-and-causal-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-descriptive-predictive-and-causal-questions">Exercise 1: Descriptive, predictive, and causal questions</h2>
-<p>Suppose that you are an analyst helping out a local board game convention. Your job is to help convention attendees have a great time.</p>
-<p>After exploring the <a href="https://github.com/Mac-STAT/data/blob/main/boardgamegeeks_codebook.md">codebook</a>, consider the following:</p>
-<ul>
-<li>Would investigating descriptive research questions help you do your job? If so, list some relevant descriptive questions that you came up with. If not, explain why descriptive research questions are not useful here.</li>
-<li>Repeat the above questions for predictive and causal research questions.</li>
-</ul>
-</section>
-<section id="exercise-2-addressing-your-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-addressing-your-questions">Exercise 2: Addressing your questions</h2>
-<p>Pick two of your research questions from the previous exercise, and create visualizations and models to address those questions. Make sure to:</p>
-<ul>
-<li>Include helpful labels on your visualizations</li>
-<li>Explain why your plots and models address your research questions</li>
-<li>Interpret only the relevant coefficients from your models</li>
-<li>If relevant, comment on model quality metrics.</li>
-</ul>
-</section>
-<section id="exercise-3-communicating-your-findings" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-communicating-your-findings">Exercise 3: Communicating your findings</h2>
-<p>Write a paragraph addressed to the convention organizers detailing how your findings in the previous exercise can help attendees have more fun at the convention.</p>
-</section>
-<section id="exercise-4-family-and-childrens-categories" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-family-and-childrens-categories">Exercise 4: Family and children’s categories</h2>
-<p><strong>Question:</strong> Does a game being in the family category (<code>cat_family</code>) provide meaningfully different information from a game being in the children’s category (<code>cat_childrens</code>) in terms of explaining average ratings?</p>
-<p>Fit 2 models that will allow you to address this question. Report and compare the multiple and adjusted R-squared measures in these 2 models. Use this comparison to answer our question.</p>
-</section>
-<section id="exercise-5-define-binary-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-define-binary-outcome">Exercise 5: Define binary outcome</h2>
-<p>Use the <code>mutate()</code> function from <code>dplyr</code> to create a binary outcome variable called <code>popular</code> that is TRUE if the <code>mean_rating</code> is over 8 AND the <code>p25_rating</code> is over 6.5. In R, you can use <code>&amp;</code> to combine logical statements. For example, <code>x1 &lt; 1 &amp; x2 &lt; 2</code> results in TRUE if both <code>x1</code> is less than 1 AND <code>x2</code> is less than 2.</p>
-</section>
-<section id="exercise-6-visual-explorations" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6-visual-explorations">Exercise 6: Visual explorations</h2>
-<p>We want to investigate how a game’s complexity and whether or not it was kickstarted relate to its popularity.</p>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
+<blockquote class="blockquote">
+<p><strong>Research question:</strong> What is the causal effect of adolescent marijuana smoking on adulthood cigarette smoking?</p>
+</blockquote>
+<p>To investigate this question, we will use data from the <a href="https://addhealth.cpc.unc.edu/">Add Health Study</a>. Read in the data below, and take a look at <a href="https://mac-stat.github.io/data/addhealth_codebook.html">this codebook</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>addhealth <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/addhealth.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>addhealth <span class="ot">&lt;-</span> addhealth <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(mathG, readG, parentED), factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="part-a" class="level3">
 <h3 class="anchored" data-anchor-id="part-a">Part a</h3>
-<p>Construct and interpret a visualization that shows how popularity is related to a game’s complexity (<code>game_weight</code>).</p>
+<p>Analysts have determined <code>white</code>, <code>mathG</code>, <code>readG</code>, <code>parentED</code> and <code>housesmoke</code> to be potential confounders of the relationship between adolescent marijuana smoking (<code>exposure</code>) on adulthood cigarette smoking (<code>smoke</code>).</p>
+<ul>
+<li>Fit a logistic regression model that addresses our research question.</li>
+<li>Interpret only the coefficient of interest on the odds (not log odds) scale.</li>
+</ul>
 </section>
 <section id="part-b" class="level3">
 <h3 class="anchored" data-anchor-id="part-b">Part b</h3>
-<p>Construct and interpret a visualization that shows how popularity is related to whether or not a game was kickstarted (<code>kickstarted</code>). (Note: you will want to use <code>factor(kickstarted)</code> in your code to ensure that it is treated as a categorical variable.)</p>
-</section>
-</section>
-<section id="exercise-7-logistic-regression-modeling" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7-logistic-regression-modeling">Exercise 7: Logistic regression modeling</h2>
-<section id="part-a-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
-<p>Fit a simple logistic regression model called that models popularity as a function of complexity (<code>game_weight</code>). Display the exponentiated coefficients.</p>
-</section>
-<section id="part-b-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
-<p>Interpret each coefficient from Part a in a contextually meaningful way. Is the intercept meaningful in this context?</p>
+<ul>
+<li>Construct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.</li>
+<li>Compare your approximate 95% CI to an exact interval using <code>confint()</code>.</li>
+</ul>
 </section>
 <section id="part-c" class="level3">
 <h3 class="anchored" data-anchor-id="part-c">Part c</h3>
-<p>Fit a simple logistic regression model called that models popularity as a function of whether or not a game was kickstarted (<code>kickstarted</code>). Display the exponentiated coefficients.</p>
+<ul>
+<li>Interpret the exact CI from Part b in context.</li>
+<li>What is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)</li>
+</ul>
 </section>
 <section id="part-d" class="level3">
 <h3 class="anchored" data-anchor-id="part-d">Part d</h3>
-<p>Interpret each coefficient from Part c in a contextually meaningful way. Is the intercept meaningful in this context?</p>
+<p>Now let’s consider hypothesis testing using test statistics and p-values.</p>
+<ul>
+<li>State the null and alternative hypotheses for the coefficient of interest in context.</li>
+<li>How do the null and alternative hypotheses differ for the exponentiated coefficient?</li>
+</ul>
+</section>
+<section id="part-e" class="level3">
+<h3 class="anchored" data-anchor-id="part-e">Part e</h3>
+<p>Report and interpret the test statistic for the coefficient of interest.</p>
+</section>
+<section id="part-f" class="level3">
+<h3 class="anchored" data-anchor-id="part-f">Part f</h3>
+<ul>
+<li>Report and interpret the p-value for the coefficient of interest.</li>
+<li>Based on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between adolescent marijuana smoking and adulthood cigarette smoking in the broader population?</li>
+<li>Do your results here and from the CI in Part c agree?</li>
+</ul>
+</section>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
+<blockquote class="blockquote">
+<p><strong>Research question:</strong> Does smoking decrease lung function in children?</p>
+</blockquote>
+<p>To investigate this question, we will use data from a pediatric clinic. Read in the data below, and look at <a href="https://mac-stat.github.io/data/fev_codebook.html">this codebook</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fev <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://mac-stat.github.io/data/fev.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="part-a-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
+<p>Analysts have determined <code>age</code>, <code>height</code>, and <code>sex</code> to be potential confounders of the relationship between smoking (<code>smoke</code>) and lung function as measured by forced expiratory volume (<code>fev</code>).</p>
+<ul>
+<li>Fit a regression model that addresses our research question.</li>
+<li>Interpret only the coefficient of interest.</li>
+</ul>
+</section>
+<section id="part-b-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
+<ul>
+<li>Construct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.</li>
+<li>Compare your approximate 95% CI to an exact interval using <code>confint()</code>.</li>
+</ul>
+</section>
+<section id="part-c-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-c-1">Part c</h3>
+<ul>
+<li>Interpret the exact CI from Part b in context.</li>
+<li>What is the null value in this context? Based on the CI, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children? (Assuming that the confounders we have adjusted for represent all confounders of the relationship.)</li>
+</ul>
+</section>
+<section id="part-d-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-d-1">Part d</h3>
+<p>Now let’s consider hypothesis testing using test statistics and p-values.</p>
+<p>State the null and alternative hypotheses for the coefficient of interest in context.</p>
+</section>
+<section id="part-e-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-e-1">Part e</h3>
+<p>Report and interpret the test statistic for the coefficient of interest.</p>
+</section>
+<section id="part-f-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-f-1">Part f</h3>
+<ul>
+<li>Report and interpret the p-value for the coefficient of interest.</li>
+<li>Based on this p-value and a significance level of 0.05, do we have evidence for a true causal relationship between smoking and lung function in the broader population of children?</li>
+<li>Do your results here and from the CI in Part c agree?</li>
+</ul>
 
 
 </section>
