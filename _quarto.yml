@@ -50,6 +50,7 @@ website:
         - activities/20_bootstrapping.qmd
         - activities/21_confidence_intervals.qmd
         - activities/22_hypothesis_testing_discovery.qmd
+        - activities/23_hypothesis_testing_details.qmd
 
     - id: homework
       title: "Practice Problems"

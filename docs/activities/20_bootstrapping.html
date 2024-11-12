@@ -256,6 +256,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../activities/22_hypothesis_testing_discovery.html">
  <span class="dropdown-text">Hypothesis testing: discovery</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../activities/23_hypothesis_testing_details.html">
+ <span class="dropdown-text">Hypothesis testing details</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -793,11 +797,11 @@ Length       0.05812749 0.005227593 11.119359 6.641225e-22</code></pre>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sample_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id Length
-1  3     54
-2  4     52
-3  5     40
-4  2     43
-5  1     44</code></pre>
+1  4     52
+2  3     54
+3  1     44
+4  5     40
+5  2     43</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sample_1 <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(Length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -815,10 +819,10 @@ Length       0.05812749 0.005227593 11.119359 6.641225e-22</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id Length
 1  2     43
-2  1     44
+2  3     54
 3  2     43
 4  1     44
-5  3     54</code></pre>
+5  1     44</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sample_2 <span class="sc">%&gt;%</span> </span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">mean</span>(Length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

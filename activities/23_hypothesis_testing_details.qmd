@@ -1,0 +1,490 @@
+---
+title: "Hypothesis testing details"
+subtitle: "Notes and in-class exercises"
+sidebar: false
+---
+
+# Notes
+
+- Slides for today are available [here](https://docs.google.com/presentation/d/1TT4Mu5lUMtN1_UunjbGfwAPsl3m2uZddeIxpNPeBsjg/edit?usp=sharing).
+- You can download a template file to work with [here](../activity_templates/23_hypothesis_testing_details.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Apply the procedure for a formal hypothesis test
+- Articulate how we can formalize a research question as a testable, statistical hypothesis
+
+
+## Readings and videos
+
+Before class you should have read and/or watched:
+
+- Reading: Section 7.3 (stop when you get to Section 7.3.4)  in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
+- Video 1: [Introduction to Statistical Inference](https://voicethread.com/share/15687646/)
+- Video 2: [Hypothesis Testing Framework](https://macalester.voicethread.com/myvoice/thread/15687700)
+- Video 3: [Hypothesis Testing Procedure](https://voicethread.com/share/15713570/)
+
+
+# Exercises
+
+## Exercise 1
+
+**Research Question**: Can we predict whether or not a mushroom is poisonous based on the shape of its cap?
+
+For this exercise, we will look at data from various species of gilled mushrooms in the Agaricus and Lepiota Family. We have information on whether a mushroom is `poisonous` (TRUE if it is, FALSE if it's edible), the shape of its cap (`cap_shape`, a categorical variable with 6 categories), the texture of its cap surface (`cap_surface`, a categorical variable with 4 categories), and the size of its gills (`gill_size`, a categorical variable with two categories)
+
+```{r warning=FALSE, message=FALSE}
+# Load the data & packages
+library(tidyverse)
+library(readr)
+library(broom)
+
+mushrooms <- read_csv("https://mac-stat.github.io/data/mushrooms.csv")
+
+mushrooms <- mushrooms %>%
+  mutate(cap_shape = relevel(as.factor(cap_shape), ref="flat")) %>%
+  dplyr::select(poisonous, cap_shape)
+
+head(mushrooms)
+```
+
+### Part a
+
+One of the most poisonous species of mushrooms is the *Amanita phalloides* or ["Death Cap" mushroom](http://www.bccdc.ca/health-info/prevention-public-health/death-cap-mushrooms), which typically has a flat cap shape when mature. Based on this anecdote, we hypothesize that species of mushrooms with flat caps in general may be *more* likely to be poisonous than edible.
+
+First, let's translate this question to an appropriate null and alternative hypothesis that we can compare with a formal hypothesis test. Remember that `poisonous` is a binary outcome, so we need to frame our null and alternative hypotheses in terms of odds (i.e., Odds(poisionous | flat cap) = P(poisonous|flat cap)/P(edible | flat cap)).
+
+> **Your answer**
+
+### Part b
+
+- Fit a logistic regression model to investigate whether `cap_shape` is associated with a mushroom being `poisonous`. (Note that in the setup code above, we have forced the reference category for the `cap_shape` predictor to be `flat`; without this, the reference category by default would be set as `bell`, which is the first category when sorted alphabetically).
+
+```{r eval=FALSE}
+mushroom_mod1 <- 
+
+coef(mushroom_mod1)
+```
+
+
+
+### Part c
+
+Provide an appropriate interpretation of the intercept coefficient **on the odds scale**. Based on this interpretation, do you believe mushrooms with flat caps are more likely to be poisonous, or more likely to be edible?
+
+> Your answer here
+
+
+### Part d
+
+Let's look at the full model summary:
+
+```{r eval=FALSE}
+summary(mushroom_mod1)
+```
+
+Report and interpret the test statistic for the intercept term (our coefficient of interest):
+
+> **Your answer**
+
+### Part e
+
+- Report and interpret the p-value for the intercept term.
+- Based on this p-value and a significance level of 0.05, do we have evidence that mushrooms with flat caps are more likely to be poisonous than edible?
+
+> **Your answer**
+
+### Part f
+
+Now suppose we are interested in whether the odds of being poisonous are different for mushrooms with other cap shapes. 
+
+By hand, calculate the odds of being poisonous for mushrooms with knobbed caps, conical caps, and sunken caps (remember that the non-exponentiated coefficients represent a difference in log-odds compared to the reference category):
+
+> odds(poisonous | knobbed cap) =
+
+> odds(poisonous | conical cap) =
+
+> odds(poisonous | sunken cap) =
+
+### Part g
+
+Based on these odds, which of the 4 mushroom cap shapes we've investigated (flat, knobbed, conical, and sunken) do you believe is the best indicator that it's edible? Which cap shape do you expect is most likely to be poisonous?
+
+> **Your answer**
+
+### Part h
+
+Let's get the full model summary again:
+
+```{r eval=FALSE}
+tidy(mushroom_mod1) %>% 
+    mutate(exp_estimate = exp(estimate)) %>% 
+    select(term, estimate, exp_estimate, everything())
+```
+
+Now report and interpret the p-values for the coefficients corresponding to `cap_shapeknobbed`, `cap_shapeconical`, and `cap_shapesunken`:
+
+> **Your answer**
+
+### Part i
+
+Based on the model summary output in **part h** above, if you were given a plate of mushrooms with different cap shapes and had to pick one to eat, which one would you choose? Which cap shape would you absolutely avoid at all costs? Are your decisions guided by the coefficient estimates, the p-values, or both?
+
+> **Your answer**
+
+### Part j
+
+Let's look at the data a slightly different way, using a 6x2 table of counts:
+
+```{r eval=FALSE}
+mushrooms %>% 
+  mutate(cap_shape=as.factor(cap_shape),
+         poisonous=as.factor(poisonous)) %>%
+  dplyr::count(cap_shape, poisonous, .drop=FALSE) %>% 
+  pivot_wider(names_from=poisonous, values_from=n, names_prefix="Poisonous = ")
+
+```
+
+Now, if you were given a plate of mushrooms with different cap shapes and had to pick one shape to eat and one to absolutely avoid, would you choose the same shapes? Why or why not?
+
+> **Your answer**
+
+
+
+## Exercise 2
+
+For this exercise, let's return to the fish dataset from the previous activity (Activity 22).
+
+```{r}
+fish <- read_csv("https://mac-stat.github.io/data/Mercury.csv")
+
+head(fish)
+```
+
+**Research question:** We believe the length of a fish (measured in centimeters) is causally associated with its mercury concentration (measured in parts per million [ppm]). We suspect that the river a fish is sampled from may be a confounder, since differences in the river environment may causally influence both the average length of fish (e.g. due to differences in water temperature or food availability) as well as mercury concentration (e.g. due to differences between the two rivers in mercury pollution levels). 
+
+### Part a
+
+Fit a linear regression model that can be used to answer our research question.
+
+```{r eval=FALSE}
+mod_fish1 <- ___
+summary(mod_fish1)
+```
+
+### Part b
+
+State the null and alternative hypotheses that we should use to test whether `RiverWacamaw` is associated with a difference in mercury concentration.
+
+> **Response**
+
+### Part c
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient. Assume we have specified a significance level of 0.05. In your interpretation, state whether you do or do not find evidence that `RiverWacamaw` confounds the relationship between fish length and mercury concentration.
+
+> **Response**
+
+### Part d
+
+Suppose we now want to determine if the causal effect of fish length on mercury concentration *differs* according to the river a fish was sampled from. 
+
+First, modify the code chunk below to visualize the 3-way relationship between the `Concen`, `Length`, and `River` variables.
+
+```{r eval=FALSE}
+fish %>% 
+  ggplot(aes(x = ___, y = ___, colour = ___)) + 
+  # [ADDITIONAL GGPLOT LAYER(S)]
+```
+
+Next, fit an appropriate linear regression model with an interaction term to investigate this question.
+
+```{r eval=FALSE}
+mod_fish2 <- ___
+summary(mod_fish2)
+```
+
+### Part e
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw:Length` interaction term in this revised model (`mod_fish2`). Assume we've set a significance level of 0.05. Do we have evidence that `River` modifies the relationship between `Length` and `Concen`?
+
+> **Response**
+
+### Part f
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient in this revised model (`mod_fish2`). (again, you can assume we've set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that `River` is not a confounder? What would it take to change your conclusion?
+
+> **Response**
+
+### Part g (CHALLENGE)
+
+Suppose another researcher runs the same model we fit in part c above (`mod_fish2`), but they claim that a more appropriate alternative hypothesis should be Beta_1 < 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when `Length = 0cm`).
+
+What is the p-value they would have reported for the `RiverWacamaw` coefficient in `mod_fish2`?
+
+> **Response**
+
+What is a potential ethical problem with the other researcher's claim that the alternative hypothesis should be Beta_1 < 0? 
+
+> **Response**
+
+### Part h (CHALLENGE)
+
+You point out to the other researcher that the intercept and `RiverWacamaw` coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts "at baseline" is not useful or meaningful--you cannot have a fish that is 0cm long, nor a mercury concentration <0ppm.
+
+You propose that a more appropriate model should transform the `Length` variable in some way to make the intercept more interpretable. Create a new variable named `Length_adj` with this transformation and use it to re-fit the model:
+
+```{r eval=FALSE}
+mod_fish3 <- lm(Concen ~ Length_adj*River, data=fish)
+summary(mod_fish3)
+```
+
+Compare the output of this model to that of `mod_fish2`. What happened to the estimate, test statistic, and p-value for the `RiverWacamaw` coefficient? How does this affect your conclusion? How about the other researcher's conclusion? Is it still possible that `River` is a confounder? 
+
+> **Response**
+
+
+
+
+
+
+<br><br><br><br><br><br>
+
+
+
+
+
+
+# Solutions
+
+## Exercise 1
+
+### Part a
+
+One of the most poisonous species of mushrooms is the *Amanita phalloides* or ["Death Cap" mushroom](http://www.bccdc.ca/health-info/prevention-public-health/death-cap-mushrooms), which typically has a flat cap shape when mature. Based on this anecdote, we hypothesize that species of mushrooms with flat caps in general may be *more* likely to be poisonous than edible.
+
+First, let's translate this question to an appropriate null and alternative hypothesis that we can compare with a formal hypothesis test. Remember that `poisonous` is a binary outcome, so we need to frame our null and alternative hypotheses in terms of odds (i.e., Odds(poisonous | flat cap) = P(poisonous|flat cap)/P(edible | flat cap)).
+
+> $H_0$: Odds(poisonous | flat cap) = 1
+> $H_a$: Odds(poisonous | flat cap) ≠ 1
+
+### Part b
+
+- Fit a logistic regression model to investigate whether `cap_shape` is associated with a mushroom being `poisonous`. (Note that in the setup code chunk above, we have forced the reference category for the `cap_shape` predictor to be `flat`; otherwise, the reference category by default would be set as `bell`, which is the first category when sorted alphabetically).
+
+```{r}
+mushroom_mod1 <- glm(poisonous ~ cap_shape, data=mushrooms, family="binomial")
+
+coef(mushroom_mod1)
+```
+
+
+
+### Part c
+
+Provide an appropriate interpretation of the intercept coefficient **on the odds scale**. Based on this interpretation, do you believe mushrooms with flat caps are more likely to be poisonous, or more likely to be edible?
+
+```{r}
+exp(coef(mushroom_mod1))
+```
+
+> The odds of a flat-capped mushroom being poisonous are 0.975:1--that is, mushrooms with flat caps are very slightly *less* likely to be poisonous than they are edible.
+
+
+### Part d
+
+Let's look at the full model summary:
+
+```{r}
+summary(mushroom_mod1)
+```
+
+Report and interpret the test statistic for the intercept term (our coefficient of interest):
+
+> The test statistic is -0.712—this means that the coefficient estimate of interest is 0.712 standard errors away from (specifically, below) the null value of 0 (note that this is on the log-odds scale).
+
+### Part e
+
+- Report and interpret the p-value for the intercept term.
+- Based on this p-value and a significance level of 0.05, do we have evidence that mushrooms with flat caps are more likely to be poisonous than edible?
+
+> The p-value for the intercept term is 0.4762.
+
+> Interpretation: If the null hypothesis were true (i.e., the odds of being poisonous were 1), the probability of seeing a test statistic as or more extreme than |-0.712| is 0.4762. Because the p-value is greater than our significance level of 0.05, we have no evidence to suggest that a flat-capped mushroom is more or less likely to be poisonous.
+
+### Part f
+
+Now suppose we are interested in whether the odds of being poisonous are different for mushrooms with other cap shapes. 
+
+Calculate the odds of being poisonous for mushrooms with knobbed caps, conical caps, and sunken caps (remember that the non-exponentiated coefficients represent a difference in log-odds compared to the reference category):
+
+```{r}
+# knobbed
+exp(-0.025+0.992)
+
+#conical
+exp(-0.025+14.59)
+
+#sunken
+exp(-0.025-14.54)
+```
+
+### Part g
+
+Based on these odds, which of the 4 mushroom cap shapes we've investigated (flat, knobbed, conical, and sunken) do you believe is the best indicator that it's edible? Which cap shape do you expect is most likely to be poisonous?
+
+> Using only the coefficient estimates, it appears that mushrooms with a sunken cap shape appear to be most likely to be edible, as the odds they are poisonous are approximately 4.7*10^-7 to 1. Mushrooms with conical caps appear to be most likely to be poisonous (odds of being poisonous are >2 million to 1).
+
+### Part h
+
+Let's get the full model summary again:
+
+```{r}
+tidy(mushroom_mod1) %>% 
+    mutate(exp_estimate = exp(estimate)) %>% 
+    select(term, estimate, exp_estimate, everything())
+```
+
+Now report and interpret the p-values for the coefficients corresponding to `cap_shapeknobbed`, `cap_shapeconical`, and `cap_shapesunken`:
+
+> `cap_shapeknobbed`: Our null hypothesis is that the odds ratio between flat-capped and knob-capped mushrooms is 1 (i.e., the odds of a knob-capped mushroom being poisonous are equal to the odds of a flat-capped mushroom being poisonous). If we assume the null hypothesis is true, then the probability of seeing a test statistic as or more extreme than |11.60| is 3.91e-31. Because the p-value is far below our significance level of 0.05, we take this as strong evidence that knob-capped mushrooms are much more likely to be poisonous than flat-capped mushrooms. 
+
+> `cap_shapeconical`: Our null hypothesis is that the odds ratio between flat-capped and cone-capped mushrooms is 1 (i.e., the odds of a cone-capped mushroom being poisonous are equal to the odds of a flat-capped mushroom being poisonous). If we assume the null hypothesis is true, then the probability of seeing a test statistic as or more extreme than |0.03| is 0.974 (i.e., we are very likely to see a test statistic more extreme than |-0.03| if in fact there were no difference between flat-capped and cone-cap mushrooms in odds of being poisonous). Because the p-value is far above our significance level of 0.05, we do not have evidence that the odds of a cone-capped mushroom being poisonous differ from the odds of a flat-capped mushroom being poisonous. 
+
+> `cap_shapesunken`: Our null hypothesis is that the odds ratio between flat-capped and sunken-cap mushrooms is 1 (i.e., the odds of a sunken-cap mushroom being poisonous are equal to the odds of a flat-capped mushroom being poisonous). If we assume the null hypothesis is true, then the probability of seeing a test statistic as or more extreme than |-0.09| is 0.926 (i.e., we are very likely to see a test statistic more extreme than |-0.09| if in fact there were no difference between flat-capped and sunken-cap mushrooms in odds of being poisonous). Because the p-value is far above our significance level of 0.05, we do not have evidence that the odds of a sunken-capped mushroom being poisonous differ from the odds of a flat-capped mushroom being poisonous.
+
+### Part i
+
+Based on the model summary output in **part h** above, if you were given a plate of mushrooms with different cap shapes and had to pick one to eat, which one would you choose? Which cap shape would you absolutely avoid at all costs? Are your decisions guided by the coefficient estimates, the p-values, or both?
+
+> Answers may vary--if only considering coefficient estimates, then cone-shaped caps are most likely to be poisonous and sunken-shaped caps are most likely to be edible. But if we only look at p-values, then knob-shaped caps have the strongest evidence that they are more likely to be poisonous, and bell-shaped caps have the strongest evidence that they are more likely to be edible. 
+
+### Part j
+
+Let's look at the data a slightly different way, using a 6x2 table of counts:
+
+```{r}
+mushrooms %>% 
+  mutate(cap_shape=as.factor(cap_shape),
+         poisonous=as.factor(poisonous)) %>%
+  dplyr::count(cap_shape, poisonous, .drop=FALSE) %>% 
+  pivot_wider(names_from=poisonous, values_from=n, names_prefix="Poisonous = ")
+
+```
+
+Now, if you were given a plate of mushrooms with different cap shapes and had to pick one shape to eat and one to absolutely avoid, would you choose the same shapes? Why or why not?
+
+> Personally, I'd stick with the sunken-shaped caps for eating. Even though our model suggests there's no evidence to believe they are less likely to be poisonous, 0 out of 32 in the sample are poisonous, which seems like the least risky choice. However, I'd tend to avoid the knob-capped mushrooms more than the cone-capped mushrooms—even though the latter are all poisonous in the sample, there were only 4 observations, so it's possible that due to sampling variation, the odds of being poisonous for cone-capped mushrooms is lower than that of knob-capped mushrooms (where we have many more observations).
+
+
+## Exercise 2
+
+For this exercise, let's return to the fish dataset from the previous activity (Activity 22).
+
+```{r}
+fish <- read_csv("https://Mac-STAT.github.io/data/Mercury.csv")
+
+head(fish)
+```
+
+**Research question:** We believe the length of a fish (measured in centimeters) is causally associated with its mercury concentration (measured in parts per million [ppm]). We suspect that the river a fish is sampled from may be a confounder, since differences in the river environment may causally influence both the average length of fish (e.g. due to differences in water temperature or food availability) as well as mercury concentration (e.g. due to differences between the two rivers in mercury pollution levels). 
+
+### Part a
+
+Fit a linear regression model that can be used to answer our research question.
+
+```{r}
+mod_fish1 <- lm(Concen ~ Length + River, data=fish)
+summary(mod_fish1)
+```
+
+### Part b
+
+State the null and alternative hypotheses that we should use to test whether `RiverWacamaw` is associated with a difference in mercury concentration.
+
+> H_0: Beta_2 = 0
+> H_a: Beta_2 ≠ 0
+
+### Part c
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient. Assume we have specified a significance level of 0.05. In your interpretation, state whether you do or do not find evidence that `RiverWacamaw` confounds the relationship between fish length and mercury concentration.
+
+> coefficient: Holding fish length constant, we estimate the average mercury concentration among fish in the Wacamaw River to be 0.14ppm higher than fish in the Lumber River.
+
+> Test statistic: The estimate we observe (0.14) is 1.587 standard errors higher than the null value of a 0ppm difference in mercury concentration.
+
+> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |1.587| is 0.114. Because 0.114 > 0.05, we do not have sufficient evidence to reject the null hypothesis, and conclude that the average mercury concentration does not differ between the two rivers.
+
+### Part d
+
+Suppose we now want to determine if the causal effect of fish length on mercury concentration *differs* according to the river a fish was sampled from. 
+
+First, modify the code chunk below to visualize the 3-way relationship between the `Concen`, `Length`, and `River` variables.
+
+```{r}
+fish %>% 
+  ggplot(aes(x = Length, y = Concen, colour = River)) + 
+  geom_point()+
+  geom_smooth(method="lm", se=F)
+```
+
+Next, fit an appropriate linear regression model with an interaction term to investigate this question.
+
+```{r}
+mod_fish2 <- lm(Concen ~ Length * River, data=fish)
+summary(mod_fish2)
+```
+
+### Part e
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw:Length` interaction term in this revised model (`mod_fish2`). Assume we've set a significance level of 0.05. Do we have evidence that `River` modifies the relationship between `Length` and `Concen`?
+
+> coefficient: First, we interpret the `Length` coefficient--that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an *additional* 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).
+
+> Test statistic: The estimate we observe (0.14) is 1.587 standard errors higher than the null value of a 0ppm difference in mercury concentration.
+
+> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |0.024| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
+
+
+### Part f
+
+Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient in this revised model (`mod_fish2`). (again, you can assume we've set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that `River` is not a confounder? What would it take to change your conclusion?
+
+> coefficient: First, we interpret the `Length` coefficient--that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an *additional* 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).
+
+> Test statistic: The estimate we observe (0.14) is 1.587 standard errors higher than the null value of a 0ppm difference in mercury concentration.
+
+> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |0.024| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
+
+### Part g (CHALLENGE)
+
+Suppose another researcher runs the same model we fit in part c above (`mod_fish2`), but they claim that a more appropriate alternative hypothesis should be Beta_1 < 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when `Length = 0cm`).
+
+What is the p-value they would have reported for the `RiverWacamaw` coefficient in `mod_fish2`?
+
+> 0.0544/2 = 0.0272 (we divide the "two-tailed" p-value in half to obtain the p-value for a "one-tailed" test)
+
+What is a potential ethical problem with the other researcher's claim that the alternative hypothesis should be Beta_1 < 0? 
+
+> It is possible that the researchers had a particular reason or incentive to publish evidence in support of their hypothesis (some potential reasons are that scientific journals are generally less interested in publishing results, a financial conflict of interests, or favoring a pet hypothesis). They could have first looked at the results of a "two-tailed" statistical test and since the p-value is very close to the traditional significance threshold of 0.05, come up with a post-hoc rationalization to perform a hypothesis test resulting in a "statistically significant" p-value. This unethical practice is known in the field as "p-hacking."
+
+### Part h (CHALLENGE)
+
+You point out to the other researcher that the intercept and `RiverWacamaw` coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts "at baseline" is not useful or meaningful--you cannot have a fish that is 0cm long, nor a mercury concentration <0ppm.
+
+You propose that a more appropriate model should transform the `Length` variable in some way to make the intercept more interpretable. Create a new variable named `Length_adj` with this transformation and use it to re-fit the model:
+
+```{r}
+fish <- fish %>%
+  mutate(Length_adj=Length-min(Length))
+
+mod_fish3 <- lm(Concen ~ Length_adj*River, data=fish)
+summary(mod_fish3)
+```
+
+Compare the output of this model to that of `mod_fish2`. What happened to the estimate, standard error, test statistic, and p-value for the `RiverWacamaw` coefficient? How does this affect your conclusion? How about the other researcher's conclusion? Is it still possible that `River` is a confounder? 
+
+> The `RiverWacamaw` coefficient increased (and became closer to 0), and the standard error also increased, so the test statistic decreased and the p-value decreased. Therefore, when using a transformation that provides us with a more meaningful intercept, we end up with even less evidence that mercury concentration differs between the two rivers when adjusting for fish length, and are more confident in concluding that `River` is likely not a confounder. The other researcher's conclusion that the length-adjusted effect of `River` on mercury concentration was statistically significant when using a one-tailed alternative hypothesis should also be overturned, since the corresponding p-value = 0.115 > 0.05. Importantly, the `Length_adj:RiverWacamaw` interaction term is unchanged by this transformation, so we still have some evidence that the `River` variable seems to modify the effect of `Length` on `Concen`. With a larger sample, it may still be possible that we find a statistically significant main effect for `River`, but for now we do not have strong evidence to argue that it's an important confounder. 
