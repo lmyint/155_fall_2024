@@ -444,9 +444,9 @@ Interpret the coefficient estimate, test statistic, and p-value for the `RiverWa
 
 > coefficient: First, we interpret the `Length` coefficient--that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an *additional* 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).
 
-> Test statistic: The estimate we observe (0.14) is 1.587 standard errors higher than the null value of a 0ppm difference in mercury concentration.
+> Test statistic: The estimate we observe (0.024326) is 2.321 standard errors higher than the null value of a 0ppm per cm difference between the rivers.
 
-> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |0.024| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
+> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |2.321| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
 
 
 ### Part f
@@ -455,9 +455,9 @@ Interpret the coefficient estimate, test statistic, and p-value for the `RiverWa
 
 > coefficient: First, we interpret the `Length` coefficient--that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an *additional* 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).
 
-> Test statistic: The estimate we observe (0.14) is 1.587 standard errors higher than the null value of a 0ppm difference in mercury concentration.
+> Test statistic: The estimate we observe (-0.826291) is 1.937 standard errors lower than the null value of 0.
 
-> p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |0.024| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
+> p-value: Assuming the null hypothesis is true, the probability of observing a test statistic as or more extreme than |-1.937| is 0.0054. Because 0.0054 > 0.05, we do not have evidence to reject the null.
 
 ### Part g (CHALLENGE)
 
