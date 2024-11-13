@@ -684,7 +684,8 @@ dbl (4): Station, Length, Weight, Concen
 <p>One of the most poisonous species of mushrooms is the <em>Amanita phalloides</em> or <a href="http://www.bccdc.ca/health-info/prevention-public-health/death-cap-mushrooms">“Death Cap” mushroom</a>, which typically has a flat cap shape when mature. Based on this anecdote, we hypothesize that species of mushrooms with flat caps in general may be <em>more</em> likely to be poisonous than edible.</p>
 <p>First, let’s translate this question to an appropriate null and alternative hypothesis that we can compare with a formal hypothesis test. Remember that <code>poisonous</code> is a binary outcome, so we need to frame our null and alternative hypotheses in terms of odds (i.e., Odds(poisonous | flat cap) = P(poisonous|flat cap)/P(edible | flat cap)).</p>
 <blockquote class="blockquote">
-<p><span class="math inline">\(H_0\)</span>: Odds(poisonous | flat cap) = 1 <span class="math inline">\(H_a\)</span>: Odds(poisonous | flat cap) ≠ 1</p>
+<p><span class="math inline">\(H_0\)</span>: Odds(poisonous | flat cap) = 1</p>
+<p><span class="math inline">\(H_a\)</span>: Odds(poisonous | flat cap) ≠ 1</p>
 </blockquote>
 </section>
 <section id="part-b-2" class="level3">
@@ -794,7 +795,7 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <h3 class="anchored" data-anchor-id="part-g-1">Part g</h3>
 <p>Based on these odds, which of the 4 mushroom cap shapes we’ve investigated (flat, knobbed, conical, and sunken) do you believe is the best indicator that it’s edible? Which cap shape do you expect is most likely to be poisonous?</p>
 <blockquote class="blockquote">
-<p>Using only the coefficient estimates, it appears that mushrooms with a sunken cap shape appear to be most likely to be edible, as the odds they are poisonous are approximately 4.7*10^-7 to 1. Mushrooms with conical caps appear to be most likely to be poisonous (odds of being poisonous are &gt;2 million to 1).</p>
+<p>Using only the coefficient estimates, it appears that mushrooms with a sunken cap shape appear to be most likely to be edible, as the odds they are poisonous are approximately <span class="math inline">\(4.7 \times 10^{-7}\)</span> to 1. Mushrooms with conical caps appear to be most likely to be poisonous (odds of being poisonous are &gt;2 million to 1).</p>
 </blockquote>
 </section>
 <section id="part-h-1" class="level3">
@@ -923,7 +924,7 @@ F-statistic: 63.63 on 2 and 168 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="part-b-3">Part b</h3>
 <p>State the null and alternative hypotheses that we should use to test whether <code>RiverWacamaw</code> is associated with a difference in mercury concentration.</p>
 <blockquote class="blockquote">
-<p>H_0: Beta_2 = 0 H_a: Beta_2 ≠ 0</p>
+<p><span class="math inline">\(H_0: \beta_2 = 0\)</span> <span class="math inline">\(H_a: \beta_2 \neq 0\)</span></p>
 </blockquote>
 </section>
 <section id="part-c-3" class="level3">
@@ -994,23 +995,26 @@ F-statistic: 45.33 on 3 and 167 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>coefficient: First, we interpret the <code>Length</code> coefficient–that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an <em>additional</em> 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>Test statistic: The estimate we observe (0.024326) is 2.321 standard errors higher than the null value of a 0ppm per cm difference between the rivers.</p>
+<p>Test statistic: The estimate we observe (0.024326) is 2.321 standard errors higher than the null value of zero.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>p-value: Assuming the null hypothesis is true and there is no actual difference in mercury concentration among the two fish populations (adjusting for fish length), the probability of observing a test statistic as or more extreme than |2.321| is 0.02. Because 0.02 &lt; 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.</p>
+<p>p-value: Assuming the null hypothesis is true and there is no difference in the relationship between fish length and mercury between the 2 rivers, the probability of observing a test statistic as or more extreme than |2.321| is 0.02. Because 0.02 &lt; 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.</p>
 </blockquote>
 </section>
 <section id="part-f-3" class="level3">
 <h3 class="anchored" data-anchor-id="part-f-3">Part f</h3>
 <p>Interpret the coefficient estimate, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient in this revised model (<code>mod_fish2</code>). (again, you can assume we’ve set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that <code>River</code> is not a confounder? What would it take to change your conclusion?</p>
 <blockquote class="blockquote">
-<p>coefficient: First, we interpret the <code>Length</code> coefficient–that is, among fish in the Lumber river, we expect that a 1cm increase in length corresponds to a 0.043ppm increase in mercury concentration. The interaction coefficient tells us the expected change in that relationship when considering fish in the Wacamaw River instead: we expect an <em>additional</em> 0.024ppm increase in mercury concentration per 1cm increase in length (i.e., in the Wacamaw River, we expect mercury concentration to increase by 0.067ppm per 1cm increase in fish length).</p>
+<p>coefficient: Visully, the <code>RiverWacamaw</code> coefficient represents the difference in the y-intercepts for the best fit lines for the Lumber and Wacamaw Rivers in the part d plot. Interpretation: Among fish that are 0cm long, average fish mercury concentrations are 0.826ppm lower in the Wacamaw River than in the Lumber River.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>Test statistic: The estimate we observe (-0.826291) is 1.937 standard errors lower than the null value of 0.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>p-value: Assuming the null hypothesis is true, the probability of observing a test statistic as or more extreme than |-1.937| is 0.0054. Because 0.0054 &gt; 0.05, we do not have evidence to reject the null.</p>
+<p>p-value: Assuming the null hypothesis is true, the probability of observing a test statistic as or more extreme than |-1.937| is 0.0544. Because 0.0544 &gt; 0.05, we do not have evidence to reject the null.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Conclusions: The <code>RiverWacamaw</code> coefficient represents a difference in where the Lumber and Wacamaw River lines “start”, and so the conclusions we draw from looking at this coefficient should be taken alongside our inspection of the interaction coefficient in Part e. There seems to be a modest but real interaction between River and Length, so <code>River</code> should be included in the model for that reason.</p>
 </blockquote>
 </section>
 <section id="part-g-challenge-1" class="level3">
@@ -1060,8 +1064,33 @@ F-statistic: 45.33 on 3 and 167 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Compare the output of this model to that of <code>mod_fish2</code>. What happened to the estimate, standard error, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient? How does this affect your conclusion? How about the other researcher’s conclusion? Is it still possible that <code>River</code> is a confounder?</p>
 <blockquote class="blockquote">
-<p>The <code>RiverWacamaw</code> coefficient increased (and became closer to 0), and the standard error also increased, so the test statistic decreased and the p-value decreased. Therefore, when using a transformation that provides us with a more meaningful intercept, we end up with even less evidence that mercury concentration differs between the two rivers when adjusting for fish length, and are more confident in concluding that <code>River</code> is likely not a confounder. The other researcher’s conclusion that the length-adjusted effect of <code>River</code> on mercury concentration was statistically significant when using a one-tailed alternative hypothesis should also be overturned, since the corresponding p-value = 0.115 &gt; 0.05. Importantly, the <code>Length_adj:RiverWacamaw</code> interaction term is unchanged by this transformation, so we still have some evidence that the <code>River</code> variable seems to modify the effect of <code>Length</code> on <code>Concen</code>. With a larger sample, it may still be possible that we find a statistically significant main effect for <code>River</code>, but for now we do not have strong evidence to argue that it’s an important confounder.</p>
+<p>The <code>RiverWacamaw</code> coefficient increased (and became closer to 0). The standard error decreased, but the test statistic decreased in magnitude and the p-value increased.</p>
+<p>What happened with this transformation is that the vertical axis got shifted so that the new “zero” was at 25.2cm (the minimum fish length in the data). At this point there is a smaller difference between the Lumber and Wacamaw River lines. However, as we saw above, there does seem to be a true modest difference in the slopes of these lines so there are larger differences between the 2 rivers at larger fish lengths.</p>
+<p>To consider the question of river as a confounder more directly, let’s use plots. When looking at the relationship between <code>River</code> and <code>Length</code>, we don’t see much of a difference between rivers in fish length. So there doesn’t seem to be a connection between river and length on a causal diagram. <code>River</code> + <code>Concen</code>. When looking at the relationship between <code>River</code> and <code>Concen</code>, there is slightly higher concentration in the Wacamaw River.</p>
+<p>So <code>River</code> is acting more as a precision variable than a confounder and is still important to include in the model in an interaction term with <code>Length</code>.</p>
 </blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fish, <span class="fu">aes</span>(<span class="at">x =</span> River, <span class="at">y =</span> Length)) <span class="sc">+</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fish, <span class="fu">aes</span>(<span class="at">x =</span> River, <span class="at">y =</span> Concen)) <span class="sc">+</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
