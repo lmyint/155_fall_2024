@@ -116,7 +116,7 @@ Analysts have determined `age`, `height`, and `sex` to be potential confounders 
 
 ### Part b
 
-- Construct an approximate 95% confidence interval (CI) for the coefficient of interest on the odds scale by using the Central Limit Theorem and the 68-95-99.7 rule.
+- Construct an approximate 95% confidence interval (CI) for the coefficient of interest by using the Central Limit Theorem and the 68-95-99.7 rule.
 - Compare your approximate 95% CI to an exact interval using `confint()`.
 
 ### Part c

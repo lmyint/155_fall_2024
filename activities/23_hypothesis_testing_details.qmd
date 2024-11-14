@@ -213,39 +213,6 @@ Interpret the coefficient estimate, test statistic, and p-value for the `RiverWa
 
 > **Response**
 
-### Part f
-
-Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient in this revised model (`mod_fish2`). (again, you can assume we've set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that `River` is not a confounder? What would it take to change your conclusion?
-
-> **Response**
-
-### Part g (CHALLENGE)
-
-Suppose another researcher runs the same model we fit in part c above (`mod_fish2`), but they claim that a more appropriate alternative hypothesis should be Beta_1 < 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when `Length = 0cm`).
-
-What is the p-value they would have reported for the `RiverWacamaw` coefficient in `mod_fish2`?
-
-> **Response**
-
-What is a potential ethical problem with the other researcher's claim that the alternative hypothesis should be Beta_1 < 0? 
-
-> **Response**
-
-### Part h (CHALLENGE)
-
-You point out to the other researcher that the intercept and `RiverWacamaw` coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts "at baseline" is not useful or meaningful--you cannot have a fish that is 0cm long, nor a mercury concentration <0ppm.
-
-You propose that a more appropriate model should transform the `Length` variable in some way to make the intercept more interpretable. Create a new variable named `Length_adj` with this transformation and use it to re-fit the model:
-
-```{r eval=FALSE}
-mod_fish3 <- lm(Concen ~ Length_adj*River, data=fish)
-summary(mod_fish3)
-```
-
-Compare the output of this model to that of `mod_fish2`. What happened to the estimate, test statistic, and p-value for the `RiverWacamaw` coefficient? How does this affect your conclusion? How about the other researcher's conclusion? Is it still possible that `River` is a confounder? 
-
-> **Response**
-
 
 
 
@@ -407,6 +374,7 @@ summary(mod_fish1)
 State the null and alternative hypotheses that we should use to test whether `RiverWacamaw` is associated with a difference in mercury concentration.
 
 > $H_0: \beta_2 = 0$
+> 
 > $H_a: \beta_2 \neq 0$
 
 ### Part c
@@ -450,60 +418,3 @@ Interpret the coefficient estimate, test statistic, and p-value for the `RiverWa
 > p-value: Assuming the null hypothesis is true and there is no difference in the relationship between fish length and mercury between the 2 rivers, the probability of observing a test statistic as or more extreme than |2.321| is 0.02. Because 0.02 < 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.
 
 
-### Part f
-
-Interpret the coefficient estimate, test statistic, and p-value for the `RiverWacamaw` coefficient in this revised model (`mod_fish2`). (again, you can assume we've set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that `River` is not a confounder? What would it take to change your conclusion?
-
-> coefficient: Visully, the `RiverWacamaw` coefficient represents the difference in the y-intercepts for the best fit lines for the Lumber and Wacamaw Rivers in the part d plot. Interpretation: Among fish that are 0cm long, average fish mercury concentrations are 0.826ppm lower in the Wacamaw River than in the Lumber River.
-
-> Test statistic: The estimate we observe (-0.826291) is 1.937 standard errors lower than the null value of 0.
-
-> p-value: Assuming the null hypothesis is true, the probability of observing a test statistic as or more extreme than |-1.937| is 0.0544. Because 0.0544 > 0.05, we do not have evidence to reject the null.
-
-> Conclusions: The `RiverWacamaw` coefficient represents a difference in where the Lumber and Wacamaw River lines "start", and so the conclusions we draw from looking at this coefficient should be taken alongside our inspection of the interaction coefficient in Part e. There seems to be a modest but real interaction between River and Length, so `River` should be included in the model for that reason.
-
-### Part g (CHALLENGE)
-
-Suppose another researcher runs the same model we fit in part c above (`mod_fish2`), but they claim that a more appropriate alternative hypothesis should be Beta_1 < 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when `Length = 0cm`).
-
-What is the p-value they would have reported for the `RiverWacamaw` coefficient in `mod_fish2`?
-
-> 0.0544/2 = 0.0272 (we divide the "two-tailed" p-value in half to obtain the p-value for a "one-tailed" test)
-
-What is a potential ethical problem with the other researcher's claim that the alternative hypothesis should be Beta_1 < 0? 
-
-> It is possible that the researchers had a particular reason or incentive to publish evidence in support of their hypothesis (some potential reasons are that scientific journals are generally less interested in publishing results, a financial conflict of interests, or favoring a pet hypothesis). They could have first looked at the results of a "two-tailed" statistical test and since the p-value is very close to the traditional significance threshold of 0.05, come up with a post-hoc rationalization to perform a hypothesis test resulting in a "statistically significant" p-value. This unethical practice is known in the field as "p-hacking."
-
-### Part h (CHALLENGE)
-
-You point out to the other researcher that the intercept and `RiverWacamaw` coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts "at baseline" is not useful or meaningful--you cannot have a fish that is 0cm long, nor a mercury concentration <0ppm.
-
-You propose that a more appropriate model should transform the `Length` variable in some way to make the intercept more interpretable. Create a new variable named `Length_adj` with this transformation and use it to re-fit the model:
-
-```{r}
-fish <- fish %>%
-  mutate(Length_adj=Length-min(Length))
-
-mod_fish3 <- lm(Concen ~ Length_adj*River, data=fish)
-summary(mod_fish3)
-```
-
-Compare the output of this model to that of `mod_fish2`. What happened to the estimate, standard error, test statistic, and p-value for the `RiverWacamaw` coefficient? How does this affect your conclusion? How about the other researcher's conclusion? Is it still possible that `River` is a confounder? 
-
-> The `RiverWacamaw` coefficient increased (and became closer to 0). The standard error decreased, but the test statistic decreased in magnitude and the p-value increased. 
-> 
-> What happened with this transformation is that the vertical axis got shifted so that the new "zero" was at 25.2cm (the minimum fish length in the data). At this point there is a smaller difference between the Lumber and Wacamaw River lines. However, as we saw above, there does seem to be a true modest difference in the slopes of these lines so there are larger differences between the 2 rivers at larger fish lengths.
-> 
-> To consider the question of river as a confounder more directly, let's use plots. When looking at the relationship between `River` and `Length`, we don't see much of a difference between rivers in fish length. So there doesn't seem to be a connection between river and length on a causal diagram. `River` + `Concen`. When looking at the relationship between `River` and `Concen`, there is slightly higher concentration in the Wacamaw River.
->
-> So `River` is acting more as a precision variable than a confounder and is still important to include in the model in an interaction term with `Length`.
-
-```{r}
-ggplot(fish, aes(x = River, y = Length)) + 
-    geom_boxplot() +
-    theme_classic()
-
-ggplot(fish, aes(x = River, y = Concen)) + 
-    geom_boxplot() +
-    theme_classic()
-```

@@ -348,9 +348,6 @@ window.Quarto = {
   <li><a href="#part-c-1" id="toc-part-c-1" class="nav-link" data-scroll-target="#part-c-1">Part c</a></li>
   <li><a href="#part-d-1" id="toc-part-d-1" class="nav-link" data-scroll-target="#part-d-1">Part d</a></li>
   <li><a href="#part-e-1" id="toc-part-e-1" class="nav-link" data-scroll-target="#part-e-1">Part e</a></li>
-  <li><a href="#part-f-1" id="toc-part-f-1" class="nav-link" data-scroll-target="#part-f-1">Part f</a></li>
-  <li><a href="#part-g-challenge" id="toc-part-g-challenge" class="nav-link" data-scroll-target="#part-g-challenge">Part g (CHALLENGE)</a></li>
-  <li><a href="#part-h-challenge" id="toc-part-h-challenge" class="nav-link" data-scroll-target="#part-h-challenge">Part h (CHALLENGE)</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
@@ -362,7 +359,7 @@ window.Quarto = {
   <li><a href="#part-c-2" id="toc-part-c-2" class="nav-link" data-scroll-target="#part-c-2">Part c</a></li>
   <li><a href="#part-d-2" id="toc-part-d-2" class="nav-link" data-scroll-target="#part-d-2">Part d</a></li>
   <li><a href="#part-e-2" id="toc-part-e-2" class="nav-link" data-scroll-target="#part-e-2">Part e</a></li>
-  <li><a href="#part-f-2" id="toc-part-f-2" class="nav-link" data-scroll-target="#part-f-2">Part f</a></li>
+  <li><a href="#part-f-1" id="toc-part-f-1" class="nav-link" data-scroll-target="#part-f-1">Part f</a></li>
   <li><a href="#part-g-1" id="toc-part-g-1" class="nav-link" data-scroll-target="#part-g-1">Part g</a></li>
   <li><a href="#part-h-1" id="toc-part-h-1" class="nav-link" data-scroll-target="#part-h-1">Part h</a></li>
   <li><a href="#part-i-1" id="toc-part-i-1" class="nav-link" data-scroll-target="#part-i-1">Part i</a></li>
@@ -375,9 +372,6 @@ window.Quarto = {
   <li><a href="#part-c-3" id="toc-part-c-3" class="nav-link" data-scroll-target="#part-c-3">Part c</a></li>
   <li><a href="#part-d-3" id="toc-part-d-3" class="nav-link" data-scroll-target="#part-d-3">Part d</a></li>
   <li><a href="#part-e-3" id="toc-part-e-3" class="nav-link" data-scroll-target="#part-e-3">Part e</a></li>
-  <li><a href="#part-f-3" id="toc-part-f-3" class="nav-link" data-scroll-target="#part-f-3">Part f</a></li>
-  <li><a href="#part-g-challenge-1" id="toc-part-g-challenge-1" class="nav-link" data-scroll-target="#part-g-challenge-1">Part g (CHALLENGE)</a></li>
-  <li><a href="#part-h-challenge-1" id="toc-part-h-challenge-1" class="nav-link" data-scroll-target="#part-h-challenge-1">Part h (CHALLENGE)</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -639,38 +633,6 @@ dbl (4): Station, Length, Weight, Concen
 <blockquote class="blockquote">
 <p><strong>Response</strong></p>
 </blockquote>
-</section>
-<section id="part-f-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-f-1">Part f</h3>
-<p>Interpret the coefficient estimate, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient in this revised model (<code>mod_fish2</code>). (again, you can assume we’ve set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that <code>River</code> is not a confounder? What would it take to change your conclusion?</p>
-<blockquote class="blockquote">
-<p><strong>Response</strong></p>
-</blockquote>
-</section>
-<section id="part-g-challenge" class="level3">
-<h3 class="anchored" data-anchor-id="part-g-challenge">Part g (CHALLENGE)</h3>
-<p>Suppose another researcher runs the same model we fit in part c above (<code>mod_fish2</code>), but they claim that a more appropriate alternative hypothesis should be Beta_1 &lt; 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when <code>Length = 0cm</code>).</p>
-<p>What is the p-value they would have reported for the <code>RiverWacamaw</code> coefficient in <code>mod_fish2</code>?</p>
-<blockquote class="blockquote">
-<p><strong>Response</strong></p>
-</blockquote>
-<p>What is a potential ethical problem with the other researcher’s claim that the alternative hypothesis should be Beta_1 &lt; 0?</p>
-<blockquote class="blockquote">
-<p><strong>Response</strong></p>
-</blockquote>
-</section>
-<section id="part-h-challenge" class="level3">
-<h3 class="anchored" data-anchor-id="part-h-challenge">Part h (CHALLENGE)</h3>
-<p>You point out to the other researcher that the intercept and <code>RiverWacamaw</code> coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts “at baseline” is not useful or meaningful–you cannot have a fish that is 0cm long, nor a mercury concentration &lt;0ppm.</p>
-<p>You propose that a more appropriate model should transform the <code>Length</code> variable in some way to make the intercept more interpretable. Create a new variable named <code>Length_adj</code> with this transformation and use it to re-fit the model:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod_fish3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length_adj<span class="sc">*</span>River, <span class="at">data=</span>fish)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Compare the output of this model to that of <code>mod_fish2</code>. What happened to the estimate, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient? How does this affect your conclusion? How about the other researcher’s conclusion? Is it still possible that <code>River</code> is a confounder?</p>
-<blockquote class="blockquote">
-<p><strong>Response</strong></p>
-</blockquote>
 <p><br><br><br><br><br><br></p>
 </section>
 </section>
@@ -694,9 +656,9 @@ dbl (4): Station, Length, Weight, Concen
 <li>Fit a logistic regression model to investigate whether <code>cap_shape</code> is associated with a mushroom being <code>poisonous</code>. (Note that in the setup code chunk above, we have forced the reference category for the <code>cap_shape</code> predictor to be <code>flat</code>; otherwise, the reference category by default would be set as <code>bell</code>, which is the first category when sorted alphabetically).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mushroom_mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(poisonous <span class="sc">~</span> cap_shape, <span class="at">data=</span>mushrooms, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mushroom_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mushroom_mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(poisonous <span class="sc">~</span> cap_shape, <span class="at">data=</span>mushrooms, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mushroom_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept)    cap_shapebell cap_shapeconical  cap_shapeconvex 
      -0.02538207      -2.10483179      14.59144985      -0.10609804 
@@ -709,7 +671,7 @@ cap_shapeknobbed  cap_shapesunken
 <h3 class="anchored" data-anchor-id="part-c-2">Part c</h3>
 <p>Provide an appropriate interpretation of the intercept coefficient <strong>on the odds scale</strong>. Based on this interpretation, do you believe mushrooms with flat caps are more likely to be poisonous, or more likely to be edible?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mushroom_mod1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(mushroom_mod1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept)    cap_shapebell cap_shapeconical  cap_shapeconvex 
     9.749373e-01     1.218662e-01     2.172632e+06     8.993365e-01 
@@ -725,7 +687,7 @@ cap_shapeknobbed  cap_shapesunken
 <h3 class="anchored" data-anchor-id="part-d-2">Part d</h3>
 <p>Let’s look at the full model summary:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mushroom_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mushroom_mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -769,23 +731,23 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <p>Interpretation: If the null hypothesis were true (i.e., the odds of being poisonous were 1), the probability of seeing a test statistic as or more extreme than |-0.712| is 0.4762. Because the p-value is greater than our significance level of 0.05, we have no evidence to suggest that a flat-capped mushroom is more or less likely to be poisonous.</p>
 </blockquote>
 </section>
-<section id="part-f-2" class="level3">
-<h3 class="anchored" data-anchor-id="part-f-2">Part f</h3>
+<section id="part-f-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-f-1">Part f</h3>
 <p>Now suppose we are interested in whether the odds of being poisonous are different for mushrooms with other cap shapes.</p>
 <p>Calculate the odds of being poisonous for mushrooms with knobbed caps, conical caps, and sunken caps (remember that the non-exponentiated coefficients represent a difference in log-odds compared to the reference category):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knobbed</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025+0.992</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knobbed</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025+0.992</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.630042</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#conical</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025+14.59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#conical</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025+14.59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2115919</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sunken</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025-14.54</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sunken</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.025-14.54</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.726078e-07</code></pre>
 </div>
@@ -802,9 +764,9 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <h3 class="anchored" data-anchor-id="part-h-1">Part h</h3>
 <p>Let’s get the full model summary again:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mushroom_mod1) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">exp_estimate =</span> <span class="fu">exp</span>(estimate)) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(term, estimate, exp_estimate, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mushroom_mod1) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">exp_estimate =</span> <span class="fu">exp</span>(estimate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(term, estimate, exp_estimate, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 6
   term             estimate exp_estimate std.error statistic  p.value
@@ -839,11 +801,11 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <h3 class="anchored" data-anchor-id="part-j-1">Part j</h3>
 <p>Let’s look at the data a slightly different way, using a 6x2 table of counts:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mushrooms <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cap_shape=</span><span class="fu">as.factor</span>(cap_shape),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">poisonous=</span><span class="fu">as.factor</span>(poisonous)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(cap_shape, poisonous, <span class="at">.drop=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>poisonous, <span class="at">values_from=</span>n, <span class="at">names_prefix=</span><span class="st">"Poisonous = "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mushrooms <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cap_shape=</span><span class="fu">as.factor</span>(cap_shape),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">poisonous=</span><span class="fu">as.factor</span>(poisonous)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(cap_shape, poisonous, <span class="at">.drop=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>poisonous, <span class="at">values_from=</span>n, <span class="at">names_prefix=</span><span class="st">"Poisonous = "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   cap_shape `Poisonous = FALSE` `Poisonous = TRUE`
@@ -866,7 +828,7 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <h2 class="anchored" data-anchor-id="exercise-2-1">Exercise 2</h2>
 <p>For this exercise, let’s return to the fish dataset from the previous activity (Activity 22).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://Mac-STAT.github.io/data/Mercury.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://Mac-STAT.github.io/data/Mercury.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 171 Columns: 5
 ── Column specification ────────────────────────────────────────────────────────
@@ -877,7 +839,7 @@ dbl (4): Station, Length, Weight, Concen
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
   River  Station Length Weight Concen
@@ -895,8 +857,8 @@ dbl (4): Station, Length, Weight, Concen
 <h3 class="anchored" data-anchor-id="part-a-3">Part a</h3>
 <p>Fit a linear regression model that can be used to answer our research question.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mod_fish1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length <span class="sc">+</span> River, <span class="at">data=</span>fish)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mod_fish1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length <span class="sc">+</span> River, <span class="at">data=</span>fish)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -924,7 +886,8 @@ F-statistic: 63.63 on 2 and 168 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="part-b-3">Part b</h3>
 <p>State the null and alternative hypotheses that we should use to test whether <code>RiverWacamaw</code> is associated with a difference in mercury concentration.</p>
 <blockquote class="blockquote">
-<p><span class="math inline">\(H_0: \beta_2 = 0\)</span> <span class="math inline">\(H_a: \beta_2 \neq 0\)</span></p>
+<p><span class="math inline">\(H_0: \beta_2 = 0\)</span></p>
+<p><span class="math inline">\(H_a: \beta_2 \neq 0\)</span></p>
 </blockquote>
 </section>
 <section id="part-c-3" class="level3">
@@ -945,25 +908,25 @@ F-statistic: 63.63 on 2 and 168 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Suppose we now want to determine if the causal effect of fish length on mercury concentration <em>differs</em> according to the river a fish was sampled from.</p>
 <p>First, modify the code chunk below to visualize the 3-way relationship between the <code>Concen</code>, <code>Length</code>, and <code>River</code> variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fish <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Length, <span class="at">y =</span> Concen, <span class="at">colour =</span> River)) <span class="sc">+</span> </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fish <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Length, <span class="at">y =</span> Concen, <span class="at">colour =</span> River)) <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Next, fit an appropriate linear regression model with an interaction term to investigate this question.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mod_fish2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length <span class="sc">*</span> River, <span class="at">data=</span>fish)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mod_fish2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length <span class="sc">*</span> River, <span class="at">data=</span>fish)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1000,97 +963,6 @@ F-statistic: 45.33 on 3 and 167 DF,  p-value: &lt; 2.2e-16</code></pre>
 <blockquote class="blockquote">
 <p>p-value: Assuming the null hypothesis is true and there is no difference in the relationship between fish length and mercury between the 2 rivers, the probability of observing a test statistic as or more extreme than |2.321| is 0.02. Because 0.02 &lt; 0.05, we take this as evidence to reject the null hypothesis, and conclude that the effect of fish length on mercury concentration does differ slightly between the two rivers.</p>
 </blockquote>
-</section>
-<section id="part-f-3" class="level3">
-<h3 class="anchored" data-anchor-id="part-f-3">Part f</h3>
-<p>Interpret the coefficient estimate, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient in this revised model (<code>mod_fish2</code>). (again, you can assume we’ve set a significance level of 0.05). Based on these results, do you think we should reconsider the conclusion from our earlier model (where we did not include an interaction term) that <code>River</code> is not a confounder? What would it take to change your conclusion?</p>
-<blockquote class="blockquote">
-<p>coefficient: Visully, the <code>RiverWacamaw</code> coefficient represents the difference in the y-intercepts for the best fit lines for the Lumber and Wacamaw Rivers in the part d plot. Interpretation: Among fish that are 0cm long, average fish mercury concentrations are 0.826ppm lower in the Wacamaw River than in the Lumber River.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Test statistic: The estimate we observe (-0.826291) is 1.937 standard errors lower than the null value of 0.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>p-value: Assuming the null hypothesis is true, the probability of observing a test statistic as or more extreme than |-1.937| is 0.0544. Because 0.0544 &gt; 0.05, we do not have evidence to reject the null.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Conclusions: The <code>RiverWacamaw</code> coefficient represents a difference in where the Lumber and Wacamaw River lines “start”, and so the conclusions we draw from looking at this coefficient should be taken alongside our inspection of the interaction coefficient in Part e. There seems to be a modest but real interaction between River and Length, so <code>River</code> should be included in the model for that reason.</p>
-</blockquote>
-</section>
-<section id="part-g-challenge-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-g-challenge-1">Part g (CHALLENGE)</h3>
-<p>Suppose another researcher runs the same model we fit in part c above (<code>mod_fish2</code>), but they claim that a more appropriate alternative hypothesis should be Beta_1 &lt; 0, (and not Beta_1 ≠ 0, as is assumed by default when running a regression model). Because of this, they reported a smaller p-value for the coefficient, and claim that the Wacamaw River has a lower baseline mercury concentration (i.e., when <code>Length = 0cm</code>).</p>
-<p>What is the p-value they would have reported for the <code>RiverWacamaw</code> coefficient in <code>mod_fish2</code>?</p>
-<blockquote class="blockquote">
-<p>0.0544/2 = 0.0272 (we divide the “two-tailed” p-value in half to obtain the p-value for a “one-tailed” test)</p>
-</blockquote>
-<p>What is a potential ethical problem with the other researcher’s claim that the alternative hypothesis should be Beta_1 &lt; 0?</p>
-<blockquote class="blockquote">
-<p>It is possible that the researchers had a particular reason or incentive to publish evidence in support of their hypothesis (some potential reasons are that scientific journals are generally less interested in publishing results, a financial conflict of interests, or favoring a pet hypothesis). They could have first looked at the results of a “two-tailed” statistical test and since the p-value is very close to the traditional significance threshold of 0.05, come up with a post-hoc rationalization to perform a hypothesis test resulting in a “statistically significant” p-value. This unethical practice is known in the field as “p-hacking.”</p>
-</blockquote>
-</section>
-<section id="part-h-challenge-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-h-challenge-1">Part h (CHALLENGE)</h3>
-<p>You point out to the other researcher that the intercept and <code>RiverWacamaw</code> coefficients are both negative, so whatever difference in mercury concentration between the two rivers your model predicts “at baseline” is not useful or meaningful–you cannot have a fish that is 0cm long, nor a mercury concentration &lt;0ppm.</p>
-<p>You propose that a more appropriate model should transform the <code>Length</code> variable in some way to make the intercept more interpretable. Create a new variable named <code>Length_adj</code> with this transformation and use it to re-fit the model:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> fish <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Length_adj=</span>Length<span class="sc">-</span><span class="fu">min</span>(Length))</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>mod_fish3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Concen <span class="sc">~</span> Length_adj<span class="sc">*</span>River, <span class="at">data=</span>fish)</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_fish3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Concen ~ Length_adj * River, data = fish)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.27784 -0.35402 -0.08314  0.30650  1.94304 
-
-Coefficients:
-                         Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)              0.464384   0.132896   3.494 0.000609 ***
-Length_adj               0.043185   0.008085   5.341 2.99e-07 ***
-RiverWacamaw            -0.213287   0.176778  -1.207 0.229321    
-Length_adj:RiverWacamaw  0.024326   0.010483   2.321 0.021520 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.5705 on 167 degrees of freedom
-Multiple R-squared:  0.4488,    Adjusted R-squared:  0.4389 
-F-statistic: 45.33 on 3 and 167 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<p>Compare the output of this model to that of <code>mod_fish2</code>. What happened to the estimate, standard error, test statistic, and p-value for the <code>RiverWacamaw</code> coefficient? How does this affect your conclusion? How about the other researcher’s conclusion? Is it still possible that <code>River</code> is a confounder?</p>
-<blockquote class="blockquote">
-<p>The <code>RiverWacamaw</code> coefficient increased (and became closer to 0). The standard error decreased, but the test statistic decreased in magnitude and the p-value increased.</p>
-<p>What happened with this transformation is that the vertical axis got shifted so that the new “zero” was at 25.2cm (the minimum fish length in the data). At this point there is a smaller difference between the Lumber and Wacamaw River lines. However, as we saw above, there does seem to be a true modest difference in the slopes of these lines so there are larger differences between the 2 rivers at larger fish lengths.</p>
-<p>To consider the question of river as a confounder more directly, let’s use plots. When looking at the relationship between <code>River</code> and <code>Length</code>, we don’t see much of a difference between rivers in fish length. So there doesn’t seem to be a connection between river and length on a causal diagram. <code>River</code> + <code>Concen</code>. When looking at the relationship between <code>River</code> and <code>Concen</code>, there is slightly higher concentration in the Wacamaw River.</p>
-<p>So <code>River</code> is acting more as a precision variable than a confounder and is still important to include in the model in an interaction term with <code>Length</code>.</p>
-</blockquote>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fish, <span class="fu">aes</span>(<span class="at">x =</span> River, <span class="at">y =</span> Length)) <span class="sc">+</span> </span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fish, <span class="fu">aes</span>(<span class="at">x =</span> River, <span class="at">y =</span> Concen)) <span class="sc">+</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="23_hypothesis_testing_details_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 
 
 </section>
