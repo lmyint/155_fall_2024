@@ -1,6 +1,5 @@
 ---
 title: "Data Fundamentals"
-sidebar: false
 ---
 
 Welcome to our first in-class activity! Today we will start thinking about fundamental ideas when working with data and get to know the people in this class.

@@ -1,7 +1,6 @@
 ---
 title: "Probability and Odds"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

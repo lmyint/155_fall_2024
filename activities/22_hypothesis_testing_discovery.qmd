@@ -1,7 +1,6 @@
 ---
 title: "Hypothesis testing: discovery"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

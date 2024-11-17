@@ -1,6 +1,5 @@
 ---
 title: "Practice Problems 7"
-sidebar: false
 eval: false
 ---
 

@@ -1,10 +1,12 @@
 ---
 title: "Univariate visualization and summaries"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes
+
+- You can download a template file to work with [here](../activity_templates/02_foundations_univariate.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
 
 ## Learning goals
 
@@ -167,8 +169,6 @@ sd(pockets$minHeightFront)
 
 <br><br><br><br>
 
-
-**File organization:** You can download a template file to work with [here](../activity_templates/02_foundations_univariate.qmd). Save this file in the "Activities" subfolder of your "STAT155" folder.
 
 # Exercises
 

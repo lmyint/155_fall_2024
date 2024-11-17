@@ -1,6 +1,5 @@
 ---
 title: "Syllabus"
-sidebar: false
 ---
 
 # Welcome to STAT 155!

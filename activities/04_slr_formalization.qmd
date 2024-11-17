@@ -1,7 +1,6 @@
 ---
 title: "Simple linear regression: formalizing concepts"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

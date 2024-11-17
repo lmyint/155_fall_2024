@@ -1,0 +1,213 @@
+---
+title: "Hypothesis testing: additional considerations"
+subtitle: "Notes and in-class exercises"
+---
+
+# Notes
+
+- No template file today - all exercises can be viewed from the webpage
+
+## Learning goals
+
+By the end of this lesson, you should be able to:
+
+- Differentiate between more and less accurate interpretations of p-values
+- Explain how different factors affect statistical power
+- Explain the difference between practical and statistical significance
+- Explain how multiple testing impacts the conduct and interpretation of statistical research
+
+## Readings and videos
+
+No new readings or videos for today.
+
+
+
+
+# Exercises
+
+## Exercise 1: Conceptual understanding
+
+a. Suppose that you and a friend are in two different sections (each with the same number of students) of the same class. On your respective midterm exams, you each obtained 85%, and the class average in both of your classes was 80%. Could one of you or your friend still be considered further above the class average than the other? Briefly explain.
+
+b. Now suppose that your section's test scores were more tightly packed around 80%: maybe the standard deviation of your section's scores was 2.5, whereas the standard deviation of your friend's section's scores was 5. Which of you or your friend was further above the class average? Explain/justify your answer.
+
+c. Broadly speaking, does a p-value measure the chance of a hypothesis being true, or, the chance of the data having occurred?
+
+d. Why can't a p-value measure the other quantity that you didn't choose in Part c?
+
+e. Explain in words why, in calculating a p-value, we need to assume that the null hypothesis is true.
+
+f. Suppose that a hypothesis test yields a p-value of 1e-6 ($1\times 10^{-6}$). What can you tell about the magnitude of the effect or the uncertainty of the effect from this p-value? (i.e., What can you tell about the coefficient estimate or the standard error?)
+
+
+
+## Exercise 2: Statistical vs. practical significance
+
+Music researchers compiled information on 16,216 Spotify songs. They looked at the relationship between a song's genre (latin vs. not latin) and song duration in seconds. Their modeling code and output is below:
+
+```r
+spotify_model <- lm(duration ~ latin_genre, data = spotify)
+coef(summary(spotify_model))
+```
+
+```
+##                   Estimate Std. Error   t value   Pr(>|t|)
+## (Intercept)     212.673908  0.4165491 510.56143 0.00000000
+## latin_genreTRUE   1.555355  0.7435700   2.09174 0.03647731
+```
+
+a. Interpret the `latin_genreTRUE` coefficient.
+b. In the context of song listening, is this a large or small effect size?
+c. Report and interpret the p-value for the `latin_genreTRUE` coefficient.
+d. Use the p-value to make a yes/no decision about the evidence for a relationship between genre and song duration.
+e. This exercise highlights the difference between statistical significance and practical significance---explain how. That is, when might we observe statistically significant results that aren't practically significant?
+
+
+
+## Exercise 3: Power
+
+Statistical power is the probability of rejecting the null hypothesis when the alternative hypothesis is true. We are frequently testing hypotheses to investigate differences or relationships, so in this context, statistical power is the probability of detecting a relationship when there truly is a relationship.
+
+Navigate to [this page](https://rpsychologist.com/d3/nhst/) to look at an interactive visualization of the factors that influence statistical power.
+
+Under "Settings", next to the "Solve for?" text, click "Power". You will vary the 3 different parameters (significance level, sample size, and effect size) one at a time to understand how these factors affect power.
+
+Some context behind this interactive visualization:
+
+- Visualization is based on a one sample Z-test:    
+    This is a test for whether the true population mean equals a particular value. (e.g., true mean = 30)
+- The effect size slider is measured with a metric called Cohen's d:
+    - Cohen's d = magnitude of effect/standard deviation of response variable
+    - Here: how far is the true mean from the null value in units of SD?
+    - e.g., If the null value is 30, true mean is 40, and the true population SD of the quantity is 5, the Cohen’s d effect size is (40-30)/5 = 2.
+
+a. What is your intuition about how changing the significance level will change power? Check your intuition with the visualization and explain why this happens.
+b. Repeat Part a for the sample size.
+c. Repeat Part a for the effect size.
+
+
+
+## Exercise 4: Ethical considerations
+
+a. Visit [this page](https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/) and look at both the comic at the top and the various ways in which researchers have described p-values that do not fall below the $\alpha = 0.05$ significance level threshold. What ethical consideration is arising here? (Just for fun: a related [xkcd comic](https://xkcd.com/1478/))
+
+b. Take a look at the xkcd comic [here](https://xkcd.com/882/). What ethical consideration is arising here?
+
+
+
+
+<br><br><br><br><br><br>
+
+
+
+
+
+
+# Solutions
+
+## Exercise 1: Conceptual understanding
+
+a. Suppose that you and a friend are in two different sections (each with the same number of students) of the same class. On your respective midterm exams, you each obtained 85%, and the class average in both of your classes was 80%. Could one of you or your friend still be considered further above the class average than the other? Briefly explain.
+
+> **Response:** Yes! How well you do relative to the rest of the class depends on both the class average AND the variability of scores in each section. In this case, if your section was more variable, 85% wouldn't be as far above the class average than in your friend's section.
+
+b. Now suppose that your section's test scores were more tightly packed around 80%: maybe the standard deviation of your section's scores was 2.5, whereas the standard deviation of your friend's section's scores was 5. Which of you or your friend was further above the class average? Explain/justify your answer.
+
+> **Response:** In this case, we could note that your score of 85 was 2 standard deviations above the class average (85-80)/2.5 = 2, whereas your friend's score was only one standard devation above the class average (85-80)/5 = 1. Here, your score would be considered more extreme, and therefore further above the class average than your friend's score.
+
+c. Broadly speaking, does a p-value measure the chance of a hypothesis being true, or, the chance of the data having occurred?
+d. Why can't a p-value measure the other quantity that you didn't choose in Part c?
+
+> **Response:** Broadly speaking, the latter is more correct. By definition, a p-value measures the probability that an observation (as or more extreme that what did observe) would occur over repeated sampling *under the null hypothesis* (if the null hypothesis were true). This does NOT measure the chance of a hypothesis being true, but rather, tries to make a statement about the null hypothesis through *indirect* means.
+
+e. Explain in words why, in calculating a p-value, we need to assume that the null hypothesis is true.
+
+> **Response:** In order to make probabilistic statements about repeatedly sampled measures (as p-values do), we need to first be able to define a probability distribution. The null hypothesis tells us where this probability distribution is centered. As a concrete example, we can't answer questions like "what is the chance we observed this data?" without making some assumption about what the *underlying* truth is, or sometimes, where the truth is unlikely to be. For example, if we observe a regression coefficient of 2.3, we don't know if this is likely or not. We can say, however, how likely it is we would observe 2.3 if the true population coefficient were 2 compared to if the true population coefficient were 0.5.
+
+f. Suppose that a hypothesis test yields a p-value of 1e-6 ($1\times 10^{-6}$). What can you tell about the magnitude of the effect or the uncertainty of the effect from this p-value? (i.e., What can you tell about the coefficient estimate or the standard error?)
+
+> **Response:** A p-value tells us nothing about the coefficient estimate or the standard error because it only tells us about the test statistic. A small p-value only indicates that the test statistic is large. A large test statistic could have come about from a large effect (large coefficient) or from a small coefficient with a very small standard error. This is why reporting a confidence interval is more informative than only reporting a p-value. We get a sense of both the magnitude of the estimate and the amount of uncertainty with a CI, and with just a p-value, we don't know either.
+
+
+
+## Exercise 2: Statistical vs. practical significance
+
+Music researchers compiled information on 16,216 Spotify songs. They looked at the relationship between a song's genre (latin vs. not latin) and song duration in seconds. Their modeling code and output is below:
+
+```r
+spotify_model <- lm(duration ~ latin_genre, data = spotify)
+coef(summary(spotify_model))
+```
+
+```
+##                   Estimate Std. Error   t value   Pr(>|t|)
+## (Intercept)     212.673908  0.4165491 510.56143 0.00000000
+## latin_genreTRUE   1.555355  0.7435700   2.09174 0.03647731
+```
+
+a. Interpret the `latin_genreTRUE` coefficient.
+
+> **Response:** On average, latin genre songs tend to be 1.56 seconds longer than non-latin songs.
+
+b. In the context of song listening, is this a large or small effect size?
+
+> **Response:** Seems rather small---1.56 seconds in a song is really short.
+
+c. Report and interpret the p-value for the `latin_genreTRUE` coefficient.
+
+> **Response:** If there were truly no difference in the duration of latin vs non-latin songs (in the broader population of songs), there's only a 3.6% chance that we would have obtained a sample in which the observed difference was so large relative to the amount of uncertainty in the estimate (the standard error).
+
+d. Use the p-value to make a yes/no decision about the evidence for a relationship between genre and song duration.
+
+> **Response:** We do have statistically significant evidence that latin genre songs tend to be longer than non-latin songs.
+
+e. This exercise highlights the difference between statistical significance and practical significance---explain how. That is, when might we observe statistically significant results that aren't practically significant?
+
+> **Response:** Our large sample size of over 16,000 songs is relevant. The more data we have, the smaller our standard errors. (Recall that standard errors are inversely proportionaly to the square root of sample size: std error = $c/\sqrt{n}$, where $c$ is a constant from complicated formulas.) Larger sample sizes lead to narrower CIs, larger test staistics, and smaller p-values. With large sample sizes, it is easier to find statistically significant results even when the results aren’t practically significant.
+
+
+
+## Exercise 3: Power
+
+**Overall notes about the power investigations:**
+
+> Because power is the probability of correctly rejecting the null hypothesis (rejecting the null when the alternative hypothesis is true), parameter changes that increase the frequency of rejecting the null hypothesis will increase power. Keep this in mind as you work through. Visually, power corresponds to the light blue area under the distribution on the right. The distribution on the left is our familiar sampling distribution of the test statistic (here called $Z_{\text{crit}}$) under the null. The distribution on the right is very closely related but is the sampling distribution of the test statistics under the alternative hypothesis (which is why the $H_A$ label is above it). Power corresponds to the light blue area under the $H_A$ distribution because this area actually corresponds to the test statistics for which we would reject the null. The area represents the probability that we would obtain such test statistics if indeed the alternative were true. That is, the area represents the percentage of samples that would generate test statistics large enough to reject the null (if the alternative hypothesis were true).
+
+**Effect of significance level:**
+
+> If the significance level increases, there is a "less stringent" threshold for rejecting the null (p-value only has to be less than some higher threshold). Increasing the significance level will result in more frequent rejections of the null, and thus higher power (but at the price of a higher type 1 error rate).
+
+**Effect of sample size:**
+
+> If sample size increases, power should increase because higher sample size will decrease standard error, which will increase the test statistic, which more likely leads to rejecting the null.
+
+**Effect of effect size:**
+
+> If the magnitude of the effect (numerator of Cohen's d) increases, power should increase because it is easier (we are more likely) to detect large effects. It is harder (we are less likely) to detect very small effects.
+> 
+> If the variability of the response variable decreases (denominator of Cohen's d), power should increase because any "signal" from our predictors being picked up by our coefficient estimates will rise far enough above the "noise" in the small variability of the response. The variability of the response variable also contributes to the standard error for the coefficient. With low variability of the response, we will have lower standard errors because there will be lower spread in the estimates across samples. And with lower standard errors, test statistics should increase, resulting in greater frequency of rejecting the null.
+> 
+> A large effect magnitude and small variability in the response result in a large effect size, and increasing effect size results in higher power.
+
+
+
+## Exercise 4: Ethical considerations
+
+a. Visit [this page](https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/) and look at both the comic at the top and the various ways in which researchers have described p-values that do not fall below the $\alpha = 0.05$ significance level threshold. What ethical consideration is arising here? (Just for fun: a related [xkcd comic](https://xkcd.com/1478/))
+
+> **Response:** The comic is an illustration of something called the **file drawer phenomenon**. There is a culture that has arisen when using hypothesis testing in statistical analysis to only appreciate rejections of the null hypothesis as meaningful results. Any results for which investigators were not able to reject the null were filed away, never to be reported. Investigators would keep trying until their p-values were lower than the significance level.
+> 
+> There are serious ethical considerations behind this phenomenon. Who ever said that rejecting the null hypothesis was the only way to get meaningful scientific results? *There is immense benefit in knowing when there are no effects / no relationships.* A very important public health example of this is the relationships between vaccination and autism risk in children. Time and time again, studies have not been able to detect any causal relationship. What would our society look like if those "null" results had been filed away, never to be reported?
+
+b. Take a look at the xkcd comic [here](https://xkcd.com/882/). What ethical consideration is arising here?
+
+> **Response:** The idea here is that many, many hypothesis tests are being conducted, which is an idea called **multiple testing**. As more and more tests are being conducted, there is a higher and higher overall chance that the null hypothesis will be rejected - because we're just trying so many times. If the null hypothesis is in fact true, testing more and more times is going to increase the probability of making at least one type 1 error.
+> 
+> In this comic, we would likely be inclined to believe that the null hypothesis is true (no true association between jelly bean eating and acne). But the sheer number of times that this hypothesis was tested (20 times) means that the scientists ended up finding an association just by chance. That is, the association found for green jelly beans was quite likely a type 1 error. And in fact one null hypothesis rejection among 20 tests is exactly a 5% error rate - in other words, exactly the number of null hypothesis rejections we would expect to make if indeed the null were true (exactly the expected number of type 1 errors).
+
+
+
+
+
+
+

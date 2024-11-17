@@ -1,6 +1,5 @@
 ---
 title: "R Resources"
-sidebar: false
 ---
 
 # Getting Help

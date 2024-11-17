@@ -1,7 +1,6 @@
 ---
 title: "The Normal model & sampling variation"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

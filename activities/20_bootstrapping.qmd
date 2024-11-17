@@ -1,7 +1,6 @@
 ---
 title: "Bootstrapping"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 

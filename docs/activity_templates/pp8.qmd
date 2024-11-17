@@ -1,0 +1,127 @@
+---
+title: "Practice Problems 8"
+author: "STUDENT NAME"
+date: now
+date-format: "YYYY-MM-DDTHH:mm:ssZ"
+format:
+  html:
+    toc: true
+    embed-resources: true
+    code-tools: true    
+---
+
+<center>
+**Due Friday, 11/22 at 5pm on [Moodle](https://moodle.macalester.edu/mod/assign/view.php?id=146546).**
+</center>
+
+# Purpose
+
+The purpose of this assignment is to practice the following skills:
+
+- Interpreting test statistics and p-values and using them to test statistical hypotheses
+- Determining when an F-test is needed/appropriate for a specific hypothesis
+
+
+# Directions
+
+1. Create a code chunk in which you load the `ggplot2`, `dplyr`, `ggmosaic`, `broom`, and `readr` packages.
+
+2. Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:
+
+> Response here. (The > at the start of the line starts a blockquote and makes the text larger and easier to read.)
+
+3. Render your work for submission:
+    - Click the "Render" button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.
+    - Scroll through and inspect the document to check that your work translated to the HTML format correctly.
+    - Close the browser tab.
+    - Go to the "Background Jobs" pane in RStudio and click the Stop button to end the rendering process.
+    - Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.
+
+
+# Context
+
+Throughout this problem set, we'll continue working with data on poisonous mushrooms. In addition to cap shape, we now have information on cap surface and gill size as well. We will investigate whether these two additional variables add "value" to our logistic regression model, in addition to cap shape (where we'll consider a few different definitions of "value").
+
+```{r warning = FALSE, message = FALSE}
+# Read in mushroom data
+mushrooms <- read_csv("https://Mac-STAT.github.io/data/mushrooms.csv")
+```
+
+# Exercises
+
+## Exercise 1
+
+### Part a
+
+Construct two separate visualizations comparing whether a mushroom is `poisonous` or not to `cap_surface`, and `gill_size`, respectively. Comment on what sort of relationships you observe.
+
+
+### Part b
+
+Construct a 4x2 table of counts for `poisonous` and `cap_surface`. Based on the values in this table, explain why we *cannot* estimate the odds of a mushroom being poisonous for *all* types of mushroom cap surfaces.
+
+
+## Exercise 2
+
+Since we determined in Exercise 1 that we cannot estimate the odds of a mushroom being poisonous for certain mushroom cap surfaces, we will no longer consider including it in our multiple logistic regression model. Fit a multiple logistic regression model with *two* predictors for whether or not a mushroom is poisonous (shape and gill size).
+
+Interpret the coefficient for the `cap_shapesunken` coefficient, in context.
+
+
+## Exercise 3
+
+### Part a
+
+State the null and alternative hypothesis (in symbols) associated with the p-value given by the logistic regression summary output for the `cap_shapesunken` coefficient.
+
+
+### Part b
+
+Explain why the hypothesis test in Part a *does not* correspond to testing whether or not cap shape on the whole is associated with whether or not a mushroom is poisonous, after adjusting for gill size.
+
+Then, state the appropriate null and alternative hypothesis (in symbols) that would address this question.
+
+
+### Part c
+
+Conduct the hypothesis test you stated in Part b, and make a conclusion.
+
+
+## Exercise 4
+
+Suppose we are interested in whether there is a significant association between gill size and whether or not a mushroom is poisonous, adjusting for shape of a mushroom's cap. Note that this question can be addressed using the same model we've already fit.
+
+Do we need to conduct an F-test to answer this question? If yes, state the null and alternative hypotheses you would need to answer this question, and conduct the F-test. If no, state the null and alternative hypotheses you would need to answer this question, and report (no need to interpret) the *test-statistic and p-value* of your hypothesis test.
+
+
+## Exercise 5
+
+Returning to our original research question, we wanted to investigate whether gill size added "value" to our logistic regression model, in addition to cap shape. Let's consider "value" in terms of statistical significance. Conclude whether or not we have evidence of "value" here, citing an appropriate p-value or test statistic.
+
+
+## Exercise 6
+
+For this exercise, we'll review model evaluation for logistic regression, and consider the accuracy, sensitivity, and specificity of the following two models for predicting whether or not a mushroom is poisonous:
+
+Model 1: poisonous ~ cap_shape
+
+Model 2: poisonous ~ cap_shape + gill_size
+
+### Part a
+
+Compute the (overall) accuracy, sensitivity, and specificity of *both* logistic regression models, using a probability threshold of 0.5. Show your work for the calculations.
+
+### Part b
+
+Returning to our original research question, we wanted to investigate whether cap surface and gill size add "value" to our logistic regression model, in addition to cap shape. For each of the following metrics separately, determine whether the additional two variables added value to our logistic regression model:
+
+> Overall accuracy: 
+
+> Sensitivity: 
+
+> Specificity: 
+
+### Part c
+
+Suppose you are going mushroom hunting, and you don't want to accidentally poison yourself. Would you prefer a model with higher sensitivity, or higher specificity, if you could only have one? Explain why or why not, and using this justification, conclude which model from Part a you would prefer.
+

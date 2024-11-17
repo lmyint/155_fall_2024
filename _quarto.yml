@@ -7,61 +7,56 @@ project:
 
 website:
   title: "STAT 155"
-  navbar:
-    background: primary
-    search: true
-    left:
-      - file: index.qmd
-        text: "Home"
-      - file: schedule.qmd
-        text: "Schedule"
-      - file: syllabus.qmd
-        text: "Syllabus"
-      - sidebar:activities
-      - sidebar:homework
-      - file: project.qmd
-        text: "Project"
-      - file: r_resources.qmd
-        text: "R Resources"
-
   sidebar:
-    - id: activities
-      title: "Activities"
-      contents:
-        - activities/01_foundations_welcome.qmd
-        - activities/02_foundations_univariate.qmd
-        - activities/03_slr_introduction.qmd
-        - activities/04_slr_formalization.qmd
-        - activities/05_slr_model_eval.qmd
-        - activities/06_slr_transformations.qmd
-        - activities/07_slr_cat_predictor.qmd
-        - activities/08_mlr_intro.qmd
-        - activities/09_mlr_principles.qmd
-        - activities/10_mlr_confounding.qmd
-        - activities/11_mlr_interaction_explore.qmd
-        - activities/12_mlr_interaction_practice.qmd
-        - activities/13_mlr_model_building_1.qmd
-        - activities/14_mlr_model_building_2.qmd
-        - activities/15_prob_odds.qmd
-        - activities/16_logistic_univariate.qmd
-        - activities/17_logistic_multivariate_evaluation.qmd
-        - activities/18_sampling_normal.qmd
-        - activities/19_sampling_dist_clt.qmd
-        - activities/20_bootstrapping.qmd
-        - activities/21_confidence_intervals.qmd
-        - activities/22_hypothesis_testing_discovery.qmd
-        - activities/23_hypothesis_testing_details.qmd
-
-    - id: homework
-      title: "Practice Problems"
-      contents:
-        - assignments/pp1.qmd
-        - assignments/pp2.qmd
-        - assignments/pp3.qmd
-        - assignments/pp4.qmd
-        - assignments/pp5.qmd
-        - assignments/pp6.qmd
-        - assignments/pp7.qmd
+    style: "docked"
+    search: true
+    contents:
+      - href: index.qmd
+        text: "Home"
+      - href: schedule.qmd
+        text: "Schedule"
+      - href: syllabus.qmd
+        text: "Syllabus"
+      - section: "Activities"
+        contents:
+          - activities/01_foundations_welcome.qmd
+          - activities/02_foundations_univariate.qmd
+          - activities/03_slr_introduction.qmd
+          - activities/04_slr_formalization.qmd
+          - activities/05_slr_model_eval.qmd
+          - activities/06_slr_transformations.qmd
+          - activities/07_slr_cat_predictor.qmd
+          - activities/08_mlr_intro.qmd
+          - activities/09_mlr_principles.qmd
+          - activities/10_mlr_confounding.qmd
+          - activities/11_mlr_interaction_explore.qmd
+          - activities/12_mlr_interaction_practice.qmd
+          - activities/13_mlr_model_building_1.qmd
+          - activities/14_mlr_model_building_2.qmd
+          - activities/15_prob_odds.qmd
+          - activities/16_logistic_univariate.qmd
+          - activities/17_logistic_multivariate_evaluation.qmd
+          - activities/18_sampling_normal.qmd
+          - activities/19_sampling_dist_clt.qmd
+          - activities/20_bootstrapping.qmd
+          - activities/21_confidence_intervals.qmd
+          - activities/22_hypothesis_testing_discovery.qmd
+          - activities/23_hypothesis_testing_details.qmd
+          - activities/24_hypothesis_testing_considerations.qmd
+      - section: "Homework"
+        contents:
+          - assignments/pp1.qmd
+          - assignments/pp2.qmd
+          - assignments/pp3.qmd
+          - assignments/pp4.qmd
+          - assignments/pp5.qmd
+          - assignments/pp6.qmd
+          - assignments/pp7.qmd
+          - assignments/pp8.qmd
+      - href: project.qmd
+        text: "Project"
+      - href: r_resources.qmd
+        text: "R Resources"
   
   page-footer:
     left: |

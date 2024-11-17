@@ -40,11 +40,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -71,187 +71,288 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">STAT 155</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./schedule.html" aria-current="page"> 
-<span class="menu-text">Schedule</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
-<span class="menu-text">Syllabus</span></a>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Activities</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
-        <li>
-    <a class="dropdown-item" href="./activities/01_foundations_welcome.html">
- <span class="dropdown-text">Data Fundamentals</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/02_foundations_univariate.html">
- <span class="dropdown-text">Univariate visualization and summaries</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/03_slr_introduction.html">
- <span class="dropdown-text">Simple linear regression: Visualization and Introduction</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/04_slr_formalization.html">
- <span class="dropdown-text">Simple linear regression: formalizing concepts</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/05_slr_model_eval.html">
- <span class="dropdown-text">Simple linear regression: model evaluation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/06_slr_transformations.html">
- <span class="dropdown-text">Simple linear regression: Transformations</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/07_slr_cat_predictor.html">
- <span class="dropdown-text">Simple linear regression: categorical predictor</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/08_mlr_intro.html">
- <span class="dropdown-text">Introduction to multiple regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/09_mlr_principles.html">
- <span class="dropdown-text">Multiple regression principles</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/10_mlr_confounding.html">
- <span class="dropdown-text">Confounding variables</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/11_mlr_interaction_explore.html">
- <span class="dropdown-text">Multiple linear regression: exploring interaction</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/12_mlr_interaction_practice.html">
- <span class="dropdown-text">Multiple linear regression: interaction terms practice</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/13_mlr_model_building_1.html">
- <span class="dropdown-text">Multiple linear regression: model building (part 1)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/14_mlr_model_building_2.html">
- <span class="dropdown-text">Multiple linear regression: model building (part 2)</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/15_prob_odds.html">
- <span class="dropdown-text">Probability and Odds</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/16_logistic_univariate.html">
- <span class="dropdown-text">Simple logistic regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/17_logistic_multivariate_evaluation.html">
- <span class="dropdown-text">Multiple logistic regression</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/18_sampling_normal.html">
- <span class="dropdown-text">The Normal model &amp; sampling variation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/19_sampling_dist_clt.html">
- <span class="dropdown-text">Sampling distributions &amp; the CLT</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/20_bootstrapping.html">
- <span class="dropdown-text">Bootstrapping</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/21_confidence_intervals.html">
- <span class="dropdown-text">Confidence intervals</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/22_hypothesis_testing_discovery.html">
- <span class="dropdown-text">Hypothesis testing: discovery</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./activities/23_hypothesis_testing_details.html">
- <span class="dropdown-text">Hypothesis testing details</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practice-problems" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Practice Problems</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-practice-problems">    
-        <li>
-    <a class="dropdown-item" href="./assignments/pp1.html">
- <span class="dropdown-text">Practice Problems 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp2.html">
- <span class="dropdown-text">Practice Problems 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp3.html">
- <span class="dropdown-text">Practice Problems 3</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp4.html">
- <span class="dropdown-text">Practice Problems 4</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp5.html">
- <span class="dropdown-text">Practice Problems 5</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp6.html">
- <span class="dropdown-text">Practice Problems 6</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./assignments/pp7.html">
- <span class="dropdown-text">Practice Problems 7</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./project.html"> 
-<span class="menu-text">Project</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./r_resources.html"> 
-<span class="menu-text">R Resources</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./schedule.html">Schedule</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">STAT 155</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/01_foundations_welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Fundamentals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/02_foundations_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Univariate visualization and summaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/03_slr_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression: Visualization and Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/04_slr_formalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression: formalizing concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/05_slr_model_eval.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression: model evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/06_slr_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression: Transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/07_slr_cat_predictor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple linear regression: categorical predictor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/08_mlr_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to multiple regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/09_mlr_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple regression principles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/10_mlr_confounding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confounding variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/11_mlr_interaction_explore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple linear regression: exploring interaction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/12_mlr_interaction_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple linear regression: interaction terms practice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/13_mlr_model_building_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple linear regression: model building (part 1)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/14_mlr_model_building_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple linear regression: model building (part 2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/15_prob_odds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability and Odds</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/16_logistic_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple logistic regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/17_logistic_multivariate_evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple logistic regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/18_sampling_normal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Normal model &amp; sampling variation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/19_sampling_dist_clt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling distributions &amp; the CLT</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/20_bootstrapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/21_confidence_intervals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence intervals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/22_hypothesis_testing_discovery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing: discovery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/23_hypothesis_testing_details.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing details</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./activities/24_hypothesis_testing_considerations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis testing: additional considerations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/pp8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice Problems 8</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Resources</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -436,7 +537,10 @@ ul.task-list li input[type="checkbox"] {
     <td class="topleft">
         Work day
     </td>
-    <td class="topleft"><b>PP7 due Friday 11/15 at 5pm</b></td>
+    <td class="topleft">
+        <b>PP7 due Friday 11/15 at 5pm</b><br>
+        <b>Quiz 2 + PP corrections and reflection due Monday 11/18 at 5pm</b>
+    </td>
   </tr>
   <tr>
     <td class="topleft">12 (11/18 - 11/22)</td>
@@ -449,9 +553,24 @@ ul.task-list li input[type="checkbox"] {
         <b>Checkpoint 17 due 11:30am<b>
     </b></b></td>
     <td class="topleft">
-        Discussion: ASA statement on p-values
+        Discussion: p-values in practice<br>
+        See <a href="https://moodle.macalester.edu/mod/url/view.php?id=146408">this document</a> for assigned reading.
     </td>
-    <td class="topleft"><b>PP8 due Friday 11/22 at 5pm</b></td>
+    <td class="topleft">
+        <b>PP8 due Friday 11/22 at 5pm</b><br>
+        <b>Project Checkpoint 2 due Tuesday 11/26 at 5pm</b>
+    </td>
+  </tr>
+  <tr>
+    <td class="topleft">13 (11/25 - 11/29)</td>
+    <td class="topleft">
+        Review activity
+    </td>
+    <td class="topleft" colspan="2">
+        🦃 Thanksgiving Break 11/27 - 12/1 🦃
+    </td>
+    <td class="topleft">
+    </td>
   </tr>
 </tbody>
 </table>
@@ -952,7 +1071,7 @@ Week 10: 11/4 - 11/8 (Confidence intervals)
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Week 11: 11/11 - 11/15 (Hypothesis testing)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -961,7 +1080,7 @@ Week 11: 11/11 - 11/15 (Hypothesis testing)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="announcements-10" class="level4">
 <h4 class="anchored" data-anchor-id="announcements-10">Announcements</h4>
@@ -1021,17 +1140,31 @@ Week 12: 11/18 - 11/22 (Hypothesis testing)
 <li><a href="https://moodle.macalester.edu/mod/assign/view.php?id=145171">Project Checkpoint 2</a> due Tuesday 11/26 at 5pm</li>
 </ul>
 </section>
-<section id="monday" class="level4">
-<h4 class="anchored" data-anchor-id="monday">Monday</h4>
+<section id="monday-1118" class="level4">
+<h4 class="anchored" data-anchor-id="monday-1118">Monday (11/18)</h4>
 <p>Before class:</p>
+<ul>
+<li>Review material as needed</li>
+<li>No checkpoint today!</li>
+</ul>
 </section>
-<section id="wednesday" class="level4">
-<h4 class="anchored" data-anchor-id="wednesday">Wednesday</h4>
+<section id="wednesday-1120" class="level4">
+<h4 class="anchored" data-anchor-id="wednesday-1120">Wednesday (11/20)</h4>
 <p>Before class:</p>
+<ul>
+<li>Complete today’s <a href="https://moodle.macalester.edu/mod/quiz/view.php?id=135660">checkpoint</a> (CP17) on Moodle.
+<ul>
+<li>See checkpoint description for links to the readings/videos.</li>
+<li>Due 30 minutes before class today (11:30am).</li>
+</ul></li>
+</ul>
 </section>
-<section id="friday" class="level4">
-<h4 class="anchored" data-anchor-id="friday">Friday</h4>
+<section id="friday-1122" class="level4">
+<h4 class="anchored" data-anchor-id="friday-1122">Friday (11/22)</h4>
 <p>Before class:</p>
+<ul>
+<li>Please look in <a href="https://moodle.macalester.edu/mod/url/view.php?id=146408">this document</a> to find an assigned reading for today’s class.</li>
+</ul>
 </section>
 </div>
 </div>
@@ -1054,17 +1187,13 @@ Week 13: 11/25 - 11/29 (Hypothesis testing, p-values) (Thanksgiving Break)
 <li><a href="https://moodle.macalester.edu/mod/assign/view.php?id=145171">Project Checkpoint 2</a> due Tuesday 11/26 at 5pm</li>
 </ul>
 </section>
-<section id="monday-1" class="level4">
-<h4 class="anchored" data-anchor-id="monday-1">Monday</h4>
+<section id="monday" class="level4">
+<h4 class="anchored" data-anchor-id="monday">Monday</h4>
 <p>Before class:</p>
-</section>
-<section id="wednesday-1" class="level4">
-<h4 class="anchored" data-anchor-id="wednesday-1">Wednesday</h4>
-<p>Before class:</p>
-</section>
-<section id="friday-1" class="level4">
-<h4 class="anchored" data-anchor-id="friday-1">Friday</h4>
-<p>Before class:</p>
+<ul>
+<li>Review material as needed</li>
+<li>No checkpoint today!</li>
+</ul>
 </section>
 </div>
 </div>
@@ -1084,16 +1213,16 @@ Week 14: 12/2 - 12/6 (Project work)
 <section id="announcements-13" class="level4">
 <h4 class="anchored" data-anchor-id="announcements-13">Announcements</h4>
 </section>
-<section id="monday-2" class="level4">
-<h4 class="anchored" data-anchor-id="monday-2">Monday</h4>
+<section id="monday-1" class="level4">
+<h4 class="anchored" data-anchor-id="monday-1">Monday</h4>
 <p>Before class:</p>
 </section>
-<section id="wednesday-2" class="level4">
-<h4 class="anchored" data-anchor-id="wednesday-2">Wednesday</h4>
+<section id="wednesday" class="level4">
+<h4 class="anchored" data-anchor-id="wednesday">Wednesday</h4>
 <p>Before class:</p>
 </section>
-<section id="friday-2" class="level4">
-<h4 class="anchored" data-anchor-id="friday-2">Friday</h4>
+<section id="friday" class="level4">
+<h4 class="anchored" data-anchor-id="friday">Friday</h4>
 <p>Before class:</p>
 </section>
 </div>
@@ -1114,12 +1243,12 @@ Week 15: 12/9 - 12/13 (Project work, paper, and presentations)
 <section id="announcements-14" class="level4">
 <h4 class="anchored" data-anchor-id="announcements-14">Announcements</h4>
 </section>
-<section id="monday-3" class="level4">
-<h4 class="anchored" data-anchor-id="monday-3">Monday</h4>
+<section id="monday-2" class="level4">
+<h4 class="anchored" data-anchor-id="monday-2">Monday</h4>
 <p>Before class:</p>
 </section>
-<section id="wednesday-3" class="level4">
-<h4 class="anchored" data-anchor-id="wednesday-3">Wednesday</h4>
+<section id="wednesday-1" class="level4">
+<h4 class="anchored" data-anchor-id="wednesday-1">Wednesday</h4>
 <p>(Last day of class)</p>
 <p>Before class:</p>
 </section>

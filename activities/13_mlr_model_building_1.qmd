@@ -1,7 +1,6 @@
 ---
 title: "Multiple linear regression: model building (part 1)"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

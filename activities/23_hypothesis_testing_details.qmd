@@ -1,7 +1,6 @@
 ---
 title: "Hypothesis testing details"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

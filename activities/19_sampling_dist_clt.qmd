@@ -1,7 +1,6 @@
 ---
 title: "Sampling distributions & the CLT"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

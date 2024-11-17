@@ -1,10 +1,12 @@
 ---
 title: "Simple linear regression: Visualization and Introduction"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes
+
+- You can download a template file to work with [here](../activity_templates/04_slr_formalization.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
 
 ## Learning goals
 
@@ -28,8 +30,6 @@ These readings and videos are for **AFTER** class.
     - [R Code for Fitting a Linear Model](https://voicethread.com/share/14928147/) (Time: 11:07)
 
 
-
-**File organization:** You can download a template file to work with [here](../activity_templates/03_slr_introduction.qmd). Save this file in the "Activities" subfolder of your "STAT155" folder.
 
 # Exercises
 

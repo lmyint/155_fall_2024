@@ -1,7 +1,6 @@
 ---
 title: "Multiple regression principles"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

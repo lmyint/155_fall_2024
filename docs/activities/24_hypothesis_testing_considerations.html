@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Practice Problems 4 – STAT 155</title>
+<title>Hypothesis testing: additional considerations – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/pp1.html">Homework</a></li><li class="breadcrumb-item"><a href="../assignments/pp4.html">Practice Problems 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/24_hypothesis_testing_considerations.html">Hypothesis testing: additional considerations</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -335,7 +335,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../activities/24_hypothesis_testing_considerations.html" class="sidebar-item-text sidebar-link">
+  <a href="../activities/24_hypothesis_testing_considerations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Hypothesis testing: additional considerations</span></a>
   </div>
 </li>
@@ -370,7 +370,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/pp4.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/pp4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practice Problems 4</span></a>
   </div>
 </li>
@@ -422,30 +422,24 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions">Directions</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
+  <ul class="collapse">
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
+  <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
+  </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a>
-  <ul class="collapse">
-  <li><a href="#school-enrollment" id="toc-school-enrollment" class="nav-link" data-scroll-target="#school-enrollment">School Enrollment</a></li>
-  <li><a href="#bikes" id="toc-bikes" class="nav-link" data-scroll-target="#bikes">Bikes</a></li>
+  <li><a href="#exercise-1-conceptual-understanding" id="toc-exercise-1-conceptual-understanding" class="nav-link" data-scroll-target="#exercise-1-conceptual-understanding">Exercise 1: Conceptual understanding</a></li>
+  <li><a href="#exercise-2-statistical-vs.-practical-significance" id="toc-exercise-2-statistical-vs.-practical-significance" class="nav-link" data-scroll-target="#exercise-2-statistical-vs.-practical-significance">Exercise 2: Statistical vs.&nbsp;practical significance</a></li>
+  <li><a href="#exercise-3-power" id="toc-exercise-3-power" class="nav-link" data-scroll-target="#exercise-3-power">Exercise 3: Power</a></li>
+  <li><a href="#exercise-4-ethical-considerations" id="toc-exercise-4-ethical-considerations" class="nav-link" data-scroll-target="#exercise-4-ethical-considerations">Exercise 4: Ethical considerations</a></li>
   </ul></li>
-  <li><a href="#exercise-1-define-a-new-variable-and-visualize" id="toc-exercise-1-define-a-new-variable-and-visualize" class="nav-link" data-scroll-target="#exercise-1-define-a-new-variable-and-visualize">Exercise 1: Define a new variable and visualize</a>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
   <ul class="collapse">
-  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part a</a></li>
-  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part b</a></li>
-  </ul></li>
-  <li><a href="#exercise-2-compare-models-with-and-without-interaction" id="toc-exercise-2-compare-models-with-and-without-interaction" class="nav-link" data-scroll-target="#exercise-2-compare-models-with-and-without-interaction">Exercise 2: Compare models with and without interaction</a></li>
-  <li><a href="#exercise-3-assess" id="toc-exercise-3-assess" class="nav-link" data-scroll-target="#exercise-3-assess">Exercise 3: Assess</a>
-  <ul class="collapse">
-  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part a</a></li>
-  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part b</a></li>
-  </ul></li>
-  <li><a href="#exercise-4-visualize-interaction-term---school-enrollment" id="toc-exercise-4-visualize-interaction-term---school-enrollment" class="nav-link" data-scroll-target="#exercise-4-visualize-interaction-term---school-enrollment">Exercise 4: Visualize Interaction Term - School Enrollment</a></li>
-  <li><a href="#exercise-5-visualize-interaction-term---bikes" id="toc-exercise-5-visualize-interaction-term---bikes" class="nav-link" data-scroll-target="#exercise-5-visualize-interaction-term---bikes">Exercise 5: Visualize Interaction Term - Bikes</a></li>
-  <li><a href="#exercise-6-model-statement-and-fitting" id="toc-exercise-6-model-statement-and-fitting" class="nav-link" data-scroll-target="#exercise-6-model-statement-and-fitting">Exercise 6: Model statement and fitting</a></li>
-  <li><a href="#exercise-7-interpretation-and-conclusions" id="toc-exercise-7-interpretation-and-conclusions" class="nav-link" data-scroll-target="#exercise-7-interpretation-and-conclusions">Exercise 7: Interpretation and Conclusions</a></li>
+  <li><a href="#exercise-1-conceptual-understanding-1" id="toc-exercise-1-conceptual-understanding-1" class="nav-link" data-scroll-target="#exercise-1-conceptual-understanding-1">Exercise 1: Conceptual understanding</a></li>
+  <li><a href="#exercise-2-statistical-vs.-practical-significance-1" id="toc-exercise-2-statistical-vs.-practical-significance-1" class="nav-link" data-scroll-target="#exercise-2-statistical-vs.-practical-significance-1">Exercise 2: Statistical vs.&nbsp;practical significance</a></li>
+  <li><a href="#exercise-3-power-1" id="toc-exercise-3-power-1" class="nav-link" data-scroll-target="#exercise-3-power-1">Exercise 3: Power</a></li>
+  <li><a href="#exercise-4-ethical-considerations-1" id="toc-exercise-4-ethical-considerations-1" class="nav-link" data-scroll-target="#exercise-4-ethical-considerations-1">Exercise 4: Ethical considerations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -453,9 +447,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/pp1.html">Homework</a></li><li class="breadcrumb-item"><a href="../assignments/pp4.html">Practice Problems 4</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/24_hypothesis_testing_considerations.html">Hypothesis testing: additional considerations</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Practice Problems 4</h1>
+<h1 class="title">Hypothesis testing: additional considerations</h1>
+<p class="subtitle lead">Notes and in-class exercises</p>
 </div>
 
 
@@ -472,127 +467,198 @@ window.Quarto = {
 </header>
 
 
-<center>
-<strong>Due Friday, 10/11 at 5pm on <a href="https://moodle.macalester.edu/mod/assign/view.php?id=140137">Moodle</a>.</strong>
-</center>
-<section id="purpose" class="level1">
-<h1>Purpose</h1>
-<p>The goal of this set of practice problems is to practice the following skills:</p>
+<section id="notes" class="level1">
+<h1>Notes</h1>
 <ul>
-<li>Visualize interactions between categorical and quantitative predictors</li>
-<li>Write a model formula with an interaction term</li>
-<li>Interpret coefficients in an interaction model in context</li>
-<li>Critically determine whether interaction terms should be included in multiple linear regression models</li>
+<li>No template file today - all exercises can be viewed from the webpage</li>
 </ul>
-<p><strong>You can download a template to start from <a href="../activity_templates/pp4.qmd">here</a>.</strong></p>
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>Differentiate between more and less accurate interpretations of p-values</li>
+<li>Explain how different factors affect statistical power</li>
+<li>Explain the difference between practical and statistical significance</li>
+<li>Explain how multiple testing impacts the conduct and interpretation of statistical research</li>
+</ul>
 </section>
-<section id="directions" class="level1">
-<h1>Directions</h1>
-<ol type="1">
-<li>Create a code chunk in which you load the <code>ggplot2</code>, <code>dplyr</code>, and <code>readr</code> packages. Include the following commands in the code chunk to read in <em>two</em> data sets:</li>
-</ol>
-<ul>
-<li><code>enroll &lt;- read_csv("https://mac-stat.github.io/data/school_enrollment.csv")</code></li>
-<li><code>bikes &lt;- read_csv("https://mac-stat.github.io/data/bikeshare.csv")</code></li>
-</ul>
-<ol start="2" type="1">
-<li>Continue with the exercises below. You will need to create new code chunks to construct visualizations and models and write interpretations beneath. Put text responses in blockquotes as shown below:</li>
-</ol>
-<blockquote class="blockquote">
-<p>Response here. (The &gt; at the start of the line starts a blockquote and makes the text larger and easier to read.)</p>
-</blockquote>
-<ol start="3" type="1">
-<li>Render your work for submission:
-<ul>
-<li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
-<li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
-<li>Close the browser tab.</li>
-<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
-<li>Locate the rendered HTML file in the folder where this file is saved. Open the HTML to ensure that your work looks as it should (code appears, output displays, interpretations appear). Upload this HTML file to Moodle.</li>
-</ul></li>
-</ol>
+<section id="readings-and-videos" class="level2">
+<h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
+<p>No new readings or videos for today.</p>
+</section>
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<section id="context" class="level2">
-<h2 class="anchored" data-anchor-id="context">Context</h2>
-<section id="school-enrollment" class="level3">
-<h3 class="anchored" data-anchor-id="school-enrollment">School Enrollment</h3>
-<p>For Exercises 1-4, we’ll revisit the data from the World Bank on secondary school enrollment that we worked with in Practice Problems #2. As a reminder, the context from that assignment is pasted below.</p>
-<p>We have access to the following information:</p>
+<section id="exercise-1-conceptual-understanding" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-conceptual-understanding">Exercise 1: Conceptual understanding</h2>
+<ol type="a">
+<li><p>Suppose that you and a friend are in two different sections (each with the same number of students) of the same class. On your respective midterm exams, you each obtained 85%, and the class average in both of your classes was 80%. Could one of you or your friend still be considered further above the class average than the other? Briefly explain.</p></li>
+<li><p>Now suppose that your section’s test scores were more tightly packed around 80%: maybe the standard deviation of your section’s scores was 2.5, whereas the standard deviation of your friend’s section’s scores was 5. Which of you or your friend was further above the class average? Explain/justify your answer.</p></li>
+<li><p>Broadly speaking, does a p-value measure the chance of a hypothesis being true, or, the chance of the data having occurred?</p></li>
+<li><p>Why can’t a p-value measure the other quantity that you didn’t choose in Part c?</p></li>
+<li><p>Explain in words why, in calculating a p-value, we need to assume that the null hypothesis is true.</p></li>
+<li><p>Suppose that a hypothesis test yields a p-value of 1e-6 (<span class="math inline">\(1\times 10^{-6}\)</span>). What can you tell about the magnitude of the effect or the uncertainty of the effect from this p-value? (i.e., What can you tell about the coefficient estimate or the standard error?)</p></li>
+</ol>
+</section>
+<section id="exercise-2-statistical-vs.-practical-significance" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-statistical-vs.-practical-significance">Exercise 2: Statistical vs.&nbsp;practical significance</h2>
+<p>Music researchers compiled information on 16,216 Spotify songs. They looked at the relationship between a song’s genre (latin vs.&nbsp;not latin) and song duration in seconds. Their modeling code and output is below:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>spotify_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(duration <span class="sc">~</span> latin_genre, <span class="at">data =</span> spotify)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(spotify_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>##                   Estimate Std. Error   t value   Pr(&gt;|t|)
+## (Intercept)     212.673908  0.4165491 510.56143 0.00000000
+## latin_genreTRUE   1.555355  0.7435700   2.09174 0.03647731</code></pre>
+<ol type="a">
+<li>Interpret the <code>latin_genreTRUE</code> coefficient.</li>
+<li>In the context of song listening, is this a large or small effect size?</li>
+<li>Report and interpret the p-value for the <code>latin_genreTRUE</code> coefficient.</li>
+<li>Use the p-value to make a yes/no decision about the evidence for a relationship between genre and song duration.</li>
+<li>This exercise highlights the difference between statistical significance and practical significance—explain how. That is, when might we observe statistically significant results that aren’t practically significant?</li>
+</ol>
+</section>
+<section id="exercise-3-power" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-power">Exercise 3: Power</h2>
+<p>Statistical power is the probability of rejecting the null hypothesis when the alternative hypothesis is true. We are frequently testing hypotheses to investigate differences or relationships, so in this context, statistical power is the probability of detecting a relationship when there truly is a relationship.</p>
+<p>Navigate to <a href="https://rpsychologist.com/d3/nhst/">this page</a> to look at an interactive visualization of the factors that influence statistical power.</p>
+<p>Under “Settings”, next to the “Solve for?” text, click “Power”. You will vary the 3 different parameters (significance level, sample size, and effect size) one at a time to understand how these factors affect power.</p>
+<p>Some context behind this interactive visualization:</p>
 <ul>
-<li><code>Country</code>: country name</li>
-<li><code>Year</code>: year enrollment was measured (ranges from 2004 - 2019)</li>
-<li><code>GER</code>: gross enrollment rate in secondary school (%)</li>
-<li><code>NER</code>: net enrollment rate in secondary school (%)</li>
+<li>Visualization is based on a one sample Z-test:<br>
+This is a test for whether the true population mean equals a particular value. (e.g., true mean = 30)</li>
+<li>The effect size slider is measured with a metric called Cohen’s d:
+<ul>
+<li>Cohen’s d = magnitude of effect/standard deviation of response variable</li>
+<li>Here: how far is the true mean from the null value in units of SD?</li>
+<li>e.g., If the null value is 30, true mean is 40, and the true population SD of the quantity is 5, the Cohen’s d effect size is (40-30)/5 = 2.</li>
+</ul></li>
 </ul>
-<p>Net enrollment rate (NER) is the ratio of children who are <em>of secondary school age</em> who are enrolled in secondary school, out of the total number of children of secondary school age. In contrast, gross enrollment rate (GER) is the ratio of children who are enrolled in secondary school <em>regardless of age</em>, out of the total number of children of secondary school age. NER ranges from 0 to 100%, since it is a true proportion, while GER can exceed 100% (some children who are <em>not</em> of secondary school age may in fact be enrolled).</p>
-<p>Historically, NER is more difficult to measure than GER (particularly in low- and middle-income countries), since it requires knowledge of the age of the children enrolled in school.</p>
-<p>A relevant research question is: If we know GER, can we accurately predict NER? In order to answer this question, we first want to better understand the relationship between GER and NER.</p>
+<ol type="a">
+<li>What is your intuition about how changing the significance level will change power? Check your intuition with the visualization and explain why this happens.</li>
+<li>Repeat Part a for the sample size.</li>
+<li>Repeat Part a for the effect size.</li>
+</ol>
 </section>
-<section id="bikes" class="level3">
-<h3 class="anchored" data-anchor-id="bikes">Bikes</h3>
-<p>For Exercises 5-7, we’ll revisit the data on bike ridership. We’ve looked at many of the variables included in this dataset so far in this course, but suppose we are now interested in how season impacts the relationship between actual temperature and number of total riders. This is the question we’ll explore in this assignment.</p>
-</section>
-</section>
-<section id="exercise-1-define-a-new-variable-and-visualize" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-define-a-new-variable-and-visualize">Exercise 1: Define a new variable and visualize</h2>
-<section id="part-a" class="level3">
-<h3 class="anchored" data-anchor-id="part-a">Part a</h3>
-<p>Just as in Practice Problems #2, construct an appropriate visualization of the <code>GER</code> and <code>NER</code> variables (<code>NER</code> should be the dependent variable in your visualization). You may copy your code from the previous assignment.</p>
-<p>At roughly what value of GER does the relationship between GER and NER appear to change?</p>
-</section>
-<section id="part-b" class="level3">
-<h3 class="anchored" data-anchor-id="part-b">Part b</h3>
-<p>Define a binary (indicator) variable called <code>GER_binary</code>, that has value 0 when <code>GER</code> is less than 100, and 1 when <code>GER</code> is greater than or equal to 100.</p>
+<section id="exercise-4-ethical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-ethical-considerations">Exercise 4: Ethical considerations</h2>
+<ol type="a">
+<li><p>Visit <a href="https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">this page</a> and look at both the comic at the top and the various ways in which researchers have described p-values that do not fall below the <span class="math inline">\(\alpha = 0.05\)</span> significance level threshold. What ethical consideration is arising here? (Just for fun: a related <a href="https://xkcd.com/1478/">xkcd comic</a>)</p></li>
+<li><p>Take a look at the xkcd comic <a href="https://xkcd.com/882/">here</a>. What ethical consideration is arising here?</p></li>
+</ol>
+<p><br><br><br><br><br><br></p>
 </section>
 </section>
-<section id="exercise-2-compare-models-with-and-without-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-compare-models-with-and-without-interaction">Exercise 2: Compare models with and without interaction</h2>
-<p>In Practice Problems #2, we noted that a linear regression model did not accurately reflect the relationship between GER and NER. We’ll now compare that same simple linear regression model to a multiple linear regression model with an interaction term between <code>GER</code> and <code>GER_binary</code>.</p>
-<p>Fit both of these models.</p>
+<section id="solutions" class="level1">
+<h1>Solutions</h1>
+<section id="exercise-1-conceptual-understanding-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-conceptual-understanding-1">Exercise 1: Conceptual understanding</h2>
+<ol type="a">
+<li>Suppose that you and a friend are in two different sections (each with the same number of students) of the same class. On your respective midterm exams, you each obtained 85%, and the class average in both of your classes was 80%. Could one of you or your friend still be considered further above the class average than the other? Briefly explain.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Yes! How well you do relative to the rest of the class depends on both the class average AND the variability of scores in each section. In this case, if your section was more variable, 85% wouldn’t be as far above the class average than in your friend’s section.</p>
+</blockquote>
+<ol start="2" type="a">
+<li>Now suppose that your section’s test scores were more tightly packed around 80%: maybe the standard deviation of your section’s scores was 2.5, whereas the standard deviation of your friend’s section’s scores was 5. Which of you or your friend was further above the class average? Explain/justify your answer.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> In this case, we could note that your score of 85 was 2 standard deviations above the class average (85-80)/2.5 = 2, whereas your friend’s score was only one standard devation above the class average (85-80)/5 = 1. Here, your score would be considered more extreme, and therefore further above the class average than your friend’s score.</p>
+</blockquote>
+<ol start="3" type="a">
+<li>Broadly speaking, does a p-value measure the chance of a hypothesis being true, or, the chance of the data having occurred?</li>
+<li>Why can’t a p-value measure the other quantity that you didn’t choose in Part c?</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Broadly speaking, the latter is more correct. By definition, a p-value measures the probability that an observation (as or more extreme that what did observe) would occur over repeated sampling <em>under the null hypothesis</em> (if the null hypothesis were true). This does NOT measure the chance of a hypothesis being true, but rather, tries to make a statement about the null hypothesis through <em>indirect</em> means.</p>
+</blockquote>
+<ol start="5" type="a">
+<li>Explain in words why, in calculating a p-value, we need to assume that the null hypothesis is true.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> In order to make probabilistic statements about repeatedly sampled measures (as p-values do), we need to first be able to define a probability distribution. The null hypothesis tells us where this probability distribution is centered. As a concrete example, we can’t answer questions like “what is the chance we observed this data?” without making some assumption about what the <em>underlying</em> truth is, or sometimes, where the truth is unlikely to be. For example, if we observe a regression coefficient of 2.3, we don’t know if this is likely or not. We can say, however, how likely it is we would observe 2.3 if the true population coefficient were 2 compared to if the true population coefficient were 0.5.</p>
+</blockquote>
+<ol start="6" type="a">
+<li>Suppose that a hypothesis test yields a p-value of 1e-6 (<span class="math inline">\(1\times 10^{-6}\)</span>). What can you tell about the magnitude of the effect or the uncertainty of the effect from this p-value? (i.e., What can you tell about the coefficient estimate or the standard error?)</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> A p-value tells us nothing about the coefficient estimate or the standard error because it only tells us about the test statistic. A small p-value only indicates that the test statistic is large. A large test statistic could have come about from a large effect (large coefficient) or from a small coefficient with a very small standard error. This is why reporting a confidence interval is more informative than only reporting a p-value. We get a sense of both the magnitude of the estimate and the amount of uncertainty with a CI, and with just a p-value, we don’t know either.</p>
+</blockquote>
 </section>
-<section id="exercise-3-assess" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-assess">Exercise 3: Assess</h2>
-<section id="part-a-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-a-1">Part a</h3>
-<p>For each of the two models you fit in Exercise 2, plot residuals vs.&nbsp;fitted values. Does the model with the interaction term appear to better predict <code>NER</code> than the simple linear regression model? Explain why or why not.</p>
+<section id="exercise-2-statistical-vs.-practical-significance-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-statistical-vs.-practical-significance-1">Exercise 2: Statistical vs.&nbsp;practical significance</h2>
+<p>Music researchers compiled information on 16,216 Spotify songs. They looked at the relationship between a song’s genre (latin vs.&nbsp;not latin) and song duration in seconds. Their modeling code and output is below:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>spotify_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(duration <span class="sc">~</span> latin_genre, <span class="at">data =</span> spotify)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(spotify_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>##                   Estimate Std. Error   t value   Pr(&gt;|t|)
+## (Intercept)     212.673908  0.4165491 510.56143 0.00000000
+## latin_genreTRUE   1.555355  0.7435700   2.09174 0.03647731</code></pre>
+<ol type="a">
+<li>Interpret the <code>latin_genreTRUE</code> coefficient.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> On average, latin genre songs tend to be 1.56 seconds longer than non-latin songs.</p>
+</blockquote>
+<ol start="2" type="a">
+<li>In the context of song listening, is this a large or small effect size?</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Seems rather small—1.56 seconds in a song is really short.</p>
+</blockquote>
+<ol start="3" type="a">
+<li>Report and interpret the p-value for the <code>latin_genreTRUE</code> coefficient.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> If there were truly no difference in the duration of latin vs non-latin songs (in the broader population of songs), there’s only a 3.6% chance that we would have obtained a sample in which the observed difference was so large relative to the amount of uncertainty in the estimate (the standard error).</p>
+</blockquote>
+<ol start="4" type="a">
+<li>Use the p-value to make a yes/no decision about the evidence for a relationship between genre and song duration.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> We do have statistically significant evidence that latin genre songs tend to be longer than non-latin songs.</p>
+</blockquote>
+<ol start="5" type="a">
+<li>This exercise highlights the difference between statistical significance and practical significance—explain how. That is, when might we observe statistically significant results that aren’t practically significant?</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> Our large sample size of over 16,000 songs is relevant. The more data we have, the smaller our standard errors. (Recall that standard errors are inversely proportionaly to the square root of sample size: std error = <span class="math inline">\(c/\sqrt{n}\)</span>, where <span class="math inline">\(c\)</span> is a constant from complicated formulas.) Larger sample sizes lead to narrower CIs, larger test staistics, and smaller p-values. With large sample sizes, it is easier to find statistically significant results even when the results aren’t practically significant.</p>
+</blockquote>
 </section>
-<section id="part-b-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-b-1">Part b</h3>
-<p>Compare the multiple <span class="math inline">\(R^2\)</span> values from each model. Based on these values, which model is stronger?</p>
+<section id="exercise-3-power-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-power-1">Exercise 3: Power</h2>
+<p><strong>Overall notes about the power investigations:</strong></p>
+<blockquote class="blockquote">
+<p>Because power is the probability of correctly rejecting the null hypothesis (rejecting the null when the alternative hypothesis is true), parameter changes that increase the frequency of rejecting the null hypothesis will increase power. Keep this in mind as you work through. Visually, power corresponds to the light blue area under the distribution on the right. The distribution on the left is our familiar sampling distribution of the test statistic (here called <span class="math inline">\(Z_{\text{crit}}\)</span>) under the null. The distribution on the right is very closely related but is the sampling distribution of the test statistics under the alternative hypothesis (which is why the <span class="math inline">\(H_A\)</span> label is above it). Power corresponds to the light blue area under the <span class="math inline">\(H_A\)</span> distribution because this area actually corresponds to the test statistics for which we would reject the null. The area represents the probability that we would obtain such test statistics if indeed the alternative were true. That is, the area represents the percentage of samples that would generate test statistics large enough to reject the null (if the alternative hypothesis were true).</p>
+</blockquote>
+<p><strong>Effect of significance level:</strong></p>
+<blockquote class="blockquote">
+<p>If the significance level increases, there is a “less stringent” threshold for rejecting the null (p-value only has to be less than some higher threshold). Increasing the significance level will result in more frequent rejections of the null, and thus higher power (but at the price of a higher type 1 error rate).</p>
+</blockquote>
+<p><strong>Effect of sample size:</strong></p>
+<blockquote class="blockquote">
+<p>If sample size increases, power should increase because higher sample size will decrease standard error, which will increase the test statistic, which more likely leads to rejecting the null.</p>
+</blockquote>
+<p><strong>Effect of effect size:</strong></p>
+<blockquote class="blockquote">
+<p>If the magnitude of the effect (numerator of Cohen’s d) increases, power should increase because it is easier (we are more likely) to detect large effects. It is harder (we are less likely) to detect very small effects.</p>
+<p>If the variability of the response variable decreases (denominator of Cohen’s d), power should increase because any “signal” from our predictors being picked up by our coefficient estimates will rise far enough above the “noise” in the small variability of the response. The variability of the response variable also contributes to the standard error for the coefficient. With low variability of the response, we will have lower standard errors because there will be lower spread in the estimates across samples. And with lower standard errors, test statistics should increase, resulting in greater frequency of rejecting the null.</p>
+<p>A large effect magnitude and small variability in the response result in a large effect size, and increasing effect size results in higher power.</p>
+</blockquote>
 </section>
-</section>
-<section id="exercise-4-visualize-interaction-term---school-enrollment" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-visualize-interaction-term---school-enrollment">Exercise 4: Visualize Interaction Term - School Enrollment</h2>
-<p>It may seem strange to include an interaction term between <code>GER</code> and another variable that was created from <code>GER</code> itself, but this is actually a special type of interaction term that creates what is called a <em>piecewise linear regression model</em>. It allows both the slope and intercept of the regression line to change at specific values of a predictor. Fill in the code below to visualize this model.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions from model with interaction term</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>newdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">GER =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(enroll<span class="sc">$</span>GER), </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">to =</span> <span class="fu">max</span>(enroll<span class="sc">$</span>GER), <span class="at">by =</span> <span class="fl">0.01</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">GER_binary =</span> <span class="fu">ifelse</span>(GER <span class="sc">&lt;</span> <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in your interaction model object below for ___</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>newdat<span class="sc">$</span>NER <span class="ot">&lt;-</span> <span class="fu">predict</span>(___, <span class="at">newdata =</span> newdat)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> enroll, <span class="fu">aes</span>(GER, NER)) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> newdat, <span class="fu">aes</span>(GER, NER), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-5-visualize-interaction-term---bikes" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5-visualize-interaction-term---bikes">Exercise 5: Visualize Interaction Term - Bikes</h2>
-<p>Recall that we are now interested in how season impacts the relationship between actual temperature and number of total riders. Make an appropriate visualization (consider number of total riders as your outcome variable) to display this impact. Comment on what you notice from the visual.</p>
-</section>
-<section id="exercise-6-model-statement-and-fitting" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6-model-statement-and-fitting">Exercise 6: Model statement and fitting</h2>
-<p>Write a model statement in the form <span class="math inline">\(E[Y | X, Z] = ...\)</span> in context, that would allow us to answer the research question we’re interested in. Additionally, note which regression coefficient will be the relevant one to interpret that will directly address our research question.</p>
-<p>Fit this multiple linear regression model.</p>
-</section>
-<section id="exercise-7-interpretation-and-conclusions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7-interpretation-and-conclusions">Exercise 7: Interpretation and Conclusions</h2>
-<p>Interpret the regression coefficient you noted would directly address the research question we’re interested in. <em>Make sure to use appropriate causation vs.&nbsp;association language, include units, and talk about averages rather than individual cases.</em></p>
-<p>Write a paragraph conclusion about the results of your analysis, fit for a news article. Does season appear to meaningfully impact the relationship between actual temperature and number of total riders? What impact would this have on cities looking to start bikeshare programs? Should more bikes be provided or expected in certain seasons based on temperature conditions? Explain why or why not.</p>
+<section id="exercise-4-ethical-considerations-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-ethical-considerations-1">Exercise 4: Ethical considerations</h2>
+<ol type="a">
+<li>Visit <a href="https://mchankins.wordpress.com/2013/04/21/still-not-significant-2/">this page</a> and look at both the comic at the top and the various ways in which researchers have described p-values that do not fall below the <span class="math inline">\(\alpha = 0.05\)</span> significance level threshold. What ethical consideration is arising here? (Just for fun: a related <a href="https://xkcd.com/1478/">xkcd comic</a>)</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> The comic is an illustration of something called the <strong>file drawer phenomenon</strong>. There is a culture that has arisen when using hypothesis testing in statistical analysis to only appreciate rejections of the null hypothesis as meaningful results. Any results for which investigators were not able to reject the null were filed away, never to be reported. Investigators would keep trying until their p-values were lower than the significance level.</p>
+<p>There are serious ethical considerations behind this phenomenon. Who ever said that rejecting the null hypothesis was the only way to get meaningful scientific results? <em>There is immense benefit in knowing when there are no effects / no relationships.</em> A very important public health example of this is the relationships between vaccination and autism risk in children. Time and time again, studies have not been able to detect any causal relationship. What would our society look like if those “null” results had been filed away, never to be reported?</p>
+</blockquote>
+<ol start="2" type="a">
+<li>Take a look at the xkcd comic <a href="https://xkcd.com/882/">here</a>. What ethical consideration is arising here?</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Response:</strong> The idea here is that many, many hypothesis tests are being conducted, which is an idea called <strong>multiple testing</strong>. As more and more tests are being conducted, there is a higher and higher overall chance that the null hypothesis will be rejected - because we’re just trying so many times. If the null hypothesis is in fact true, testing more and more times is going to increase the probability of making at least one type 1 error.</p>
+<p>In this comic, we would likely be inclined to believe that the null hypothesis is true (no true association between jelly bean eating and acne). But the sheer number of times that this hypothesis was tested (20 times) means that the scientists ended up finding an association just by chance. That is, the association found for green jelly beans was quite likely a type 1 error. And in fact one null hypothesis rejection among 20 tests is exactly a 5% error rate - in other words, exactly the number of null hypothesis rejections we would expect to make if indeed the null were true (exactly the expected number of type 1 errors).</p>
+</blockquote>
 
 
 </section>

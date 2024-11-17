@@ -1,7 +1,6 @@
 ---
 title: "Multiple linear regression: interaction terms practice"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

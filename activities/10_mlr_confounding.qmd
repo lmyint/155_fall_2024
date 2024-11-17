@@ -1,7 +1,6 @@
 ---
 title: "Confounding variables"
 subtitle: "Notes and in-class exercises"
-sidebar: false
 ---
 
 # Notes

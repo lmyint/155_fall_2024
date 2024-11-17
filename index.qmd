@@ -1,7 +1,6 @@
 ---
 title: "STAT 155: Introduction to Statistical Modeling"
 subtitle: "Section 1 (Fall 2024)"
-sidebar: false
 ---
 
 <img src="images/stat155_hex.png" width=300 style="float: right; padding-left: 20px; padding-bottom: 20px;">

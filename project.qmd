@@ -1,6 +1,5 @@
 ---
 title: "Project"
-sidebar: false
 ---
 
 A detailed description of the group project can be found [here](https://docs.google.com/document/d/1GpwqXcdKkyB9ctmUu54X4ukruu_WHNKJE0nkdVu041g/edit?usp=sharing). Important dates and key information are listed below.

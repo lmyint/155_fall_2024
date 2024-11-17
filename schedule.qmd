@@ -1,6 +1,5 @@
 ---
 title: "Schedule"
-sidebar: false
 html-table-processing: none
 ---
 
@@ -156,7 +155,10 @@ html-table-processing: none
     <td class="topleft">
         Work day
     </td>
-    <td class="topleft"><b>PP7 due Friday 11/15 at 5pm</b></td>
+    <td class="topleft">
+        <b>PP7 due Friday 11/15 at 5pm</b><br>
+        <b>Quiz 2 + PP corrections and reflection due Monday 11/18 at 5pm</b>
+    </td>
   </tr>
   <tr>
     <td class="topleft">12 (11/18 - 11/22)</td>
@@ -169,9 +171,24 @@ html-table-processing: none
         <b>Checkpoint 17 due 11:30am<b>
     </td>
     <td class="topleft">
-        Discussion: ASA statement on p-values
+        Discussion: p-values in practice<br>
+        See <a href="https://moodle.macalester.edu/mod/url/view.php?id=146408">this document</a> for assigned reading.
     </td>
-    <td class="topleft"><b>PP8 due Friday 11/22 at 5pm</b></td>
+    <td class="topleft">
+        <b>PP8 due Friday 11/22 at 5pm</b><br>
+        <b>Project Checkpoint 2 due Tuesday 11/26 at 5pm</b>
+    </td>
+  </tr>
+  <tr>
+    <td class="topleft">13 (11/25 - 11/29)</td>
+    <td class="topleft">
+        Review activity
+    </td>
+    <td class="topleft" colspan=2>
+        🦃 Thanksgiving Break 11/27 - 12/1 🦃
+    </td>
+    <td class="topleft">
+    </td>
   </tr>
 </tbody>
 </table>
@@ -473,7 +490,7 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 11: 11/11 - 11/15 (Hypothesis testing)"}
+::: {.callout-tip icon=false collapse="true" title="Week 11: 11/11 - 11/15 (Hypothesis testing)"}
 #### Announcements
 
 - [Quiz 2 + PP reflection and revisions](https://moodle.macalester.edu/mod/assign/view.php?id=145215) due Monday 11/18 at 5pm
@@ -512,17 +529,26 @@ Before class:
 - Practice Problems #8 (PP8) due Friday 11/22 at 5pm
 - [Project Checkpoint 2](https://moodle.macalester.edu/mod/assign/view.php?id=145171) due Tuesday 11/26 at 5pm
 
-#### Monday
+#### Monday (11/18)
 
 Before class:
 
-#### Wednesday
+- Review material as needed
+- No checkpoint today!
+
+#### Wednesday (11/20)
 
 Before class:
 
-#### Friday
+- Complete today's [checkpoint](https://moodle.macalester.edu/mod/quiz/view.php?id=135660) (CP17) on Moodle.
+    - See checkpoint description for links to the readings/videos.
+    - Due 30 minutes before class today (11:30am).
+
+#### Friday (11/22)
 
 Before class:
+
+- Please look in [this document](https://moodle.macalester.edu/mod/url/view.php?id=146408) to find an assigned reading for today's class.
 
 :::
 
@@ -535,13 +561,8 @@ Before class:
 
 Before class:
 
-#### Wednesday
-
-Before class:
-
-#### Friday
-
-Before class:
+- Review material as needed
+- No checkpoint today!
 
 :::
 
