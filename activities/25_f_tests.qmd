@@ -1,0 +1,539 @@
+---
+title: "Nested Models & F-Tests"
+subtitle: "Notes and in-class exercises"
+---
+
+# Notes
+
+- You can download a template file to work with [here](../activity_templates/25_f_tests.qmd).
+- **File organization:** Save this file in the "Activities" subfolder of your "STAT155" folder.
+
+## Learning goals
+
+By the end of this activity, you should be able to:
+
+- Determine if one model is nested within another
+- Determine which null and alternative hypotheses require an f-test
+- Determine which f-tests require the use of the `anova` function in R vs. the overall f-test given in regular regression output
+- Interpret the results of an f-test in context
+
+## Readings and videos
+
+Please read the following notes **before** class:
+
+- Reading: Section 7.3.4 in the [STAT 155 Notes](https://mac-stat.github.io/Stat155Notes/)
+
+## Discussion
+
+### Nested models
+
+"Nested models" are models where the covariates of one model are a subset of another model.
+
+As an example, consider the following models for estimating the association between forced expiratory volume (FEV) and smoking status:
+
+**Model 1:**
+
+$$
+E[FEV \mid smoke] = \beta_0 + \beta_1 smoke
+$$
+
+**Model 2:**
+
+$$
+E[FEV \mid smoke, age] = \beta_0 + \beta_1 smoke + \beta_2 age
+$$
+
+Here, Model 1 is "nested" inside Model 2, since the covariates included in Model 1 (only *smoke*) are a subset of those in Model 2 (both *smoke* and *age*).
+
+An example of non-nested models are...
+
+**Model 3:**
+
+$$
+E[FEV \mid smoke, height] = \beta_0 + \beta_1 smoke + \beta_2 height
+$$
+
+**Model 4:**
+
+$$
+E[FEV \mid smoke, sex] = \beta_0 + \beta_1 smoke + \beta_2 sex
+$$
+
+Here, even though Model 3 and Model 4 both contain *smoke* as explanatory variables, neither is nested in the other, since *sex* is not a part of Model 3, and *height* is not a part of Model 4.
+
+
+**Why should we care about nested models?**
+
+Comparing nested models provides us a way of looking at the usefulness of multiple coefficients at the same time. Looking at multiple coefficients is relevant when...
+
+- we are adding a single categorical predictor with >2 categories to a model
+- we are adding several different predictors to a model
+
+### Example: house prices
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+homes <- read_csv("https://mac-stat.github.io/data/homes.csv")
+homes <- homes %>% 
+    mutate(across(c(Fuel.Type, Heat.Type, Sewer.Type), factor))
+```
+
+**Research question:** Does fuel type provide meaningful additional information on house price after considering square footage (`Living.Area`) and `Age`?
+
+- How can we use adjusted R-squared to answer this question? (Why would we use adjusted R-squared instead of multiple R-squared?)
+
+```{r}
+homes_mod_small <- lm(Price ~ Living.Area + Age, data = homes)
+homes_mod_large <- lm(Price ~ Living.Area + Age + Fuel.Type, data = homes)
+summary(homes_mod_small)
+summary(homes_mod_large)
+```
+We can also use the `anova()` function to approach our research question:
+
+```{r}
+anova(homes_mod_small, homes_mod_large)
+```
+
+- Null and alternative hypotheses:
+    - $H_0$: There is NO relationship between fuel type and house price after accounting for house size and age.
+    - $H_A$: There IS a relationship between fuel type and house price after accounting for house size and age.
+- Test statistic: 7.57
+    - The number in row 2 in the F column.
+    - Doesn't have a nice interpretation as "standard errors away from the null" like we do when testing single coefficients.
+    - Null value is 1 because the F statistic is a ratio of variances.
+- P-value: 0.000533
+    - The number in row 2 in the Pr(>F) column.
+    - We'll use a significance level of 0.05.
+    - Because this p-value is less than our significance level, we would reject the null hypothesis: we do have evidence for a relationship between fuel type and house price after accounting for house size and age.
+
+### Example: résumés
+
+We are interested in exploring résumé characteristics that relate to the odds of an applicant receiving a callback.
+
+```{r}
+resume <- read_csv("https://mac-stat.github.io/data/resume.csv")
+```
+
+**Research question:** Does the collective presence of special skills and computer skills provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender?
+
+```{r}
+resume_mod_small <- glm(received_callback ~ race + gender, data = resume, family = "binomial")
+resume_mod_large <- glm(received_callback ~ race + gender + special_skills + computer_skills, data = resume, family = "binomial")
+
+anova(resume_mod_small, resume_mod_large)
+```
+
+- Null and alternative hypotheses:
+    - $H_0$: Special skills and computer skills collectively DO NOT provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+    - $H_A$: Special skills and computer skills collectively DO provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+- Test statistic: 60.233
+    - The number in row 2 in the Deviance column.
+    - Doesn't have a nice interpretation as "standard errors away from the null" like we do when testing single coefficients.
+    - Null value is 1 because this statistic is a ratio of likelihoods.
+- P-value: 8.328e-14
+    - The number in row 2 in the Pr(>Chi) column.
+    - We'll use a significance level of 0.05.
+    - Because this p-value is less than our significance level, we would reject the null hypothesis: we do have evidence that special skills and computer skills collectively provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+
+
+
+
+# Exercises
+
+## Exercise 1: Nested Models
+
+a. Which of the following models are nested in the model $E[A \mid B, C, D] = \beta_0 + \beta_1 D + \beta_2 B + \beta_3 C + \beta_4 B * C$?
+
+- Model 1: $E[A \mid B] = \beta_0 + \beta_1 B$
+- Model 2: $E[A \mid B, D] = \beta_0 + \beta_1 B + \beta_2 D$
+- Model 3: $E[B \mid C] = \beta_0 + \beta_1 C$
+- Model 4: $E[A \mid B, C, D] = \beta_0 + \beta_1 B + \beta_2 C + \beta_3 D$
+- Model 5: $E[A \mid B, C, D] = \beta_0 + \beta_1 C + \beta_2 B + \beta_3 D + \beta_4 B * D$
+- Model 6: $E[A \mid D] = \beta_0 + \beta_1 D$
+
+b. Consider the following models involving variables A, B, C, and D:
+
+- Model 1: $E[A \mid B] = \beta_0 + \beta_1 B$
+- Model 2: $E[A \mid B, C] = \beta_0 + \beta_1 B + \beta_2 C$
+- Model 3: $E[A \mid B, C] = \beta_0 + \beta_1 B + \beta_2 C + \beta_3 BC$
+- Model 4: $E[A \mid C, D] = \beta_0 + \beta_1 C + \beta_2 D$
+- Model 5: $E[B \mid A] = \beta_0 + \beta_1 A$
+- Model 6: $E[B \mid A, C] = \beta_0 + \beta_1 A + \beta_2 C + \beta_3 AC$
+
+Determine for each of the following statements whether that statement is True or False.
+
+- Model 1 is nested in Model 2
+- Model 1 is nested in Model 3
+- Model 1 is nested in Model 4
+- Model 2 is nested in Model 3
+- Model 3 is nested in Model 2
+- Model 2 is nested in Model 6
+
+c. What is one (numeric) way to compare nested models? Explain how you would determine which model is "better" based on this metric.
+
+
+## Exercise 2: F-Tests
+
+This exercise involves the `MacGrades.csv` dataset, which contains a sub-sample (to help preserve anonymity) of every grade assigned to a former Macalester graduating class. For each of the 6414 rows of data, the following information is provided (with a few missing values):
+
+- `sessionID`: A section ID number
+- `sid`: A student ID number
+- `grade`: The grade obtained, as a numerical value (i.e. an A is a 4, an A- is a 3.67, etc.)
+- `dept`: A department identifier (these have been made ambiguous to maintain anonymity)
+- `level`: The course level (e.g. 100-, 200-, 300-, and 600-)
+- `sem`: A semester identifier
+- `enroll`: The section enrollment
+- `iid`: An instructor identifier (these have been made ambiguous to maintain anonymity)
+
+```{r, warning = FALSE, message = FALSE}
+# load necessary packages
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# load datasets
+MacGrades <- read_csv("https://mac-stat.github.io/data/MacGrades.csv")
+```
+
+
+a. Hypothesize the relationships between the variables in the dataset. Your response should include at least five sentences, at a minimum. If you find it useful, you may also draw a DAG for this question.
+
+> **Response** Put your response here
+
+b. Explore the relationship between course grades and other variables in the data. Make at least four visualizations, *and* describe any patterns you observe.
+
+
+c. Note that the `level` variable is currently quantitative. For this activity, we'd like to treat it as categorical. Create a new variable `level_cat` so that we can consider level categorically in the following analysis.
+
+
+d. Suppose we are interested in the relationship between course level (categorical) and student grades. Using grade as your outcome variable, fit a linear regression model to investigate this question.
+
+
+Comment on the nature of the relationship between course level and student grades (this should not be a coefficient interpretation, but instead a description of a general trend, or lack thereof).
+
+
+e. State the null and alternative hypotheses associated with the research question in part (d).
+
+$$
+H_0: 
+$$
+
+$$
+H_1:
+$$
+
+f. What is the p-value associated with this hypothesis test? Do we have enough evidence to reject the null hypothesis, using a significance threshold of 0.05?
+
+
+
+g. Suppose we are interested in the relationship between course enrollment and student grades. Again, use grade as your outcome variable, and fit a linear regression model to investigate this question.
+
+
+h. State the null and alternative hypotheses associated with the research question in part (g).
+
+$$
+H_0: 
+$$
+
+$$
+H_1:
+$$
+
+i. What is the p-value associated with this hypothesis test? Do we have enough evidence to reject the null hypothesis, using a significance threshold of 0.05?
+
+
+j. Do we need to conduct a *nested* F-test using the `anova` function to complete our hypothesis testing procedure for the research question posed in part (g)? Explain why or why not.
+
+
+## Exercise 3: More F-tests
+
+
+a. Suppose we are now interested in the association between course grade and enrollment for classes of the same level. Write a model statement in the form $E[Y | X] = ...$ that will produce a statistical model that will allow us to answer our scientific question. Replace Y and X, where appropriate, with response and predictor variables. 
+
+$$
+E[Y | X] = ___
+$$
+
+Which coefficient(s) in your model is the one that is relevant to your research question?
+
+
+b. What are the relevant null and alternative hypotheses that address the scientific question in part (a)?
+
+
+
+c. Fit the model you wrote in part (a), calculate a p-value, and report the results of the hypothesis test in part (b). 
+
+
+
+
+## Reflection
+
+F-tests are useful when the null hypothesis you wish to test is such that *more than one* covariate is simultaneously equal to a specific number (typically zero). What scenarios, outside of those shown in this example, can you think of where a relevant scientific hypothesis you want to test involves more than one covariate being simultaneously equal to zero?
+
+> **Response** Put your response here.
+
+# Additional Practice
+
+## Exercise 4
+
+Repeat Exercise 3, supposing we are instead interested in the association between course grade and course level for classes of the same enrollment.
+
+## Exercise 5: Reference categories
+
+Our final research question pertains to whether or not there is a relationship between course grade and department. Again, use course grade as the outcome variable in your linear regression model.
+
+a. State the null and alternative hypotheses *in colloquial language* associated with the relevant hypothesis test.
+
+H0:
+
+H1:
+
+b. Fit a linear regression model, and conduct your hypothesis testing procedure to answer the research question posed in this Exercise. State your conclusions accordingly (you do not need to interpret any regression coefficients, just state and interpret the results of your hypothesis test!).
+
+c. Are any of the individual department p-values significant?
+
+What do these p-values tell us, and why is this *not* contradictory to your answer in part (b)?
+
+
+
+
+
+<br><br><br><br><br><br>
+
+# Solutions
+
+## Exercise 1: Nested Models
+
+a. Models 1, 2, 4 and 6.
+
+b. 
+
+- Model 1 is nested in Model 2 TRUE
+- Model 1 is nested in Model 3 TRUE
+- Model 1 is nested in Model 4 FALSE
+- Model 2 is nested in Model 3 TRUE
+- Model 3 is nested in Model 2 FALSE
+- Model 2 is nested in Model 6 FALSE
+
+c. You could compare the Adjusted $R^2$ values from each model, and note that the one with a higher adjusted $R^2$ is better by this metric. Multiple $R^2$ would *not* be a good metric, because the larger model (within the nesting structure) will *always* have a higher $R^2$ value.
+
+
+## Exercise 2: F-Tests
+
+
+a. It is reasonable to assume that course grade varies by department as well as course level and instructor. Certain instructors may grade more strictly (or curve more) than others, and similarly, this can vary across department due to cultural norms within the department. As the level of a course gets higher, I would expect grades to perhaps get lower, since courses with higher numbers are expected to be more difficult. Then again, students perhaps “care” more about such courses, and may put in more effort to get a higher grade. I doubt semester plays a significant role in determining course grades, though it is possible that Fall semester first-years or Spring semester seniors have worse grades, on average. We don’t have course year as a variable in our data, so we would be unable to examine this relationship. As enrollment in a course goes up, I would expect grades to decrease, since professors have less time to dedicate to individual students when course enrollment is high.
+
+b. Explore the relationship between course grades and other variables in the data. Make at least four visualizations, *and* describe any patterns you observe.
+
+```{r, message = FALSE, warning = FALSE}
+library(stringr)
+# Exploratory plots
+
+# course grade vs. enrollment
+MacGrades %>%
+  ggplot(aes(enroll, grade)) +
+  geom_jitter() +
+  theme_classic() +
+  ggtitle("Course grades by enrollment numbers")
+
+# course grade vs. level
+MacGrades %>%
+  mutate(level = factor(level)) %>%
+  ggplot(aes(y = grade, x = level)) +
+  geom_boxplot() +
+  ggtitle("Course grades by course level")
+
+# course grade vs. level (treating grade as categorical)
+MacGrades %>%
+  filter(!is.na(grade)) %>%
+  mutate(level = factor(level),
+         grade = factor(grade)) %>%
+  ggplot(aes(x = level, fill = grade)) +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d(option = "H") +
+  theme_classic() +
+  ggtitle("Course grades by course level")
+
+# course grade vs. semester
+MacGrades %>%
+  filter(!is.na(grade)) %>%
+  mutate(grade = factor(grade)) %>%
+  ggplot(aes(x = sem, fill = grade)) +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d(option = "H") +
+  theme_classic() +
+  ggtitle("Course grades by semester") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Let's do something fancy and check out how grades have changed over time... this will require
+# some string manipulation
+
+MacGrades$year <- MacGrades$sem %>%
+  str_replace("FA", "") %>%
+  str_replace("SP", "") %>%
+  str_replace("S1", "") %>%
+  str_replace("S2", "") %>% 
+  str_replace("IT", "") %>% as.numeric()
+
+MacGrades %>%
+  ggplot(aes(year, grade)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_classic() +
+  ggtitle("Course grades by year, with least-squares line")
+```
+
+In general, course grades seem to be associated with enrollment numbers. Specifically, when enrollments are greater than 50, we see very few students receiving a course grade lower than a 2.0, which is different than when enrollments are fewer than 50 students. There does not appear to be a clear relationship between course grade and course level, with the exception of 600-level courses. In these cases, every student received either an A or A-. It does seem like the proportion of students who received lower than a 2.67 is greater for 100-level courses than the other course levels.
+
+
+c. 
+
+```{r}
+# Make level categorical
+MacGrades <- MacGrades %>%
+  mutate(level = factor(level))
+```
+
+
+d. 
+
+```{r}
+mod <- lm(grade ~ level, data = MacGrades)
+summary(mod)
+```
+
+We observe that as course level goes up, course grades also tend to increase on average.
+
+e. State the null and alternative hypotheses associated with the research question in part (d).
+
+$$
+H_0: \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0
+$$
+
+$$
+H_1: \text{One of } \beta_1, \beta_2, \beta_3, \beta_4 \neq 0
+$$
+
+In words, the null is that there is *no* relationship between course level and course grades, and the alternative is that there is *some* relationship (either positive or negative) between course level and course grades.
+
+f. The p-value associated with this hypothesis test is 9.713 x $10^{-13}$. We do have enough evidence to reject the null hypothesis.
+
+
+g. 
+
+```{r}
+mod <- lm(grade ~ enroll, data = MacGrades)
+summary(mod)
+```
+
+
+h. 
+
+$$
+H_0: \beta_1 = 0
+$$
+
+$$
+H_1: \beta_1 \neq 0
+$$
+
+i. The p-value associated with this hypothesis test is 2.806 x $10^{-06}$. We do have enough evidence to reject the null hypothesis. Note that this p-value could be obtained from either the overall model fit or from the individual coefficient for enroll (they are the same). They may be ever so slightly different when there are few observations in your dataset, but when there are a lot, they will be exactly identical.
+
+
+j. We do *not* need to conduct an F-test, because our hypothesis test involves only a single regression coefficient, and therefore is readily obtained from the summary output of our linear model in R.
+
+
+## Exercise 3: More F-tests
+
+
+a. 
+
+$$
+E[grade | enroll, level] = \beta_0 + \beta_1 enroll + \beta_2 level200 + \beta_3 level300 + \beta_4 level400 + \beta_5 level600
+$$
+
+The relevant coefficient that answers our scientific question is $\beta_1$, or the coefficient that corresponds to enrollment.
+
+
+b. 
+
+The relevant null and alternative hypotheses are:
+
+$$
+H_0: \beta_1 = 0
+$$
+
+$$
+H_1: \beta_1 \neq 0
+$$
+We do not need to conduct an F-test to complete this hypothesis testing procedure, since our hypothesis involves only a single regression coefficient.
+
+c.  
+
+```{r}
+mod <- lm(grade ~ enroll + level, data = MacGrades)
+summary(mod)
+```
+
+We have statistically significant evidence of a relationship between enrollment and course grade, for courses of the same level (p = 0.001058). We reject the null hypothesis that there is no relationship between enrollment and course grade, adjusting for course level.
+
+
+## Exercise 4
+
+
+Our model statement is identical to that in Exercise 3, but the relevant coefficients are $\beta_2, \beta_3, \beta_4$, and $\beta_5$. 
+
+The relevant null and alternative hypotheses are:
+
+$$
+H_0: \beta_2 = \beta_3 = \beta_4 = \beta_5 = 0
+$$
+
+$$
+H_1: \text{At least one of } \beta_2, \beta_3, \beta_4, \beta_5 \neq 0
+$$
+
+We *do* need to conduct an F-test to complete this hypothesis testing procedure, since our hypothesis involves more than one regression coefficient.
+
+```{r}
+# Same model as in Question 10, we just now need to do an F-test!
+mod <- lm(grade ~ enroll + level, data = MacGrades)
+smaller_mod <- lm(grade ~ enroll, data = MacGrades)
+
+anova(smaller_mod, mod)
+```
+
+We have statistically significant evidence of a relationship between course level and course grade, for courses of the same enrollment ($p = 2.19 \times 10^{-10}$). We reject the null hypothesis that there is no relationship between course level and course grade, adjusting for enrollment.
+
+## Exercise 5: Reference categories
+
+a. 
+
+H0: There is no relationship between course grade and department.
+
+H1: There is *some* relationship between course grade and department.
+
+b. 
+
+```{r}
+mod <- lm(grade ~ dept, data = MacGrades)
+summary(mod)
+```
+
+We have statistically significant evidence of a relationship between department and course grades at a significance level of 0.05 (p-value < 2.2 x $10^{-16}$). We reject the null hypothesis that there is no relationship between course grade and department.
+
+c. 
+
+*None* of the individual p-values for department are significant! These p-values tell us about whether or not there is a statistically significant difference in course grades between each respective department and the *reference* department (Department "A"). This doesn't contradict our answer to part (b) because there are different hypothesis tests that answer different questions!
+
+
+
+
+
+
+
+
+

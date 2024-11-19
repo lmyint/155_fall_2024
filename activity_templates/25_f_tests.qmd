@@ -1,0 +1,283 @@
+---
+title: "Nested Models & F-Tests"
+subtitle: "Notes and in-class exercises"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Discussion
+
+## Nested models
+
+"Nested models" are models where the covariates of one model are a subset of another model.
+
+As an example, consider the following models for estimating the association between forced expiratory volume (FEV) and smoking status:
+
+**Model 1:**
+
+$$
+E[FEV \mid smoke] = \beta_0 + \beta_1 smoke
+$$
+
+**Model 2:**
+
+$$
+E[FEV \mid smoke, age] = \beta_0 + \beta_1 smoke + \beta_2 age
+$$
+
+Here, Model 1 is "nested" inside Model 2, since the covariates included in Model 1 (only *smoke*) are a subset of those in Model 2 (both *smoke* and *age*).
+
+An example of non-nested models are...
+
+**Model 3:**
+
+$$
+E[FEV \mid smoke, height] = \beta_0 + \beta_1 smoke + \beta_2 height
+$$
+
+**Model 4:**
+
+$$
+E[FEV \mid smoke, sex] = \beta_0 + \beta_1 smoke + \beta_2 sex
+$$
+
+Here, even though Model 3 and Model 4 both contain *smoke* as explanatory variables, neither is nested in the other, since *sex* is not a part of Model 3, and *height* is not a part of Model 4.
+
+
+**Why should we care about nested models?**
+
+Comparing nested models provides us a way of looking at the usefulness of multiple coefficients at the same time. Looking at multiple coefficients is relevant when...
+
+- we are adding a single categorical predictor with >2 categories to a model
+- we are adding several different predictors to a model
+
+## Example: house prices
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+homes <- read_csv("https://mac-stat.github.io/data/homes.csv")
+homes <- homes %>% 
+    mutate(across(c(Fuel.Type, Heat.Type, Sewer.Type), factor))
+```
+
+**Research question:** Does fuel type provide meaningful additional information on house price after considering square footage (`Living.Area`) and `Age`?
+
+- How can we use adjusted R-squared to answer this question? (Why would we use adjusted R-squared instead of multiple R-squared?)
+
+```{r}
+homes_mod_small <- lm(Price ~ Living.Area + Age, data = homes)
+homes_mod_large <- lm(Price ~ Living.Area + Age + Fuel.Type, data = homes)
+summary(homes_mod_small)
+summary(homes_mod_large)
+```
+We can also use the `anova()` function to approach our research question:
+
+```{r}
+anova(homes_mod_small, homes_mod_large)
+```
+
+- Null and alternative hypotheses:
+    - $H_0$: There is NO relationship between fuel type and house price after accounting for house size and age.
+    - $H_A$: There IS a relationship between fuel type and house price after accounting for house size and age.
+- Test statistic: 7.57
+    - The number in row 2 in the F column.
+    - Doesn't have a nice interpretation as "standard errors away from the null" like we do when testing single coefficients.
+    - Null value is 1 because the F statistic is a ratio of variances.
+- P-value: 0.000533
+    - The number in row 2 in the Pr(>F) column.
+    - We'll use a significance level of 0.05.
+    - Because this p-value is less than our significance level, we would reject the null hypothesis: we do have evidence for a relationship between fuel type and house price after accounting for house size and age.
+
+## Example: résumés
+
+We are interested in exploring résumé characteristics that relate to the odds of an applicant receiving a callback.
+
+```{r}
+resume <- read_csv("https://mac-stat.github.io/data/resume.csv")
+```
+
+**Research question:** Does the collective presence of special skills and computer skills provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender?
+
+```{r}
+resume_mod_small <- glm(received_callback ~ race + gender, data = resume, family = "binomial")
+resume_mod_large <- glm(received_callback ~ race + gender + special_skills + computer_skills, data = resume, family = "binomial")
+
+anova(resume_mod_small, resume_mod_large)
+```
+
+- Null and alternative hypotheses:
+    - $H_0$: Special skills and computer skills collectively DO NOT provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+    - $H_A$: Special skills and computer skills collectively DO provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+- Test statistic: 60.233
+    - The number in row 2 in the Deviance column.
+    - Doesn't have a nice interpretation as "standard errors away from the null" like we do when testing single coefficients.
+    - Null value is 1 because this statistic is a ratio of likelihoods.
+- P-value: 8.328e-14
+    - The number in row 2 in the Pr(>Chi) column.
+    - We'll use a significance level of 0.05.
+    - Because this p-value is less than our significance level, we would reject the null hypothesis: we do have evidence that special skills and computer skills collectively provide meaningful additional information on the odds of receiving a callback after considering an applicant's inferred race and gender.
+
+
+
+
+# Exercises
+
+## Exercise 1: Nested Models
+
+a. Which of the following models are nested in the model $E[A \mid B, C, D] = \beta_0 + \beta_1 D + \beta_2 B + \beta_3 C + \beta_4 B * C$?
+
+- Model 1: $E[A \mid B] = \beta_0 + \beta_1 B$
+- Model 2: $E[A \mid B, D] = \beta_0 + \beta_1 B + \beta_2 D$
+- Model 3: $E[B \mid C] = \beta_0 + \beta_1 C$
+- Model 4: $E[A \mid B, C, D] = \beta_0 + \beta_1 B + \beta_2 C + \beta_3 D$
+- Model 5: $E[A \mid B, C, D] = \beta_0 + \beta_1 C + \beta_2 B + \beta_3 D + \beta_4 B * D$
+- Model 6: $E[A \mid D] = \beta_0 + \beta_1 D$
+
+b. Consider the following models involving variables A, B, C, and D:
+
+- Model 1: $E[A \mid B] = \beta_0 + \beta_1 B$
+- Model 2: $E[A \mid B, C] = \beta_0 + \beta_1 B + \beta_2 C$
+- Model 3: $E[A \mid B, C] = \beta_0 + \beta_1 B + \beta_2 C + \beta_3 BC$
+- Model 4: $E[A \mid C, D] = \beta_0 + \beta_1 C + \beta_2 D$
+- Model 5: $E[B \mid A] = \beta_0 + \beta_1 A$
+- Model 6: $E[B \mid A, C] = \beta_0 + \beta_1 A + \beta_2 C + \beta_3 AC$
+
+Determine for each of the following statements whether that statement is True or False.
+
+- Model 1 is nested in Model 2
+- Model 1 is nested in Model 3
+- Model 1 is nested in Model 4
+- Model 2 is nested in Model 3
+- Model 3 is nested in Model 2
+- Model 2 is nested in Model 6
+
+c. What is one (numeric) way to compare nested models? Explain how you would determine which model is "better" based on this metric.
+
+
+## Exercise 2: F-Tests
+
+This exercise involves the `MacGrades.csv` dataset, which contains a sub-sample (to help preserve anonymity) of every grade assigned to a former Macalester graduating class. For each of the 6414 rows of data, the following information is provided (with a few missing values):
+
+- `sessionID`: A section ID number
+- `sid`: A student ID number
+- `grade`: The grade obtained, as a numerical value (i.e. an A is a 4, an A- is a 3.67, etc.)
+- `dept`: A department identifier (these have been made ambiguous to maintain anonymity)
+- `level`: The course level (e.g. 100-, 200-, 300-, and 600-)
+- `sem`: A semester identifier
+- `enroll`: The section enrollment
+- `iid`: An instructor identifier (these have been made ambiguous to maintain anonymity)
+
+```{r, warning = FALSE, message = FALSE}
+# load necessary packages
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# load datasets
+MacGrades <- read_csv("https://mac-stat.github.io/data/MacGrades.csv")
+```
+
+
+a. Hypothesize the relationships between the variables in the dataset. Your response should include at least five sentences, at a minimum. If you find it useful, you may also draw a DAG for this question.
+
+> **Response** Put your response here
+
+b. Explore the relationship between course grades and other variables in the data. Make at least four visualizations, *and* describe any patterns you observe.
+
+
+c. Note that the `level` variable is currently quantitative. For this activity, we'd like to treat it as categorical. Create a new variable `level_cat` so that we can consider level categorically in the following analysis.
+
+
+d. Suppose we are interested in the relationship between course level (categorical) and student grades. Using grade as your outcome variable, fit a linear regression model to investigate this question.
+
+
+Comment on the nature of the relationship between course level and student grades (this should not be a coefficient interpretation, but instead a description of a general trend, or lack thereof).
+
+
+e. State the null and alternative hypotheses associated with the research question in part (d).
+
+$$
+H_0: 
+$$
+
+$$
+H_1:
+$$
+
+f. What is the p-value associated with this hypothesis test? Do we have enough evidence to reject the null hypothesis, using a significance threshold of 0.05?
+
+
+
+g. Suppose we are interested in the relationship between course enrollment and student grades. Again, use grade as your outcome variable, and fit a linear regression model to investigate this question.
+
+
+h. State the null and alternative hypotheses associated with the research question in part (g).
+
+$$
+H_0: 
+$$
+
+$$
+H_1:
+$$
+
+i. What is the p-value associated with this hypothesis test? Do we have enough evidence to reject the null hypothesis, using a significance threshold of 0.05?
+
+
+j. Do we need to conduct a *nested* F-test using the `anova` function to complete our hypothesis testing procedure for the research question posed in part (g)? Explain why or why not.
+
+
+## Exercise 3: More F-tests
+
+
+a. Suppose we are now interested in the association between course grade and enrollment for classes of the same level. Write a model statement in the form $E[Y | X] = ...$ that will produce a statistical model that will allow us to answer our scientific question. Replace Y and X, where appropriate, with response and predictor variables. 
+
+$$
+E[Y | X] = ___
+$$
+
+Which coefficient(s) in your model is the one that is relevant to your research question?
+
+
+b. What are the relevant null and alternative hypotheses that address the scientific question in part (a)?
+
+
+
+c. Fit the model you wrote in part (a), calculate a p-value, and report the results of the hypothesis test in part (b). 
+
+
+
+
+## Reflection
+
+F-tests are useful when the null hypothesis you wish to test is such that *more than one* covariate is simultaneously equal to a specific number (typically zero). What scenarios, outside of those shown in this example, can you think of where a relevant scientific hypothesis you want to test involves more than one covariate being simultaneously equal to zero?
+
+> **Response** Put your response here.
+
+# Additional Practice
+
+## Exercise 4
+
+Repeat Exercise 3, supposing we are instead interested in the association between course grade and course level for classes of the same enrollment.
+
+## Exercise 5: Reference categories
+
+Our final research question pertains to whether or not there is a relationship between course grade and department. Again, use course grade as the outcome variable in your linear regression model.
+
+a. State the null and alternative hypotheses *in colloquial language* associated with the relevant hypothesis test.
+
+H0:
+
+H1:
+
+b. Fit a linear regression model, and conduct your hypothesis testing procedure to answer the research question posed in this Exercise. State your conclusions accordingly (you do not need to interpret any regression coefficients, just state and interpret the results of your hypothesis test!).
+
+c. Are any of the individual department p-values significant?
+
+What do these p-values tell us, and why is this *not* contradictory to your answer in part (b)?
+
