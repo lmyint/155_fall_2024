@@ -123,7 +123,7 @@ resume <- read_csv("https://mac-stat.github.io/data/resume.csv")
 resume_mod_small <- glm(received_callback ~ race + gender, data = resume, family = "binomial")
 resume_mod_large <- glm(received_callback ~ race + gender + special_skills + computer_skills, data = resume, family = "binomial")
 
-anova(resume_mod_small, resume_mod_large)
+anova(resume_mod_small, resume_mod_large, test = "LRT")
 ```
 
 - Null and alternative hypotheses:
