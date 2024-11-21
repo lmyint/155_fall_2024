@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Multiple linear regression: model building (part 1) – STAT 155</title>
+<title>P-value Discussion – STAT 155</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/13_mlr_model_building_1.html">Multiple linear regression: model building (part 1)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/26_p_values_discussion.html">P-value Discussion</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -206,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../activities/13_mlr_model_building_1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../activities/13_mlr_model_building_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Multiple linear regression: model building (part 1)</span></a>
   </div>
 </li>
@@ -284,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../activities/26_p_values_discussion.html" class="sidebar-item-text sidebar-link">
+  <a href="../activities/26_p_values_discussion.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">P-value Discussion</span></a>
   </div>
 </li>
@@ -373,23 +373,13 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#notes" id="toc-notes" class="nav-link active" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
-  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
   <li><a href="#readings-and-videos" id="toc-readings-and-videos" class="nav-link" data-scroll-target="#readings-and-videos">Readings and videos</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a>
   <ul class="collapse">
-  <li><a href="#exercise-1-descriptive-research-questions" id="toc-exercise-1-descriptive-research-questions" class="nav-link" data-scroll-target="#exercise-1-descriptive-research-questions">Exercise 1: Descriptive research questions</a></li>
-  <li><a href="#exercise-2-predictive-research-questions" id="toc-exercise-2-predictive-research-questions" class="nav-link" data-scroll-target="#exercise-2-predictive-research-questions">Exercise 2: Predictive research questions</a></li>
-  <li><a href="#exercise-3-causal-research-questions" id="toc-exercise-3-causal-research-questions" class="nav-link" data-scroll-target="#exercise-3-causal-research-questions">Exercise 3: Causal research questions</a></li>
-  <li><a href="#exercise-4-cultivating-curiosity" id="toc-exercise-4-cultivating-curiosity" class="nav-link" data-scroll-target="#exercise-4-cultivating-curiosity">Exercise 4: Cultivating curiosity</a></li>
-  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
-  <li><a href="#render-your-work" id="toc-render-your-work" class="nav-link" data-scroll-target="#render-your-work">Render your work</a></li>
-  </ul></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a>
-  <ul class="collapse">
-  <li><a href="#exercise-1-descriptive-research-questions-1" id="toc-exercise-1-descriptive-research-questions-1" class="nav-link" data-scroll-target="#exercise-1-descriptive-research-questions-1">Exercise 1: Descriptive research questions</a></li>
-  <li><a href="#exercise-2-predictive-research-questions-1" id="toc-exercise-2-predictive-research-questions-1" class="nav-link" data-scroll-target="#exercise-2-predictive-research-questions-1">Exercise 2: Predictive research questions</a></li>
-  <li><a href="#exercise-3-causal-research-questions-1" id="toc-exercise-3-causal-research-questions-1" class="nav-link" data-scroll-target="#exercise-3-causal-research-questions-1">Exercise 3: Causal research questions</a></li>
+  <li><a href="#step-1-review" id="toc-step-1-review" class="nav-link" data-scroll-target="#step-1-review">Step 1: Review</a></li>
+  <li><a href="#step-2-discuss" id="toc-step-2-discuss" class="nav-link" data-scroll-target="#step-2-discuss">Step 2: Discuss</a></li>
+  <li><a href="#step-3-share-out" id="toc-step-3-share-out" class="nav-link" data-scroll-target="#step-3-share-out">Step 3: Share out</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -397,9 +387,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/13_mlr_model_building_1.html">Multiple linear regression: model building (part 1)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../activities/01_foundations_welcome.html">Activities</a></li><li class="breadcrumb-item"><a href="../activities/26_p_values_discussion.html">P-value Discussion</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Multiple linear regression: model building (part 1)</h1>
+<h1 class="title">P-value Discussion</h1>
 <p class="subtitle lead">Notes and in-class exercises</p>
 </div>
 
@@ -419,148 +409,41 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="notes" class="level1">
 <h1>Notes</h1>
-<section id="learning-goals" class="level2">
-<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
-<p>By the end of this lesson, you should be able to:</p>
-<ul>
-<li>Iterate on a broad research question to make it more precise and answerable</li>
-<li>Choose appropriate models for addressing a research question</li>
-</ul>
-</section>
+<p>In this activity, you will read an article about p-values and then discuss a set of prompts as a group. Each group will then share out some highlights of your discussion to the class.</p>
 <section id="readings-and-videos" class="level2">
 <h2 class="anchored" data-anchor-id="readings-and-videos">Readings and videos</h2>
-<p>Please watch the following video <strong>before</strong> class.</p>
+<p>Your instructor will assign you to one of four groups, each with a different reading to complete ahead of class time. You are of course welcome to read more than only your assigned reading if you choose to! The group reading assignments are as follows:</p>
 <ul>
-<li>Video: <a href="https://voicethread.com/share/15362352/">Causal Diagrams and Confounding Variables</a></li>
+<li>Group 1: <a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108">The ASA Statement on p-values</a></li>
+<li>Group 2: <a href="https://www.nature.com/news/scientific-method-statistical-errors-1.14700">Scientific method: Statistical error</a></li>
+<li>Group 3: <a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2019.1583913">Moving to a World Beyond “p &lt; 0.05”</a></li>
+<li>Group 4: <a href="https://drive.google.com/file/d/1dW6G8gO4PGAZP-cTf7w2EC29hmHbvdOq/view?usp=sharing">Statistical tests, p-values, confidence intervals, and power: a guide to misinterpretations</a></li>
 </ul>
-<!--
-DISCUSSION SECTION
-
-Review the ideas of confounder, effect modifier, precision, collider variables from the video. 
-
-Have them work on Exercises 1 and 2 for about 15 minutes, then recap together.
-
-Have them work on Exercises 3 and 4 for about 15 minutes, then recap together.
-
--->
 </section>
 </section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="exercise-1-descriptive-research-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-descriptive-research-questions">Exercise 1: Descriptive research questions</h2>
-<p>Consider the following 2 research questions:</p>
+<section id="steps" class="level1">
+<h1>Steps</h1>
+<section id="step-1-review" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-review">Step 1: Review</h2>
+<p>Take a few minutes to review the assigned reading. Make note of the things you found most important, the things you found most confusing, or the things you still have questions about.</p>
+</section>
+<section id="step-2-discuss" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-discuss">Step 2: Discuss</h2>
+<p>Once everyone in your group is ready, find an empty space at the whiteboard.</p>
+<p>You’ll discuss the following questions with your group and write down your key takeaways from your conversation on the board. After a few minutes, rotate to the next station: respond/react to the previous responses (e.g., add a + if you agree) and add your own. Repeat until you’ve visited all stations.</p>
+<p>Questions:</p>
 <ol type="1">
-<li>What are the average home prices in different neighborhoods of St.&nbsp;Paul, MN in 2023?</li>
-<li>How have rental prices in St.&nbsp;Paul changed over the past five years?</li>
+<li>How does this reading relate to your previous knowledge about p-values?</li>
+<li>Was anything that you learned from the reading particularly surprising?</li>
+<li>What are some of the ways in which p-values are often misinterpreted and/or misused?</li>
+<li>What suggestions does the article offer in terms of how p-values should be used?</li>
+<li>Does the article provide any suggestions in terms of other tools that we should use instead of or in addition to p-values?</li>
+<li>What are your main takeaways from the reading?</li>
 </ol>
-<p>For each question, answer the following:</p>
-<ul>
-<li>Who would be interested in the answer to this question?</li>
-<li>What variables would we need in a dataset to address this question?</li>
-<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
-<ul>
-<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
-<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
-<li>For data summaries, describe the summary statistics and groupings you would use.</li>
-</ul></li>
-</ul>
-<p>Why do you think the questions here are often called <strong>descriptive</strong> research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
 </section>
-<section id="exercise-2-predictive-research-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-predictive-research-questions">Exercise 2: Predictive research questions</h2>
-<p>Consider the following 2 research questions:</p>
-<ol type="1">
-<li>Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?</li>
-<li>Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?</li>
-</ol>
-<p>For each question, answer the following:</p>
-<ul>
-<li>Who would be interested in the answer to this question?</li>
-<li>What variables would we need in a dataset to address this question?</li>
-<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
-<ul>
-<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
-<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
-<li>For data summaries, describe the summary statistics and groupings you would use.</li>
-</ul></li>
-</ul>
-<p>How do predictive research questions differ from descriptive research questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
-</section>
-<section id="exercise-3-causal-research-questions" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-causal-research-questions">Exercise 3: Causal research questions</h2>
-<p>Consider the following 2 research questions:</p>
-<ol type="1">
-<li>Does proximity to highly-rated schools raise home prices?</li>
-<li>How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?</li>
-</ol>
-<p>For each question, answer the following:</p>
-<ul>
-<li>Who would be interested in the answer to this question?</li>
-<li>What variables would we need in a dataset to address this question?</li>
-<li>What model(s), plot(s), and or data summaries would be appropriate to use to address this question and why?
-<ul>
-<li>For models, write the model formula, and indicate which coefficient(s) is/are of interest.</li>
-<li>For plots, describe the type of plot and what variables are linked to the axes and possibly other features (like point shape and color).</li>
-<li>For data summaries, describe the summary statistics and groupings you would use.</li>
-</ul></li>
-</ul>
-<p>How do causal research questions differ from predictive and descriptive questions? Were concepts of confounders, precision variables, effect modififers, mediators, and/or colliders relevant here? If so, where and why?</p>
-</section>
-<section id="exercise-4-cultivating-curiosity" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-cultivating-curiosity">Exercise 4: Cultivating curiosity</h2>
-<p>Think about the role that housing plays in your life right now or may play in the future. What other questions might you have about housing data that haven’t come up in the previous exercises? Do these questions seem descriptive, predictive, or causal in nature?</p>
-</section>
-<section id="reflection" class="level2">
-<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
-<p>Today was all about letting good questions lead the way and using questions to guide the way we explore data. How confident do you feel about running with questions that come up in your daily life and thinking about what data would answer them and how they would be answered? What might help you feel more confident?</p>
-<blockquote class="blockquote">
-<p><strong>Response:</strong> Put your response here.</p>
-</blockquote>
-</section>
-<section id="render-your-work" class="level2">
-<h2 class="anchored" data-anchor-id="render-your-work">Render your work</h2>
-<ul>
-<li>Click the “Render” button in the menu bar for this pane (blue arrow pointing right). This will create an HTML file containing all of the directions, code, and responses from this activity. A preview of the HTML will appear in the browser.</li>
-<li>Scroll through and inspect the document to check that your work translated to the HTML format correctly.</li>
-<li>Close the browser tab.</li>
-<li>Go to the “Background Jobs” pane in RStudio and click the Stop button to end the rendering process.</li>
-<li>Navigate to your “Activities” subfolder within your “STAT155” folder and locate the HTML file. You can open it again in your browser to double check.</li>
-</ul>
-<p><br><br><br><br><br><br></p>
-</section>
-</section>
-<section id="solutions" class="level1">
-<h1>Solutions</h1>
-<section id="exercise-1-descriptive-research-questions-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-descriptive-research-questions-1">Exercise 1: Descriptive research questions</h2>
-<p>Our 2 research questions:</p>
-<ol type="1">
-<li>What are the average home prices in different neighborhoods of St.&nbsp;Paul, MN in 2023?</li>
-<li>How have rental prices in St.&nbsp;Paul changed over the past five years?</li>
-</ol>
-<p>For descriptive research questions, visualizations and data summaries that show the primary variable of interest along (e.g., house price) along with grouping variables (e.g., neighborhoods) can go a long way because the purpose is to get a sense of what the data looks like. For this reason, simple linear regression models rather than multiple linear regression models will generally suffice to answer descriptive research questions. Confounders, precision variables, effect modififers, mediators, and colliders aren’t very relevant here because these types of variables come into play when we have to think multiple variables.</p>
-<p>There can be a subtle transition from descriptive to causal questions when trying to describe differences in a variable of interest along a grouping variable. For example, house price might be our main variable of interest, and we might summarize house price among houses built before and after the COVID-19 pandemic. We can use grouped summaries to describe this information, but there is likely another question lurking—did the pandemic cause a change in house prices (perhaps by fundamentally changing the way builders operate, supply and demand, etc.)?</p>
-</section>
-<section id="exercise-2-predictive-research-questions-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-predictive-research-questions-1">Exercise 2: Predictive research questions</h2>
-<p>Our 2 research questions:</p>
-<ol type="1">
-<li>Can we predict the likelihood of a property being sold within 30 days of listing based on its listing details and property characteristics?</li>
-<li>Can we predict how much over or under the listing price a property will be sold for based on its listing details and property characteristics?</li>
-</ol>
-<p>For predictive research questions, we have an outcome variable of interest, and we want as much information as possible on variables that relate to that outcome to explain as much as possible about why that outcome variable takes different values. (Explaining variation—does that remind us of the R-squared metric? It should!) Precision variables are relevant here because these variables cause the outcome and are things that help explain variation. Confounders can also be relevant because these variables affect our outcome of interest–as confounders, they are also related to another variable in our data. Effect modifiers can be relevant to if the variables we’re including in our modeling have different relationships with the outcome depending on another variable.</p>
-<p>Predictive research questions truly require the use of many variables in modeling, which is a notable difference from descriptive research questions.</p>
-</section>
-<section id="exercise-3-causal-research-questions-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-causal-research-questions-1">Exercise 3: Causal research questions</h2>
-<p>Our 2 research questions:</p>
-<ol type="1">
-<li>Does proximity to highly-rated schools raise home prices?</li>
-<li>How much does the renovation of a property (e.g., adding a new bathroom or kitchen) affect its market value?</li>
-</ol>
-<p>Causal research questions really focus in on the effect of a particular variable on an outcome—the idea being that if we can answer causal research questions, we have some information to potentially make changes in the world to make things better for ourselves and others. For example, knowing that proximity to highly-rated schools raises home prices affects how a buyer buys and how a developer decides to construct a new home.</p>
-<p>Confounders, precision variables, effect modififers, mediators, and colliders are all relevant to answering causal research questions. Confounders need to be included in a regression model to answer causal questions. Whether mediators should be included depends on if we’re trying to understand the overall or the direct effect of a predictor of interest on the outcome. Including a collider in a regression model should be avoided because it creates an unfair comparison between the groups defined by the predictor of interest. Precision variables don’t hurt to include in a regression model when pursuing a causal question because they won’t introduce any unfair comparisons. Effect modifiers can be useful to include in a model in case the variable of interest has a different effect on the outcome depending on another variable.</p>
+<section id="step-3-share-out" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-share-out">Step 3: Share out</h2>
+<p>Designate someone from your group who will share the highlights of your discussion with the full class!</p>
 
 
 </section>

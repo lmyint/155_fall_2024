@@ -345,6 +345,12 @@ window.Quarto = {
  <span class="menu-text">Nested Models &amp; F-Tests</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../activities/26_p_values_discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">P-value Discussion</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -914,9 +920,9 @@ E[pci\_2019 \mid pic\_2017] = 1.294 + 1.027 pci\_2017
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observe that the 2 counties change every time &amp; differ from your neighbors' samples</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(county_clean, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    state          name  fips pci_2019 pci_2017
-1 Georgia Putnam County 13237   31.504 27.31633
-2 Wyoming   Park County 56029   35.147 32.42697</code></pre>
+<pre><code>     state             name  fips pci_2019 pci_2017
+1 Kentucky Jefferson County 21111   33.251 30.61777
+2 Virginia       Galax city 51640   23.025 22.66133</code></pre>
 </div>
 </div>
 <div class="cell">

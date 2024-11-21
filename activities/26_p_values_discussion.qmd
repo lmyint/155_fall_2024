@@ -1,0 +1,42 @@
+---
+title: "P-value Discussion"
+subtitle: "Notes and in-class exercises"
+---
+
+# Notes
+
+In this activity, you will read an article about p-values and then discuss a set of prompts as a group. Each group will then share out some highlights of your discussion to the class.
+
+## Readings and videos
+
+Your instructor will assign you to one of four groups, each with a different reading to complete ahead of class time. You are of course welcome to read more than only your assigned reading if you choose to! The group reading assignments are as follows:
+
+- Group 1: [The ASA Statement on p-values](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108)
+- Group 2: [Scientific method: Statistical error](https://www.nature.com/news/scientific-method-statistical-errors-1.14700)
+- Group 3: [Moving to a World Beyond "p < 0.05"](https://www.tandfonline.com/doi/full/10.1080/00031305.2019.1583913)
+- Group 4: [Statistical tests, p-values, confidence intervals, and power: a guide to misinterpretations](https://drive.google.com/file/d/1dW6G8gO4PGAZP-cTf7w2EC29hmHbvdOq/view?usp=sharing)
+
+# Steps
+
+## Step 1: Review
+
+Take a few minutes to review the assigned reading. Make note of the things you found most important, the things you found most confusing, or the things you still have questions about.
+
+## Step 2: Discuss
+
+Once everyone in your group is ready, find an empty space at the whiteboard.
+
+You'll discuss the following questions with your group and write down your key takeaways from your conversation on the board. After a few minutes, rotate to the next station: respond/react to the previous responses (e.g., add a + if you agree) and add your own. Repeat until you've visited all stations.
+
+Questions:
+
+1.  How does this reading relate to your previous knowledge about p-values?
+2.  Was anything that you learned from the reading particularly surprising?
+3.  What are some of the ways in which p-values are often misinterpreted and/or misused?
+4.  What suggestions does the article offer in terms of how p-values should be used?
+5.  Does the article provide any suggestions in terms of other tools that we should use instead of or in addition to p-values?
+6.  What are your main takeaways from the reading?
+
+## Step 3: Share out
+
+Designate someone from your group who will share the highlights of your discussion with the full class!

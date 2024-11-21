@@ -44,6 +44,7 @@ website:
           - activities/23_hypothesis_testing_details.qmd
           - activities/24_hypothesis_testing_considerations.qmd
           - activities/25_f_tests.qmd
+          - activities/26_p_values_discussion.qmd
       - section: "Homework"
         contents:
           - assignments/pp1.qmd
