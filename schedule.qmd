@@ -191,6 +191,41 @@ html-table-processing: none
         <b>Project Checkpoint 2 due Tuesday 11/26 at 5pm</b>
     </td>
   </tr>
+  <tr>
+    <td class="topleft">14 (12/2 - 12/6)</td>
+    <td class="topleft">
+        Project work time and review
+    </td>
+    <td class="topleft">
+        Project work time and review
+    </td>
+    <td class="topleft">
+        Project work time and review<br>
+        End-of-course surveys in class
+    </td>
+    
+    <td class="topleft">
+        <b>Final Project Paper due Wednesday 12/11 at 5pm</b><br><br>
+        <b>Quiz 3 (cumulative) during final exam period: Monday, 12/16 8:00-10:00am. See more information below.</b>
+    </td>
+  </tr>
+  <tr>
+    <td class="topleft">15 (12/9 - 12/13)</td>
+    <td class="topleft">
+        Project work time and review
+    </td>
+    <td class="topleft">
+        Last day of class<br>
+        Digital project poster session. See details below.
+    </td>
+    <td class="topleft">
+    </td>
+    
+    <td class="topleft">
+        <b>Final Project Paper due Wednesday 12/11 at 5pm</b><br><br>
+        <b>Quiz 3 (cumulative) during final exam period: Monday, 12/16 8:00-10:00am. See more information below.</b>
+    </td>
+  </tr>
 </tbody>
 </table>
 ```
@@ -523,7 +558,7 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 12: 11/18 - 11/22 (Hypothesis testing)"}
+::: {.callout-tip icon=false collapse="true" title="Week 12: 11/18 - 11/22 (Hypothesis testing)"}
 #### Announcements
 
 - [Quiz 2 + PP reflection and revisions](https://moodle.macalester.edu/mod/assign/view.php?id=145215) due Monday 11/18 at 5pm
@@ -553,7 +588,7 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 13: 11/25 - 11/29 (Hypothesis testing, p-values) (Thanksgiving Break)"}
+::: {.callout-tip icon=false collapse="true" title="Week 13: 11/25 - 11/29 (Hypothesis testing, p-values) (Thanksgiving Break)"}
 #### Announcements
 
 - [Project Checkpoint 2](https://moodle.macalester.edu/mod/assign/view.php?id=145171) due Tuesday 11/26 at 5pm
@@ -567,35 +602,43 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 14: 12/2 - 12/6 (Project work)"}
+::: {.callout-tip icon=false collapse="false" title="Week 14: 12/2 - 12/6 (Project work and review)"}
 #### Announcements
 
-#### Monday
-
-Before class:
-
-#### Wednesday
-
-Before class:
-
-#### Friday
-
-Before class:
+- [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
+- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
+    - Written to take ~75 minutes
+    - Same format as previous quizzes:
+        - You don't need to write R code but output from R code will be provided.
+        - You can bring one 3x5 inch notecard with handwritten or typed notes on both sides.
+    - Content covered spans the full semester
+- On Friday, 12/6 we will be doing end-of-course surveys in class.
 
 :::
 
-::: {.callout-tip icon=false collapse="true" title="Week 15: 12/9 - 12/13 (Project work, paper, and presentations)"}
+::: {.callout-tip icon=false collapse="false" title="Week 15: 12/9 - 12/13 (Project work, paper, and presentations)"}
 #### Announcements
+
+- [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
+- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
+    - Written to take ~75 minutes
+    - Same format as previous quizzes:
+        - You don't need to write R code but output from R code will be provided.
+        - You can bring one 3x5 inch notecard with handwritten or typed notes on both sides.
+    - Content covered spans the full semester
 
 #### Monday
 
-Before class:
+Class time will be for review and project work
 
 #### Wednesday
 
-(Last day of class)
+Last day of class
 
 Before class:
+
+- Prepare one slide with your research question, 1 visualization, and 2 key findings from your project
+- We will have a digital poster session in class
 
 :::
 
