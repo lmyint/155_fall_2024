@@ -226,6 +226,20 @@ html-table-processing: none
         <b>Quiz 3 (cumulative) during final exam period: Monday, 12/16 8:00-10:00am. See more information below.</b>
     </td>
   </tr>
+  <tr>
+    <td class="topleft">16 (12/16 - 12/20)</td>
+    <td class="topleft">
+        Monday, December 16<br>
+        <b>Quiz 3 during final exam slot: 8:00-10:00am</b>
+    </td>
+    <td class="topleft">
+    </td>
+    <td class="topleft">
+    </td>
+    <td class="topleft">
+        <b>Single PP correction due Sunday, 12/15 at 8am (24 hours before Quiz 3).</b>
+    </td>
+  </tr>
 </tbody>
 </table>
 ```
