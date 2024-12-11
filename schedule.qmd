@@ -616,11 +616,11 @@ Before class:
 
 :::
 
-::: {.callout-tip icon=false collapse="false" title="Week 14: 12/2 - 12/6 (Project work and review)"}
+::: {.callout-tip icon=false collapse="true" title="Week 14: 12/2 - 12/6 (Project work and review)"}
 #### Announcements
 
 - [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
-- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
+- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am in our normal classroom (THEATR 204)
     - Written to take ~75 minutes but you have the whole 2 hour time period
     - Same format as previous quizzes:
         - You don't need to write R code but output from R code will be provided.
@@ -634,7 +634,8 @@ Before class:
 #### Announcements
 
 - [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
-- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
+- Optional: Turn in [Single PP correction](https://moodle.macalester.edu/mod/assign/view.php?id=148308) by Sunday, December 15 at 8am
+- Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am in our normal classroom (THEATR 204)
     - Written to take ~75 minutes but you have the whole 2 hour time period
     - Same format as previous quizzes:
         - You don't need to write R code but output from R code will be provided.
