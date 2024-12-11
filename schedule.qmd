@@ -621,7 +621,7 @@ Before class:
 
 - [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
 - Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
-    - Written to take ~75 minutes
+    - Written to take ~75 minutes but you have the whole 2 hour time period
     - Same format as previous quizzes:
         - You don't need to write R code but output from R code will be provided.
         - You can bring one 3x5 inch notecard with handwritten or typed notes on both sides.
@@ -635,7 +635,7 @@ Before class:
 
 - [Final Project Paper](https://moodle.macalester.edu/mod/assign/view.php?id=148019) due Wednesday, December 11 at 5pm
 - Quiz 3 will be during our final exam period: Monday, 12/16 8:00-10:00am
-    - Written to take ~75 minutes
+    - Written to take ~75 minutes but you have the whole 2 hour time period
     - Same format as previous quizzes:
         - You don't need to write R code but output from R code will be provided.
         - You can bring one 3x5 inch notecard with handwritten or typed notes on both sides.
